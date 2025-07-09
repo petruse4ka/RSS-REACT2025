@@ -1,0 +1,21 @@
+{
+  "name": "rss-react2025",
+  "version": "1.0.0",
+  "description": "Personal projects for the React 2025 course at RS School",
+  "homepage": "http://petruse4ka.github.io/RSS-REACT2025/",
+  "bugs": {
+    "url": "https://github.com/petruse4ka/RSS-REACT2025/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petruse4ka/RSS-REACT2025.git"
+  },
+  "license": "ISC",
+  "author": "Konstantin Petrov",
+  "type": "module",
+  "main": "main.tsx",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": []
+}
