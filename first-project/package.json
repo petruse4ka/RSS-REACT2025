@@ -24,13 +24,26 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && npx gh-pages -d dist -e first-project"
+    "deploy": "npm run build && npx gh-pages -d dist -e first-project",
+    "prepare": "cd .. && husky ./first-project/.husky",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js}": [
+      "npm run lint",
+      "npm run format"
+    ],
+    "src/**/*.{css,scss}": [
+      "npm run format"
+    ]
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.30.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
@@ -43,6 +56,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "husky": "^9.1.7",
     "prettier": "3.6.2",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
