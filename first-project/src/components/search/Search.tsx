@@ -27,13 +27,13 @@ export default class Search extends PureComponent<object, state> {
 
   render() {
     return (
-      <div className="flex gap-4 w-full">
+      <div className="container flex gap-4 w-full">
         <Input
           type="text"
           placeholder={SEARCH_TEXTS.PLACEHOLDER}
           value={this.state.searchQuery}
           onChange={this.handleSearchQueryChange}
-          className="border-fuchsia-300 text-white hover:border-fuchsia-500 focus:border-teal-500"
+          className="border-fuchsia-300 text-white hover:border-fuchsia-500 focus:border-cyan-300"
         />
         <Button
           type="button"

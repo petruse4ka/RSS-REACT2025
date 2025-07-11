@@ -13,7 +13,7 @@ export default class Input extends PureComponent<props> {
     const { type, placeholder, value, onChange, className } = this.props;
 
     const defaultClassName =
-      'flex-1 min-w-[200px] px-4 py-2 border rounded-sm transition focus:outline-none';
+      'flex-1 min-w-[200px] px-4 py-2 border rounded-sm transition duration-300 focus:outline-none';
 
     return (
       <input
