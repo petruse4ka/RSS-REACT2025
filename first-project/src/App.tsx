@@ -1,8 +1,10 @@
+import Search from './components/search/Search';
+
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold text-pink-500">Magic will happen here</h1>
-    </>
+    <div className="flex flex-col items-center h-screen my-20 max-w-[1440px] mx-auto px-5 md:px-20">
+      <Search />
+    </div>
   );
 }
 
