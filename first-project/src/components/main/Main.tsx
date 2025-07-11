@@ -3,6 +3,7 @@ import defaultImage from '../../assets/images/default-image.png';
 import type { CardData } from '../../types/interfaces';
 import { SEARCH_TEXTS } from '../../constants';
 import Loader from '../ui/loader';
+import CardsList from '../cards-list/cards-list';
 
 type state = {
   cards: CardData[];
@@ -44,7 +45,7 @@ export default class Main extends PureComponent<object, state> {
       },
     ];
 
-    this.setState({ cards: mockCards });
+    this.setState({ cards: mockCards, loading: false });
   };
 
   render() {
@@ -61,26 +62,7 @@ export default class Main extends PureComponent<object, state> {
             />
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
-            {cards.map((card) => (
-              <div
-                key={card.id}
-                className="bg-fuchsia-500 rounded-lg overflow-hidden hover:scale-102 transition-all duration-300"
-              >
-                <div className="h-50 overflow-hidden">
-                  <img
-                    src={card.imageUrl}
-                    alt={card.title}
-                    className=" bg-cyan-300 w-full h-full object-contain object-center"
-                  />
-                </div>
-                <div className="p-4">
-                  <h2 className="text-xl font-semibold text-white mb-2">{card.title}</h2>
-                  <p className="text-sm text-gray-300 ">{card.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CardsList cards={cards} />
         )}
       </main>
     );
