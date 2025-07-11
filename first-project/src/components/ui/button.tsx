@@ -1,13 +1,13 @@
 import { PureComponent } from 'react';
 
-type props = {
+type Props = {
   type: 'button' | 'submit' | 'reset';
   onClick: () => void;
   className: string;
   text: string;
 };
 
-export default class Button extends PureComponent<props> {
+export default class Button extends PureComponent<Props> {
   render() {
     const { type, onClick, className, text } = this.props;
 

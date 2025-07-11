@@ -1,11 +1,11 @@
 import { PureComponent } from 'react';
-import type { CardData } from '../../types/interfaces';
+import type { CardData } from '@/types/interfaces';
 
-type props = {
+type Props = {
   card: CardData;
 };
 
-export default class CardItem extends PureComponent<props> {
+export default class CardItem extends PureComponent<Props> {
   render() {
     const { imageUrl, title, description } = this.props.card;
 

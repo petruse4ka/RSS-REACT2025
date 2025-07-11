@@ -3,11 +3,11 @@ import { SEARCH_TEXTS } from '@/constants';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 
-type state = {
+type State = {
   searchQuery: string;
 };
 
-export default class Search extends PureComponent<object, state> {
+export default class Search extends PureComponent<object, State> {
   constructor(props: object) {
     super(props);
     this.state = {

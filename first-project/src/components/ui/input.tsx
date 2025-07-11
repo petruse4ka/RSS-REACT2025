@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 
-interface props {
+type Props = {
   type: 'text' | 'number';
   placeholder: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className: string;
-}
+};
 
-export default class Input extends PureComponent<props> {
+export default class Input extends PureComponent<Props> {
   render() {
     const { type, placeholder, value, onChange, className } = this.props;
 

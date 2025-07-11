@@ -1,12 +1,12 @@
 import { PureComponent } from 'react';
 
-type props = {
+type Props = {
   classNameSpinner: string;
   classNameText: string;
   text: string;
 };
 
-export default class Loader extends PureComponent<props> {
+export default class Loader extends PureComponent<Props> {
   render() {
     const { classNameSpinner, classNameText, text } = this.props;
     const defaultSpinnerClasses = `w-12 h-12 animate-spin rounded-full border-2 border-t-transparent`;

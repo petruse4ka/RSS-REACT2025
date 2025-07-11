@@ -1,21 +1,25 @@
 import { PureComponent } from 'react';
-import defaultImage from '../../assets/images/default-image.png';
-import type { CardData } from '../../types/interfaces';
-import { SEARCH_TEXTS } from '../../constants';
+import type { CardData } from '@/types/interfaces';
+import { SEARCH_TEXTS } from '@/constants';
 import Loader from '../ui/loader';
 import CardsList from '../cards-list/cards-list';
+import Button from '../ui/button';
+import { mockCards } from '../data';
+import { ERROR_TEXTS } from '@/constants';
 
-type state = {
+type State = {
   cards: CardData[];
   loading: boolean;
+  errorTriggered: boolean;
 };
 
-export default class Main extends PureComponent<object, state> {
+export default class Main extends PureComponent<object, State> {
   constructor(props: object) {
     super(props);
     this.state = {
       cards: [],
       loading: true,
+      errorTriggered: false,
     };
   }
 
@@ -24,32 +28,19 @@ export default class Main extends PureComponent<object, state> {
   }
 
   loadData = () => {
-    const mockCards: CardData[] = [
-      {
-        id: '1',
-        imageUrl: `${defaultImage}`,
-        title: 'Title 1',
-        description: 'Description 1',
-      },
-      {
-        id: '2',
-        imageUrl: `${defaultImage}`,
-        title: 'Title 2',
-        description: 'Description 2',
-      },
-      {
-        id: '3',
-        imageUrl: `${defaultImage}`,
-        title: 'Title 3',
-        description: 'Description 3',
-      },
-    ];
-
     this.setState({ cards: mockCards, loading: false });
   };
 
+  handleErrorButtonClick = () => {
+    this.setState({ errorTriggered: true });
+  };
+
   render() {
-    const { cards, loading } = this.state;
+    const { cards, loading, errorTriggered } = this.state;
+
+    if (errorTriggered) {
+      throw new Error('Test error triggered by clicking the button!');
+    }
 
     return (
       <main className="container mx-auto py-8">
@@ -62,7 +53,17 @@ export default class Main extends PureComponent<object, state> {
             />
           </div>
         ) : (
-          <CardsList cards={cards} />
+          <>
+            <CardsList cards={cards} />
+            <div className="w-full mt-8">
+              <Button
+                type="button"
+                onClick={this.handleErrorButtonClick}
+                className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-4 text-lg"
+                text={ERROR_TEXTS.ERROR_BUTTON}
+              />
+            </div>
+          </>
         )}
       </main>
     );
