@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SEARCH_TEXTS } from '@/constants';
+import Button from '@/components/ui/button';
+import Input from '@/components/ui/input';
 
 type state = {
   searchQuery: string;
@@ -26,19 +28,20 @@ export default class Search extends PureComponent<object, state> {
   render() {
     return (
       <div className="flex gap-4 w-full">
-        <input
+        <Input
           type="text"
           placeholder={SEARCH_TEXTS.PLACEHOLDER}
           value={this.state.searchQuery}
           onChange={this.handleSearchQueryChange}
-          className="flex-1 min-w-[200px] px-4 py-2 border border-fuchsia-200 text-white rounded-sm hover:border-fuchsia-300 focus:outline-none focus:border-fuchsia-500 transition"
+          className="border-fuchsia-300 text-white hover:border-fuchsia-500 focus:border-teal-500"
         />
-        <button
+        <Button
+          type="button"
           onClick={this.handleSearchButtonClick}
-          className="px-6 py-2 bg-fuchsia-500 border border-fuchsia-500 text-white rounded-sm hover:bg-fuchsia-400 hover:border-fuchsia-400 transition cursor-pointer"
+          className="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
         >
           {SEARCH_TEXTS.BUTTON}
-        </button>
+        </Button>
       </div>
     );
   }
