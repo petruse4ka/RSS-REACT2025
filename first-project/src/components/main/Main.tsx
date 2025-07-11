@@ -2,6 +2,7 @@ import { PureComponent } from 'react';
 import defaultImage from '../../assets/images/default-image.png';
 import type { CardData } from '../../types/interfaces';
 import { SEARCH_TEXTS } from '../../constants';
+import Loader from '../ui/loader';
 
 type state = {
   cards: CardData[];
@@ -13,7 +14,7 @@ export default class Main extends PureComponent<object, state> {
     super(props);
     this.state = {
       cards: [],
-      loading: false,
+      loading: true,
     };
   }
 
@@ -52,8 +53,12 @@ export default class Main extends PureComponent<object, state> {
     return (
       <main className="container mx-auto py-8">
         {loading ? (
-          <div className="flex justify-center items-center">
-            <div className="text-lg text-fuchsia-500 ">{SEARCH_TEXTS.LOADING}</div>
+          <div className="flex justify-center items-center min-h-[300px]">
+            <Loader
+              classNameSpinner="border-cyan-300"
+              classNameText="text-cyan-300 text-lg"
+              text={SEARCH_TEXTS.LOADING}
+            />
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">

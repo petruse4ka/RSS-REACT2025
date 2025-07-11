@@ -1,5 +1,5 @@
-import Search from './components/search/search';
-import Main from './components/main/main';
+import Search from './components/search/Search';
+import Main from './components/main/Main';
 
 function App() {
   return (
