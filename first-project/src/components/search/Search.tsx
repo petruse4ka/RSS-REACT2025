@@ -15,14 +15,26 @@ export default class Search extends PureComponent<object, State> {
     };
   }
 
+  componentDidMount() {
+    this.loadSearchQuery();
+  }
+
   handleSearchQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       searchQuery: event.target.value,
     });
   };
 
+  loadSearchQuery = () => {
+    const savedQuery = localStorage.getItem('konstantinFirstReactProjectSearchQuery');
+    if (savedQuery) {
+      this.setState({ searchQuery: savedQuery });
+    }
+  };
+
   handleSearchButtonClick = () => {
-    console.log('Search query:', this.state.searchQuery);
+    const { searchQuery } = this.state;
+    localStorage.setItem('konstantinFirstReactProjectSearchQuery', searchQuery);
   };
 
   render() {
