@@ -1,5 +1,6 @@
 import type { CardResponse, CardData } from '@/types/interfaces';
 import { UNSPLASH_API_KEY, UNSPLASH_BASE_URL, CARDS_PER_PAGE } from '@/constants';
+import defaultImage from '@/assets/images/default-image.png';
 
 export const fetchCards = async (
   searchQuery: string = '',
@@ -30,9 +31,9 @@ export const fetchCards = async (
 
     return {
       id: id,
-      imageUrl: urls.regular,
+      imageUrl: urls.regular || defaultImage,
       title: alt_description.toUpperCase() || 'Untitled',
-      description: `Author: ${user.name} (@${user.username})`,
+      description: `Author: ${user.name || 'unknown author'} (@${user.username || 'unknown username'})`,
     };
   });
 
