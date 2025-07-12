@@ -88,7 +88,7 @@ export default class Main extends PureComponent<Props, State> {
     }
 
     return (
-      <main className="container mx-auto py-8">
+      <section className="container mx-auto py-8">
         {loading ? (
           <div className="flex justify-center items-center min-h-[300px]">
             <Loader
@@ -108,7 +108,7 @@ export default class Main extends PureComponent<Props, State> {
             {this.renderErrorButton()}
           </>
         )}
-      </main>
+      </section>
     );
   }
 }

@@ -55,7 +55,7 @@ export default class Search extends PureComponent<Props, State> {
 
   render() {
     return (
-      <div className="container flex gap-4 w-full">
+      <section className="container flex gap-4 w-full">
         <Input
           type="text"
           placeholder={SEARCH_TEXTS.PLACEHOLDER}
@@ -70,7 +70,7 @@ export default class Search extends PureComponent<Props, State> {
           className="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
           text={SEARCH_TEXTS.BUTTON}
         />
-      </div>
+      </section>
     );
   }
 }

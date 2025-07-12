@@ -10,7 +10,7 @@ export default class CardItem extends PureComponent<Props> {
     const { imageUrl, title, description } = this.props.card;
 
     return (
-      <div className="bg-indigo-900 rounded-lg overflow-hidden hover:scale-102 transition-all duration-300">
+      <li className="bg-indigo-900 rounded-lg overflow-hidden hover:scale-102 transition-all duration-300">
         <div className="h-50 overflow-hidden">
           <img
             src={imageUrl}
@@ -22,7 +22,7 @@ export default class CardItem extends PureComponent<Props> {
           <h2 className="text-xl font-semibold text-cyan-300 mb-2">{title}</h2>
           <p className="text-sm text-gray-300">{description}</p>
         </div>
-      </div>
+      </li>
     );
   }
 }
