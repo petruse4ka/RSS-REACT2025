@@ -13,19 +13,28 @@ export interface ErrorTexts {
 
 export interface CardResponse {
   id: string;
-  alt_description: string;
+  created_at: string;
   description: string | null;
+  alt_description: string;
   urls: {
+    raw: string;
+    full: string;
     regular: string;
     small: string;
     thumb: string;
   };
-  user: {
-    name: string;
-    username: string;
+  links: {
+    self: string;
+    html: string;
+    download: string;
   };
   likes: number;
-  created_at: string;
+  user: {
+    id: string;
+    username: string;
+    name: string;
+    bio: string;
+  };
 }
 
 export interface CardData {
