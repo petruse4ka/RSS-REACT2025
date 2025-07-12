@@ -32,9 +32,20 @@ export default class Search extends PureComponent<object, State> {
     }
   };
 
-  handleSearchButtonClick = () => {
+  handleSearch = () => {
     const { searchQuery } = this.state;
-    localStorage.setItem('konstantinFirstReactProjectSearchQuery', searchQuery);
+    const trimmedQuery = searchQuery.trim();
+    localStorage.setItem('konstantinFirstReactProjectSearchQuery', trimmedQuery);
+  };
+
+  handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      this.handleSearch();
+    }
+  };
+
+  handleSearchButtonClick = () => {
+    this.handleSearch();
   };
 
   render() {
@@ -45,6 +56,7 @@ export default class Search extends PureComponent<object, State> {
           placeholder={SEARCH_TEXTS.PLACEHOLDER}
           value={this.state.searchQuery}
           onChange={this.handleSearchQueryChange}
+          onKeyDown={this.handleKeyPress}
           className="border-fuchsia-300 text-white hover:border-fuchsia-500 focus:border-cyan-300"
         />
         <Button
