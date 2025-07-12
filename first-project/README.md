@@ -2,6 +2,8 @@
 
 First personal project for the React 2025 course of the RS School
 
+---
+
 ## 🚀 Project setup
 
 Follow these steps to set up and run the project locally.
