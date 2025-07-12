@@ -19,9 +19,9 @@ export default class App extends PureComponent {
         texts={errorTexts}
         image={errorImage}
         className="min-h-screen px-5 md:px-20"
-        containerClassName="bg-fuchsia-500 backdrop-blur-sm text-white"
+        containerClassName="bg-indigo-900 backdrop-blur-sm text-white"
         imageClassName="w-64 h-64"
-        buttonClassName="bg-cyan-400 border border-cyan-400 hover:bg-cyan-300 hover:border-cyan-300"
+        buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
       >
         <div className="min-h-screen flex flex-col items-center max-w-[1440px] mx-auto py-20 px-5 md:px-20">
           <Search />

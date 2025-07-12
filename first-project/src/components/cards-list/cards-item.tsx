@@ -10,12 +10,12 @@ export default class CardItem extends PureComponent<Props> {
     const { imageUrl, title, description } = this.props.card;
 
     return (
-      <div className="bg-fuchsia-500 rounded-lg overflow-hidden hover:scale-102 transition-all duration-300">
+      <div className="bg-indigo-900 rounded-lg overflow-hidden hover:scale-102 transition-all duration-300">
         <div className="h-50 overflow-hidden">
           <img
             src={imageUrl}
             alt={title}
-            className="bg-cyan-300 w-full h-full object-contain object-center"
+            className="bg-cyan-300 w-full h-full object-cover object-center"
           />
         </div>
         <div className="p-4">

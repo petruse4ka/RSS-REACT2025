@@ -57,7 +57,7 @@ export default class Search extends PureComponent<object, State> {
           value={this.state.searchQuery}
           onChange={this.handleSearchQueryChange}
           onKeyDown={this.handleKeyPress}
-          className="border-fuchsia-300 text-white hover:border-fuchsia-500 focus:border-cyan-300"
+          className="text-white border-fuchsia-300 hover:border-fuchsia-400 focus:border-fuchsia-500"
         />
         <Button
           type="button"
