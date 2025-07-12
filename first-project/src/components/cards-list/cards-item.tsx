@@ -19,7 +19,7 @@ export default class CardItem extends PureComponent<Props> {
           />
         </div>
         <div className="p-4">
-          <h2 className="text-xl font-semibold text-white mb-2">{title}</h2>
+          <h2 className="text-xl font-semibold text-cyan-300 mb-2">{title}</h2>
           <p className="text-sm text-gray-300">{description}</p>
         </div>
       </div>

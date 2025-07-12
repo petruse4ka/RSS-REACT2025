@@ -7,39 +7,46 @@ import Button from '../ui/button';
 import { ERROR_TEXTS } from '@/constants';
 import { fetchCards } from '@/api/fetch-cards';
 
+type Props = {
+  searchQuery: string;
+};
+
 type State = {
   cards: CardData[];
   loading: boolean;
   errorTriggered: boolean;
   error: string | null;
-  searchQuery: string;
 };
 
-export default class Main extends PureComponent<object, State> {
-  constructor(props: object) {
+export default class Main extends PureComponent<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       cards: [],
       loading: true,
       errorTriggered: false,
       error: null,
-      searchQuery: '',
     };
   }
 
   componentDidMount() {
-    const searchQuery = localStorage.getItem('konstantinFirstReactProjectSearchQuery') || '';
+    const { searchQuery } = this.props;
 
-    this.setState({ searchQuery }, () => {
-      this.loadData(searchQuery);
-    });
+    this.loadData(searchQuery);
   }
 
-  loadData = async (searchQuery?: string) => {
+  componentDidUpdate(prevProps: Props) {
+    const { searchQuery } = this.props;
+
+    if (prevProps.searchQuery !== searchQuery) {
+      this.loadData(searchQuery);
+    }
+  }
+
+  loadData = async (searchQuery: string) => {
     try {
       this.setState({ loading: true, error: null });
-      const query = searchQuery || this.state.searchQuery;
-      const cards = await fetchCards(query);
+      const cards = await fetchCards(searchQuery);
 
       if (cards.length === 0) {
         this.setState({

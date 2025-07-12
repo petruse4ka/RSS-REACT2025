@@ -59,8 +59,8 @@ export default class ErrorBoundary extends Component<Props, State> {
                 />
               </div>
             )}
-            <h1 className="text-2xl font-bold mb-4">{title}</h1>
-            <p className="mb-6">{message}</p>
+            <h1 className="text-2xl font-bold mb-4 text-cyan-300">{title}</h1>
+            <p className="mb-6 text-cyan-300">{message}</p>
             <Button
               type="button"
               onClick={handleRefresh}
