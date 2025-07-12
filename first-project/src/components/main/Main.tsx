@@ -69,6 +69,17 @@ export default class Main extends PureComponent<Props, State> {
     this.setState({ errorTriggered: true });
   };
 
+  renderErrorButton = () => (
+    <div className="w-full mt-8">
+      <Button
+        type="button"
+        onClick={this.handleErrorButtonClick}
+        className="w-full bg-red-500 border-red-500 hover:bg-red-600 hover:border-red-600 py-5"
+        text={ERROR_TEXTS.ERROR_BUTTON}
+      />
+    </div>
+  );
+
   render() {
     const { cards, loading, errorTriggered, error } = this.state;
 
@@ -87,20 +98,14 @@ export default class Main extends PureComponent<Props, State> {
             />
           </div>
         ) : error ? (
-          <div className="flex justify-center items-center min-h-[300px]">
+          <div className="flex flex-col items-center justify-center min-h-[300px]">
             <div className="text-red-500 text-xl font-semibold mb-4">{error}</div>
+            {this.renderErrorButton()}
           </div>
         ) : (
           <>
             <CardsList cards={cards} />
-            <div className="w-full mt-8">
-              <Button
-                type="button"
-                onClick={this.handleErrorButtonClick}
-                className="w-full bg-red-500 border-red-500 hover:bg-red-600 hover:border-red-600 py-5"
-                text={ERROR_TEXTS.ERROR_BUTTON}
-              />
-            </div>
+            {this.renderErrorButton()}
           </>
         )}
       </main>
