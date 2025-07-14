@@ -8,7 +8,7 @@ export interface CardResponse {
   id: string;
   created_at: string;
   description: string | null;
-  alt_description: string;
+  alt_description: string | null;
   urls: {
     raw: string;
     full: string;
@@ -24,9 +24,9 @@ export interface CardResponse {
   likes: number;
   user: {
     id: string;
-    username: string;
-    name: string;
-    bio: string;
+    username: string | null;
+    name: string | null;
+    bio: string | null;
   };
 }
 
