@@ -32,7 +32,7 @@ export const fetchCards = async (
     return {
       id: id,
       imageUrl: urls.regular || defaultImage,
-      title: alt_description.toUpperCase() || 'Untitled',
+      title: (alt_description || 'Untitled').toUpperCase(),
       description: `Author: ${user.name || 'unknown author'} (@${user.username || 'unknown username'})`,
     };
   });
