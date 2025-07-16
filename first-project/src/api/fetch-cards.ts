@@ -1,6 +1,7 @@
 import type { CardResponse, CardData } from '@/types/interfaces';
 import { UNSPLASH_API_KEY, UNSPLASH_BASE_URL, CARDS_PER_PAGE } from '@/constants';
 import defaultImage from '@/assets/images/default-image.png';
+import { isEmptyResponse, isValidCardsData, isValidApiResponse } from '@/types/guards';
 
 export const fetchCards = async (
   searchQuery: string = '',
@@ -22,18 +23,30 @@ export const fetchCards = async (
     throw new Error(`HTTP error: ${response.status}`);
   }
 
-  const data = await response.json();
+  const data: unknown = await response.json();
 
-  const cardsData = data.results || data;
+  if (isEmptyResponse(data)) {
+    throw new Error('Empty response from API');
+  }
+
+  if (!isValidApiResponse(data)) {
+    throw new Error('Invalid response structure from API ');
+  }
+
+  const cardsData = 'results' in data ? data.results : data;
+
+  if (!isValidCardsData(cardsData)) {
+    throw new Error('Invalid cards data structure');
+  }
 
   const cards: CardData[] = cardsData.map((card: CardResponse) => {
     const { id, urls, alt_description, user } = card;
 
     return {
       id: id,
-      imageUrl: urls.regular || defaultImage,
+      imageUrl: urls?.regular || defaultImage,
       title: (alt_description || 'Untitled').toUpperCase(),
-      description: `Author: ${user.name || 'unknown author'} (@${user.username || 'unknown username'})`,
+      description: `Author: ${user?.name || 'unknown author'} (@${user?.username || 'unknown username'})`,
     };
   });
 
