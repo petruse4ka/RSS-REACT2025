@@ -49,7 +49,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 
       return (
         <div className={`flex flex-col items-center justify-center ${className}`}>
-          <div className={`rounded-lg shadow-lg p-8 text-center ${containerClassName}`}>
+          <div className={`rounded-lg p-8 text-center shadow-lg ${containerClassName}`}>
             {image && (
               <div className="mb-6">
                 <img
@@ -59,7 +59,7 @@ export default class ErrorBoundary extends Component<Props, State> {
                 />
               </div>
             )}
-            <h1 className="text-2xl font-bold mb-4 text-cyan-300">{title}</h1>
+            <h1 className="mb-4 text-2xl font-bold text-cyan-300">{title}</h1>
             <p className="mb-6 text-cyan-300">{message}</p>
             <Button
               type="button"

@@ -4,7 +4,7 @@ import '@/styles/index.scss';
 import App from './App';
 
 if (import.meta.env.DEV) {
-  import('./mocks/browser.ts');
+  import('./tests/mocks/browser.ts');
 }
 
 const root = document.getElementById('root');
