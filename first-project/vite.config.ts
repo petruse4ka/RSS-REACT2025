@@ -26,6 +26,7 @@ export default defineConfig(({ mode }) => ({
     open: true,
   },
   test: {
+    environment: 'jsdom',
     globals: true,
     watch: false,
     setupFiles: ['./vitest.setup.ts'],
@@ -33,6 +34,19 @@ export default defineConfig(({ mode }) => ({
       provider: 'v8',
       reporter: ['text'],
       include: ['src/**/*.{ts,tsx,js,jsx}'],
+      exclude: [
+        'src/**/*.test.{js,jsx,ts,tsx}',
+        'src/**/*.spec.{js,jsx,ts,tsx}',
+        'src/index.{js,jsx,ts,tsx}',
+        'src/setupTests.{js,ts}',
+        'src/**/*.d.ts',
+      ],
+      thresholds: {
+        statements: 80,
+        branches: 50,
+        functions: 50,
+        lines: 50,
+      },
     },
   },
 }));
