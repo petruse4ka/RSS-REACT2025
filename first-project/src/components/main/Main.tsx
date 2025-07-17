@@ -76,6 +76,7 @@ export default class Main extends PureComponent<Props, State> {
         onClick={this.handleErrorButtonClick}
         className="w-full border-red-500 bg-red-500 py-5 hover:border-red-600 hover:bg-red-600"
         text={ERROR_TEXTS.ERROR_BUTTON}
+        dataTestId="error-button"
       />
     </div>
   );

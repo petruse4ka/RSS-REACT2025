@@ -72,7 +72,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               {message}
             </p>
             <Button
-              dataTestId="error-refresh-button"
+              dataTestId="refresh-button"
               type="button"
               onClick={handleRefresh}
               className={`${buttonClassName}`}

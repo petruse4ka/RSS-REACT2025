@@ -69,6 +69,7 @@ export default class Search extends PureComponent<Props, State> {
           onClick={this.handleSearchButtonClick}
           className="border border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400"
           text={SEARCH_TEXTS.BUTTON}
+          dataTestId="search-button"
         />
       </section>
     );

@@ -1,6 +1,7 @@
-import { render, screen } from '@/tests/test-utils/test-utils';
+import { render, screen, fireEvent } from '@/tests/test-utils/test-utils';
 import ErrorBoundary from './error-boundary';
 import { ERROR_TEXTS } from '@/constants';
+import Main from '../main/main';
 
 const ThrowError = ({ error = false }: { error?: boolean }) => {
   if (error) {
@@ -42,10 +43,10 @@ test('ErrorBoundary catches errors and renders fallback UI when there is an erro
   expect(screen.getByTestId('error-boundary')).toBeInTheDocument();
   expect(screen.getByTestId('error-title')).toBeInTheDocument();
   expect(screen.getByTestId('error-message')).toBeInTheDocument();
-  expect(screen.getByTestId('error-refresh-button')).toBeInTheDocument();
+  expect(screen.getByTestId('refresh-button')).toBeInTheDocument();
   expect(screen.getByTestId('error-title')).toHaveTextContent(ERROR_TEXTS.TITLE);
   expect(screen.getByTestId('error-message')).toHaveTextContent(ERROR_TEXTS.DESCRIPTION);
-  expect(screen.getByTestId('error-refresh-button')).toHaveTextContent(ERROR_TEXTS.REFRESH_BUTTON);
+  expect(screen.getByTestId('refresh-button')).toHaveTextContent(ERROR_TEXTS.REFRESH_BUTTON);
 });
 
 test('ErrorBoundary logs error to console when error occurs', () => {
@@ -66,4 +67,25 @@ test('ErrorBoundary logs error to console when error occurs', () => {
   expect(consoleErrorSpy).toHaveBeenCalled();
 
   consoleErrorSpy.mockRestore();
+});
+
+test('Error button triggers error when clicked', async () => {
+  render(
+    <ErrorBoundary
+      texts={{
+        title: ERROR_TEXTS.TITLE,
+        message: ERROR_TEXTS.DESCRIPTION,
+        buttonText: ERROR_TEXTS.REFRESH_BUTTON,
+      }}
+    >
+      <Main searchQuery="" />
+    </ErrorBoundary>
+  );
+
+  const errorButton = await screen.findByTestId('error-button');
+  fireEvent.click(errorButton);
+
+  expect(screen.getByTestId('error-boundary')).toBeInTheDocument();
+  expect(screen.getByTestId('error-title')).toHaveTextContent(ERROR_TEXTS.TITLE);
+  expect(screen.getByTestId('error-message')).toHaveTextContent(ERROR_TEXTS.DESCRIPTION);
 });
