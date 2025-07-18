@@ -24,6 +24,7 @@ test('Loader renders with default styling and text', () => {
 
   const text = screen.getByTestId('loader-text');
   expect(text).toHaveTextContent(SEARCH_TEXTS.LOADING);
+  expect(text).toHaveClass('text-cyan-500');
 });
 
 test('Main component renders loader when loading state is true and removes it when loading is false', async () => {

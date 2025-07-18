@@ -27,7 +27,7 @@ test('ErrorBoundary renders children when there is no error', () => {
   expect(screen.getByText('Children Component')).toBeInTheDocument();
 });
 
-test('ErrorBoundary catches errors and renders fallback UI when there is an error in child components', () => {
+test('ErrorBoundary renders fallback UI when there is an error in child components', () => {
   render(
     <ErrorBoundary
       texts={{
