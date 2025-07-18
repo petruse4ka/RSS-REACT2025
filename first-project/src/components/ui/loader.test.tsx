@@ -1,20 +1,17 @@
 import { render, screen, waitForElementToBeRemoved } from '@/tests/test-utils/test-utils';
 import Loader from './loader';
-import { UNSPLASH_BASE_URL, SEARCH_TEXTS } from '@/constants';
+import { SEARCH_TEXTS } from '@/constants';
 import Main from '../main/main';
-import { http, HttpResponse } from 'msw';
-import { server } from '@/tests/mocks/node';
-import { mockCards } from '@/tests/mocks/handlers';
 
 test('Loader renders with default styling and text', () => {
-  const props = {
-    classNameSpinner: 'border-cyan-500',
-    classNameText: 'text-cyan-500',
-    text: SEARCH_TEXTS.LOADING,
-    dataTestId: 'loader',
-  };
-
-  render(<Loader {...props} />);
+  render(
+    <Loader
+      classNameSpinner="border-cyan-500"
+      classNameText="text-cyan-500"
+      text={SEARCH_TEXTS.LOADING}
+      dataTestId="loader"
+    />
+  );
 
   const loader = screen.getByTestId('loader');
   expect(loader).toBeInTheDocument();
@@ -28,17 +25,6 @@ test('Loader renders with default styling and text', () => {
 });
 
 test('Main component renders loader when loading state is true and removes it when loading is false', async () => {
-  server.use(
-    http.get(`${UNSPLASH_BASE_URL}/search/photos`, async () => {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      return HttpResponse.json({
-        results: mockCards,
-        total: mockCards.length,
-        total_pages: 1,
-      });
-    })
-  );
-
   render(<Main searchQuery="test" />);
 
   expect(screen.getByTestId('main-loader')).toBeInTheDocument();

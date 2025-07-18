@@ -13,9 +13,9 @@ type Props = {
 
 type State = {
   cards: CardData[];
-  loading: boolean;
+  isLoading: boolean;
   errorTriggered: boolean;
-  error: string | null;
+  isError: string | null;
 };
 
 export default class Main extends PureComponent<Props, State> {
@@ -23,9 +23,9 @@ export default class Main extends PureComponent<Props, State> {
     super(props);
     this.state = {
       cards: [],
-      loading: true,
+      isLoading: true,
       errorTriggered: false,
-      error: null,
+      isError: null,
     };
   }
 
@@ -45,22 +45,22 @@ export default class Main extends PureComponent<Props, State> {
 
   loadData = async (searchQuery: string) => {
     try {
-      this.setState({ loading: true, error: null });
+      this.setState({ isLoading: true, isError: null });
       const cards = await fetchCards(searchQuery);
 
       if (cards.length === 0) {
         this.setState({
-          loading: false,
-          error: ERROR_TEXTS.FETCH_ERROR,
+          isLoading: false,
+          isError: ERROR_TEXTS.FETCH_ERROR,
         });
         return;
       }
 
-      this.setState({ cards, loading: false });
+      this.setState({ cards, isLoading: false });
     } catch {
       this.setState({
-        loading: false,
-        error: ERROR_TEXTS.FETCH_ERROR,
+        isLoading: false,
+        isError: ERROR_TEXTS.FETCH_ERROR,
       });
     }
   };
@@ -82,7 +82,7 @@ export default class Main extends PureComponent<Props, State> {
   );
 
   render() {
-    const { cards, loading, errorTriggered, error } = this.state;
+    const { cards, isLoading, errorTriggered, isError } = this.state;
 
     if (errorTriggered) {
       throw new Error('Test error triggered by clicking the button!');
@@ -90,7 +90,7 @@ export default class Main extends PureComponent<Props, State> {
 
     return (
       <section className="container mx-auto py-8">
-        {loading ? (
+        {isLoading ? (
           <div className="flex min-h-[300px] items-center justify-center">
             <Loader
               classNameSpinner="border-cyan-300"
@@ -99,9 +99,14 @@ export default class Main extends PureComponent<Props, State> {
               dataTestId="main-loader"
             />
           </div>
-        ) : error ? (
+        ) : isError ? (
           <div className="flex min-h-[300px] flex-col items-center justify-center">
-            <div className="mb-4 text-xl font-semibold text-red-500">{error}</div>
+            <div
+              data-testid="list-error-message"
+              className="mb-4 text-xl font-semibold text-red-500"
+            >
+              {isError}
+            </div>
             {this.renderErrorButton()}
           </div>
         ) : (
