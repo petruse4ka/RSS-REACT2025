@@ -1,6 +1,7 @@
 import { render, screen } from '@/tests/test-utils/test-utils';
 import CardsList from './cards-list';
 import { mockCardData } from '@/tests/mocks/handlers';
+import { ERROR_TEXTS } from '@/constants';
 
 test('CardsList renders correct number of card items with correct data', () => {
   render(<CardsList cards={[mockCardData]} />);
@@ -22,12 +23,13 @@ test('CardsList renders correct number of card items with correct data', () => {
   expect(firstCardImage).toHaveAttribute('alt', firstCard.title);
 });
 
-test('CardsList renders empty when no cards provided', () => {
+test('CardsList renders error message when no cards provided', () => {
   render(<CardsList cards={[]} />);
 
-  const cardsList = screen.getByTestId('cards-list');
-  expect(cardsList).toBeInTheDocument();
+  const errorMessage = screen.getByTestId('list-error-message');
+  expect(errorMessage).toBeInTheDocument();
+  expect(errorMessage).toHaveTextContent(ERROR_TEXTS.FETCH_ERROR);
 
-  const cardItems = screen.queryAllByTestId('card-item');
-  expect(cardItems).toHaveLength(0);
+  const cardsList = screen.queryByTestId('cards-list');
+  expect(cardsList).not.toBeInTheDocument();
 });

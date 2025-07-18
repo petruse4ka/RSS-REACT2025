@@ -233,9 +233,3 @@ export const handlers = [
     return HttpResponse.json(mockCards);
   }),
 ];
-
-export const localStorageMock = {
-  getItem: vi.fn(),
-  setItem: vi.fn(),
-  clear: vi.fn(),
-};

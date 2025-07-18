@@ -1,7 +1,12 @@
 import { render, screen, fireEvent } from '@/tests/test-utils/test-utils';
 import Search from './search';
 import { SEARCH_TEXTS } from '@/constants';
-import { localStorageMock } from '@/tests/mocks/handlers';
+
+const localStorageMock = {
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  clear: vi.fn(),
+};
 
 Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
