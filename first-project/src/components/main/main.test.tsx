@@ -52,7 +52,7 @@ test('Main component does not render cards list and error button when error stat
   expect(screen.queryByTestId('error-button')).toBeInTheDocument();
 });
 
-test('Main component receives searchQuery prop from localStorage and starts loading data', async () => {
+test('Main component receives searchQuery prop from App after mounting', async () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
