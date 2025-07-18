@@ -55,7 +55,7 @@ export default class Search extends PureComponent<Props, State> {
 
   render() {
     return (
-      <section className="container flex w-full gap-4">
+      <section data-testid="search" className="container flex w-full gap-4">
         <Input
           type="text"
           placeholder={SEARCH_TEXTS.PLACEHOLDER}

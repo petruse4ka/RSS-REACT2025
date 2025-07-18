@@ -89,7 +89,7 @@ export default class Main extends PureComponent<Props, State> {
     }
 
     return (
-      <section className="container mx-auto py-8">
+      <section data-testid="main" className="container mx-auto py-8">
         {isLoading ? (
           <div className="flex min-h-[300px] items-center justify-center">
             <Loader
