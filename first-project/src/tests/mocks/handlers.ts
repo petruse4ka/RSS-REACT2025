@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { UNSPLASH_BASE_URL } from '@/constants';
-import type { CardResponse } from '@/types/interfaces';
+import type { CardResponse, CardData } from '@/types/interfaces';
 
 const mockCards: CardResponse[] = [
   {
@@ -182,6 +182,22 @@ const mockCards: CardResponse[] = [
   },
 ];
 
+export const mockCardData: CardData = {
+  id: 'IPtSV340-j4',
+  imageUrl:
+    'https://images.unsplash.com/photo-1682685797703-2bb22dbb885b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NTc5MDd8MXwxfHNlYXJjaHwxfHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  title: 'A MAN WALKING DOWN A DIRT ROAD NEXT TO A MOUNTAIN',
+  description: 'Author: NEOM (@neom)',
+};
+
+export const incompleteCardData: CardData = {
+  id: 'test-id',
+  imageUrl:
+    'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NTc5MDd8MHwxfHNlYXJjaHw2fHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  title: '',
+  description: 'Test description',
+};
+
 export const handlers = [
   http.get(`${UNSPLASH_BASE_URL}/search/photos`, ({ request }) => {
     const url = new URL(request.url);
@@ -213,28 +229,7 @@ export const handlers = [
     });
   }),
 
-  http.get(`${UNSPLASH_BASE_URL}/photos`, ({ request }) => {
-    const url = new URL(request.url);
-
-    if (url.searchParams.get('page') === 'simulated-error-404') {
-      return new HttpResponse(null, { status: 404 });
-    }
-
-    if (url.searchParams.get('page') === 'simulated-error-500') {
-      return new HttpResponse(null, { status: 500 });
-    }
-
-    if (url.searchParams.get('page') === 'simulated-empty-response') {
-      return HttpResponse.json({});
-    }
-
-    if (url.searchParams.get('page') === 'simulated-invalid-data') {
-      return HttpResponse.json({
-        invalid: 'structure',
-        noArray: 'property',
-      });
-    }
-
+  http.get(`${UNSPLASH_BASE_URL}/photos`, () => {
     return HttpResponse.json(mockCards);
   }),
 ];

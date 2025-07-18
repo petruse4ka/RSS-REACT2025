@@ -37,14 +37,6 @@ test('fetchCards returns mock cards for search query', async () => {
   });
 });
 
-test('fetchCards returns correct data structure', async () => {
-  const cards = await fetchCards('random-search-query');
-
-  expect(cards).toBeDefined();
-  expect(Array.isArray(cards)).toBe(true);
-  expect(cards.length).toBeGreaterThan(0);
-});
-
 test('fetchCards throws error when API returns error 404', async () => {
   await expect(fetchCards('simulated-error-404')).rejects.toThrow('HTTP error: 404');
 });

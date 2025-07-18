@@ -10,7 +10,10 @@ export default class CardItem extends PureComponent<Props> {
     const { imageUrl, title, description } = this.props.card;
 
     return (
-      <li className="overflow-hidden rounded-lg bg-indigo-900 transition-all duration-300 hover:scale-102">
+      <li
+        data-testid="card-item"
+        className="overflow-hidden rounded-lg bg-indigo-900 transition-all duration-300 hover:scale-102"
+      >
         <div className="h-50 overflow-hidden">
           <img
             src={imageUrl}
