@@ -96,6 +96,7 @@ export default class Main extends PureComponent<Props, State> {
               classNameSpinner="border-cyan-300"
               classNameText="text-cyan-300 text-lg"
               text={SEARCH_TEXTS.LOADING}
+              dataTestId="main-loader"
             />
           </div>
         ) : error ? (

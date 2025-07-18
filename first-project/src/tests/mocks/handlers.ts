@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 import { UNSPLASH_BASE_URL } from '@/constants';
 import type { CardResponse, CardData } from '@/types/interfaces';
 
-const mockCards: CardResponse[] = [
+export const mockCards: CardResponse[] = [
   {
     id: 'IPtSV340-j4',
     created_at: '2023-04-28T12:46:16Z',
