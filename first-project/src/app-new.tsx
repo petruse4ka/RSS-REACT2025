@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
-import Search from './components/search/search';
-import Main from './components/main/main';
+import Search from './components/search/search-new';
+import Main from './components/main/main-new';
 import ErrorBoundary from './components/error-boundary/error-boundary';
 import errorImage from './assets/images/error.svg';
 import type { ErrorTexts } from './types/interfaces';

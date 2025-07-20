@@ -1,7 +1,7 @@
 import { render, screen, waitForElementToBeRemoved } from '@/__tests__/test-utils/test-utils';
-import Main from '../components/main/main';
+import Main from '../components/main/main-new';
 import { ERROR_TEXTS } from '@/constants';
-import App from '@/app';
+import App from '@/app-new';
 
 const localStorageMock = {
   getItem: vi.fn(),

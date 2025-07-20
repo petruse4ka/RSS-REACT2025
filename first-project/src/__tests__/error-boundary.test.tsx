@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
 import ErrorBoundary from '@/components/error-boundary/error-boundary';
 import { ERROR_TEXTS } from '@/constants';
-import Main from '@/components/main/main';
+import Main from '@/components/main/main-new';
 
 const ThrowError = ({ error = false }: { error?: boolean }) => {
   if (error) {
