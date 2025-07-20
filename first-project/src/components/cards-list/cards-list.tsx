@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { ERROR_TEXTS } from '@/constants';
-import CardItem from './cards-item';
+import CardItem from './card';
 
 type Props = {
   cards: CardData[];
