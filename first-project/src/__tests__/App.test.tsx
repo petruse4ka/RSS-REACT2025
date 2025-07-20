@@ -1,5 +1,5 @@
 import { render, screen } from '@/__tests__/test-utils/test-utils';
-import App from '../App';
+import App from '../app';
 
 test('App component renders with search and main components', () => {
   render(<App />);
