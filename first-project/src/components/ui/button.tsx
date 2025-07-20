@@ -5,17 +5,23 @@ type Props = {
   onClick: () => void;
   className: string;
   text: string;
+  dataTestId?: string;
 };
 
 export default class Button extends PureComponent<Props> {
   render() {
-    const { type, onClick, className, text } = this.props;
+    const { type, onClick, className, text, dataTestId } = this.props;
 
     const defaultClassName =
       'px-6 py-2 text-white rounded-sm transition duration-300 cursor-pointer focus:outline-none';
 
     return (
-      <button type={type} onClick={onClick} className={`${defaultClassName} ${className}`}>
+      <button
+        type={type}
+        onClick={onClick}
+        className={`${defaultClassName} ${className}`}
+        data-testid={dataTestId}
+      >
         {text}
       </button>
     );

@@ -55,20 +55,22 @@ export default class Search extends PureComponent<Props, State> {
 
   render() {
     return (
-      <section className="container flex gap-4 w-full">
+      <section data-testid="search" className="container flex w-full gap-4">
         <Input
           type="text"
           placeholder={SEARCH_TEXTS.PLACEHOLDER}
           value={this.state.searchQuery}
           onChange={this.handleSearchQueryChange}
           onKeyDown={this.handleKeyPress}
-          className="text-cyan-300 border-fuchsia-300 hover:border-fuchsia-400 focus:border-fuchsia-500"
+          className="border-fuchsia-300 text-cyan-300 hover:border-fuchsia-400 focus:border-fuchsia-500"
+          dataTestId="search-input"
         />
         <Button
           type="button"
           onClick={this.handleSearchButtonClick}
-          className="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
+          className="border border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400"
           text={SEARCH_TEXTS.BUTTON}
+          dataTestId="search-button"
         />
       </section>
     );

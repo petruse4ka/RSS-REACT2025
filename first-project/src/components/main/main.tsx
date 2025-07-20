@@ -13,9 +13,9 @@ type Props = {
 
 type State = {
   cards: CardData[];
-  loading: boolean;
+  isLoading: boolean;
   errorTriggered: boolean;
-  error: string | null;
+  isError: string | null;
 };
 
 export default class Main extends PureComponent<Props, State> {
@@ -23,9 +23,9 @@ export default class Main extends PureComponent<Props, State> {
     super(props);
     this.state = {
       cards: [],
-      loading: true,
+      isLoading: true,
       errorTriggered: false,
-      error: null,
+      isError: null,
     };
   }
 
@@ -45,22 +45,22 @@ export default class Main extends PureComponent<Props, State> {
 
   loadData = async (searchQuery: string) => {
     try {
-      this.setState({ loading: true, error: null });
+      this.setState({ isLoading: true, isError: null });
       const cards = await fetchCards(searchQuery);
 
       if (cards.length === 0) {
         this.setState({
-          loading: false,
-          error: ERROR_TEXTS.FETCH_ERROR,
+          isLoading: false,
+          isError: ERROR_TEXTS.FETCH_ERROR,
         });
         return;
       }
 
-      this.setState({ cards, loading: false });
+      this.setState({ cards, isLoading: false });
     } catch {
       this.setState({
-        loading: false,
-        error: ERROR_TEXTS.FETCH_ERROR,
+        isLoading: false,
+        isError: ERROR_TEXTS.FETCH_ERROR,
       });
     }
   };
@@ -70,36 +70,43 @@ export default class Main extends PureComponent<Props, State> {
   };
 
   renderErrorButton = () => (
-    <div className="w-full mt-8">
+    <div className="mt-8 w-full">
       <Button
         type="button"
         onClick={this.handleErrorButtonClick}
-        className="w-full bg-red-500 border-red-500 hover:bg-red-600 hover:border-red-600 py-5"
+        className="w-full border-red-500 bg-red-500 py-5 hover:border-red-600 hover:bg-red-600"
         text={ERROR_TEXTS.ERROR_BUTTON}
+        dataTestId="error-button"
       />
     </div>
   );
 
   render() {
-    const { cards, loading, errorTriggered, error } = this.state;
+    const { cards, isLoading, errorTriggered, isError } = this.state;
 
     if (errorTriggered) {
       throw new Error('Test error triggered by clicking the button!');
     }
 
     return (
-      <section className="container mx-auto py-8">
-        {loading ? (
-          <div className="flex justify-center items-center min-h-[300px]">
+      <section data-testid="main" className="container mx-auto py-8">
+        {isLoading ? (
+          <div className="flex min-h-[300px] items-center justify-center">
             <Loader
               classNameSpinner="border-cyan-300"
               classNameText="text-cyan-300 text-lg"
               text={SEARCH_TEXTS.LOADING}
+              dataTestId="main-loader"
             />
           </div>
-        ) : error ? (
-          <div className="flex flex-col items-center justify-center min-h-[300px]">
-            <div className="text-red-500 text-xl font-semibold mb-4">{error}</div>
+        ) : isError ? (
+          <div className="flex min-h-[300px] flex-col items-center justify-center">
+            <div
+              data-testid="list-error-message"
+              className="mb-4 text-xl font-semibold text-red-500"
+            >
+              {isError}
+            </div>
             {this.renderErrorButton()}
           </div>
         ) : (

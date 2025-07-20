@@ -43,7 +43,7 @@ export default class App extends PureComponent<object, State> {
         imageClassName="w-64 h-64"
         buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
       >
-        <div className="min-h-screen flex flex-col items-center max-w-[1440px] mx-auto py-20 px-5 md:px-20">
+        <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center px-5 py-20 md:px-20">
           <Search onSearch={this.handleSearch} />
           <Main searchQuery={this.state.searchQuery} />
         </div>
