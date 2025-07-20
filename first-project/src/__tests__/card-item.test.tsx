@@ -1,6 +1,6 @@
-import { render, screen } from '@/tests/test-utils/test-utils';
-import CardItem from './cards-item';
-import { mockCardData, incompleteCardData } from '@/tests/mocks/handlers';
+import { render, screen } from '@/__tests__/test-utils/test-utils';
+import CardItem from '@/components/cards-list/cards-item';
+import { mockCardData, incompleteCardData } from '@/__tests__/mocks/handlers';
 
 test('CardItem displays item name and description correctly', () => {
   render(<CardItem card={mockCardData} />);

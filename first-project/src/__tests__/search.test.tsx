@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@/tests/test-utils/test-utils';
-import Search from './search';
+import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
+import Search from '../components/search/search';
 import { SEARCH_TEXTS } from '@/constants';
 
 const localStorageMock = {

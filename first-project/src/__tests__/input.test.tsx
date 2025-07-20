@@ -1,5 +1,5 @@
-import { render, screen } from '@/tests/test-utils/test-utils';
-import Input from './input';
+import { render, screen } from '@/__tests__/test-utils/test-utils';
+import Input from '@/components/ui/input';
 
 test('Input renders with default styling and props', () => {
   render(

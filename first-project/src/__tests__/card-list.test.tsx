@@ -1,6 +1,6 @@
-import { render, screen } from '@/tests/test-utils/test-utils';
-import CardsList from './cards-list';
-import { mockCardData } from '@/tests/mocks/handlers';
+import { render, screen } from '@/__tests__/test-utils/test-utils';
+import CardsList from '../components/cards-list/cards-list';
+import { mockCardData } from '@/__tests__/mocks/handlers';
 import { ERROR_TEXTS } from '@/constants';
 
 test('CardsList renders correct number of card items with correct data', () => {

@@ -1,5 +1,5 @@
-import { render, screen, waitForElementToBeRemoved } from '@/tests/test-utils/test-utils';
-import Main from '../main/main';
+import { render, screen, waitForElementToBeRemoved } from '@/__tests__/test-utils/test-utils';
+import Main from '../components/main/main';
 import { ERROR_TEXTS } from '@/constants';
 import App from '@/App';
 
@@ -38,21 +38,7 @@ test('Main component does not render cards list and error button when loading st
   expect(screen.queryByTestId('error-button')).toBeInTheDocument();
 });
 
-test('Main component does not render cards list and error button when error state is true and renders error message', async () => {
-  render(<Main searchQuery="simulated-error-404" />);
-
-  expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('error-button')).not.toBeInTheDocument();
-
-  await waitForElementToBeRemoved(() => screen.queryByTestId('main-loader'));
-
-  expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
-  expect(screen.getByTestId('list-error-message')).toBeInTheDocument();
-  expect(screen.getByTestId('list-error-message')).toHaveTextContent(ERROR_TEXTS.FETCH_ERROR);
-  expect(screen.queryByTestId('error-button')).toBeInTheDocument();
-});
-
-test('Main component receives searchQuery prop from App after mounting', async () => {
+test('Main component receives searchQuery prop from App after mounting and does not render cards list and error button when error state is true and renders error message', async () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

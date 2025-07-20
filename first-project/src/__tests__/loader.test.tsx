@@ -1,5 +1,5 @@
-import { render, screen } from '@/tests/test-utils/test-utils';
-import Loader from './loader';
+import { render, screen } from '@/__tests__/test-utils/test-utils';
+import Loader from '@/components/ui/loader';
 import { SEARCH_TEXTS } from '@/constants';
 
 test('Loader renders with default styling and text', () => {

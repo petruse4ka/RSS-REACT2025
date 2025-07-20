@@ -1,5 +1,5 @@
-import { render, screen } from '@/tests/test-utils/test-utils';
-import Button from './button';
+import { render, screen } from '@/__tests__/test-utils/test-utils';
+import Button from '@/components/ui/button';
 
 test('Button renders with default styling and text', () => {
   render(
