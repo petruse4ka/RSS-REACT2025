@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 type Props = {
   type: 'text' | 'number';
@@ -10,23 +10,27 @@ type Props = {
   dataTestId: string;
 };
 
-export default class Input extends PureComponent<Props> {
-  render() {
-    const { type, placeholder, value, onChange, onKeyDown, className, dataTestId } = this.props;
+export default function Input({
+  type,
+  placeholder,
+  value,
+  onChange,
+  onKeyDown,
+  className,
+  dataTestId,
+}: Props) {
+  const defaultClassName =
+    'flex-1 min-w-[200px] px-4 py-2 border rounded-sm transition duration-300 focus:outline-none';
 
-    const defaultClassName =
-      'flex-1 min-w-[200px] px-4 py-2 border rounded-sm transition duration-300 focus:outline-none';
-
-    return (
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        className={`${defaultClassName} ${className}`}
-        data-testid={dataTestId}
-      />
-    );
-  }
+  return (
+    <input
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+      className={`${defaultClassName} ${className}`}
+      data-testid={dataTestId}
+    />
+  );
 }
