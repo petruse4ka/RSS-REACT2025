@@ -23,22 +23,19 @@ test('Main component renders loader when loading state is true and removes it wh
 
   expect(screen.getByTestId('cards-list')).toBeInTheDocument();
   expect(screen.queryByTestId('main-loader')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('error-button')).toBeInTheDocument();
 });
 
-test('Main component does not render cards list and error button when loading state is true and renders them when loading is false', async () => {
+test('Main component does not render cards list when loading state is true and renders it when loading is false', async () => {
   render(<Main searchQuery="test" />);
 
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('error-button')).not.toBeInTheDocument();
 
   await waitForElementToBeRemoved(() => screen.queryByTestId('main-loader'));
 
   expect(screen.getByTestId('cards-list')).toBeInTheDocument();
-  expect(screen.queryByTestId('error-button')).toBeInTheDocument();
 });
 
-test('Main component receives searchQuery prop from App after mounting and does not render cards list and error button when error state is true and renders error message', async () => {
+test('Main component receives searchQuery prop from App after mounting and does not render cards list when error state is true and renders error message', async () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -49,12 +46,10 @@ test('Main component receives searchQuery prop from App after mounting and does 
 
   expect(screen.getByTestId('main-loader')).toBeInTheDocument();
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('error-button')).not.toBeInTheDocument();
 
   await waitForElementToBeRemoved(() => screen.queryByTestId('main-loader'));
 
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
   expect(screen.getByTestId('list-error-message')).toBeInTheDocument();
   expect(screen.getByTestId('list-error-message')).toHaveTextContent(ERROR_TEXTS.FETCH_ERROR);
-  expect(screen.queryByTestId('error-button')).toBeInTheDocument();
 });

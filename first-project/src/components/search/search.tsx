@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function Search({ onSearch }: Props) {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     loadSearchQuery();

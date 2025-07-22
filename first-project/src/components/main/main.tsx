@@ -1,9 +1,8 @@
-import { PureComponent } from 'react';
+import { useState, useEffect } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { SEARCH_TEXTS } from '@/constants';
 import Loader from '../ui/loader';
 import CardsList from '../cards-list/cards-list';
-import Button from '../ui/button';
 import { ERROR_TEXTS } from '@/constants';
 import { fetchCards } from '@/api/fetch-cards';
 
@@ -11,111 +10,57 @@ type Props = {
   searchQuery: string;
 };
 
-type State = {
-  cards: CardData[];
-  isLoading: boolean;
-  errorTriggered: boolean;
-  isError: string | null;
-};
+export default function Main({ searchQuery }: Props) {
+  const [cards, setCards] = useState<CardData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
 
-export default class Main extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      cards: [],
-      isLoading: true,
-      errorTriggered: false,
-      isError: null,
-    };
-  }
-
-  componentDidMount() {
-    const { searchQuery } = this.props;
-
-    this.loadData(searchQuery);
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    const { searchQuery } = this.props;
-
-    if (prevProps.searchQuery !== searchQuery) {
-      this.loadData(searchQuery);
-    }
-  }
-
-  loadData = async (searchQuery: string) => {
+  const loadData = async (searchQuery: string) => {
     try {
-      this.setState({ isLoading: true, isError: null });
+      setIsLoading(true);
+      setIsError(false);
       const cards = await fetchCards(searchQuery);
 
       if (cards.length === 0) {
-        this.setState({
-          isLoading: false,
-          isError: ERROR_TEXTS.FETCH_ERROR,
-        });
+        setIsLoading(false);
+        setIsError(true);
         return;
       }
 
-      this.setState({ cards, isLoading: false });
+      setCards(cards);
+      setIsLoading(false);
     } catch {
-      this.setState({
-        isLoading: false,
-        isError: ERROR_TEXTS.FETCH_ERROR,
-      });
+      setIsLoading(false);
+      setIsError(true);
     }
   };
 
-  handleErrorButtonClick = () => {
-    this.setState({ errorTriggered: true });
-  };
+  useEffect(() => {
+    loadData(searchQuery);
+  }, [searchQuery]);
 
-  renderErrorButton = () => (
-    <div className="mt-8 w-full">
-      <Button
-        type="button"
-        onClick={this.handleErrorButtonClick}
-        className="w-full border-red-500 bg-red-500 py-5 hover:border-red-600 hover:bg-red-600"
-        text={ERROR_TEXTS.ERROR_BUTTON}
-        dataTestId="error-button"
-      />
-    </div>
+  return (
+    <section data-testid="main" className="container mx-auto py-8">
+      {isLoading ? (
+        <div className="flex min-h-[300px] items-center justify-center">
+          <Loader
+            classNameSpinner="border-cyan-300"
+            classNameText="text-cyan-300 text-lg"
+            text={SEARCH_TEXTS.LOADING}
+            dataTestId="main-loader"
+          />
+        </div>
+      ) : isError ? (
+        <div className="flex min-h-[300px] flex-col items-center justify-center">
+          <div data-testid="list-error-message" className="mb-4 text-xl font-semibold text-red-500">
+            {ERROR_TEXTS.FETCH_ERROR}
+          </div>
+        </div>
+      ) : (
+        <>
+          <CardsList cards={cards} />
+        </>
+      )}
+    </section>
   );
-
-  render() {
-    const { cards, isLoading, errorTriggered, isError } = this.state;
-
-    if (errorTriggered) {
-      throw new Error('Test error triggered by clicking the button!');
-    }
-
-    return (
-      <section data-testid="main" className="container mx-auto py-8">
-        {isLoading ? (
-          <div className="flex min-h-[300px] items-center justify-center">
-            <Loader
-              classNameSpinner="border-cyan-300"
-              classNameText="text-cyan-300 text-lg"
-              text={SEARCH_TEXTS.LOADING}
-              dataTestId="main-loader"
-            />
-          </div>
-        ) : isError ? (
-          <div className="flex min-h-[300px] flex-col items-center justify-center">
-            <div
-              data-testid="list-error-message"
-              className="mb-4 text-xl font-semibold text-red-500"
-            >
-              {isError}
-            </div>
-            {this.renderErrorButton()}
-          </div>
-        ) : (
-          <>
-            <CardsList cards={cards} />
-            {this.renderErrorButton()}
-          </>
-        )}
-      </section>
-    );
-  }
 }
