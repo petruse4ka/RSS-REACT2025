@@ -1,4 +1,4 @@
-import { PureComponent } from 'react';
+import { useState, useEffect } from 'react';
 import Search from './components/search/search';
 import Main from './components/main/main';
 import ErrorBoundary from './components/error-boundary/error-boundary';
@@ -12,42 +12,31 @@ const errorTexts: ErrorTexts = {
   buttonText: ERROR_TEXTS.REFRESH_BUTTON,
 };
 
-type State = {
-  searchQuery: string;
-};
+export default function App() {
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-export default class App extends PureComponent<object, State> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      searchQuery: '',
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const savedQuery = localStorage.getItem('konstantinFirstReactProjectSearchQuery') || '';
-    this.setState({ searchQuery: savedQuery });
-  }
+    setSearchQuery(savedQuery);
+  }, []);
 
-  handleSearch = (query: string) => {
-    this.setState({ searchQuery: query });
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
   };
 
-  render() {
-    return (
-      <ErrorBoundary
-        texts={errorTexts}
-        image={errorImage}
-        className="min-h-screen px-5 md:px-20"
-        containerClassName="bg-indigo-900 backdrop-blur-sm text-white"
-        imageClassName="w-64 h-64"
-        buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
-      >
-        <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center px-5 py-20 md:px-20">
-          <Search onSearch={this.handleSearch} />
-          <Main searchQuery={this.state.searchQuery} />
-        </div>
-      </ErrorBoundary>
-    );
-  }
+  return (
+    <ErrorBoundary
+      texts={errorTexts}
+      image={errorImage}
+      className="min-h-screen px-5 md:px-20"
+      containerClassName="bg-indigo-900 backdrop-blur-sm text-white"
+      imageClassName="w-64 h-64"
+      buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
+    >
+      <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center px-5 py-20 md:px-20">
+        <Search onSearch={handleSearch} />
+        <Main searchQuery={searchQuery} />
+      </div>
+    </ErrorBoundary>
+  );
 }
