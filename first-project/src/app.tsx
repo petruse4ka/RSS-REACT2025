@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
 import Search from './components/search/search';
 import Main from './components/main/main';
 import ErrorBoundary from './components/error-boundary/error-boundary';
 import errorImage from './assets/images/error.svg';
 import type { ErrorTexts } from './types/interfaces';
-import { ERROR_TEXTS } from './constants';
+import { ERROR_TEXTS, LOCAL_STORAGE_KEYS } from './constants';
+import useLocalStorage from './hooks/use-local-storage';
 
 const errorTexts: ErrorTexts = {
   title: ERROR_TEXTS.TITLE,
@@ -13,12 +13,7 @@ const errorTexts: ErrorTexts = {
 };
 
 export default function App() {
-  const [searchQuery, setSearchQuery] = useState<string>('');
-
-  useEffect(() => {
-    const savedQuery = localStorage.getItem('konstantinFirstReactProjectSearchQuery') || '';
-    setSearchQuery(savedQuery);
-  }, []);
+  const [searchQuery, setSearchQuery] = useLocalStorage(LOCAL_STORAGE_KEYS.SEARCH_QUERY, '');
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -34,7 +29,7 @@ export default function App() {
       buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
     >
       <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center px-5 py-20 md:px-20">
-        <Search onSearch={handleSearch} />
+        <Search searchQuery={searchQuery} onSearch={handleSearch} />
         <Main searchQuery={searchQuery} />
       </div>
     </ErrorBoundary>

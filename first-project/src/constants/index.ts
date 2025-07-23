@@ -15,3 +15,7 @@ export const ERROR_TEXTS = {
   ERROR_BUTTON: 'Test error boundary',
   FETCH_ERROR: 'No results. Please try again.',
 };
+
+export const LOCAL_STORAGE_KEYS = {
+  SEARCH_QUERY: 'konstantinFirstReactProjectSearchQuery',
+};
