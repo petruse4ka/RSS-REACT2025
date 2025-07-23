@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { SEARCH_TEXTS } from '@/constants';
 import Loader from '../ui/loader';
@@ -14,6 +14,7 @@ export default function Main({ searchQuery }: Props) {
   const [cards, setCards] = useState<CardData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
+  const prevSearchQueryRef = useRef<string>('');
 
   const loadData = async (searchQuery: string) => {
     try {
@@ -35,9 +36,10 @@ export default function Main({ searchQuery }: Props) {
     }
   };
 
-  useEffect(() => {
+  if (searchQuery !== prevSearchQueryRef.current) {
+    prevSearchQueryRef.current = searchQuery;
     loadData(searchQuery);
-  }, [searchQuery]);
+  }
 
   return (
     <section data-testid="main" className="container mx-auto py-8">

@@ -20,7 +20,7 @@ test('Search component renders with default styling and text and empty input whe
   localStorageMock.getItem.mockReturnValue(null);
 
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
   expect(input).toBeInTheDocument();
@@ -38,7 +38,7 @@ test('Search component displays previously saved search term from localStorage o
   localStorageMock.getItem.mockReturnValue(savedQuery);
 
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
   expect(input).toHaveValue(savedQuery);
@@ -50,7 +50,7 @@ test('Search component updates input value when user types', () => {
   localStorageMock.getItem.mockReturnValue(savedQuery);
 
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
   expect(input).toHaveValue(savedQuery);
@@ -62,7 +62,7 @@ test('Search component updates input value when user types', () => {
 
 test('Search component calls onSearch callback with trimmed correct parameters when button is clicked and updates localStorage', () => {
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
   const button = screen.getByTestId('search-button');
@@ -79,7 +79,7 @@ test('Search component calls onSearch callback with trimmed correct parameters w
 
 test('Search component calls onSearch callback with trimmed correct parameters when Enter key is pressed and updates localStorage', () => {
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
 
