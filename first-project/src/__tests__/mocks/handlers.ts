@@ -2,6 +2,12 @@ import { http, HttpResponse } from 'msw';
 import { UNSPLASH_BASE_URL } from '@/constants';
 import type { CardResponse, CardData } from '@/types/interfaces';
 
+export const localStorageMock = {
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  clear: vi.fn(),
+};
+
 export const mockCards: CardResponse[] = [
   {
     id: 'IPtSV340-j4',

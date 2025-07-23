@@ -1,16 +1,9 @@
-import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
+import { render, screen, fireEvent, setLocalStorageMock } from '@/__tests__/test-utils/test-utils';
 import Search from '../components/search/search';
 import { SEARCH_TEXTS } from '@/constants';
+import { localStorageMock } from './mocks/handlers';
 
-const localStorageMock = {
-  getItem: vi.fn(),
-  setItem: vi.fn(),
-  clear: vi.fn(),
-};
-
-Object.defineProperty(window, 'localStorage', {
-  value: localStorageMock,
-});
+setLocalStorageMock();
 
 beforeEach(() => {
   vi.clearAllMocks();
