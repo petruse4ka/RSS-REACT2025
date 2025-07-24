@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import type { RenderOptions } from '@testing-library/react';
 import type { ReactElement } from 'react';
-import { localStorageMock } from '../mocks/handlers';
+import { localStorageMock } from '../mocks/localStorageMock';
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
   render(ui, { ...options });

@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import useLocalStorage from '../hooks/use-local-storage';
 import { setLocalStorageMock } from './test-utils/test-utils';
-import { localStorageMock } from './mocks/handlers';
+import { localStorageMock } from './mocks/localStorageMock';
 
 setLocalStorageMock();
 
