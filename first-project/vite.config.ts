@@ -40,6 +40,8 @@ export default defineConfig(({ mode }) => ({
         'src/index.{js,jsx,ts,tsx}',
         'src/setupTests.{js,ts}',
         'src/**/*.d.ts',
+        'src/__tests__/',
+        'src/types/',
       ],
       thresholds: {
         statements: 80,

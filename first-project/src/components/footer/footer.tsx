@@ -2,10 +2,11 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-10 w-full bg-indigo-900 py-4 text-center text-white">
+    <footer data-testid="footer" className="mt-10 w-full bg-indigo-900 py-4 text-center text-white">
       <div className="container mx-auto flex max-w-[1440px] items-center justify-between px-5 md:px-20">
-        <span>Konstantin Petrov © {currentYear}</span>
+        <span data-testid="footer-copyright">Konstantin Petrov © {currentYear}</span>
         <a
+          data-testid="footer-github-link"
           href="https://github.com/petruse4ka"
           target="_blank"
           rel="noopener noreferrer"
