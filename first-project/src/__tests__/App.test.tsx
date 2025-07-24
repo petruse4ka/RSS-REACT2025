@@ -7,6 +7,9 @@ test('App component renders with homepage component', () => {
   const homepage = screen.getByTestId('homepage');
   expect(homepage).toBeInTheDocument();
 
+  const header = screen.getByTestId('header');
+  expect(header).toBeInTheDocument();
+
   const footer = screen.getByTestId('footer');
   expect(footer).toBeInTheDocument();
 });
