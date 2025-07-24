@@ -26,7 +26,7 @@ export const HEADER_TEXTS = {
 
 export const MENU_TEXTS = {
   HOMEPAGE: 'Homepage',
-  ABOUT_US: 'About Us',
+  ABOUT: 'About',
 };
 
 export const FOOTER_TEXTS = {
