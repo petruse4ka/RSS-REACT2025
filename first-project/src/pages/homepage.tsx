@@ -11,9 +11,9 @@ export default function HomePage() {
   };
 
   return (
-    <>
+    <div data-testid="homepage">
       <Search searchQuery={searchQuery} onSearch={handleSearch} />
       <Main searchQuery={searchQuery} />
-    </>
+    </div>
   );
 }
