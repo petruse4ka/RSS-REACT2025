@@ -1,10 +1,14 @@
+import { FOOTER_TEXTS } from '@/constants';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer data-testid="footer" className="mt-10 w-full bg-indigo-900 py-4 text-center text-white">
-      <div className="container mx-auto flex max-w-[1440px] items-center justify-between px-5 md:px-20">
-        <span data-testid="footer-copyright">Konstantin Petrov © {currentYear}</span>
+      <div className="container mx-auto flex items-center justify-between px-5 md:px-20">
+        <span data-testid="footer-copyright">
+          {FOOTER_TEXTS.COPYRIGHT} © {currentYear}
+        </span>
         <a
           data-testid="footer-github-link"
           href="https://github.com/petruse4ka"
@@ -12,7 +16,7 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-1 transition-all duration-300 hover:text-cyan-300"
         >
-          <span>Github</span>
+          <span>{FOOTER_TEXTS.GITHUB}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

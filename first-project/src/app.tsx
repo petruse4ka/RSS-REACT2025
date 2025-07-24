@@ -1,4 +1,5 @@
 import HomePage from './pages/homepage';
+import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import ErrorBoundary from './components/error-boundary/error-boundary';
 import errorImage from './assets/images/error.svg';
@@ -21,6 +22,7 @@ export default function App() {
       imageClassName="w-64 h-64"
       buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
     >
+      <Header />
       <div className="flex-1 px-5 md:px-20">
         <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center py-20">
           <HomePage />

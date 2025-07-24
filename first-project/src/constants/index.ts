@@ -19,3 +19,17 @@ export const ERROR_TEXTS = {
 export const LOCAL_STORAGE_KEYS = {
   SEARCH_QUERY: 'konstantinFirstReactProjectSearchQuery',
 };
+
+export const HEADER_TEXTS = {
+  LOGO: 'Photo Gallery',
+};
+
+export const MENU_TEXTS = {
+  HOMEPAGE: 'Homepage',
+  ABOUT_US: 'About Us',
+};
+
+export const FOOTER_TEXTS = {
+  COPYRIGHT: 'Konstantin Petrov',
+  GITHUB: 'Github',
+};
