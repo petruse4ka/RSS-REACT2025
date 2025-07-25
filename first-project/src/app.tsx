@@ -1,12 +1,10 @@
-import HomePage from './pages/homepage';
-import About from './pages/about';
+import { Outlet } from 'react-router-dom';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import ErrorBoundary from './components/error-boundary/error-boundary';
 import errorImage from './assets/images/error.svg';
 import type { ErrorTexts } from './types/interfaces';
 import { ERROR_TEXTS } from './constants';
-import Error404 from './pages/error-404';
 
 const errorTexts: ErrorTexts = {
   title: ERROR_TEXTS.TITLE,
@@ -27,9 +25,7 @@ export default function App() {
       <Header />
       <div className="flex-1 px-5 md:px-20">
         <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center py-20">
-          <HomePage />
-          <About />
-          <Error404 />
+          <Outlet />
         </div>
       </div>
       <Footer />

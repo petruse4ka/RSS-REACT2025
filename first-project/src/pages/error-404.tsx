@@ -1,10 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/ui/button';
 import { ERROR_404_TEXTS } from '../constants';
 import errorImage from '../assets/images/404-error.png';
 
 export default function Error404() {
+  const navigate = useNavigate();
+
   const returnHome = () => {
-    window.location.href = '/';
+    navigate('/');
   };
 
   return (

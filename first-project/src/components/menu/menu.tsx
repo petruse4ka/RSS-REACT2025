@@ -36,10 +36,10 @@ export default function Menu() {
   return (
     <>
       <nav data-testid="menu" className="hidden items-center gap-6 md:flex">
-        <MenuItem dataTestId="menu-homepage-link" href="/">
+        <MenuItem dataTestId="menu-homepage-link" to="/">
           {MENU_TEXTS.HOMEPAGE}
         </MenuItem>
-        <MenuItem dataTestId="menu-about-link" href="/about">
+        <MenuItem dataTestId="menu-about-link" to="/about">
           {MENU_TEXTS.ABOUT}
         </MenuItem>
       </nav>
@@ -67,10 +67,10 @@ export default function Menu() {
           className="absolute inset-0 flex items-center justify-center bg-indigo-900"
         >
           <div className="flex flex-col items-center gap-8">
-            <MenuItem dataTestId="mobile-menu-homepage-link" href="/" onClick={closeMenu}>
+            <MenuItem dataTestId="mobile-menu-homepage-link" to="/" onClick={closeMenu}>
               {MENU_TEXTS.HOMEPAGE}
             </MenuItem>
-            <MenuItem dataTestId="mobile-menu-about-link" href="/about" onClick={closeMenu}>
+            <MenuItem dataTestId="mobile-menu-about-link" to="/about" onClick={closeMenu}>
               {MENU_TEXTS.ABOUT}
             </MenuItem>
           </div>

@@ -42,7 +42,7 @@ export const ABOUT_TEXTS = {
     'My strategic planning expertise and leadership approach have enabled me to navigate complex challenges with foresight and precision. I am passionate about driving results and thrive in fast-paced environments where strategic thinking and effective teamwork are paramount.',
     'I am expanding my skill set by learning Front-End development to broaden my expertise and explore potential opportunities in the IT sector.',
   ],
-  LEARNING_JOURNEY_TITLE: 'Current Course',
+  LEARNING_JOURNEY_TITLE: 'React Course',
   LEARNING_JOURNEY_DESCRIPTION:
     'I am Currently studying Front-End development at RS School and following the React course. RS School offers a unique learning experience as a free, community-based online education initiative. The RS School has been run by the Rolling Scopes community since 2013. Today, over 600 developer-volunteers from various countries and companies assist as mentors.',
   RS_SCHOOL_BUTTON: 'Join RS School React Course',
