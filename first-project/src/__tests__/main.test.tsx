@@ -1,7 +1,9 @@
 import { render, screen, waitForElementToBeRemoved } from '@/__tests__/test-utils/test-utils';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import Main from '../components/main/main';
 import { ERROR_TEXTS } from '@/constants';
 import App from '@/app';
+import HomePage from '@/pages/homepage';
 
 const localStorageMock = {
   getItem: vi.fn(),
@@ -12,6 +14,21 @@ const localStorageMock = {
 Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
 });
+
+const memoryRouter = () => {
+  return createMemoryRouter([
+    {
+      path: '/',
+      Component: App,
+      children: [
+        {
+          index: true,
+          Component: HomePage,
+        },
+      ],
+    },
+  ]);
+};
 
 test('Main component renders loader when loading state is true and removes it when loading is false', async () => {
   render(<Main searchQuery="test" />);
@@ -42,7 +59,8 @@ test('Main component receives searchQuery prop from App after mounting and does 
 
   localStorageMock.getItem.mockReturnValue('simulated-error-404');
 
-  render(<App />);
+  const testRouter = memoryRouter();
+  render(<RouterProvider router={testRouter} />);
 
   expect(screen.getByTestId('main-loader')).toBeInTheDocument();
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();

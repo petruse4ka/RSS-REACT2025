@@ -1,9 +1,27 @@
 import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
-import Menu from '../components/menu/menu';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { MENU_TEXTS } from '@/constants';
+import App from '@/app';
+import HomePage from '@/pages/homepage';
+
+const memoryRouter = () => {
+  return createMemoryRouter([
+    {
+      path: '/',
+      Component: App,
+      children: [
+        {
+          index: true,
+          Component: HomePage,
+        },
+      ],
+    },
+  ]);
+};
 
 test('Menu component renders with homepage and about links', () => {
-  render(<Menu />);
+  const testRouter = memoryRouter();
+  render(<RouterProvider router={testRouter} />);
 
   const homepageLink = screen.getByTestId('menu-homepage-link');
   expect(homepageLink).toBeInTheDocument();
@@ -15,14 +33,16 @@ test('Menu component renders with homepage and about links', () => {
 });
 
 test('Menu component renders burger menu', () => {
-  render(<Menu />);
+  const testRouter = memoryRouter();
+  render(<RouterProvider router={testRouter} />);
 
   const burgerMenu = screen.getByTestId('burger-menu');
   expect(burgerMenu).toBeInTheDocument();
 });
 
 test('Burger menu toggles mobile menu when clicked', () => {
-  render(<Menu />);
+  const testRouter = memoryRouter();
+  render(<RouterProvider router={testRouter} />);
 
   const burgerMenu = screen.getByTestId('burger-menu');
 
@@ -48,7 +68,8 @@ test('Burger menu toggles mobile menu when clicked', () => {
 });
 
 test('Menu component handles window resize correctly', () => {
-  render(<Menu />);
+  const testRouter = memoryRouter();
+  render(<RouterProvider router={testRouter} />);
 
   const burgerMenu = screen.getByTestId('burger-menu');
 

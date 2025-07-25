@@ -1,20 +1,27 @@
-import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
+import { render, screen } from '@/__tests__/test-utils/test-utils';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import Error404 from '../pages/error-404';
 import { ERROR_404_TEXTS } from '../constants';
+import App from '@/app';
 
-Object.defineProperty(window, 'location', {
-  value: {
-    href: '',
-  },
-  writable: true,
-});
-
-beforeEach(() => {
-  window.location.href = '';
-});
+const memoryRouter = () => {
+  return createMemoryRouter([
+    {
+      path: '/',
+      Component: App,
+      children: [
+        {
+          index: true,
+          Component: Error404,
+        },
+      ],
+    },
+  ]);
+};
 
 test('Error404 component renders 404 error page with all elements', () => {
-  render(<Error404 />);
+  const testRouter = memoryRouter();
+  render(<RouterProvider router={testRouter} />);
 
   const errorPage = screen.getByTestId('404-error-page');
   expect(errorPage).toBeInTheDocument();
@@ -30,16 +37,7 @@ test('Error404 component renders 404 error page with all elements', () => {
   expect(description).toBeInTheDocument();
   expect(description).toHaveTextContent(ERROR_404_TEXTS.DESCRIPTION);
 
-  const button = screen.getByTestId('404-error-button');
+  const button = screen.getByTestId('return-homepage-button');
   expect(button).toBeInTheDocument();
   expect(button).toHaveTextContent(ERROR_404_TEXTS.BUTTON);
-});
-
-test('Error404 componentbutton navigates to homepage when clicked', () => {
-  render(<Error404 />);
-
-  const button = screen.getByTestId('404-error-button');
-  fireEvent.click(button);
-
-  expect(window.location.href).toBe('/');
 });

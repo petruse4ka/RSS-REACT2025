@@ -39,7 +39,7 @@ export default function Error404() {
           onClick={returnHome}
           className="mt-10 rounded-lg bg-indigo-900 py-3 hover:bg-indigo-800"
           text={ERROR_404_TEXTS.BUTTON}
-          dataTestId="404-error-button"
+          dataTestId="return-homepage-button"
         />
       </div>
     </div>
