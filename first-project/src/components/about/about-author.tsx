@@ -13,9 +13,15 @@ export default function AboutAuthor() {
       </div>
       <div data-testid="about-author-description" className="flex flex-1 flex-col justify-start">
         <div className="space-y-6">
-          <p className="leading-relaxed text-gray-300">{ABOUT_TEXTS.BACKGROUND_DESCRIPTION_1}</p>
-          <p className="leading-relaxed text-gray-300">{ABOUT_TEXTS.BACKGROUND_DESCRIPTION_2}</p>
-          <p className="leading-relaxed text-gray-300">{ABOUT_TEXTS.BACKGROUND_DESCRIPTION_3}</p>
+          <p data-testid="about-author-description-1" className="leading-relaxed text-gray-300">
+            {ABOUT_TEXTS.BACKGROUND_DESCRIPTION_1}
+          </p>
+          <p data-testid="about-author-description-2" className="leading-relaxed text-gray-300">
+            {ABOUT_TEXTS.BACKGROUND_DESCRIPTION_2}
+          </p>
+          <p data-testid="about-author-description-3" className="leading-relaxed text-gray-300">
+            {ABOUT_TEXTS.BACKGROUND_DESCRIPTION_3}
+          </p>
         </div>
       </div>
     </div>
