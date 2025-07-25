@@ -1,4 +1,5 @@
 import HomePage from './pages/homepage';
+import About from './pages/about';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import ErrorBoundary from './components/error-boundary/error-boundary';
@@ -26,6 +27,7 @@ export default function App() {
       <div className="flex-1 px-5 md:px-20">
         <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center py-20">
           <HomePage />
+          <About />
         </div>
       </div>
       <Footer />
