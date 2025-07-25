@@ -19,18 +19,17 @@ export default function Menu() {
     document.body.style.overflow = 'auto';
   };
 
-  const handleWindowResize = () => {
-    if (window.innerWidth >= 768 && isMenuOpen) {
-      setIsMenuOpen(false);
-      document.body.style.overflow = 'auto';
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('resize', handleWindowResize);
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
+    const handleWindowResize = () => {
+      if (window.innerWidth >= 768 && isMenuOpen) {
+        setIsMenuOpen(false);
+        document.body.style.overflow = 'auto';
+      }
     };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => window.removeEventListener('resize', handleWindowResize);
   }, [isMenuOpen]);
 
   return (
