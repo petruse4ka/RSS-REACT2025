@@ -13,15 +13,15 @@ export default function AboutAuthor() {
       </div>
       <div data-testid="about-author-description" className="flex flex-1 flex-col justify-start">
         <div className="space-y-6">
-          <p data-testid="about-author-description-1" className="leading-relaxed text-gray-300">
-            {ABOUT_TEXTS.BACKGROUND_DESCRIPTION_1}
-          </p>
-          <p data-testid="about-author-description-2" className="leading-relaxed text-gray-300">
-            {ABOUT_TEXTS.BACKGROUND_DESCRIPTION_2}
-          </p>
-          <p data-testid="about-author-description-3" className="leading-relaxed text-gray-300">
-            {ABOUT_TEXTS.BACKGROUND_DESCRIPTION_3}
-          </p>
+          {ABOUT_TEXTS.BACKGROUND_DESCRIPTION.map((description, index) => (
+            <p
+              key={index}
+              data-testid={`about-author-description-${index + 1}`}
+              className="leading-relaxed text-gray-300"
+            >
+              {description}
+            </p>
+          ))}
         </div>
       </div>
     </div>

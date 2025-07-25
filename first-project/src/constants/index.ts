@@ -37,12 +37,11 @@ export const FOOTER_TEXTS = {
 export const ABOUT_TEXTS = {
   TITLE: 'Konstantin Petrov',
   SUBTITLE: 'Strategic Management Professional & Front-End Developer',
-  BACKGROUND_DESCRIPTION_1:
+  BACKGROUND_DESCRIPTION: [
     "I am a Master's graduate in strategic management with extensive experience in project management and business development. Throughout my career, I have honed my abilities in project management, overseeing diverse teams and delivering multiple projects to successful outcomes.",
-  BACKGROUND_DESCRIPTION_2:
     'My strategic planning expertise and leadership approach have enabled me to navigate complex challenges with foresight and precision. I am passionate about driving results and thrive in fast-paced environments where strategic thinking and effective teamwork are paramount.',
-  BACKGROUND_DESCRIPTION_3:
     'I am expanding my skill set by learning Front-End development to broaden my expertise and explore potential opportunities in the IT sector.',
+  ],
   LEARNING_JOURNEY_TITLE: 'Current Course',
   LEARNING_JOURNEY_DESCRIPTION:
     'I am Currently studying Front-End development at RS School and following the React course. RS School offers a unique learning experience as a free, community-based online education initiative. The RS School has been run by the Rolling Scopes community since 2013. Today, over 600 developer-volunteers from various countries and companies assist as mentors.',
@@ -67,4 +66,11 @@ export const CONTACTS_URLS = {
   GITHUB: 'https://github.com/petruse4ka',
   EMAIL: 'mailto:karlson8.9@hotmail.com',
   DISCORD: 'https://discordapp.com/users/448093026095595530',
+};
+
+export const ERROR_404_TEXTS = {
+  TITLE: '404 - Page Not Found',
+  DESCRIPTION:
+    'The page you are looking for does not exist. It might have been moved, deleted, or you entered the wrong URL.',
+  BUTTON: 'Return to Homepage',
 };

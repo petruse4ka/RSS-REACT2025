@@ -10,13 +10,13 @@ test('AboutAuthor component renders with author information', () => {
 
   const description1 = screen.getByTestId('about-author-description-1');
   expect(description1).toBeInTheDocument();
-  expect(description1).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION_1);
+  expect(description1).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[0]);
 
   const description2 = screen.getByTestId('about-author-description-2');
   expect(description2).toBeInTheDocument();
-  expect(description2).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION_2);
+  expect(description2).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[1]);
 
   const description3 = screen.getByTestId('about-author-description-3');
   expect(description3).toBeInTheDocument();
-  expect(description3).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION_3);
+  expect(description3).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[2]);
 });

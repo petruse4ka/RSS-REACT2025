@@ -18,6 +18,9 @@ test('About page renders with all sections', () => {
 
   const aboutAuthorDescription = screen.getByTestId('about-author-description');
   expect(aboutAuthorDescription).toBeInTheDocument();
+  expect(aboutAuthorDescription).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[0]);
+  expect(aboutAuthorDescription).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[1]);
+  expect(aboutAuthorDescription).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[2]);
 
   const contacts = screen.getByTestId('contacts');
   expect(contacts).toBeInTheDocument();
