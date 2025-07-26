@@ -1,6 +1,7 @@
 export const UNSPLASH_API_KEY = 'FxZY4UTxT-kJuANjPorZ5zeArfqlEpNCLEk4ejZHB-w';
 export const UNSPLASH_BASE_URL = 'https://api.unsplash.com';
 export const CARDS_PER_PAGE = 30;
+export const DEFAULT_SEARCH_QUERY = 'random';
 
 export const SEARCH_TEXTS = {
   PLACEHOLDER: 'Enter the search query',
@@ -73,4 +74,10 @@ export const ERROR_404_TEXTS = {
   DESCRIPTION:
     'The page you are looking for does not exist. It might have been moved, deleted, or you entered the wrong URL.',
   BUTTON: 'Return to Homepage',
+};
+
+export const PAGINATOR_TEXTS = {
+  PREVIOUS: 'Previous',
+  NEXT: 'Next',
+  OF: 'of',
 };

@@ -1,11 +1,12 @@
 import { fetchCards } from '@/api/fetch-cards';
 
 test('fetchCards returns mock data for default search', async () => {
-  const defaultCards = await fetchCards('');
+  const { cards: defaultCards, total } = await fetchCards('');
 
   expect(defaultCards).toBeDefined();
   expect(Array.isArray(defaultCards)).toBe(true);
   expect(defaultCards.length).toBeGreaterThan(0);
+  expect(typeof total).toBe('number');
 
   const firstCard = defaultCards[0];
   expect(firstCard).toHaveProperty('id');
@@ -15,11 +16,12 @@ test('fetchCards returns mock data for default search', async () => {
 });
 
 test('fetchCards returns mock cards for search query', async () => {
-  const cards = await fetchCards('random-search-query');
+  const { cards, total } = await fetchCards('random-search-query');
 
   expect(cards).toBeDefined();
   expect(Array.isArray(cards)).toBe(true);
   expect(cards.length).toBeGreaterThan(0);
+  expect(typeof total).toBe('number');
 
   const cardIds = cards.map((card) => card.id);
   const cardDescriptions = cards.map((card) => card.description);

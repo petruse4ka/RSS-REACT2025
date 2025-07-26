@@ -1,12 +1,17 @@
 import type { CardResponse, CardData } from '@/types/interfaces';
-import { UNSPLASH_API_KEY, UNSPLASH_BASE_URL, CARDS_PER_PAGE } from '@/constants';
+import {
+  UNSPLASH_API_KEY,
+  UNSPLASH_BASE_URL,
+  CARDS_PER_PAGE,
+  DEFAULT_SEARCH_QUERY,
+} from '@/constants';
 import defaultImage from '@/assets/images/default-image.png';
 import { isEmptyResponse, isValidCardsData, isValidApiResponse } from '@/types/guards';
 
 export const fetchCards = async (
   searchQuery: string = '',
   page: number = 1
-): Promise<CardData[]> => {
+): Promise<{ cards: CardData[]; total: number }> => {
   const urlParameters = new URLSearchParams({
     client_id: UNSPLASH_API_KEY,
     per_page: CARDS_PER_PAGE.toString(),
@@ -15,7 +20,7 @@ export const fetchCards = async (
 
   const path = searchQuery
     ? `/search/photos?query=${searchQuery}&${urlParameters.toString()}`
-    : `/photos?${urlParameters.toString()}`;
+    : `/search/photos?query=${DEFAULT_SEARCH_QUERY}&${urlParameters.toString()}`;
 
   const response = await fetch(`${UNSPLASH_BASE_URL}${path}`);
 
@@ -50,5 +55,9 @@ export const fetchCards = async (
     };
   });
 
-  return cards;
+  if ('total' in data && typeof data.total === 'number') {
+    return { cards, total: data.total };
+  }
+
+  return { cards, total: cards.length };
 };

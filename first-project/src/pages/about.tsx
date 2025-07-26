@@ -5,7 +5,7 @@ import { ABOUT_TEXTS } from '@/constants';
 
 export default function About() {
   return (
-    <div data-testid="about-page">
+    <div data-testid="about-page" className="w-full">
       <div>
         <section data-testid="about-header" className="mb-12 text-center">
           <h2 className="mb-4 text-4xl font-bold text-cyan-300 md:text-5xl">{ABOUT_TEXTS.TITLE}</h2>

@@ -11,7 +11,7 @@ export default function HomePage() {
   };
 
   return (
-    <div data-testid="homepage">
+    <div data-testid="homepage" className="w-full">
       <Search searchQuery={searchQuery} onSearch={handleSearch} />
       <Main searchQuery={searchQuery} />
     </div>

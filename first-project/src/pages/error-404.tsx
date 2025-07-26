@@ -11,7 +11,7 @@ export default function Error404() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center" data-testid="404-error-page">
+    <div className="flex w-full flex-col items-center justify-center" data-testid="404-error-page">
       <div className="text-center">
         <h2
           className="mb-4 text-4xl font-bold text-cyan-300 md:text-5xl"

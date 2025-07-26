@@ -224,8 +224,7 @@ export const handlers = [
 
     return HttpResponse.json({
       results: mockCards,
-      total: mockCards.length,
-      total_pages: 1,
+      total: 120,
     });
   }),
 
