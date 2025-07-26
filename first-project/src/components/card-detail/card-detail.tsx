@@ -54,7 +54,7 @@ export default function CardDetail({ cardIndex, cards, handleClose }: Props) {
     }
   }, [cardIndex, cards]);
 
-  return !cardData ? null : isLoading ? (
+  return isLoading ? (
     <div className="flex h-full items-center justify-center">
       <div className="flex min-h-[300px] items-center justify-center">
         <Loader
@@ -76,7 +76,7 @@ export default function CardDetail({ cardIndex, cards, handleClose }: Props) {
         dataTestId="close-detail-button"
       />
     </div>
-  ) : (
+  ) : cardData ? (
     <div className="overflow-y-auto" data-testid="card-detail">
       <div className="p-3 sm:p-6">
         <DetailHeader onClose={handleClose} />
@@ -100,5 +100,5 @@ export default function CardDetail({ cardIndex, cards, handleClose }: Props) {
         />
       </div>
     </div>
-  );
+  ) : null;
 }
