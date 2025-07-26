@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Search from '@/components/search/search';
 import Main from '@/components/main/main';
 import CardDetail from '@/components/card-detail/card-detail';
@@ -7,6 +7,7 @@ import { LOCAL_STORAGE_KEYS } from '@/constants';
 
 export default function HomePage() {
   const params = useParams();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useLocalStorage(LOCAL_STORAGE_KEYS.SEARCH_QUERY, '');
 
   const currentPage = params.page ? parseInt(params.page, 10) : 1;
@@ -14,27 +15,24 @@ export default function HomePage() {
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    window.history.pushState(null, '', '/1');
-    window.dispatchEvent(new PopStateEvent('popstate'));
+    navigate('/1');
   };
 
   const handlePageChange = (page: number) => {
     if (cardIndex) {
-      window.history.pushState(null, '', `/${page}`);
+      navigate(`/${page}`);
     } else {
-      window.history.pushState(null, '', `/${page}`);
+      navigate(`/${page}`);
     }
-    window.dispatchEvent(new PopStateEvent('popstate'));
   };
 
   const handleCardClick = (cardIndex: number) => {
-    window.history.pushState(null, '', `/${currentPage}/${cardIndex}`);
-    window.dispatchEvent(new PopStateEvent('popstate'));
+    navigate(`/${currentPage}/${cardIndex}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleDetailsClose = () => {
-    window.history.pushState(null, '', `/?page=${currentPage}`);
-    window.dispatchEvent(new PopStateEvent('popstate'));
+    navigate(`/${currentPage}`);
   };
 
   const handleMainClick = () => {
