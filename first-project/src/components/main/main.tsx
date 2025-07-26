@@ -1,64 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { SEARCH_TEXTS, CARDS_PER_PAGE } from '@/constants';
 import Loader from '../ui/loader';
 import CardsList from '../cards-list/cards-list';
 import Paginator from '../paginator/paginator';
-import { ERROR_TEXTS } from '@/constants';
-import { fetchCards } from '@/api/fetch-cards';
 
 type Props = {
   searchQuery: string;
   currentPage: number;
   handlePageChange: (page: number) => void;
   handleCardClick?: (cardIndex: number) => void;
+  cards: CardData[];
+  totalItems: number;
+  isLoading: boolean;
+  isError: boolean;
+  errorMessage: string;
 };
 
 export default function Main({
-  searchQuery,
   currentPage,
   handlePageChange,
   handleCardClick,
+  cards,
+  totalItems,
+  isLoading,
+  isError,
+  errorMessage,
 }: Props) {
-  const [cards, setCards] = useState<CardData[]>([]);
-  const [totalItems, setTotalItems] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-
-  useEffect(() => {
-    const loadData = async (searchQuery: string) => {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        setErrorMessage('');
-        const { cards, total } = await fetchCards(searchQuery, currentPage);
-
-        if (cards.length === 0) {
-          setIsLoading(false);
-          setIsError(true);
-          setErrorMessage(ERROR_TEXTS.FETCH_ERROR);
-          return;
-        }
-
-        setCards(cards);
-        setTotalItems(total);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        setIsError(true);
-
-        if (error instanceof Error && error.message === 'HTTP error: 403') {
-          setErrorMessage(ERROR_TEXTS.RATE_LIMIT_ERROR);
-        } else {
-          setErrorMessage(ERROR_TEXTS.FETCH_ERROR);
-        }
-      }
-    };
-
-    loadData(searchQuery);
-  }, [searchQuery, currentPage]);
-
   useEffect(() => {
     if (totalItems > 0) {
       const totalPages = Math.ceil(totalItems / CARDS_PER_PAGE);

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { CardDetailResponse } from '@/types/interfaces';
+import type { CardDetailResponse, CardData } from '@/types/interfaces';
 import { fetchCardDetails } from '@/api/fetch-card-details';
-import { fetchCards } from '@/api/fetch-cards';
 import Loader from '../ui/loader';
 import Button from '../ui/button';
 import { ERROR_TEXTS, CARD_DETAIL_TEXTS } from '@/constants';
@@ -12,10 +11,11 @@ import DetailStatistics from './detail-statistics';
 
 type Props = {
   cardIndex: number;
+  cards: CardData[];
   handleClose: () => void;
 };
 
-export default function CardDetail({ cardIndex, handleClose }: Props) {
+export default function CardDetail({ cardIndex, cards, handleClose }: Props) {
   const [cardData, setCardData] = useState<CardDetailResponse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
@@ -28,7 +28,6 @@ export default function CardDetail({ cardIndex, handleClose }: Props) {
         setIsError(false);
         setErrorMessage('');
 
-        const { cards } = await fetchCards('', 1);
         const cardId = cards[cardIndex - 1]?.id;
 
         if (!cardId) {
@@ -50,10 +49,10 @@ export default function CardDetail({ cardIndex, handleClose }: Props) {
       }
     };
 
-    if (cardIndex) {
+    if (cardIndex && cards.length > 0 && cards.length >= cardIndex) {
       loadCardData();
     }
-  }, [cardIndex]);
+  }, [cardIndex, cards]);
 
   return !cardData ? null : isLoading ? (
     <div className="flex h-full items-center justify-center">
