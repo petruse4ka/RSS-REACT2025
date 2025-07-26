@@ -15,6 +15,8 @@ export const ERROR_TEXTS = {
   REFRESH_BUTTON: 'Refresh page',
   ERROR_BUTTON: 'Test error boundary',
   FETCH_ERROR: 'No results. Please try again.',
+  RATE_LIMIT_ERROR:
+    'Unfortunately, the API provides only 50 requests per hour. Currently, the request limit has been exceeded. This is not an application error, but an API limitation. Please try again in one hour.',
 };
 
 export const LOCAL_STORAGE_KEYS = {
