@@ -14,6 +14,14 @@ export const router = createBrowserRouter([
         Component: HomePage,
       },
       {
+        path: ':page',
+        Component: HomePage,
+      },
+      {
+        path: ':page/:id',
+        Component: HomePage,
+      },
+      {
         path: 'about',
         Component: About,
       },

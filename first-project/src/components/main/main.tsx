@@ -11,9 +11,15 @@ type Props = {
   searchQuery: string;
   currentPage: number;
   handlePageChange: (page: number) => void;
+  handleCardClick?: (cardIndex: number) => void;
 };
 
-export default function Main({ searchQuery, currentPage, handlePageChange }: Props) {
+export default function Main({
+  searchQuery,
+  currentPage,
+  handlePageChange,
+  handleCardClick,
+}: Props) {
   const [cards, setCards] = useState<CardData[]>([]);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -63,7 +69,7 @@ export default function Main({ searchQuery, currentPage, handlePageChange }: Pro
   }, [totalItems, currentPage, handlePageChange]);
 
   return (
-    <section data-testid="main" className="container mx-auto w-full py-8">
+    <section data-testid="main" className="w-full">
       {isLoading ? (
         <div className="flex min-h-[300px] items-center justify-center">
           <Loader
@@ -74,7 +80,7 @@ export default function Main({ searchQuery, currentPage, handlePageChange }: Pro
           />
         </div>
       ) : isError ? (
-        <div className="mt-10 flex flex-col items-center justify-center">
+        <div className="flex min-h-[300px] flex-col items-center justify-center">
           <div
             data-testid="list-error-message"
             className="mb-4 text-center text-xl leading-relaxed font-semibold text-red-500"
@@ -83,14 +89,14 @@ export default function Main({ searchQuery, currentPage, handlePageChange }: Pro
           </div>
         </div>
       ) : (
-        <>
-          <CardsList cards={cards} />
+        <div className="py-4">
+          <CardsList cards={cards} handleCardClick={handleCardClick} />
           <Paginator
             currentPage={currentPage}
             totalItems={totalItems}
             handlePageChange={handlePageChange}
           />
-        </>
+        </div>
       )}
     </section>
   );

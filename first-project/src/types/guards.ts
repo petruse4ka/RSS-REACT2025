@@ -31,3 +31,29 @@ export const isValidCardsData = (data: unknown): data is CardResponse[] => {
     )
   );
 };
+
+export const isValidCardDetailResponse = (data: unknown): data is CardResponse => {
+  if (!data || typeof data !== 'object') {
+    return false;
+  }
+
+  return (
+    'id' in data &&
+    typeof data.id === 'string' &&
+    'description' in data &&
+    (typeof data.description === 'string' || data.description === null) &&
+    'alt_description' in data &&
+    (typeof data.alt_description === 'string' || data.alt_description === null) &&
+    'urls' in data &&
+    typeof data.urls === 'object' &&
+    data.urls !== null &&
+    'links' in data &&
+    typeof data.links === 'object' &&
+    data.links !== null &&
+    'likes' in data &&
+    typeof data.likes === 'number' &&
+    'user' in data &&
+    typeof data.user === 'object' &&
+    data.user !== null
+  );
+};

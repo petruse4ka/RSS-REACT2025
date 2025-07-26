@@ -4,13 +4,19 @@ import CardItem from './card';
 
 type Props = {
   cards: CardData[];
+  handleCardClick?: (cardIndex: number) => void;
 };
 
-export default function CardsList({ cards }: Props) {
+export default function CardsList({ cards, handleCardClick }: Props) {
   return cards.length > 0 ? (
     <ul data-testid="cards-list" className="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3">
-      {cards.map((card) => (
-        <CardItem key={card.id} card={card} />
+      {cards.map((card, index) => (
+        <CardItem
+          key={card.id}
+          card={card}
+          cardIndex={index + 1}
+          handleCardClick={handleCardClick}
+        />
       ))}
     </ul>
   ) : (

@@ -1,6 +1,7 @@
 import { http, HttpResponse } from 'msw';
 import { UNSPLASH_BASE_URL } from '@/constants';
 import type { CardResponse, CardData } from '@/types/interfaces';
+import defaultAvatar from '@/assets/icons/default-avatar.png';
 
 export const mockCards: CardResponse[] = [
   {
@@ -180,6 +181,35 @@ export const mockCards: CardResponse[] = [
       bio: 'All for the love of photography!',
     },
   },
+  {
+    id: 'simulated-error-403',
+    created_at: '2024-01-15T14:30:00Z',
+    description: 'This card will trigger a 403 error when you try to view its details.',
+    alt_description: 'mountain landscape that causes rate limit error',
+    urls: {
+      raw: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?ixid=M3w2NTc5MDd8MHwxfHNlYXJjaHw2fHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA&ixlib=rb-4.1.0',
+      full: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2NTc5MDd8MHwxfHNlYXJjaHw2fHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA&ixlib=rb-4.1.0&q=85',
+      regular:
+        'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NTc5MDd8MHwxfHNlYXJjaHw2fHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+      small:
+        'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NTc5MDd8MHwxfHNlYXJjaHw2fHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA&ixlib=rb-4.1.0&q=80&w=400',
+      thumb:
+        'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NTc5MDd8MHwxfHNlYXJjaHw2fHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA&ixlib=rb-4.1.0&q=80&w=200',
+    },
+    links: {
+      self: 'https://api.unsplash.com/photos/mountain-landscape-that-causes-rate-limit-error-simulated-error-403',
+      html: 'https://unsplash.com/photos/mountain-landscape-that-causes-rate-limit-error-simulated-error-403',
+      download:
+        'https://unsplash.com/photos/simulated-error-403/download?ixid=M3w2NTc5MDd8MHwxfHNlYXJjaHw2fHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA',
+    },
+    likes: 999,
+    user: {
+      id: 'error-user-403',
+      username: 'rate-limited-user',
+      name: 'Rate Limited User',
+      bio: 'This user has exceeded their API rate limit.',
+    },
+  },
 ];
 
 export const mockCardData: CardData = {
@@ -224,11 +254,40 @@ export const handlers = [
 
     return HttpResponse.json({
       results: mockCards,
-      total: 120,
+      total: 90,
+      total_pages: 3,
     });
   }),
 
-  http.get(`${UNSPLASH_BASE_URL}/photos`, () => {
-    return HttpResponse.json(mockCards);
+  http.get(`${UNSPLASH_BASE_URL}/photos/:id`, ({ params }) => {
+    const cardId = params.id;
+
+    if (cardId === 'simulated-error-403') {
+      return new HttpResponse(null, { status: 403 });
+    }
+
+    const card = mockCards.find((mockCard) => mockCard.id === cardId);
+
+    if (!card) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    return HttpResponse.json({
+      ...card,
+      downloads: 111,
+      views: 444,
+      likes: 333,
+      links: {
+        ...card.links,
+        download:
+          'https://unsplash.com/photos/IPtSV340-j4/download?ixid=M3w2NTc5MDd8MHwxfHNlYXJjaHwxfHxtb3VudGFpbnN8ZW58MHx8fHwxNzUyNjMwNTA5fDA',
+      },
+      user: {
+        ...card.user,
+        profile_image: {
+          medium: defaultAvatar,
+        },
+      },
+    });
   }),
 ];

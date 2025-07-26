@@ -23,7 +23,7 @@ export default function App() {
       buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
     >
       <Header />
-      <div className="flex-1 px-5 md:px-20">
+      <div className="flex-1 px-5 lg:px-20">
         <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center py-20">
           <Outlet />
         </div>

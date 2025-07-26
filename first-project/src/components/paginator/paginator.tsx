@@ -33,8 +33,8 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
         onClick={handlePreviousPage}
         className={`${
           currentPage === 1
-            ? 'min-w-[100px] cursor-not-allowed border-gray-300 bg-gray-300 text-gray-500'
-            : 'min-w-[100px] border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400'
+            ? 'cursor-not-allowed border-gray-300 bg-gray-300 px-2 text-gray-500 sm:px-6 md:text-xl lg:min-w-[100px]'
+            : 'border-fuchsia-500 bg-fuchsia-500 px-2 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:px-6 md:text-xl lg:min-w-[100px]'
         }`}
         text={PAGINATOR_TEXTS.PREVIOUS}
         dataTestId="previous-button"
@@ -50,8 +50,8 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
         onClick={handleNextPage}
         className={`${
           currentPage === totalPages
-            ? 'min-w-[100px] border-gray-300 bg-gray-300 text-gray-500'
-            : 'min-w-[100px] border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400'
+            ? 'border-gray-300 bg-gray-300 px-2 text-gray-500 sm:px-6 md:text-xl lg:min-w-[100px]'
+            : 'border-fuchsia-500 bg-fuchsia-500 px-2 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:px-6 md:text-xl lg:min-w-[100px]'
         }`}
         text={PAGINATOR_TEXTS.NEXT}
         dataTestId="next-button"

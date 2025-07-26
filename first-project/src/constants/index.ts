@@ -6,7 +6,7 @@ export const DEFAULT_SEARCH_QUERY = 'random';
 export const SEARCH_TEXTS = {
   PLACEHOLDER: 'Enter the search query',
   BUTTON: 'Search',
-  LOADING: 'Loading...',
+  LOADING: 'Loading cards...',
 };
 
 export const ERROR_TEXTS = {
@@ -17,6 +17,11 @@ export const ERROR_TEXTS = {
   FETCH_ERROR: 'No results. Please try again.',
   RATE_LIMIT_ERROR:
     'Unfortunately, the API provides only 50 requests per hour. Currently, the request limit has been exceeded. This is not an application error, but an API limitation. Please try again in one hour.',
+  EMPTY_RESPONSE: 'Empty response from API',
+  INVALID_RESPONSE_STRUCTURE: 'Invalid response structure from API',
+  INVALID_CARDS_DATA: 'Invalid cards data structure',
+  INVALID_CARD_DETAIL_DATA: 'Invalid card detail data structure from API',
+  HTTP_ERROR: 'HTTP error:',
 };
 
 export const LOCAL_STORAGE_KEYS = {
@@ -79,7 +84,26 @@ export const ERROR_404_TEXTS = {
 };
 
 export const PAGINATOR_TEXTS = {
-  PREVIOUS: 'Previous',
-  NEXT: 'Next',
+  PREVIOUS: '←',
+  NEXT: '→',
   OF: 'of',
+};
+
+export const CARD_DETAIL_TEXTS = {
+  TITLE: 'Image Details',
+  LOADING: 'Loading details...',
+  AUTHOR: 'Author',
+  STATISTICS: 'Statistics',
+  LIKES: 'Likes',
+  DOWNLOADS: 'Downloads',
+  VIEWS: 'Views',
+  VIEW_ON_UNSPLASH: 'Open in Unsplash',
+  CLOSE: 'Close',
+  UNTITLED: 'Untitled',
+  NO_DESCRIPTION: 'No description available',
+  UNKNOWN_AUTHOR: 'Unknown Author',
+  UNKNOWN_USERNAME: 'unknown',
+  NO_BIO: 'No bio available',
+  UNKNOWN_AUTHOR_DISPLAY: 'unknown author',
+  UNKNOWN_USERNAME_DISPLAY: 'unknown username',
 };
