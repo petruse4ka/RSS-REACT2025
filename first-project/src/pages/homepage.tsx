@@ -18,8 +18,23 @@ export default function HomePage() {
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const currentPage = params.page ? parseInt(params.page, 10) : 1;
-  const cardIndex = params.id ? parseInt(params.id, 10) : null;
+  const pageParam = params.page ? parseInt(params.page, 10) : 1;
+  const idParam = params.id ? parseInt(params.id, 10) : null;
+
+  const isPageValid =
+    !params.page || (!isNaN(pageParam) && pageParam > 0 && params.page === pageParam.toString());
+  const isIdValid =
+    !params.id ||
+    (idParam !== null && !isNaN(idParam) && idParam > 0 && params.id === idParam.toString());
+
+  useEffect(() => {
+    if (!isPageValid || !isIdValid) {
+      navigate('/404', { replace: true });
+    }
+  }, [isPageValid, isIdValid, navigate]);
+
+  const currentPage = isPageValid ? pageParam : 1;
+  const cardIndex = isIdValid ? idParam : null;
 
   useEffect(() => {
     const loadData = async (searchQuery: string) => {
@@ -53,6 +68,12 @@ export default function HomePage() {
 
     loadData(searchQuery);
   }, [searchQuery, currentPage]);
+
+  useEffect(() => {
+    if (cardIndex && cards.length > 0 && cardIndex > cards.length) {
+      navigate(`/${currentPage}/1`, { replace: true });
+    }
+  }, [cardIndex, cards.length, currentPage, navigate]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);

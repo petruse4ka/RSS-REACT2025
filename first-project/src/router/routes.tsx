@@ -26,6 +26,10 @@ export const router = createBrowserRouter([
         Component: About,
       },
       {
+        path: '404',
+        Component: Error404,
+      },
+      {
         path: '*',
         Component: Error404,
       },
