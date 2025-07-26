@@ -14,13 +14,15 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
     return null;
   }
 
-  const handlePreviousPage = () => {
+  const handlePreviousPage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     if (currentPage > 1) {
       handlePageChange(currentPage - 1);
     }
   };
 
-  const handleNextPage = () => {
+  const handleNextPage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     if (currentPage < totalPages) {
       handlePageChange(currentPage + 1);
     }

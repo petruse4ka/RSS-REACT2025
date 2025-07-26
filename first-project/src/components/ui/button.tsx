@@ -1,6 +1,6 @@
 type Props = {
   type: 'button' | 'submit' | 'reset';
-  onClick: () => void;
+  onClick: (e?: React.MouseEvent) => void;
   className: string;
   text: string;
   dataTestId?: string;
