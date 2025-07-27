@@ -3,7 +3,7 @@ import CardItem from '@/components/cards-list/card';
 import { mockCardData, incompleteCardData } from '@/__tests__/mocks/handlers';
 
 test('CardItem displays item name and description correctly', () => {
-  render(<CardItem card={mockCardData} />);
+  render(<CardItem card={mockCardData} cardIndex={0} handleCardClick={vi.fn()} />);
 
   expect(screen.getByTestId('card-item')).toBeInTheDocument();
   expect(screen.getByText('A MAN WALKING DOWN A DIRT ROAD NEXT TO A MOUNTAIN')).toBeInTheDocument();
@@ -20,7 +20,7 @@ test('CardItem displays item name and description correctly', () => {
 });
 
 test('CardItem handles missing props gracefully', () => {
-  render(<CardItem card={incompleteCardData} />);
+  render(<CardItem card={incompleteCardData} cardIndex={0} handleCardClick={vi.fn()} />);
 
   const cardItem = screen.getByTestId('card-item');
   const image = cardItem.querySelector('img');

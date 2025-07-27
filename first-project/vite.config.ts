@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig(({ mode }) => ({
-  base: './',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -22,8 +21,15 @@ export default defineConfig(({ mode }) => ({
     },
   },
   server: {
-    port: 3000,
+    port: 3333,
     open: true,
+    proxy: {
+      '/api': {
+        target: 'https://api.unsplash.com',
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/api/, ''),
+      },
+    },
   },
   test: {
     environment: 'jsdom',
@@ -40,6 +46,8 @@ export default defineConfig(({ mode }) => ({
         'src/index.{js,jsx,ts,tsx}',
         'src/setupTests.{js,ts}',
         'src/**/*.d.ts',
+        'src/__tests__/',
+        'src/types/',
       ],
       thresholds: {
         statements: 80,

@@ -24,7 +24,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && npx gh-pages -d dist -e first-project",
+    "deploy": "npm run build && netlify deploy --prod --dir=dist",
     "prepare": "cd .. && husky ./first-project/.husky",
     "pre-commit": "lint-staged",
     "test": "vitest",
@@ -43,6 +43,8 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router": "^7.7.1",
+    "react-router-dom": "^7.7.1",
     "save-dev": "^0.0.1-security"
   },
   "devDependencies": {
@@ -70,6 +72,7 @@
     "jsdom": "^26.1.0",
     "lint-staged": "^16.1.2",
     "msw": "^2.10.4",
+    "netlify-cli": "^22.4.0",
     "postcss": "^8.5.6",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",

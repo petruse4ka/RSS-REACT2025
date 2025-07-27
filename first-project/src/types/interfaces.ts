@@ -22,11 +22,16 @@ export interface CardResponse {
     download: string;
   };
   likes: number;
+  downloads?: number;
+  views?: number;
   user: {
     id: string;
     username: string | null;
     name: string | null;
     bio: string | null;
+    profile_image?: {
+      medium: string;
+    };
   };
 }
 
@@ -35,4 +40,31 @@ export interface CardData {
   imageUrl: string;
   title: string;
   description: string;
+}
+
+export interface SearchResponse {
+  results: CardResponse[];
+  total: number;
+  total_pages: number;
+}
+
+export interface CardDetailResponse {
+  id: string;
+  imageUrl: string;
+  title: string;
+  description: string;
+  author: {
+    name: string;
+    username: string;
+    bio: string;
+    profileImage: string;
+  };
+  stats: {
+    likes: number;
+    downloads: number;
+    views: number;
+  };
+  links: {
+    html: string;
+  };
 }

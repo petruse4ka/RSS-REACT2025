@@ -1,12 +1,33 @@
 import { render, screen } from '@/__tests__/test-utils/test-utils';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import App from '../app';
+import HomePage from '../pages/homepage';
 
-test('App component renders with search and main components', () => {
-  render(<App />);
+const memoryRouter = () => {
+  return createMemoryRouter([
+    {
+      path: '/',
+      Component: App,
+      children: [
+        {
+          index: true,
+          Component: HomePage,
+        },
+      ],
+    },
+  ]);
+};
 
-  const search = screen.getByTestId('search');
-  expect(search).toBeInTheDocument();
+test('App component renders with homepage component', () => {
+  const testRouter = memoryRouter();
+  render(<RouterProvider router={testRouter} />);
 
-  const main = screen.getByTestId('main');
-  expect(main).toBeInTheDocument();
+  const homepage = screen.getByTestId('homepage');
+  expect(homepage).toBeInTheDocument();
+
+  const header = screen.getByTestId('header');
+  expect(header).toBeInTheDocument();
+
+  const footer = screen.getByTestId('footer');
+  expect(footer).toBeInTheDocument();
 });

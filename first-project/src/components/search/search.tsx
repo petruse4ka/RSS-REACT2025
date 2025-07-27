@@ -1,78 +1,53 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import { SEARCH_TEXTS } from '@/constants';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 
 type Props = {
+  searchQuery: string;
   onSearch: (query: string) => void;
 };
 
-type State = {
-  searchQuery: string;
-};
+export default function Search({ searchQuery, onSearch }: Props) {
+  const [inputValue, setInputValue] = useState(searchQuery);
 
-export default class Search extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      searchQuery: '',
-    };
-  }
-
-  componentDidMount() {
-    this.loadSearchQuery();
-  }
-
-  handleSearchQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      searchQuery: event.target.value,
-    });
+  const handleSearchQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
   };
 
-  loadSearchQuery = () => {
-    const savedQuery = localStorage.getItem('konstantinFirstReactProjectSearchQuery');
-    if (savedQuery) {
-      this.setState({ searchQuery: savedQuery });
-    }
+  const handleSearch = () => {
+    const trimmedQuery = inputValue.trim();
+    onSearch(trimmedQuery);
   };
 
-  handleSearch = () => {
-    const { searchQuery } = this.state;
-    const trimmedQuery = searchQuery.trim();
-    localStorage.setItem('konstantinFirstReactProjectSearchQuery', trimmedQuery);
-    this.props.onSearch(trimmedQuery);
-  };
-
-  handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' || event.key === 'NumpadEnter') {
-      this.handleSearch();
+      handleSearch();
     }
   };
 
-  handleSearchButtonClick = () => {
-    this.handleSearch();
+  const handleSearchButtonClick = () => {
+    handleSearch();
   };
 
-  render() {
-    return (
-      <section data-testid="search" className="container flex w-full gap-4">
-        <Input
-          type="text"
-          placeholder={SEARCH_TEXTS.PLACEHOLDER}
-          value={this.state.searchQuery}
-          onChange={this.handleSearchQueryChange}
-          onKeyDown={this.handleKeyPress}
-          className="border-fuchsia-300 text-cyan-300 hover:border-fuchsia-400 focus:border-fuchsia-500"
-          dataTestId="search-input"
-        />
-        <Button
-          type="button"
-          onClick={this.handleSearchButtonClick}
-          className="border border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400"
-          text={SEARCH_TEXTS.BUTTON}
-          dataTestId="search-button"
-        />
-      </section>
-    );
-  }
+  return (
+    <section data-testid="search" className="container mx-auto flex w-full gap-4">
+      <Input
+        type="text"
+        placeholder={SEARCH_TEXTS.PLACEHOLDER}
+        value={inputValue}
+        onChange={handleSearchQueryChange}
+        onKeyDown={handleKeyPress}
+        className="border-fuchsia-300 text-cyan-300 hover:border-fuchsia-400 focus:border-fuchsia-500"
+        dataTestId="search-input"
+      />
+      <Button
+        type="button"
+        onClick={handleSearchButtonClick}
+        className="border border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400"
+        text={SEARCH_TEXTS.BUTTON}
+        dataTestId="search-button"
+      />
+    </section>
+  );
 }

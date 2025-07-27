@@ -1,16 +1,9 @@
-import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
+import { render, screen, fireEvent, setLocalStorageMock } from '@/__tests__/test-utils/test-utils';
 import Search from '../components/search/search';
 import { SEARCH_TEXTS } from '@/constants';
+import { localStorageMock } from './mocks/localStorageMock';
 
-const localStorageMock = {
-  getItem: vi.fn(),
-  setItem: vi.fn(),
-  clear: vi.fn(),
-};
-
-Object.defineProperty(window, 'localStorage', {
-  value: localStorageMock,
-});
+setLocalStorageMock();
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -20,7 +13,7 @@ test('Search component renders with default styling and text and empty input whe
   localStorageMock.getItem.mockReturnValue(null);
 
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
   expect(input).toBeInTheDocument();
@@ -32,37 +25,33 @@ test('Search component renders with default styling and text and empty input whe
   expect(button).toHaveTextContent(SEARCH_TEXTS.BUTTON);
 });
 
-test('Search component displays previously saved search term from localStorage on mount', () => {
-  const savedQuery = 'mountain';
-
-  localStorageMock.getItem.mockReturnValue(savedQuery);
+test('Search component displays search query from props', () => {
+  const searchQuery = 'mountain';
 
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery={searchQuery} onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
-  expect(input).toHaveValue(savedQuery);
+  expect(input).toHaveValue(searchQuery);
 });
 
 test('Search component updates input value when user types', () => {
-  const savedQuery = 'mountain';
-
-  localStorageMock.getItem.mockReturnValue(savedQuery);
+  const searchQuery = 'mountain';
 
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery={searchQuery} onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
-  expect(input).toHaveValue(savedQuery);
+  expect(input).toHaveValue(searchQuery);
 
   fireEvent.change(input, { target: { value: 'new test query' } });
 
   expect(input).toHaveValue('new test query');
 });
 
-test('Search component calls onSearch callback with trimmed correct parameters when button is clicked and updates localStorage', () => {
+test('Search component calls onSearch callback with trimmed correct parameters when button is clicked', () => {
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
   const button = screen.getByTestId('search-button');
@@ -71,15 +60,11 @@ test('Search component calls onSearch callback with trimmed correct parameters w
   fireEvent.click(button);
 
   expect(mockSearchCallback).toHaveBeenCalledWith('untrimmed query');
-  expect(localStorageMock.setItem).toHaveBeenCalledWith(
-    'konstantinFirstReactProjectSearchQuery',
-    'untrimmed query'
-  );
 });
 
-test('Search component calls onSearch callback with trimmed correct parameters when Enter key is pressed and updates localStorage', () => {
+test('Search component calls onSearch callback with trimmed correct parameters when Enter key is pressed', () => {
   const mockSearchCallback = vi.fn();
-  render(<Search onSearch={mockSearchCallback} />);
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
 
   const input = screen.getByTestId('search-input');
 
@@ -87,8 +72,4 @@ test('Search component calls onSearch callback with trimmed correct parameters w
   fireEvent.keyDown(input, { key: 'Enter' });
 
   expect(mockSearchCallback).toHaveBeenCalledWith('untrimmed query');
-  expect(localStorageMock.setItem).toHaveBeenCalledWith(
-    'konstantinFirstReactProjectSearchQuery',
-    'untrimmed query'
-  );
 });
