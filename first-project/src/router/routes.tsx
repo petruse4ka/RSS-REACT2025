@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         Component: About,
       },
       {
-        path: '404',
+        path: 'error404',
         Component: Error404,
       },
       {

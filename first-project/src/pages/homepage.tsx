@@ -29,7 +29,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!isPageValid || !isIdValid) {
-      navigate('/404', { replace: true });
+      navigate('/error404', { replace: true });
     }
   }, [isPageValid, isIdValid, navigate]);
 
