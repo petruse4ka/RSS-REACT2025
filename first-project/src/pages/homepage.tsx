@@ -1,8 +1,7 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useParams, useNavigate, Outlet } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import Search from '@/components/search/search';
 import Main from '@/components/main/main';
-import CardDetail from '@/components/card-detail/card-detail';
 import useLocalStorage from '@/hooks/use-local-storage';
 import { LOCAL_STORAGE_KEYS, ERROR_TEXTS } from '@/constants';
 import type { CardData } from '@/types/interfaces';
@@ -17,6 +16,7 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const prevSearchQuery = useRef<string>(searchQuery);
 
   const pageParam = params.page ? parseInt(params.page, 10) : 1;
   const idParam = params.id ? parseInt(params.id, 10) : null;
@@ -42,7 +42,9 @@ export default function HomePage() {
         setIsLoading(true);
         setIsError(false);
         setErrorMessage('');
-        const { cards, total } = await fetchCards(searchQuery, currentPage);
+
+        const pageToFetch = searchQuery !== prevSearchQuery.current ? 1 : currentPage;
+        const { cards, total } = await fetchCards(searchQuery, pageToFetch);
 
         if (cards.length === 0) {
           setIsLoading(false);
@@ -54,6 +56,7 @@ export default function HomePage() {
         setCards(cards);
         setTotalItems(total);
         setIsLoading(false);
+        prevSearchQuery.current = searchQuery;
       } catch (error) {
         setIsLoading(false);
         setIsError(true);
@@ -124,11 +127,7 @@ export default function HomePage() {
           />
         </div>
 
-        {cardIndex && (
-          <div className="mt-4 mb-4 ml-2 w-1/2 self-start rounded-lg bg-indigo-900 sm:ml-4 md:ml-8 2xl:w-1/3">
-            <CardDetail cardIndex={cardIndex} cards={cards} handleClose={handleDetailsClose} />
-          </div>
-        )}
+        <Outlet context={{ cards, cardIndex, handleDetailsClose }} />
       </div>
     </div>
   );

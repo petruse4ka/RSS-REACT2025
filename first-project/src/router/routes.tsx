@@ -3,6 +3,7 @@ import App from '../app';
 import HomePage from '../pages/homepage';
 import About from '../pages/about';
 import Error404 from '../pages/error-404';
+import CardDetailPage from '../pages/card-detail';
 
 export const router = createBrowserRouter([
   {
@@ -16,10 +17,12 @@ export const router = createBrowserRouter([
       {
         path: ':page',
         Component: HomePage,
-      },
-      {
-        path: ':page/:id',
-        Component: HomePage,
+        children: [
+          {
+            path: ':id',
+            Component: CardDetailPage,
+          },
+        ],
       },
       {
         path: 'about',
