@@ -94,29 +94,29 @@ Use the following scripts to assist with development, formatting, linting, build
 
 ### 🧹 Code Quality Scripts
 
-| Script                  | Description                                                                                                                                                                 |
-| :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run lint`          | Execute ESLint on all `.ts`, `.tsx`, `.js`, and `.jsx` files in the `src/` folder to check for code quality issues.                                                         |
-| `npm run lint:fix`      | Execute ESLint and automatically fix all fixable issues.                                                                                                                    |
-| `npm run format:fix`    | Execute Prettier on all `.ts`, `.tsx`, `.js`, `.jsx`, `.css`, and `.scss` files in the `src/` folder to check if the files are properly formatted and automatically fix all fixable issues. |
-| `npm run format:check`  | Execute Prettier without formatting the files.                                                                                                                              |
+| Script                 | Description                                                                                                                                                                                 |
+| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run lint`         | Execute ESLint on all `.ts`, `.tsx`, `.js`, and `.jsx` files in the `src/` folder to check for code quality issues.                                                                         |
+| `npm run lint:fix`     | Execute ESLint and automatically fix all fixable issues.                                                                                                                                    |
+| `npm run format:fix`   | Execute Prettier on all `.ts`, `.tsx`, `.js`, `.jsx`, `.css`, and `.scss` files in the `src/` folder to check if the files are properly formatted and automatically fix all fixable issues. |
+| `npm run format:check` | Execute Prettier without formatting the files.                                                                                                                                              |
 
 ### ✅ Testing
 
-| Script                  | Description                                                                         |
-| :---------------------- | :---------------------------------------------------------------------------------- |
-| `npm run test`          | Execute unit tests using Vitest.                                                    |
-| `npm run test:coverage` | Execute unit tests using Vitest and view coverage info.                             |
-| `npm run test:update`   | Update snapshots after making changes to test expectations.                         |
-| `npm run check`         | Execute a code quality check: Vitest, ESLint, and Prettier formatting check.       |
+| Script                  | Description                                                                  |
+| :---------------------- | :--------------------------------------------------------------------------- |
+| `npm run test`          | Execute unit tests using Vitest.                                             |
+| `npm run test:coverage` | Execute unit tests using Vitest and view coverage info.                      |
+| `npm run test:update`   | Update snapshots after making changes to test expectations.                  |
+| `npm run check`         | Execute a code quality check: Vitest, ESLint, and Prettier formatting check. |
 
 ### ⚙️ Development & Deployment
 
-| Script            | Description                                 |
-| :---------------- | :------------------------------------------ |
-| `npm run dev`     | Start a local development server with Vite. |
-| `npm run build`   | Build the project for production.           |
-| `npm run preview` | Preview the production build locally.       |
+| Script            | Description                                  |
+| :---------------- | :------------------------------------------- |
+| `npm run dev`     | Start a local development server with Vite.  |
+| `npm run build`   | Build the project for production.            |
+| `npm run preview` | Preview the production build locally.        |
 | `npm run deploy`  | Build the project and deploy to GitHub Pages |
 
 ### 🛡️ Git Hooks
@@ -177,7 +177,7 @@ index.scss
 ### Example Component Names
 
 ```typescript
-class CardsList extends PureComponent { }
+class CardsList extends PureComponent {}
 ```
 
 ---
@@ -218,3 +218,15 @@ class CardsList extends PureComponent { }
 **GitHub Pages** – Used for hosting and continuous deployment of the application.
 
 ---
+
+### Development Mode Setup
+
+To enable mock data in development mode, make sure the following code is uncommented in `src/main.tsx`:
+
+```typescript
+if (import.meta.env.DEV) {
+  import('./__tests__/mocks/browser.ts');
+}
+```
+
+This will automatically load the MSW (Mock Service Worker) handlers to provide mock API responses during development.
