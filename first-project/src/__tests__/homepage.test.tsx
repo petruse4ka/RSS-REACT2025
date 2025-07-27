@@ -54,7 +54,7 @@ test('HomePage handles invalid page parameter', async () => {
   render(<RouterProvider router={testRouter} />);
 
   await waitFor(() => {
-    expect(testRouter.state.location.pathname).toBe('/404');
+    expect(testRouter.state.location.pathname).toBe('/error404');
   });
 });
 
