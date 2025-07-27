@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import type { CardData } from '@/types/interfaces';
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 export default function CardItem({ card, cardIndex, handleCardClick }: Props) {
   const { imageUrl, title, description } = card;
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
     if (handleCardClick) {
       handleCardClick(cardIndex);

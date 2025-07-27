@@ -1,6 +1,8 @@
+import type { MouseEvent } from 'react';
+
 type Props = {
   type: 'button' | 'submit' | 'reset';
-  onClick: (e?: React.MouseEvent) => void;
+  onClick: (e?: MouseEvent) => void;
   className: string;
   text: string;
   dataTestId?: string;

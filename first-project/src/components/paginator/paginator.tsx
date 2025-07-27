@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import { CARDS_PER_PAGE, PAGINATOR_TEXTS } from '@/constants';
 import Button from '../ui/button';
 
@@ -14,7 +15,7 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
     return null;
   }
 
-  const handlePreviousPage = (e?: React.MouseEvent) => {
+  const handlePreviousPage = (e?: MouseEvent) => {
     e?.stopPropagation();
     if (currentPage > 1) {
       handlePageChange(currentPage - 1);
@@ -22,7 +23,7 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
     }
   };
 
-  const handleNextPage = (e?: React.MouseEvent) => {
+  const handleNextPage = (e?: MouseEvent) => {
     e?.stopPropagation();
     if (currentPage < totalPages) {
       handlePageChange(currentPage + 1);

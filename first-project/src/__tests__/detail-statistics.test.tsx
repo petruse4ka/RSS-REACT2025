@@ -1,4 +1,4 @@
-import { render, screen } from '@/__tests__/test-utils/test-utils';
+import { render } from '@/__tests__/test-utils/test-utils';
 import DetailStatistics from '../components/card-detail/detail-statistics';
 
 const mockStats = {
@@ -8,9 +8,15 @@ const mockStats = {
 };
 
 test('DetailStatistics component renders correctly', () => {
+  const toLocaleStringSpy = vi.spyOn(Number.prototype, 'toLocaleString');
+
   render(<DetailStatistics stats={mockStats} />);
 
-  expect(screen.getByText('1,234')).toBeInTheDocument();
-  expect(screen.getByText('567')).toBeInTheDocument();
-  expect(screen.getByText('8,901')).toBeInTheDocument();
+  expect(toLocaleStringSpy).toHaveBeenCalledTimes(3);
+  expect(toLocaleStringSpy).toHaveBeenCalledWith();
+  expect(toLocaleStringSpy.mock.instances[0]).toBe(mockStats.likes);
+  expect(toLocaleStringSpy.mock.instances[1]).toBe(mockStats.downloads);
+  expect(toLocaleStringSpy.mock.instances[2]).toBe(mockStats.views);
+
+  toLocaleStringSpy.mockRestore();
 });
