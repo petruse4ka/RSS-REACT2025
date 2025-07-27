@@ -30,24 +30,52 @@ const memoryRouter = () => {
   ]);
 };
 
+const defaultProps = {
+  searchQuery: 'test',
+  currentPage: 1,
+  handlePageChange: vi.fn(),
+  handleCardClick: vi.fn(),
+  cards: [],
+  totalItems: 0,
+  isLoading: true,
+  isError: false,
+  errorMessage: '',
+};
+
 test('Main component renders loader when loading state is true and removes it when loading is false', async () => {
-  render(<Main searchQuery="test" />);
+  const { rerender } = render(<Main {...defaultProps} />);
 
   expect(screen.getByTestId('main-loader')).toBeInTheDocument();
   expect(screen.queryByTestId('error-button')).not.toBeInTheDocument();
 
-  await waitForElementToBeRemoved(() => screen.queryByTestId('main-loader'));
+  // Rerender with loading false and some cards
+  rerender(
+    <Main
+      {...defaultProps}
+      isLoading={false}
+      cards={[{ id: '1', imageUrl: 'test.jpg', title: 'Test', description: 'Test description' }]}
+      totalItems={1}
+    />
+  );
 
   expect(screen.getByTestId('cards-list')).toBeInTheDocument();
   expect(screen.queryByTestId('main-loader')).not.toBeInTheDocument();
 });
 
 test('Main component does not render cards list when loading state is true and renders it when loading is false', async () => {
-  render(<Main searchQuery="test" />);
+  const { rerender } = render(<Main {...defaultProps} />);
 
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
 
-  await waitForElementToBeRemoved(() => screen.queryByTestId('main-loader'));
+  // Rerender with loading false and some cards
+  rerender(
+    <Main
+      {...defaultProps}
+      isLoading={false}
+      cards={[{ id: '1', imageUrl: 'test.jpg', title: 'Test', description: 'Test description' }]}
+      totalItems={1}
+    />
+  );
 
   expect(screen.getByTestId('cards-list')).toBeInTheDocument();
 });

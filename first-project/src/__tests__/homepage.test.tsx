@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@/__tests__/test-utils/test-
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import HomePage from '../pages/homepage';
 import App from '@/app';
+import Error404 from '../pages/error-404';
 
 const memoryRouter = (initialEntries = ['/']) => {
   return createMemoryRouter(
@@ -13,6 +14,20 @@ const memoryRouter = (initialEntries = ['/']) => {
           {
             index: true,
             Component: HomePage,
+          },
+          {
+            path: ':page',
+            Component: HomePage,
+            children: [
+              {
+                path: ':id',
+                Component: HomePage,
+              },
+            ],
+          },
+          {
+            path: '*',
+            Component: Error404,
           },
         ],
       },
@@ -34,15 +49,17 @@ test('HomePage component renders with search and main components', () => {
   expect(main).toBeInTheDocument();
 });
 
-test('HomePage handles invalid page parameter', () => {
-  const testRouter = memoryRouter(['/?page=test']);
+test('HomePage handles invalid page parameter', async () => {
+  const testRouter = memoryRouter(['/test']);
   render(<RouterProvider router={testRouter} />);
 
-  expect(testRouter.state.location.search).toBe('?page=test');
+  await waitFor(() => {
+    expect(testRouter.state.location.pathname).toBe('/404');
+  });
 });
 
 test('HomePage resets to page 1 when searching', async () => {
-  const testRouter = memoryRouter(['/?page=5']);
+  const testRouter = memoryRouter(['/5']);
   render(<RouterProvider router={testRouter} />);
 
   const searchInput = screen.getByTestId('search-input');
@@ -52,12 +69,12 @@ test('HomePage resets to page 1 when searching', async () => {
   fireEvent.click(searchButton);
 
   await waitFor(() => {
-    expect(testRouter.state.location.search).toBe('?page=1');
+    expect(testRouter.state.location.pathname).toBe('/1');
   });
 });
 
 test('HomePage updates URL with new page parameter', async () => {
-  const testRouter = memoryRouter(['/?page=1']);
+  const testRouter = memoryRouter(['/1']);
   render(<RouterProvider router={testRouter} />);
 
   const searchInput = screen.getByTestId('search-input');
@@ -76,7 +93,6 @@ test('HomePage updates URL with new page parameter', async () => {
   fireEvent.click(nextButton);
 
   await waitFor(() => {
-    const currentSearch = testRouter.state.location.search;
-    expect(currentSearch).toBe('?page=2');
+    expect(testRouter.state.location.pathname).toBe('/2');
   });
 });
