@@ -101,9 +101,7 @@ export const CARD_DETAIL_TEXTS = {
   CLOSE: 'Close',
   UNTITLED: 'Untitled',
   NO_DESCRIPTION: 'No description available',
-  UNKNOWN_AUTHOR: 'Unknown Author',
-  UNKNOWN_USERNAME: 'unknown',
+  UNKNOWN_AUTHOR: 'Unknown author',
+  UNKNOWN_USERNAME: 'Unknown username',
   NO_BIO: 'No bio available',
-  UNKNOWN_AUTHOR_DISPLAY: 'unknown author',
-  UNKNOWN_USERNAME_DISPLAY: 'unknown username',
 };
