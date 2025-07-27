@@ -66,3 +66,17 @@ This will launch the Vite development server to test that the project has been s
 >
 > - Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
 > - Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
+
+---
+
+### Development Mode Setup
+
+To enable mock data in development mode, make sure the following code is uncommented in `src/main.tsx`:
+
+```typescript
+if (import.meta.env.DEV) {
+  import('./__tests__/mocks/browser.ts');
+}
+```
+
+This will automatically load the MSW (Mock Service Worker) handlers to provide mock API responses during development.
