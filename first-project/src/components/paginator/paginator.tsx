@@ -18,6 +18,7 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
     e?.stopPropagation();
     if (currentPage > 1) {
       handlePageChange(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -25,6 +26,7 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
     e?.stopPropagation();
     if (currentPage < totalPages) {
       handlePageChange(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

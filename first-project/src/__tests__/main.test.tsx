@@ -48,7 +48,6 @@ test('Main component renders loader when loading state is true and removes it wh
   expect(screen.getByTestId('main-loader')).toBeInTheDocument();
   expect(screen.queryByTestId('error-button')).not.toBeInTheDocument();
 
-  // Rerender with loading false and some cards
   rerender(
     <Main
       {...defaultProps}
@@ -67,7 +66,6 @@ test('Main component does not render cards list when loading state is true and r
 
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
 
-  // Rerender with loading false and some cards
   rerender(
     <Main
       {...defaultProps}

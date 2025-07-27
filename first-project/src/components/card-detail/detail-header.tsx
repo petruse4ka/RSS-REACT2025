@@ -2,10 +2,10 @@ import Button from '../ui/button';
 import { CARD_DETAIL_TEXTS } from '@/constants';
 
 type Props = {
-  onClose: () => void;
+  handleClose: () => void;
 };
 
-export default function DetailHeader({ onClose }: Props) {
+export default function DetailHeader({ handleClose }: Props) {
   return (
     <div
       data-testid="detail-header"
@@ -16,7 +16,7 @@ export default function DetailHeader({ onClose }: Props) {
       </h2>
       <Button
         type="button"
-        onClick={onClose}
+        onClick={handleClose}
         className="self-end border-fuchsia-500 bg-fuchsia-500 px-4 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:self-center"
         text="x"
         dataTestId="close-detail-button"

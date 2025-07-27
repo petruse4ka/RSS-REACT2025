@@ -18,7 +18,7 @@ export default function AboutSchool() {
         href={ABOUT_TEXTS.RS_SCHOOL_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex items-center justify-center gap-3 rounded-lg bg-indigo-900 px-6 py-3 transition-all duration-300 hover:scale-105 hover:bg-indigo-800 lg:gap-6"
+        className="inline-flex items-center justify-center gap-3 rounded-lg bg-fuchsia-500 px-6 py-3 transition-all duration-300 hover:scale-105 hover:bg-fuchsia-400 lg:gap-6"
       >
         <img
           data-testid="about-school-logo"
@@ -28,7 +28,7 @@ export default function AboutSchool() {
         />
         <span
           data-testid="about-school-button"
-          className="text-base font-semibold text-white group-hover:text-cyan-300 md:text-lg"
+          className="text-base font-semibold text-white md:text-lg"
         >
           {ABOUT_TEXTS.RS_SCHOOL_BUTTON}
         </span>

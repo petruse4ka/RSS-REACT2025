@@ -81,7 +81,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
       ) : cardData ? (
         <div className="overflow-y-auto" data-testid="card-detail">
           <div className="p-3 sm:p-6">
-            <DetailHeader onClose={handleDetailsClose} />
+            <DetailHeader handleClose={handleDetailsClose} />
 
             <DetailPhoto
               imageUrl={cardData.imageUrl}
