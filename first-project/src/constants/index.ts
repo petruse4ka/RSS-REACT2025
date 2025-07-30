@@ -1,6 +1,6 @@
 export const UNSPLASH_API_KEY = 'FxZY4UTxT-kJuANjPorZ5zeArfqlEpNCLEk4ejZHB-w';
 export const UNSPLASH_BASE_URL = 'https://api.unsplash.com';
-export const CARDS_PER_PAGE = 26;
+export const CARDS_PER_PAGE = 20;
 export const DEFAULT_SEARCH_QUERY = 'random';
 
 export const SEARCH_TEXTS = {

@@ -59,7 +59,7 @@ export default function Main({
           </div>
         </div>
       ) : (
-        <div className="py-4">
+        <div className="pt-5 md:pt-10">
           <CardsList
             cards={cards}
             handleCardClick={handleCardClick}

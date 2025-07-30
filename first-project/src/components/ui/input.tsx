@@ -20,7 +20,7 @@ export default function Input({
   dataTestId,
 }: Props) {
   const defaultClassName =
-    'flex-1 min-w-[200px] px-4 py-2 border rounded-sm transition duration-300 focus:outline-none';
+    'flex-1 px-4 py-2 border rounded-sm transition duration-300 focus:outline-none';
 
   return (
     <input

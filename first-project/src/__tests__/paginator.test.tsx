@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
 import Paginator from '../components/paginator/paginator';
+import { CARDS_PER_PAGE } from '@/constants';
 
 const mockHandlePageChange = vi.fn();
 
@@ -18,7 +19,9 @@ test('Paginator renders with previous and next buttons', () => {
 test('Paginator shows correct page information', () => {
   render(<Paginator currentPage={2} totalItems={90} handlePageChange={mockHandlePageChange} />);
 
-  expect(screen.getByTestId('page-info')).toHaveTextContent('2 of 3');
+  expect(screen.getByTestId('page-info')).toHaveTextContent(
+    `2 of ${Math.ceil(90 / CARDS_PER_PAGE)}`
+  );
 });
 
 test('Paginator calls handlePageChange when buttons are clicked', () => {

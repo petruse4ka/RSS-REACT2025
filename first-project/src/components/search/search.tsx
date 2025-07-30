@@ -31,7 +31,7 @@ export default function Search({ searchQuery, onSearch }: Props) {
   };
 
   return (
-    <section data-testid="search" className="container mx-auto flex w-full gap-4">
+    <section data-testid="search" className="mx-auto flex w-full gap-4">
       <Input
         type="text"
         placeholder={SEARCH_TEXTS.PLACEHOLDER}
