@@ -15,6 +15,7 @@ type Props = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
+  isCardDetailOpen: boolean;
 };
 
 export default function Main({
@@ -26,6 +27,7 @@ export default function Main({
   isLoading,
   isError,
   errorMessage,
+  isCardDetailOpen,
 }: Props) {
   useEffect(() => {
     if (totalItems > 0) {
@@ -58,7 +60,11 @@ export default function Main({
         </div>
       ) : (
         <div className="py-4">
-          <CardsList cards={cards} handleCardClick={handleCardClick} />
+          <CardsList
+            cards={cards}
+            handleCardClick={handleCardClick}
+            isCardDetailOpen={isCardDetailOpen}
+          />
           <Paginator
             currentPage={currentPage}
             totalItems={totalItems}

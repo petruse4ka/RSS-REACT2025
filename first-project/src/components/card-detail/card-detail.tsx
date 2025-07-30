@@ -55,7 +55,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
   }, [cardIndex, cards]);
 
   return (
-    <div className="mt-4 mb-4 ml-2 w-1/2 self-start rounded-lg bg-indigo-900 sm:ml-4 md:ml-8 2xl:w-1/3">
+    <div className="sticky top-4 mt-4 mb-4 ml-2 w-1/2 self-start rounded-lg bg-indigo-900 sm:ml-4 md:ml-8 xl:w-1/3">
       {isLoading ? (
         <div className="flex h-full items-center justify-center">
           <div className="flex min-h-[300px] items-center justify-center">

@@ -24,7 +24,7 @@ export default function App() {
     >
       <Header />
       <div className="flex-1 px-5 lg:px-20">
-        <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center py-20">
+        <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center py-5 md:py-10 lg:py-20">
           <Outlet />
         </div>
       </div>

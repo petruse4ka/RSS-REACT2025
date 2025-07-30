@@ -1,6 +1,6 @@
 export const UNSPLASH_API_KEY = 'FxZY4UTxT-kJuANjPorZ5zeArfqlEpNCLEk4ejZHB-w';
 export const UNSPLASH_BASE_URL = 'https://api.unsplash.com';
-export const CARDS_PER_PAGE = 30;
+export const CARDS_PER_PAGE = 26;
 export const DEFAULT_SEARCH_QUERY = 'random';
 
 export const SEARCH_TEXTS = {
@@ -105,3 +105,13 @@ export const CARD_DETAIL_TEXTS = {
   UNKNOWN_USERNAME: 'Unknown username',
   NO_BIO: 'No bio available',
 };
+
+export const CARD_SIZES = [
+  'col-span-1 row-span-1',
+  'col-span-2 row-span-1',
+  'col-span-1 row-span-2',
+  'col-span-2 row-span-2',
+  'col-span-1 row-span-1',
+  'col-span-2 row-span-1',
+  'col-span-1 row-span-2',
+];

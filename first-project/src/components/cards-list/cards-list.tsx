@@ -1,21 +1,31 @@
 import type { CardData } from '@/types/interfaces';
 import { ERROR_TEXTS } from '@/constants';
+import { getCardSize } from '@/utils/get-card-size';
 import CardItem from './card';
 
 type Props = {
   cards: CardData[];
   handleCardClick?: (cardIndex: number) => void;
+  isCardDetailOpen?: boolean;
 };
 
-export default function CardsList({ cards, handleCardClick }: Props) {
+export default function CardsList({ cards, handleCardClick, isCardDetailOpen = false }: Props) {
   return cards.length > 0 ? (
-    <ul data-testid="cards-list" className="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3">
+    <ul
+      data-testid="cards-list"
+      className={`grid gap-5 ${
+        isCardDetailOpen
+          ? 'grid-cols-1 xl:grid-cols-2'
+          : 'grid-cols-1 xl:auto-rows-[200px] xl:grid-cols-4'
+      }`}
+    >
       {cards.map((card, index) => (
         <CardItem
           key={card.id}
           card={card}
           cardIndex={index + 1}
           handleCardClick={handleCardClick}
+          classNames={`h-[300px] ${isCardDetailOpen ? '' : `xl:h-auto xl:${getCardSize(index)}`}`}
         />
       ))}
     </ul>

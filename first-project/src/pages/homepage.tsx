@@ -111,7 +111,7 @@ export default function HomePage() {
       <Search searchQuery={searchQuery} onSearch={handleSearch} />
       <div className="flex">
         <div
-          className={`${cardIndex ? 'w-1/2 2xl:w-2/3' : 'w-full'} transition-all duration-300`}
+          className={`${cardIndex ? 'w-1/2 xl:w-2/3' : 'w-full'} transition-all duration-300`}
           onClick={handleMainClick}
         >
           <Main
@@ -124,6 +124,7 @@ export default function HomePage() {
             isLoading={isLoading}
             isError={isError}
             errorMessage={errorMessage}
+            isCardDetailOpen={Boolean(cardIndex)}
           />
         </div>
 
