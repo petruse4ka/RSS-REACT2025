@@ -1,13 +1,13 @@
 import { render, screen } from '@/__tests__/test-utils/test-utils';
 import Loader from '@/components/ui/loader';
-import { SEARCH_TEXTS } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 
 test('Loader renders with default styling and text', () => {
   render(
     <Loader
       classNameSpinner="border-cyan-500"
       classNameText="text-cyan-500"
-      text={SEARCH_TEXTS.LOADING}
+      text={useLocale().search.loading}
       dataTestId="loader"
     />
   );
@@ -19,6 +19,6 @@ test('Loader renders with default styling and text', () => {
   expect(spinner).toHaveClass('border-cyan-500');
 
   const text = screen.getByTestId('loader-text');
-  expect(text).toHaveTextContent(SEARCH_TEXTS.LOADING);
+  expect(text).toHaveTextContent(useLocale().search.loading);
   expect(text).toHaveClass('text-cyan-500');
 });

@@ -64,7 +64,7 @@ export default function Menu() {
       {isMenuOpen && (
         <nav
           data-testid="mobile-menu"
-          className="absolute inset-0 flex items-center justify-center bg-indigo-900 dark:bg-gray-900"
+          className="absolute inset-0 flex items-center justify-center bg-indigo-900"
         >
           <div className="flex flex-col items-center gap-8">
             <MenuItem dataTestId="mobile-menu-homepage-link" to="/" onClick={closeMenu}>

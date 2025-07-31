@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
 import Paginator from '../components/paginator/paginator';
 import { CARDS_PER_PAGE } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 
 const mockHandlePageChange = vi.fn();
 
@@ -20,7 +21,7 @@ test('Paginator shows correct page information', () => {
   render(<Paginator currentPage={2} totalItems={90} handlePageChange={mockHandlePageChange} />);
 
   expect(screen.getByTestId('page-info')).toHaveTextContent(
-    `2 of ${Math.ceil(90 / CARDS_PER_PAGE)}`
+    `2 ${useLocale().paginator.of} ${Math.ceil(90 / CARDS_PER_PAGE)}`
   );
 });
 

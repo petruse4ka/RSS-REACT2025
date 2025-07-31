@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer
       data-testid="footer"
-      className="mt-10 w-full bg-indigo-900 px-5 py-4 text-center text-white lg:px-20 dark:bg-gray-900"
+      className="mt-10 w-full bg-indigo-900 px-5 py-4 text-center text-white lg:px-20"
     >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between">
         <span data-testid="footer-copyright">

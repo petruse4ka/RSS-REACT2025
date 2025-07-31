@@ -1,7 +1,7 @@
 import { render, screen } from '@/__tests__/test-utils/test-utils';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import Error404 from '../pages/error-404';
-import { ERROR_404_TEXTS } from '../constants';
+import { useLocale } from '@/hooks/use-locale';
 import App from '@/app';
 
 const memoryRouter = () => {
@@ -28,16 +28,16 @@ test('Error404 component renders 404 error page with all elements', () => {
 
   const title = screen.getByTestId('404-error-title');
   expect(title).toBeInTheDocument();
-  expect(title).toHaveTextContent(ERROR_404_TEXTS.TITLE);
+  expect(title).toHaveTextContent(useLocale().error404.title);
 
   const image = screen.getByTestId('404-error-image');
   expect(image).toBeInTheDocument();
 
   const description = screen.getByTestId('404-error-description');
   expect(description).toBeInTheDocument();
-  expect(description).toHaveTextContent(ERROR_404_TEXTS.DESCRIPTION);
+  expect(description).toHaveTextContent(useLocale().error404.description);
 
   const button = screen.getByTestId('return-homepage-button');
   expect(button).toBeInTheDocument();
-  expect(button).toHaveTextContent(ERROR_404_TEXTS.BUTTON);
+  expect(button).toHaveTextContent(useLocale().error404.button);
 });

@@ -55,7 +55,7 @@ export const en = {
     of: 'of',
   },
   cardDetail: {
-    title: 'Photo Details',
+    title: 'Details',
     loading: 'Loading details...',
     author: 'Author',
     statistics: 'Statistics',

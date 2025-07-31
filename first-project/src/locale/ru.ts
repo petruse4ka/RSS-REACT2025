@@ -55,7 +55,7 @@ export const ru = {
     of: 'из',
   },
   cardDetail: {
-    title: 'Детали фотографии',
+    title: 'Детали',
     loading: 'Загрузка деталей...',
     author: 'Автор',
     statistics: 'Статистика',

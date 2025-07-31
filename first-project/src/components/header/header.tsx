@@ -9,10 +9,7 @@ export default function Header() {
   const translations = useLocale();
 
   return (
-    <header
-      data-testid="header"
-      className="w-full bg-indigo-900 px-5 py-4 text-white lg:px-20 dark:bg-gray-900"
-    >
+    <header data-testid="header" className="w-full bg-indigo-900 px-5 py-4 text-white lg:px-20">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-4 flex items-center justify-between">
           <Link

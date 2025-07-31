@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import { MENU_TEXTS } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 import App from '@/app';
 import HomePage from '@/pages/homepage';
 
@@ -25,11 +25,11 @@ test('Menu component renders with homepage and about links', () => {
 
   const homepageLink = screen.getByTestId('menu-homepage-link');
   expect(homepageLink).toBeInTheDocument();
-  expect(homepageLink).toHaveTextContent(MENU_TEXTS.HOMEPAGE);
+  expect(homepageLink).toHaveTextContent(useLocale().menu.homepage);
 
   const aboutLink = screen.getByTestId('menu-about-link');
   expect(aboutLink).toBeInTheDocument();
-  expect(aboutLink).toHaveTextContent(MENU_TEXTS.ABOUT);
+  expect(aboutLink).toHaveTextContent(useLocale().menu.about);
 });
 
 test('Menu component renders burger menu', () => {
@@ -57,10 +57,10 @@ test('Burger menu toggles mobile menu when clicked', () => {
   const mobileAboutLink = screen.getByTestId('mobile-menu-about-link');
 
   expect(mobileHomepageLink).toBeInTheDocument();
-  expect(mobileHomepageLink).toHaveTextContent(MENU_TEXTS.HOMEPAGE);
+  expect(mobileHomepageLink).toHaveTextContent(useLocale().menu.homepage);
 
   expect(mobileAboutLink).toBeInTheDocument();
-  expect(mobileAboutLink).toHaveTextContent(MENU_TEXTS.ABOUT);
+  expect(mobileAboutLink).toHaveTextContent(useLocale().menu.about);
 
   fireEvent.click(burgerMenu);
 
