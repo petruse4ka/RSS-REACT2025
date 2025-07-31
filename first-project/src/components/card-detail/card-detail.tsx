@@ -3,7 +3,7 @@ import type { CardDetailResponse, CardData } from '@/types/interfaces';
 import { fetchCardDetails } from '@/api/fetch-card-details';
 import Loader from '../ui/loader';
 import Button from '../ui/button';
-import { ERROR_TEXTS, CARD_DETAIL_TEXTS } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 import DetailHeader from './detail-header';
 import DetailPhoto from './detail-photo';
 import DetailAuthor from './detail-author';
@@ -20,6 +20,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const translations = useLocale();
 
   useEffect(() => {
     const loadCardData = async () => {
@@ -31,20 +32,20 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
         const cardId = cards[cardIndex - 1]?.id;
 
         if (!cardId) {
-          throw new Error('Card not found');
+          throw new Error(translations.error.cardNotFound);
         }
 
-        const card = await fetchCardDetails(cardId);
+        const card = await fetchCardDetails(cardId, translations);
         setCardData(card);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
         setIsError(true);
 
-        if (error instanceof Error && error.message === 'HTTP error: 403') {
-          setErrorMessage(ERROR_TEXTS.RATE_LIMIT_ERROR);
+        if (error instanceof Error && error.message === translations.error.httpError + ' 403') {
+          setErrorMessage(translations.error.rateLimitError);
         } else {
-          setErrorMessage(ERROR_TEXTS.FETCH_ERROR);
+          setErrorMessage(translations.error.fetchError);
         }
       }
     };
@@ -52,17 +53,17 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
     if (cardIndex && cards.length > 0 && cards.length >= cardIndex) {
       loadCardData();
     }
-  }, [cardIndex, cards]);
+  }, [cardIndex, cards, translations]);
 
   return (
-    <div className="sticky top-4 mt-4 mb-4 ml-2 w-1/2 self-start rounded-lg bg-indigo-900 sm:ml-4 md:ml-8 xl:w-1/3">
+    <div className="sticky top-4 mt-5 ml-2 w-1/2 self-start rounded-lg bg-indigo-900 sm:ml-4 md:mt-10 md:ml-8 xl:w-1/3 dark:bg-gray-900">
       {isLoading ? (
         <div className="flex h-full items-center justify-center">
           <div className="flex min-h-[300px] items-center justify-center">
             <Loader
               classNameSpinner="border-cyan-300"
               classNameText="text-cyan-300 text-lg"
-              text={CARD_DETAIL_TEXTS.LOADING}
+              text={translations.cardDetail.loading}
               dataTestId="main-loader"
             />
           </div>
@@ -74,7 +75,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
             type="button"
             onClick={handleDetailsClose}
             className="border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400"
-            text={CARD_DETAIL_TEXTS.CLOSE}
+            text={translations.cardDetail.close}
             dataTestId="close-detail-button"
           />
         </div>
@@ -97,7 +98,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
               type="button"
               onClick={() => window.open(cardData.links.html, '_blank')}
               className="mt-4 w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:mt-6"
-              text={CARD_DETAIL_TEXTS.VIEW_ON_UNSPLASH}
+              text={translations.cardDetail.viewOnUnsplash}
               dataTestId="unsplash-link-button"
             />
           </div>

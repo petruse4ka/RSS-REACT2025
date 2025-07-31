@@ -1,21 +1,24 @@
 import rsSchoolLogo from '@/assets/images/rs-school-logo.svg';
-import { ABOUT_TEXTS } from '@/constants';
+import { RS_SCHOOL_URL } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 
 export default function AboutSchool() {
+  const translations = useLocale();
+
   return (
     <section data-testid="about-school" className="mt-16 text-center">
       <h3
         data-testid="about-school-title"
         className="mb-8 text-center text-3xl font-semibold text-cyan-300"
       >
-        {ABOUT_TEXTS.LEARNING_JOURNEY_TITLE}
+        {translations.about.learningJourneyTitle}
       </h3>
       <p data-testid="about-school-description" className="mb-8 leading-relaxed text-gray-300">
-        {ABOUT_TEXTS.LEARNING_JOURNEY_DESCRIPTION}
+        {translations.about.learningJourneyDescription}
       </p>
       <a
         data-testid="about-school-link"
-        href={ABOUT_TEXTS.RS_SCHOOL_URL}
+        href={RS_SCHOOL_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center justify-center gap-3 rounded-lg bg-fuchsia-500 px-6 py-3 transition-all duration-300 hover:scale-105 hover:bg-fuchsia-400 lg:gap-6"
@@ -30,7 +33,7 @@ export default function AboutSchool() {
           data-testid="about-school-button"
           className="text-base font-semibold text-white md:text-lg"
         >
-          {ABOUT_TEXTS.RS_SCHOOL_BUTTON}
+          {translations.about.rsSchoolButton}
         </span>
       </a>
     </section>

@@ -3,11 +3,13 @@ import { useState, useEffect, useRef } from 'react';
 import Search from '@/components/search/search';
 import Main from '@/components/main/main';
 import useLocalStorage from '@/hooks/use-local-storage';
-import { LOCAL_STORAGE_KEYS, ERROR_TEXTS } from '@/constants';
+import { LOCAL_STORAGE_KEYS } from '@/constants';
 import type { CardData } from '@/types/interfaces';
 import { fetchCards } from '@/api/fetch-cards';
+import { useLocale } from '@/hooks/use-locale';
 
 export default function HomePage() {
+  const translations = useLocale();
   const params = useParams();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useLocalStorage(LOCAL_STORAGE_KEYS.SEARCH_QUERY, '');
@@ -44,12 +46,12 @@ export default function HomePage() {
         setErrorMessage('');
 
         const pageToFetch = searchQuery !== prevSearchQuery.current ? 1 : currentPage;
-        const { cards, total } = await fetchCards(searchQuery, pageToFetch);
+        const { cards, total } = await fetchCards(searchQuery, pageToFetch, translations);
 
         if (cards.length === 0) {
           setIsLoading(false);
           setIsError(true);
-          setErrorMessage(ERROR_TEXTS.FETCH_ERROR);
+          setErrorMessage(translations.error.fetchError);
           return;
         }
 
@@ -62,15 +64,15 @@ export default function HomePage() {
         setIsError(true);
 
         if (error instanceof Error && error.message === 'HTTP error: 403') {
-          setErrorMessage(ERROR_TEXTS.RATE_LIMIT_ERROR);
+          setErrorMessage(translations.error.rateLimitError);
         } else {
-          setErrorMessage(ERROR_TEXTS.FETCH_ERROR);
+          setErrorMessage(translations.error.fetchError);
         }
       }
     };
 
     loadData(searchQuery);
-  }, [searchQuery, currentPage]);
+  }, [searchQuery, currentPage, translations]);
 
   useEffect(() => {
     if (cardIndex && cards.length > 0 && cardIndex > cards.length) {

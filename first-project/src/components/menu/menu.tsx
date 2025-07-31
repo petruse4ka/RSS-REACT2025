@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { MENU_TEXTS } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 import MenuItem from './menu-item';
 
 export default function Menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const translations = useLocale();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -36,10 +37,10 @@ export default function Menu() {
     <>
       <nav data-testid="menu" className="hidden items-center gap-6 md:flex">
         <MenuItem dataTestId="menu-homepage-link" to="/">
-          {MENU_TEXTS.HOMEPAGE}
+          {translations.menu.homepage}
         </MenuItem>
         <MenuItem dataTestId="menu-about-link" to="/about">
-          {MENU_TEXTS.ABOUT}
+          {translations.menu.about}
         </MenuItem>
       </nav>
 
@@ -63,14 +64,14 @@ export default function Menu() {
       {isMenuOpen && (
         <nav
           data-testid="mobile-menu"
-          className="absolute inset-0 flex items-center justify-center bg-indigo-900"
+          className="absolute inset-0 flex items-center justify-center bg-indigo-900 dark:bg-gray-900"
         >
           <div className="flex flex-col items-center gap-8">
             <MenuItem dataTestId="mobile-menu-homepage-link" to="/" onClick={closeMenu}>
-              {MENU_TEXTS.HOMEPAGE}
+              {translations.menu.homepage}
             </MenuItem>
             <MenuItem dataTestId="mobile-menu-about-link" to="/about" onClick={closeMenu}>
-              {MENU_TEXTS.ABOUT}
+              {translations.menu.about}
             </MenuItem>
           </div>
         </nav>

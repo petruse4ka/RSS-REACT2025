@@ -4,15 +4,17 @@ import Footer from './components/footer/footer';
 import ErrorBoundary from './components/error-boundary/error-boundary';
 import errorImage from './assets/images/error.svg';
 import type { ErrorTexts } from './types/interfaces';
-import { ERROR_TEXTS } from './constants';
-
-const errorTexts: ErrorTexts = {
-  title: ERROR_TEXTS.TITLE,
-  message: ERROR_TEXTS.DESCRIPTION,
-  buttonText: ERROR_TEXTS.REFRESH_BUTTON,
-};
+import { useLocale } from './hooks/use-locale';
 
 export default function App() {
+  const translations = useLocale();
+
+  const errorTexts: ErrorTexts = {
+    title: translations.error.title,
+    message: translations.error.description,
+    buttonText: translations.error.refreshButton,
+  };
+
   return (
     <ErrorBoundary
       texts={errorTexts}

@@ -1,13 +1,17 @@
-import { FOOTER_TEXTS } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const translations = useLocale();
 
   return (
-    <footer data-testid="footer" className="mt-10 w-full bg-indigo-900 py-4 text-center text-white">
-      <div className="container mx-auto flex items-center justify-between px-5 md:px-20">
+    <footer
+      data-testid="footer"
+      className="mt-10 w-full bg-indigo-900 px-5 py-4 text-center text-white lg:px-20 dark:bg-gray-900"
+    >
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between">
         <span data-testid="footer-copyright">
-          {FOOTER_TEXTS.COPYRIGHT} © {currentYear}
+          {translations.footer.copyright} © {currentYear}
         </span>
         <a
           data-testid="footer-github-link"
@@ -16,7 +20,7 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-1 transition-all duration-300 hover:text-cyan-300"
         >
-          <span>{FOOTER_TEXTS.GITHUB}</span>
+          <span>{translations.footer.github}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

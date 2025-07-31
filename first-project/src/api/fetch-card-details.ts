@@ -1,10 +1,14 @@
 import type { CardDetailResponse } from '@/types/interfaces';
-import { UNSPLASH_API_KEY, UNSPLASH_BASE_URL, ERROR_TEXTS, CARD_DETAIL_TEXTS } from '@/constants';
+import { UNSPLASH_API_KEY, UNSPLASH_BASE_URL } from '@/constants';
 import defaultAvatar from '@/assets/icons/default-avatar.png';
 import { isEmptyResponse, isValidCardDetailResponse } from '@/types/guards';
 import defaultImage from '@/assets/images/default-image.png';
+import type { Translations } from '@/locale';
 
-export const fetchCardDetails = async (cardId: string): Promise<CardDetailResponse> => {
+export const fetchCardDetails = async (
+  cardId: string,
+  translations: Translations
+): Promise<CardDetailResponse> => {
   const urlParameters = new URLSearchParams({
     client_id: UNSPLASH_API_KEY,
   });
@@ -13,17 +17,17 @@ export const fetchCardDetails = async (cardId: string): Promise<CardDetailRespon
   const response = await fetch(`${UNSPLASH_BASE_URL}${path}`);
 
   if (!response.ok) {
-    throw new Error(`${ERROR_TEXTS.HTTP_ERROR} ${response.status}`);
+    throw new Error(`${translations.error.httpError} ${response.status}`);
   }
 
   const data: unknown = await response.json();
 
   if (isEmptyResponse(data)) {
-    throw new Error(ERROR_TEXTS.EMPTY_RESPONSE);
+    throw new Error(translations.error.emptyResponse);
   }
 
   if (!isValidCardDetailResponse(data)) {
-    throw new Error(ERROR_TEXTS.INVALID_CARD_DETAIL_DATA);
+    throw new Error(translations.error.invalidCardDetailData);
   }
 
   const { id, urls, alt_description, description, user, likes, links, downloads, views } = data;
@@ -31,12 +35,12 @@ export const fetchCardDetails = async (cardId: string): Promise<CardDetailRespon
   const cardDetail: CardDetailResponse = {
     id: id,
     imageUrl: urls?.regular || defaultImage,
-    title: (alt_description || CARD_DETAIL_TEXTS.UNTITLED).toUpperCase(),
-    description: description || CARD_DETAIL_TEXTS.NO_DESCRIPTION,
+    title: (alt_description || translations.cardDetail.untitled).toUpperCase(),
+    description: description || translations.cardDetail.noDescription,
     author: {
-      name: user?.name || CARD_DETAIL_TEXTS.UNKNOWN_AUTHOR,
-      username: user?.username || CARD_DETAIL_TEXTS.UNKNOWN_USERNAME,
-      bio: user?.bio || CARD_DETAIL_TEXTS.NO_BIO,
+      name: user?.name || translations.cardDetail.unknownAuthor,
+      username: user?.username || translations.cardDetail.unknownUsername,
+      bio: user?.bio || translations.cardDetail.noBio,
       profileImage: user?.profile_image?.medium || defaultAvatar,
     },
     stats: {

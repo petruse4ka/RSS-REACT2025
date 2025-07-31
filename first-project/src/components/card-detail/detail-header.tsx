@@ -1,18 +1,20 @@
 import Button from '../ui/button';
-import { CARD_DETAIL_TEXTS } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 
 type Props = {
   handleClose: () => void;
 };
 
 export default function DetailHeader({ handleClose }: Props) {
+  const translations = useLocale();
+
   return (
     <div
       data-testid="detail-header"
       className="flex flex-col-reverse items-center justify-between gap-4 sm:flex-row sm:gap-0"
     >
       <h2 data-testid="detail-title" className="text-base font-bold sm:text-2xl">
-        {CARD_DETAIL_TEXTS.TITLE}
+        {translations.cardDetail.title}
       </h2>
       <Button
         type="button"

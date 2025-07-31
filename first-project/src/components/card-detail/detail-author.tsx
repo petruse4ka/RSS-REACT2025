@@ -1,15 +1,17 @@
 import type { CardDetailResponse } from '@/types/interfaces';
-import { CARD_DETAIL_TEXTS } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 
 type Props = {
   author: CardDetailResponse['author'];
 };
 
 export default function DetailAuthor({ author }: Props) {
+  const translations = useLocale();
+
   return (
     <div className="mt-4 sm:mt-6">
       <h4 className="mb-3 text-center text-lg font-semibold text-cyan-300 lg:text-left">
-        {CARD_DETAIL_TEXTS.AUTHOR}
+        {translations.cardDetail.author}
       </h4>
       <div className="flex flex-col items-start gap-4 lg:flex-row">
         <img

@@ -1,6 +1,8 @@
 import type { MouseEvent } from 'react';
-import { CARDS_PER_PAGE, PAGINATOR_TEXTS } from '@/constants';
+import { CARDS_PER_PAGE } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 import Button from '../ui/button';
+import { PAGINATOR_NAVIGATION } from '@/constants';
 
 type Props = {
   currentPage: number;
@@ -10,6 +12,7 @@ type Props = {
 
 export default function Paginator({ currentPage, totalItems, handlePageChange }: Props) {
   const totalPages = Math.ceil(totalItems / CARDS_PER_PAGE);
+  const translations = useLocale();
 
   if (totalPages <= 1) {
     return null;
@@ -41,13 +44,13 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
             ? 'cursor-not-allowed border-gray-300 bg-gray-300 px-2 text-gray-500 sm:px-6 md:text-xl lg:min-w-[100px]'
             : 'border-fuchsia-500 bg-fuchsia-500 px-2 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:px-6 md:text-xl lg:min-w-[100px]'
         }`}
-        text={PAGINATOR_TEXTS.PREVIOUS}
+        text={PAGINATOR_NAVIGATION.PREVIOUS}
         dataTestId="previous-button"
         disabled={currentPage === 1}
       />
 
       <span data-testid="page-info" className="font-medium text-cyan-300">
-        {currentPage} {PAGINATOR_TEXTS.OF} {totalPages}
+        {currentPage} {translations.paginator.of} {totalPages}
       </span>
 
       <Button
@@ -58,7 +61,7 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
             ? 'border-gray-300 bg-gray-300 px-2 text-gray-500 sm:px-6 md:text-xl lg:min-w-[100px]'
             : 'border-fuchsia-500 bg-fuchsia-500 px-2 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:px-6 md:text-xl lg:min-w-[100px]'
         }`}
-        text={PAGINATOR_TEXTS.NEXT}
+        text={PAGINATOR_NAVIGATION.NEXT}
         dataTestId="next-button"
         disabled={currentPage === totalPages}
       />

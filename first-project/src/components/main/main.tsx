@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import type { CardData } from '@/types/interfaces';
-import { SEARCH_TEXTS, CARDS_PER_PAGE } from '@/constants';
+import { CARDS_PER_PAGE } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 import Loader from '../ui/loader';
 import CardsList from '../cards-list/cards-list';
 import Paginator from '../paginator/paginator';
@@ -29,6 +30,8 @@ export default function Main({
   errorMessage,
   isCardDetailOpen,
 }: Props) {
+  const translations = useLocale();
+
   useEffect(() => {
     if (totalItems > 0) {
       const totalPages = Math.ceil(totalItems / CARDS_PER_PAGE);
@@ -45,7 +48,7 @@ export default function Main({
           <Loader
             classNameSpinner="border-cyan-300"
             classNameText="text-cyan-300 text-lg"
-            text={SEARCH_TEXTS.LOADING}
+            text={translations.search.loading}
             dataTestId="main-loader"
           />
         </div>
