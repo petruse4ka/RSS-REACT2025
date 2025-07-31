@@ -4,6 +4,7 @@ import {
   UNSPLASH_BASE_URL,
   CARDS_PER_PAGE,
   DEFAULT_SEARCH_QUERY,
+  FETCH_ERRORS,
 } from '@/constants';
 import defaultImage from '@/assets/images/default-image.png';
 import { isEmptyResponse, isValidCardsData, isValidApiResponse } from '@/types/guards';
@@ -27,23 +28,23 @@ export const fetchCards = async (
   const response = await fetch(`${UNSPLASH_BASE_URL}${path}`);
 
   if (!response.ok) {
-    throw new Error(`${translations.error.httpError} ${response.status}`);
+    throw new Error(`${FETCH_ERRORS.HTTP_ERROR} ${response.status}`);
   }
 
   const data: unknown = await response.json();
 
   if (isEmptyResponse(data)) {
-    throw new Error(translations.error.emptyResponse);
+    throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
   }
 
   if (!isValidApiResponse(data)) {
-    throw new Error(translations.error.invalidResponseStructure);
+    throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
   }
 
   const cardsData = 'results' in data ? data.results : data;
 
   if (!isValidCardsData(cardsData)) {
-    throw new Error(translations.error.invalidCardsData);
+    throw new Error(FETCH_ERRORS.INVALID_CARDS_DATA);
   }
 
   const cards: CardData[] = cardsData.map((card: CardResponse) => {

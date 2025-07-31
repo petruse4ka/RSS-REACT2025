@@ -12,12 +12,6 @@ export const en = {
     fetchError: 'No results. Please try again.',
     rateLimitError:
       'Unfortunately, the API provides only 50 requests per hour. Currently, the request limit has been exceeded. This is not an application error, but an API limitation. Please try again in one hour.',
-    emptyResponse: 'Empty response from API',
-    invalidResponseStructure: 'Invalid response structure from API',
-    invalidCardsData: 'Invalid cards data structure',
-    invalidCardDetailData: 'Invalid card detail data structure from API',
-    httpError: 'HTTP error:',
-    cardNotFound: 'Card not found',
   },
   header: {
     logo: 'Photo Gallery',

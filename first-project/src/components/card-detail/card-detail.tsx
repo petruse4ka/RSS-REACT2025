@@ -8,6 +8,7 @@ import DetailHeader from './detail-header';
 import DetailPhoto from './detail-photo';
 import DetailAuthor from './detail-author';
 import DetailStatistics from './detail-statistics';
+import { FETCH_ERRORS } from '@/constants';
 
 type Props = {
   cardIndex: number;
@@ -32,7 +33,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
         const cardId = cards[cardIndex - 1]?.id;
 
         if (!cardId) {
-          throw new Error(translations.error.cardNotFound);
+          throw new Error(FETCH_ERRORS.CARD_NOT_FOUND);
         }
 
         const card = await fetchCardDetails(cardId, translations);
@@ -42,7 +43,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
         setIsLoading(false);
         setIsError(true);
 
-        if (error instanceof Error && error.message === translations.error.httpError + ' 403') {
+        if (error instanceof Error && error.message === FETCH_ERRORS.HTTP_ERROR + ' 403') {
           setErrorMessage(translations.error.rateLimitError);
         } else {
           setErrorMessage(translations.error.fetchError);

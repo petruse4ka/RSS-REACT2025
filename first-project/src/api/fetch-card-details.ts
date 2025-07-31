@@ -1,5 +1,5 @@
 import type { CardDetailResponse } from '@/types/interfaces';
-import { UNSPLASH_API_KEY, UNSPLASH_BASE_URL } from '@/constants';
+import { UNSPLASH_API_KEY, UNSPLASH_BASE_URL, FETCH_ERRORS } from '@/constants';
 import defaultAvatar from '@/assets/icons/default-avatar.png';
 import { isEmptyResponse, isValidCardDetailResponse } from '@/types/guards';
 import defaultImage from '@/assets/images/default-image.png';
@@ -17,17 +17,17 @@ export const fetchCardDetails = async (
   const response = await fetch(`${UNSPLASH_BASE_URL}${path}`);
 
   if (!response.ok) {
-    throw new Error(`${translations.error.httpError} ${response.status}`);
+    throw new Error(`${FETCH_ERRORS.HTTP_ERROR} ${response.status}`);
   }
 
   const data: unknown = await response.json();
 
   if (isEmptyResponse(data)) {
-    throw new Error(translations.error.emptyResponse);
+    throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
   }
 
   if (!isValidCardDetailResponse(data)) {
-    throw new Error(translations.error.invalidCardDetailData);
+    throw new Error(FETCH_ERRORS.INVALID_CARD_DETAIL_DATA);
   }
 
   const { id, urls, alt_description, description, user, likes, links, downloads, views } = data;

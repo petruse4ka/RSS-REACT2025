@@ -36,3 +36,12 @@ export const CARD_SIZES = [
   'col-span-2 row-span-1',
   'col-span-1 row-span-2',
 ];
+
+export const FETCH_ERRORS = {
+  HTTP_ERROR: 'HTTP error:',
+  EMPTY_RESPONSE: 'Empty response from API',
+  INVALID_RESPONSE_STRUCTURE: 'Invalid response structure from API',
+  INVALID_CARDS_DATA: 'Invalid cards data structure',
+  INVALID_CARD_DETAIL_DATA: 'Invalid card detail data structure from API',
+  CARD_NOT_FOUND: 'Card not found',
+};
