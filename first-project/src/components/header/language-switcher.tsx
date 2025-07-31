@@ -1,20 +1,20 @@
-import { useState } from 'react';
 import { useLocale } from '@/hooks/use-locale';
+import { useLanguage } from '@/hooks/use-language';
 import Toggle from '../ui/toggle';
 import ukFlagIcon from '@/assets/icons/uk-flag.png';
 import ruFlagIcon from '@/assets/icons/ru-flag.png';
 
 export default function LanguageSwitcher() {
-  const [isActive, setIsActive] = useState(false);
   const translations = useLocale();
+  const { language, setLanguage } = useLanguage();
 
   const handleToggle = () => {
-    setIsActive(!isActive);
+    setLanguage(language === 'en' ? 'ru' : 'en');
   };
 
   return (
     <Toggle
-      isActive={isActive}
+      isActive={language === 'ru'}
       onToggle={handleToggle}
       leftIcon={ukFlagIcon}
       rightIcon={ruFlagIcon}
