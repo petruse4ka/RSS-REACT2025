@@ -46,12 +46,16 @@ test('Burger menu toggles mobile menu when clicked', () => {
 
   const burgerMenu = screen.getByTestId('burger-menu');
 
-  expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('mobile-menu')).toBeInTheDocument();
+  const mobileMenu = screen.getByTestId('mobile-menu');
+  expect(mobileMenu).toHaveClass('opacity-0');
+  expect(mobileMenu).toHaveClass('pointer-events-none');
 
   fireEvent.click(burgerMenu);
 
-  const mobileMenu = screen.getByTestId('mobile-menu');
   expect(mobileMenu).toBeInTheDocument();
+  expect(mobileMenu).toHaveClass('opacity-100');
+  expect(mobileMenu).toHaveClass('pointer-events-auto');
 
   const mobileHomepageLink = screen.getByTestId('mobile-menu-homepage-link');
   const mobileAboutLink = screen.getByTestId('mobile-menu-about-link');
@@ -64,7 +68,9 @@ test('Burger menu toggles mobile menu when clicked', () => {
 
   fireEvent.click(burgerMenu);
 
-  expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('mobile-menu')).toBeInTheDocument();
+  expect(mobileMenu).toHaveClass('opacity-0');
+  expect(mobileMenu).toHaveClass('pointer-events-none');
 });
 
 test('Menu component handles window resize correctly', () => {
@@ -73,10 +79,15 @@ test('Menu component handles window resize correctly', () => {
 
   const burgerMenu = screen.getByTestId('burger-menu');
 
-  expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('mobile-menu')).toBeInTheDocument();
+  const mobileMenu = screen.getByTestId('mobile-menu');
+  expect(mobileMenu).toHaveClass('opacity-0');
+  expect(mobileMenu).toHaveClass('pointer-events-none');
 
   fireEvent.click(burgerMenu);
   expect(screen.getByTestId('mobile-menu')).toBeInTheDocument();
+  expect(mobileMenu).toHaveClass('opacity-100');
+  expect(mobileMenu).toHaveClass('pointer-events-auto');
 
   Object.defineProperty(window, 'innerWidth', {
     writable: true,
@@ -86,5 +97,7 @@ test('Menu component handles window resize correctly', () => {
 
   fireEvent.resize(window);
 
-  expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('mobile-menu')).toBeInTheDocument();
+  expect(mobileMenu).toHaveClass('opacity-0');
+  expect(mobileMenu).toHaveClass('pointer-events-none');
 });

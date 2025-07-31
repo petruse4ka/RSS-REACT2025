@@ -31,10 +31,10 @@ export default function CardItem({ card, cardIndex, handleCardClick, classNames 
           className="h-full w-full bg-cyan-300 object-cover object-center"
         />
         <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4">
-          <h2 className="mb-2 line-clamp-2 text-base font-semibold text-white sm:text-xl">
+          <h2 className="mb-2 line-clamp-2 text-base font-semibold text-cyan-300 sm:text-xl">
             {title}
           </h2>
-          <p className="line-clamp-2 text-sm text-gray-200">{description}</p>
+          <p className="line-clamp-2 text-sm text-fuchsia-400">{description}</p>
         </div>
       </div>
     </li>
