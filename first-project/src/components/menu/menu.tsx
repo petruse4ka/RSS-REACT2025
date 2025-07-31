@@ -61,21 +61,25 @@ export default function Menu() {
         />
       </div>
 
-      {isMenuOpen && (
-        <nav
-          data-testid="mobile-menu"
-          className="absolute inset-0 flex items-center justify-center bg-indigo-900"
+      <nav
+        data-testid="mobile-menu"
+        className={`absolute inset-0 z-[50] flex items-center justify-center bg-indigo-900 transition-all duration-300 ${
+          isMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+      >
+        <div
+          className={`flex flex-col items-center gap-8 transition-all duration-300 ${
+            isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+          }`}
         >
-          <div className="flex flex-col items-center gap-8">
-            <MenuItem dataTestId="mobile-menu-homepage-link" to="/" onClick={closeMenu}>
-              {translations.menu.homepage}
-            </MenuItem>
-            <MenuItem dataTestId="mobile-menu-about-link" to="/about" onClick={closeMenu}>
-              {translations.menu.about}
-            </MenuItem>
-          </div>
-        </nav>
-      )}
+          <MenuItem dataTestId="mobile-menu-homepage-link" to="/" onClick={closeMenu}>
+            {translations.menu.homepage}
+          </MenuItem>
+          <MenuItem dataTestId="mobile-menu-about-link" to="/about" onClick={closeMenu}>
+            {translations.menu.about}
+          </MenuItem>
+        </div>
+      </nav>
     </>
   );
 }
