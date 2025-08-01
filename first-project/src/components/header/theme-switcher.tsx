@@ -1,12 +1,13 @@
 import { useLocale } from '@/hooks/use-locale';
-import { useTheme } from '@/hooks/use-theme';
+import { useContext } from 'react';
+import { ThemeContext } from '@/context/theme-context';
 import Toggle from '../ui/toggle';
 import sunIcon from '@/assets/icons/sun.png';
 import moonIcon from '@/assets/icons/moon.png';
 
 export default function ThemeSwitcher() {
   const translations = useLocale();
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useContext(ThemeContext);
 
   const handleToggle = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
