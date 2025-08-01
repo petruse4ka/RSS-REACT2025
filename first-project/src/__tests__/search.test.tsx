@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, setLocalStorageMock } from '@/__tests__/test-utils/test-utils';
 import Search from '../components/search/search';
 import { en } from '@/locale/en';
-import { localStorageMock } from './mocks/localStorageMock';
+import { localStorageMock } from './mocks/local-storage-mock';
 
 setLocalStorageMock();
 
