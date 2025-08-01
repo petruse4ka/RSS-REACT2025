@@ -26,7 +26,7 @@ export default function Checkbox({ checked, onChange, checkboxClassName, checkCl
       focus:outline-none
     `;
 
-  const defaultCheckClassName = `h-4 w-4`;
+  const defaultCheckClassName = `h-4 w-4 transition-all duration-300`;
 
   return (
     <div
