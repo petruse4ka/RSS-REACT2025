@@ -1,6 +1,6 @@
 import { render, screen } from '@/__tests__/test-utils/test-utils';
 import AboutSchool from '../components/about/about-school';
-import { useLocale } from '@/hooks/use-locale';
+import { en } from '@/locale/en';
 import { RS_SCHOOL_URL } from '@/constants';
 
 test('AboutSchool component renders with RS School information', () => {
@@ -11,11 +11,11 @@ test('AboutSchool component renders with RS School information', () => {
 
   const description = screen.getByTestId('about-school-description');
   expect(description).toBeInTheDocument();
-  expect(description).toHaveTextContent(useLocale().about.learningJourneyDescription);
+  expect(description).toHaveTextContent(en.about.learningJourneyDescription);
 
   const button = screen.getByTestId('about-school-button');
   expect(button).toBeInTheDocument();
-  expect(button).toHaveTextContent(useLocale().about.rsSchoolButton);
+  expect(button).toHaveTextContent(en.about.rsSchoolButton);
 
   const logo = screen.getByTestId('about-school-logo');
   expect(logo).toBeInTheDocument();

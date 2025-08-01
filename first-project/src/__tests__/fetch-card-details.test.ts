@@ -1,9 +1,9 @@
 import { fetchCardDetails } from '@/api/fetch-card-details';
-import { useLocale } from '@/hooks/use-locale';
+import { en } from '@/locale/en';
 import { FETCH_ERRORS } from '@/constants';
 
 test('fetchCardDetails returns mock data for valid card ID', async () => {
-  const cardDetail = await fetchCardDetails('IPtSV340-j4', useLocale());
+  const cardDetail = await fetchCardDetails('IPtSV340-j4', en);
 
   expect(cardDetail).toBeDefined();
   expect(cardDetail).toHaveProperty('id');
@@ -23,13 +23,13 @@ test('fetchCardDetails returns mock data for valid card ID', async () => {
 });
 
 test('fetchCardDetails throws error when API returns error 403', async () => {
-  await expect(fetchCardDetails('simulated-error-403', useLocale())).rejects.toThrow(
+  await expect(fetchCardDetails('simulated-error-403', en)).rejects.toThrow(
     FETCH_ERRORS.HTTP_ERROR + ' 403'
   );
 });
 
 test('fetchCardDetails throws error when API returns error 404', async () => {
-  await expect(fetchCardDetails('non-existent-id', useLocale())).rejects.toThrow(
+  await expect(fetchCardDetails('non-existent-id', en)).rejects.toThrow(
     FETCH_ERRORS.HTTP_ERROR + ' 404'
   );
 });

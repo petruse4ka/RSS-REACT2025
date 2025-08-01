@@ -1,7 +1,7 @@
 import { render, screen } from '@/__tests__/test-utils/test-utils';
 import CardsList from '../components/cards-list/cards-list';
 import { mockCardData } from '@/__tests__/mocks/handlers';
-import { useLocale } from '@/hooks/use-locale';
+import { en } from '@/locale/en';
 
 test('CardsList renders correct number of card items with correct data', () => {
   render(<CardsList cards={[mockCardData]} />);
@@ -28,7 +28,7 @@ test('CardsList renders error message when no cards provided', () => {
 
   const errorMessage = screen.getByTestId('list-error-message');
   expect(errorMessage).toBeInTheDocument();
-  expect(errorMessage).toHaveTextContent(useLocale().error.fetchError);
+  expect(errorMessage).toHaveTextContent(en.error.fetchError);
 
   const cardsList = screen.queryByTestId('cards-list');
   expect(cardsList).not.toBeInTheDocument();

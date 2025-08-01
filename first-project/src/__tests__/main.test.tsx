@@ -1,7 +1,7 @@
 import { render, screen, waitForElementToBeRemoved } from '@/__tests__/test-utils/test-utils';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import Main from '../components/main/main';
-import { useLocale } from '@/hooks/use-locale';
+import { en } from '@/locale/en';
 import App from '@/app';
 import HomePage from '@/pages/homepage';
 
@@ -97,5 +97,5 @@ test('Main component receives searchQuery prop from App after mounting and does 
 
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
   expect(screen.getByTestId('list-error-message')).toBeInTheDocument();
-  expect(screen.getByTestId('list-error-message')).toHaveTextContent(useLocale().error.fetchError);
+  expect(screen.getByTestId('list-error-message')).toHaveTextContent(en.error.fetchError);
 });

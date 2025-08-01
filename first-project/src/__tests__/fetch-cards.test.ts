@@ -1,9 +1,9 @@
 import { fetchCards } from '@/api/fetch-cards';
-import { useLocale } from '@/hooks/use-locale';
+import { en } from '@/locale/en';
 import { FETCH_ERRORS } from '@/constants';
 
 test('fetchCards returns mock data for default search', async () => {
-  const { cards: defaultCards, total } = await fetchCards('', 1, useLocale());
+  const { cards: defaultCards, total } = await fetchCards('', 1, en);
 
   expect(defaultCards).toBeDefined();
   expect(Array.isArray(defaultCards)).toBe(true);
@@ -18,7 +18,7 @@ test('fetchCards returns mock data for default search', async () => {
 });
 
 test('fetchCards returns mock cards for search query', async () => {
-  const { cards, total } = await fetchCards('random-search-query', 1, useLocale());
+  const { cards, total } = await fetchCards('random-search-query', 1, en);
 
   expect(cards).toBeDefined();
   expect(Array.isArray(cards)).toBe(true);
@@ -30,7 +30,7 @@ test('fetchCards returns mock cards for search query', async () => {
   const cardTitles = cards.map((card) => card.title);
 
   expect(cardIds).toContain('IPtSV340-j4');
-  expect(cardDescriptions).toContain(`${useLocale().cardDetail.author}: NEOM (@neom)`);
+  expect(cardDescriptions).toContain(`${en.cardDetail.author}: NEOM (@neom)`);
   expect(cardTitles).toContain('A MAN WALKING DOWN A DIRT ROAD NEXT TO A MOUNTAIN');
 
   cards.forEach((card) => {
@@ -42,25 +42,25 @@ test('fetchCards returns mock cards for search query', async () => {
 });
 
 test('fetchCards throws error when API returns error 404', async () => {
-  await expect(fetchCards('simulated-error-404', 1, useLocale())).rejects.toThrow(
+  await expect(fetchCards('simulated-error-404', 1, en)).rejects.toThrow(
     FETCH_ERRORS.HTTP_ERROR + ' 404'
   );
 });
 
 test('fetchCards throws error when API returns error 500', async () => {
-  await expect(fetchCards('simulated-error-500', 1, useLocale())).rejects.toThrow(
+  await expect(fetchCards('simulated-error-500', 1, en)).rejects.toThrow(
     FETCH_ERRORS.HTTP_ERROR + ' 500'
   );
 });
 
 test('fetchCards throws error when API returns empty response', async () => {
-  await expect(fetchCards('simulated-empty-response', 1, useLocale())).rejects.toThrow(
+  await expect(fetchCards('simulated-empty-response', 1, en)).rejects.toThrow(
     FETCH_ERRORS.EMPTY_RESPONSE
   );
 });
 
 test('fetchCards throws error when API returns invalid data', async () => {
-  await expect(fetchCards('simulated-invalid-data', 1, useLocale())).rejects.toThrow(
+  await expect(fetchCards('simulated-invalid-data', 1, en)).rejects.toThrow(
     FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE
   );
 });

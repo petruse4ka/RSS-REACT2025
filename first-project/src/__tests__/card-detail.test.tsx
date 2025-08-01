@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@/__tests__/test-utils/test-utils';
 import { vi } from 'vitest';
 import CardDetail from '../components/card-detail/card-detail';
 import { mockCards } from './mocks/handlers';
-import { useLocale } from '@/hooks/use-locale';
+import { en } from '@/locale/en';
 import type { CardData } from '@/types/interfaces';
 
 const mockHandleDetailsClose = vi.fn();
@@ -51,7 +51,7 @@ test('CardDetail component handles card not found error', async () => {
     expect(screen.getByTestId('close-detail-button')).toBeInTheDocument();
   });
 
-  expect(screen.getByText(useLocale().error.fetchError)).toBeInTheDocument();
+  expect(screen.getByText(en.error.fetchError)).toBeInTheDocument();
 });
 
 test('CardDetail component handles 403 rate limit error', async () => {
@@ -72,5 +72,5 @@ test('CardDetail component handles 403 rate limit error', async () => {
     expect(screen.getByTestId('close-detail-button')).toBeInTheDocument();
   });
 
-  expect(screen.getByText(useLocale().error.rateLimitError)).toBeInTheDocument();
+  expect(screen.getByText(en.error.rateLimitError)).toBeInTheDocument();
 });
