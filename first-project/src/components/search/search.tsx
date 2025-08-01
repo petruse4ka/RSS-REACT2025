@@ -39,7 +39,7 @@ export default function Search({ searchQuery, onSearch }: Props) {
         value={inputValue}
         onChange={handleSearchQueryChange}
         onKeyDown={handleKeyPress}
-        className="border-cyan-300 text-cyan-600 hover:border-cyan-400 focus:border-cyan-500 dark:border-fuchsia-300 dark:text-cyan-300 dark:hover:border-fuchsia-400 dark:focus:border-fuchsia-500"
+        className="border-cyan-300 text-fuchsia-400 hover:border-cyan-400 focus:border-cyan-500 dark:border-fuchsia-300 dark:text-cyan-300 dark:hover:border-fuchsia-400 dark:focus:border-fuchsia-500"
         dataTestId="search-input"
       />
       <Button

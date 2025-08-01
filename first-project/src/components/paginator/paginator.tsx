@@ -41,15 +41,15 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
         onClick={handlePreviousPage}
         className={`${
           currentPage === 1
-            ? 'cursor-not-allowed border-gray-300 bg-gray-300 px-2 text-gray-500 sm:px-6 md:text-xl lg:min-w-[100px]'
-            : 'border-fuchsia-500 bg-fuchsia-500 px-2 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:px-6 md:text-xl lg:min-w-[100px]'
+            ? 'cursor-not-allowed border-gray-300 bg-gray-300 px-2 text-gray-500 sm:px-6 md:text-xl lg:min-w-[100px] dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400'
+            : 'border-cyan-500 bg-cyan-500 px-2 hover:border-cyan-400 hover:bg-cyan-400 sm:px-6 md:text-xl lg:min-w-[100px] dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400'
         }`}
         text={PAGINATOR_NAVIGATION.PREVIOUS}
         dataTestId="previous-button"
         disabled={currentPage === 1}
       />
 
-      <span data-testid="page-info" className="font-medium text-cyan-300">
+      <span data-testid="page-info" className="font-medium text-cyan-600 dark:text-cyan-300">
         {currentPage} {translations.paginator.of} {totalPages}
       </span>
 
@@ -58,8 +58,8 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
         onClick={handleNextPage}
         className={`${
           currentPage === totalPages
-            ? 'border-gray-300 bg-gray-300 px-2 text-gray-500 sm:px-6 md:text-xl lg:min-w-[100px]'
-            : 'border-fuchsia-500 bg-fuchsia-500 px-2 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:px-6 md:text-xl lg:min-w-[100px]'
+            ? 'border-gray-300 bg-gray-300 px-2 text-gray-500 sm:px-6 md:text-xl lg:min-w-[100px] dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400'
+            : 'border-cyan-500 bg-cyan-500 px-2 hover:border-cyan-400 hover:bg-cyan-400 sm:px-6 md:text-xl lg:min-w-[100px] dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400'
         }`}
         text={PAGINATOR_NAVIGATION.NEXT}
         dataTestId="next-button"
