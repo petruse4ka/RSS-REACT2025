@@ -16,7 +16,7 @@ export default function CardItem({ card, cardIndex, handleCardClick, classNames 
   const { imageUrl, title, description } = card;
   const dispatch = useAppDispatch();
   const selectedItems = useAppSelector((state) => state.selectedCards.selectedItems);
-  const isChecked = selectedItems.includes(card);
+  const isChecked = selectedItems.some((item) => item.id === card.id);
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
