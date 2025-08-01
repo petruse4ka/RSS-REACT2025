@@ -1,20 +1,20 @@
-import { useState } from 'react';
 import { useLocale } from '@/hooks/use-locale';
+import { useTheme } from '@/hooks/use-theme';
 import Toggle from '../ui/toggle';
 import sunIcon from '@/assets/icons/sun.png';
 import moonIcon from '@/assets/icons/moon.png';
 
 export default function ThemeSwitcher() {
-  const [isActive, setIsActive] = useState(true);
   const translations = useLocale();
+  const { theme, setTheme } = useTheme();
 
   const handleToggle = () => {
-    setIsActive(!isActive);
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
     <Toggle
-      isActive={isActive}
+      isActive={theme === 'dark'}
       onToggle={handleToggle}
       leftIcon={sunIcon}
       rightIcon={moonIcon}

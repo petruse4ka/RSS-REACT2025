@@ -20,12 +20,12 @@ export default function App() {
       texts={errorTexts}
       image={errorImage}
       className="min-h-screen"
-      containerClassName="bg-indigo-900 backdrop-blur-sm text-white flex flex-col min-h-screen"
+      containerClassName="dark:bg-indigo-900 bg-white backdrop-blur-sm dark:text-white text-black-900 flex flex-col min-h-screen"
       imageClassName="w-64 h-64"
       buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
     >
       <Header />
-      <div className="flex-1 px-5 lg:px-20">
+      <div className="text-black-900 flex-1 bg-white px-5 pb-10 lg:px-20 dark:bg-slate-900 dark:text-white">
         <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center py-5 md:py-10">
           <Outlet />
         </div>
