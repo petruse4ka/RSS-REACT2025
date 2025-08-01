@@ -35,7 +35,7 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
   };
 
   return (
-    <div data-testid="paginator" className="mt-15 flex items-center justify-center gap-4">
+    <div data-testid="paginator" className="my-15 flex items-center justify-center gap-4">
       <Button
         type="button"
         onClick={handlePreviousPage}

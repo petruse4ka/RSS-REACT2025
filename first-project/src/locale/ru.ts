@@ -70,6 +70,11 @@ export const ru = {
     unknownUsername: 'Неизвестный юзернейм',
     noBio: 'Биография недоступна',
   },
+  selectedCards: {
+    itemsSelected: 'Фотографий выбрано',
+    unselectAll: 'Отменить',
+    download: 'Скачать',
+  },
   theme: {
     light: 'Светлая',
     dark: 'Темная',

@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import ErrorBoundary from './components/error-boundary/error-boundary';
+import SelectedCards from './components/cards-list/selected-cards';
 import errorImage from './assets/images/error.svg';
 import type { ErrorTexts } from './types/interfaces';
 import { useLocale } from './hooks/use-locale';
@@ -31,6 +32,7 @@ export default function App() {
         </div>
       </div>
       <Footer />
+      <SelectedCards />
     </ErrorBoundary>
   );
 }

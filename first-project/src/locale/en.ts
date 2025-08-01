@@ -70,6 +70,11 @@ export const en = {
     unknownUsername: 'Unknown username',
     noBio: 'No bio available',
   },
+  selectedCards: {
+    itemsSelected: 'Photos selected',
+    unselectAll: 'Unselect',
+    download: 'Download',
+  },
   theme: {
     light: 'Light',
     dark: 'Dark',

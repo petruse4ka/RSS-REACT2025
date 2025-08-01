@@ -6,7 +6,7 @@ import { LanguageContext } from '../../context/language-context.ts';
 import { ThemeContext } from '../../context/theme-context.ts';
 import { getDefaultLanguage } from '../../utils/get-default-language.ts';
 import { getDefaultTheme } from '../../utils/get-default-theme.ts';
-import { store } from '../../store/store.ts';
+import { store } from '@/store/store.ts';
 
 export default function AppWrapper() {
   const [language, setLanguage] = useState(getDefaultLanguage());
