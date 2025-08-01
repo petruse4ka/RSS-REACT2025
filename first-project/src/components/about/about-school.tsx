@@ -9,7 +9,7 @@ export default function AboutSchool() {
     <section data-testid="about-school" className="mt-16 text-center">
       <h3
         data-testid="about-school-title"
-        className="mb-8 text-center text-3xl font-semibold text-cyan-600 dark:text-cyan-300"
+        className="mb-8 text-center text-3xl font-semibold text-fuchsia-400 dark:text-cyan-300"
       >
         {translations.about.learningJourneyTitle}
       </h3>
