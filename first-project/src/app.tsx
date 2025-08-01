@@ -19,7 +19,7 @@ export default function App() {
     <ErrorBoundary
       texts={errorTexts}
       image={errorImage}
-      className="min-h-screen"
+      className="min-h-screen bg-stone-100 dark:bg-slate-900"
       containerClassName="bg-white dark:bg-indigo-900 backdrop-blur-sm text-gray-900 dark:text-white flex flex-col"
       imageClassName="w-64 h-64"
       buttonClassName="bg-cyan-500 border border-cyan-500 hover:bg-cyan-400 hover:border-cyan-400 dark:bg-fuchsia-500 dark:border-fuchsia-500 dark:hover:bg-fuchsia-400 dark:hover:border-fuchsia-400"

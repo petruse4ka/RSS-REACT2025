@@ -22,7 +22,7 @@ export default function Checkbox({ checked, onChange, checkboxClassName, checkCl
   };
 
   const defaultCheckboxClassName = `
-      w-5 h-5 border-2 rounded cursor-pointer transition-all duration-200
+      w-5 h-5 border-2 rounded cursor-pointer transition-all duration-300
       focus:outline-none
     `;
 

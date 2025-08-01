@@ -68,3 +68,8 @@ export interface CardDetailResponse {
     html: string;
   };
 }
+
+export interface SelectedCardsState {
+  count: number;
+  selectedItems: CardData[];
+}
