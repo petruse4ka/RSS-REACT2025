@@ -65,10 +65,13 @@ export default class ErrorBoundary extends Component<Props, State> {
                 />
               </div>
             )}
-            <h1 data-testid="error-title" className="mb-4 text-2xl font-bold text-cyan-300">
+            <h1
+              data-testid="error-title"
+              className="mb-4 text-2xl font-bold text-fuchsia-400 dark:text-cyan-300"
+            >
               {title}
             </h1>
-            <p data-testid="error-message" className="mb-6 text-cyan-300">
+            <p data-testid="error-message" className="mb-6 text-fuchsia-400 dark:text-cyan-300">
               {message}
             </p>
             <Button

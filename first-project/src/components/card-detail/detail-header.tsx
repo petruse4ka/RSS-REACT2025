@@ -15,7 +15,7 @@ export default function DetailHeader({ handleClose }: Props) {
     >
       <h2
         data-testid="detail-title"
-        className="text-base text-gray-900 sm:text-2xl dark:text-white"
+        className="text-base text-cyan-600 sm:text-2xl dark:text-white"
       >
         {translations.cardDetail.title}
       </h2>

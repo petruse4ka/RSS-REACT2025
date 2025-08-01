@@ -20,9 +20,9 @@ export default function App() {
       texts={errorTexts}
       image={errorImage}
       className="min-h-screen"
-      containerClassName="dark:bg-indigo-900 bg-white backdrop-blur-sm dark:text-white text-black-900 flex flex-col min-h-screen"
+      containerClassName="bg-white dark:bg-indigo-900 backdrop-blur-sm text-gray-900 dark:text-white flex flex-col"
       imageClassName="w-64 h-64"
-      buttonClassName="bg-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-400 hover:border-fuchsia-400"
+      buttonClassName="bg-cyan-500 border border-cyan-500 hover:bg-cyan-400 hover:border-cyan-400 dark:bg-fuchsia-500 dark:border-fuchsia-500 dark:hover:bg-fuchsia-400 dark:hover:border-fuchsia-400"
     >
       <Header />
       <div className="flex-1 bg-stone-100 px-5 pb-10 text-fuchsia-500 lg:px-20 dark:bg-slate-900 dark:text-gray-100">
