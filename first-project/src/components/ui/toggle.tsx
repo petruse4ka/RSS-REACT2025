@@ -37,7 +37,7 @@ export default function Toggle({
           </div>
 
           <div
-            className={`absolute top-1 h-6 w-6 rounded-full bg-white transition-all duration-300 dark:bg-indigo-900 ${
+            className={`absolute top-1 h-6 w-6 rounded-full bg-white transition-all duration-300 dark:bg-cyan-300 ${
               isLeftSideActive ? 'translate-x-1' : 'translate-x-8'
             }`}
           />
