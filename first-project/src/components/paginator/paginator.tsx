@@ -49,7 +49,7 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
         disabled={currentPage === 1}
       />
 
-      <span data-testid="page-info" className="font-medium text-cyan-600 dark:text-cyan-300">
+      <span data-testid="page-info" className="font-medium text-fuchsia-400 dark:text-cyan-300">
         {currentPage} {translations.paginator.of} {totalPages}
       </span>
 
