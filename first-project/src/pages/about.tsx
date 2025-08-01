@@ -10,10 +10,10 @@ export default function About() {
     <div data-testid="about-page" className="w-full">
       <div>
         <section data-testid="about-header" className="mb-12 text-center">
-          <h2 className="mb-4 text-4xl font-bold text-cyan-300 md:text-5xl">
+          <h2 className="mb-4 text-4xl font-bold text-cyan-600 md:text-5xl dark:text-cyan-300">
             {translations.about.title}
           </h2>
-          <p className="text-lg text-gray-300">{translations.about.subtitle}</p>
+          <p className="text-lg text-gray-700 dark:text-gray-300">{translations.about.subtitle}</p>
         </section>
         <AboutAuthor />
         <Contacts />

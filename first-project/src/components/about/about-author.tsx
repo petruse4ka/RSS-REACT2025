@@ -19,7 +19,7 @@ export default function AboutAuthor() {
             <p
               key={index}
               data-testid={`about-author-description-${index + 1}`}
-              className="leading-relaxed text-gray-300"
+              className="leading-relaxed text-gray-700 dark:text-gray-300"
             >
               {description}
             </p>
