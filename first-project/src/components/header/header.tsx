@@ -9,13 +9,16 @@ export default function Header() {
   const translations = useLocale();
 
   return (
-    <header data-testid="header" className="w-full bg-indigo-900 px-5 py-4 text-white lg:px-20">
+    <header
+      data-testid="header"
+      className="w-full bg-white px-5 py-4 text-cyan-600 lg:px-20 dark:bg-indigo-900 dark:text-gray-100"
+    >
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-4 flex items-center justify-between">
           <Link
             data-testid="header-logo"
             to="/"
-            className="flex items-center gap-3 transition-all duration-300 hover:text-cyan-300"
+            className="flex items-center gap-3 transition-all duration-300 hover:text-fuchsia-500 dark:hover:text-cyan-300"
           >
             <img src={logoImage} alt="Logo" className="h-8 w-8" />
             <h1 className="text-xl font-bold">{translations.header.logo}</h1>

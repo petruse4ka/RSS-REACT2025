@@ -46,16 +46,16 @@ export default function Menu() {
 
       <div
         data-testid="burger-menu"
-        className="relative z-[100] flex cursor-pointer flex-col items-center justify-center gap-2 md:hidden"
+        className="grouprelative z-[100] flex cursor-pointer flex-col items-center justify-center gap-2 transition-all duration-300 md:hidden"
         onClick={toggleMenu}
       >
         <span
-          className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+          className={`block h-0.5 w-6 bg-cyan-600 transition-all duration-300 dark:bg-white ${
             isMenuOpen ? 'translate-y-1.5 rotate-45' : ''
           }`}
         />
         <span
-          className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+          className={`block h-0.5 w-6 bg-cyan-600 transition-all duration-300 dark:bg-white ${
             isMenuOpen ? '-translate-y-1 -rotate-45' : ''
           }`}
         />
@@ -63,7 +63,7 @@ export default function Menu() {
 
       <nav
         data-testid="mobile-menu"
-        className={`absolute inset-0 z-[50] flex items-center justify-center bg-indigo-900 transition-all duration-300 ${
+        className={`absolute inset-0 z-[50] flex items-center justify-center bg-white transition-all duration-300 dark:bg-indigo-900 ${
           isMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
