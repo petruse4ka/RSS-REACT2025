@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import type { MouseEvent } from 'react';
 import type { CardData } from '@/types/interfaces';
+import Checkbox from '@/components/ui/checkbox';
 
 type Props = {
   card: CardData;
@@ -10,12 +12,17 @@ type Props = {
 
 export default function CardItem({ card, cardIndex, handleCardClick, classNames }: Props) {
   const { imageUrl, title, description } = card;
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
     if (handleCardClick) {
       handleCardClick(cardIndex);
     }
+  };
+
+  const handleCheckboxChange = (checked: boolean) => {
+    setIsChecked(checked);
   };
 
   return (
@@ -30,6 +37,16 @@ export default function CardItem({ card, cardIndex, handleCardClick, classNames 
           alt={title}
           className="h-full w-full bg-cyan-300 object-cover object-center"
         />
+
+        <div className="absolute top-3 right-3 z-10">
+          <Checkbox
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+            checkboxClassName="border-fuchsia-400 hover:border-fuchsia-500 dark:border-cyan-300 dark:hover:border-cyan-400"
+            checkClassName="dark:text-fuchsia-400 text-cyan-300"
+          />
+        </div>
+
         <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4">
           <h2 className="mb-2 line-clamp-2 text-base font-semibold text-cyan-300 sm:text-xl">
             {title}
