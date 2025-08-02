@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { CardData, SelectedCardsState } from '@/types/interfaces';
-import type { RootState } from './store';
 
 const initialState: SelectedCardsState = {
   count: 0,
@@ -30,5 +29,4 @@ const selectedCardsSlice = createSlice({
 });
 
 export const { selectItem, unselectItem, clearAllItems } = selectedCardsSlice.actions;
-export const selectCount = (state: RootState) => state.selectedCards.count;
 export default selectedCardsSlice.reducer;

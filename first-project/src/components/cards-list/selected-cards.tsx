@@ -2,19 +2,17 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { clearAllItems } from '@/store/selected-cards-slice';
 import Button from '@/components/ui/button';
+import { DownloadLink } from '@/components/cards-list/download-link';
 import { useLocale } from '@/hooks/use-locale';
 
 export default function SelectedCards() {
   const dispatch = useAppDispatch();
   const count = useAppSelector((state) => state.selectedCards.count);
+  const selectedCards = useAppSelector((state) => state.selectedCards.selectedItems);
   const translations = useLocale();
 
   const handleUnselectAll = () => {
     dispatch(clearAllItems());
-  };
-
-  const handleDownload = () => {
-    console.log('File downloaded');
   };
 
   return (
@@ -33,13 +31,15 @@ export default function SelectedCards() {
           </div>
 
           <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
-            <Button
-              type="button"
-              onClick={handleDownload}
-              className="border border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
-              text={translations.selectedCards.download}
-              dataTestId="download-button"
-            />
+            <DownloadLink cards={selectedCards} filename={`${count}_items.csv`}>
+              <Button
+                type="button"
+                onClick={() => {}}
+                className="border border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+                text={translations.selectedCards.download}
+                dataTestId="download-button"
+              />
+            </DownloadLink>
 
             <Button
               type="button"

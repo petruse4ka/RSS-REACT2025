@@ -1,12 +1,12 @@
 import type { MouseEvent } from 'react';
 
-interface Props {
+type Props = {
   checked: boolean;
   onChange: (checked: boolean) => void;
   checkboxClassName?: string;
   checkClassName?: string;
   dataTestId?: string;
-}
+};
 
 export default function Checkbox({
   checked,
