@@ -72,7 +72,7 @@ export const ru = {
   },
   selectedCards: {
     itemsSelected: 'Фотографий выбрано',
-    unselectAll: 'Отменить',
+    unselectAll: 'Удалить все',
     download: 'Скачать',
   },
   theme: {

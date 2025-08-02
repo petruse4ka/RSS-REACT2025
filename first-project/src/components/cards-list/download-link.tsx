@@ -21,8 +21,18 @@ export function DownloadLink({ cards, filename, text, className, dataTestId }: P
     const headers = ['Title', 'Description', 'Image URL', 'ID'];
     const csvHeaders = headers.join(',') + '\n';
 
+    const formatCsvValue = (value: string): string => {
+      const formattedValue = value.replace(/"/g, '""');
+      return `"${formattedValue}"`;
+    };
+
     const csvRows = items.map((item) => {
-      const rowData = [item.title, item.description, item.imageUrl, item.id];
+      const rowData = [
+        formatCsvValue(item.title),
+        formatCsvValue(item.description),
+        formatCsvValue(item.imageUrl),
+        formatCsvValue(item.id),
+      ];
       return rowData.join(',');
     });
 

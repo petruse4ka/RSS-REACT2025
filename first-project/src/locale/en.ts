@@ -72,7 +72,7 @@ export const en = {
   },
   selectedCards: {
     itemsSelected: 'Photos selected',
-    unselectAll: 'Unselect',
+    unselectAll: 'Unselect all',
     download: 'Download',
   },
   theme: {
