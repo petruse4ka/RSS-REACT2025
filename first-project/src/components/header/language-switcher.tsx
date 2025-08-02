@@ -22,6 +22,7 @@ export default function LanguageSwitcher() {
       leftTitle={translations.language.en}
       rightTitle={translations.language.ru}
       activeSide="right"
+      dataTestId="language-switcher"
     />
   );
 }

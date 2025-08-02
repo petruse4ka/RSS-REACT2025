@@ -17,9 +17,9 @@ test('fetchCardDetails returns mock data for valid card ID', async () => {
   expect(cardDetail.id).toBe('IPtSV340-j4');
   expect(cardDetail.author.name).toBe('NEOM');
   expect(cardDetail.author.username).toBe('neom');
-  expect(cardDetail.stats.likes).toBe(333);
-  expect(cardDetail.stats.downloads).toBe(111);
-  expect(cardDetail.stats.views).toBe(444);
+  expect(cardDetail.stats.likes).toBe(33333);
+  expect(cardDetail.stats.downloads).toBe(11111);
+  expect(cardDetail.stats.views).toBe(4444444);
 });
 
 test('fetchCardDetails throws error when API returns error 403', async () => {

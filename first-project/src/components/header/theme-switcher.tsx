@@ -22,6 +22,7 @@ export default function ThemeSwitcher() {
       leftTitle={translations.theme.light}
       rightTitle={translations.theme.dark}
       activeSide="right"
+      dataTestId="theme-switcher"
     />
   );
 }

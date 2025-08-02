@@ -7,6 +7,7 @@ type Props = {
   activeSide: 'left' | 'right';
   className?: string;
   onToggle: () => void;
+  dataTestId: string;
 };
 
 export default function Toggle({
@@ -18,6 +19,7 @@ export default function Toggle({
   activeSide,
   className = '',
   onToggle,
+  dataTestId,
 }: Props) {
   const isLeftSideActive = isActive === (activeSide === 'left');
 
@@ -25,6 +27,7 @@ export default function Toggle({
     <button
       onClick={onToggle}
       className={`flex cursor-pointer items-center justify-center focus:outline-none ${className}`}
+      data-testid={dataTestId}
     >
       <div className="relative">
         <div className="relative h-8 w-16 rounded-full bg-slate-300 transition-all duration-300 dark:bg-slate-900">
@@ -40,6 +43,7 @@ export default function Toggle({
             className={`absolute top-1 h-6 w-6 rounded-full bg-white transition-all duration-300 dark:bg-cyan-300 ${
               isLeftSideActive ? 'translate-x-1' : 'translate-x-8'
             }`}
+            data-testid="toggle-indicator"
           />
         </div>
       </div>
