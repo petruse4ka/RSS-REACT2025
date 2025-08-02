@@ -52,6 +52,7 @@ export default function CardItem({ card, cardIndex, handleCardClick, classNames 
             onChange={handleCheckboxChange}
             checkboxClassName="dark:bg-black/40 bg-white/40 border-fuchsia-400 hover:border-fuchsia-500 dark:border-cyan-300 dark:hover:border-cyan-400"
             checkClassName="dark:text-fuchsia-400 text-cyan-300"
+            dataTestId="card-checkbox"
           />
         </div>
 

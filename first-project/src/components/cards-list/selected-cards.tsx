@@ -20,7 +20,10 @@ export default function SelectedCards() {
   return (
     <>
       {count > 0 ? (
-        <div className="fixed right-0 bottom-0 left-0 z-25 bg-slate-200 px-5 shadow-lg lg:px-20 dark:bg-sky-600">
+        <div
+          data-testid="selected-cards"
+          className="fixed right-0 bottom-0 left-0 z-25 bg-slate-200 px-5 shadow-lg lg:px-20 dark:bg-sky-600"
+        >
           <div className="mx-auto max-w-[1440px] py-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="text-center sm:text-left">

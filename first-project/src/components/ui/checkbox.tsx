@@ -1,24 +1,23 @@
-import type { MouseEvent, KeyboardEvent } from 'react';
+import type { MouseEvent } from 'react';
 
 interface Props {
   checked: boolean;
   onChange: (checked: boolean) => void;
   checkboxClassName?: string;
   checkClassName?: string;
+  dataTestId?: string;
 }
 
-export default function Checkbox({ checked, onChange, checkboxClassName, checkClassName }: Props) {
+export default function Checkbox({
+  checked,
+  onChange,
+  checkboxClassName,
+  checkClassName,
+  dataTestId,
+}: Props) {
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
     onChange(!checked);
-  };
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === 'NumpadEnter') {
-      e.stopPropagation();
-      e.preventDefault();
-      onChange(!checked);
-    }
   };
 
   const defaultCheckboxClassName = `
@@ -30,8 +29,8 @@ export default function Checkbox({ checked, onChange, checkboxClassName, checkCl
 
   return (
     <div
+      data-testid={dataTestId}
       onClick={handleClick}
-      onKeyDown={handleKeyDown}
       className={`${defaultCheckboxClassName} ${checkboxClassName}`}
     >
       {checked && (
