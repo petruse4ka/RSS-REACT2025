@@ -274,9 +274,9 @@ export const handlers = [
 
     return HttpResponse.json({
       ...card,
-      downloads: 111,
-      views: 444,
-      likes: 333,
+      downloads: 11111,
+      views: 4444444,
+      likes: 33333,
       links: {
         ...card.links,
         download:

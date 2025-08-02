@@ -10,17 +10,17 @@ export default function DetailAuthor({ author }: Props) {
 
   return (
     <div className="mt-4 sm:mt-6">
-      <h4 className="mb-3 text-center text-lg font-semibold text-cyan-600 lg:text-left dark:text-cyan-300">
+      <h4 className="mb-3 text-left text-lg font-semibold text-cyan-600 dark:text-cyan-300">
         {translations.cardDetail.author}
       </h4>
-      <div className="flex flex-col items-start gap-4 lg:flex-row">
+      <div className="flex flex-row items-start gap-4">
         <img
           src={author.profileImage}
           alt={author.name}
-          className="h-12 w-12 self-center rounded-full lg:self-start"
+          className="h-12 w-12 self-start rounded-full"
           data-testid="author-image"
         />
-        <div className="flex flex-col items-center gap-1 self-center text-center lg:items-start lg:self-start lg:text-left">
+        <div className="flex flex-col items-center items-start gap-1 self-start text-left">
           <p className="font-medium text-gray-900 dark:text-white" data-testid="author-name">
             {author.name}
           </p>

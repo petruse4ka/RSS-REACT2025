@@ -111,9 +111,9 @@ export default function HomePage() {
   return (
     <div data-testid="homepage" className="flex w-full flex-col">
       <Search searchQuery={searchQuery} onSearch={handleSearch} />
-      <div className="flex">
+      <div className="flex flex-col-reverse md:flex-row">
         <div
-          className={`${cardIndex ? 'w-1/2 xl:w-2/3' : 'w-full'} transition-all duration-300`}
+          className={`${cardIndex ? 'w-full md:w-1/2 xl:w-2/3' : 'w-full'} transition-all duration-300`}
           onClick={handleMainClick}
         >
           <Main

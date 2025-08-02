@@ -10,12 +10,15 @@ export default function DetailStatistics({ stats }: Props) {
 
   return (
     <div className="mt-4 sm:mt-6">
-      <h4 className="mb-3 text-center text-lg font-semibold text-cyan-600 lg:text-left dark:text-cyan-300">
+      <h4 className="mb-3 text-left text-lg font-semibold text-cyan-600 dark:text-cyan-300">
         {translations.cardDetail.statistics}
       </h4>
-      <div className="grid grid-cols-1 gap-2 text-center lg:grid-cols-3 lg:gap-4">
+      <div className="line-clamp-1 grid grid-cols-3 gap-2 text-center lg:gap-4">
         <div>
-          <p className="text-xl font-bold text-sky-500 dark:text-sky-400" data-testid="likes-count">
+          <p
+            className="text-base font-bold text-sky-500 sm:text-xl md:text-base 2xl:text-xl dark:text-sky-400"
+            data-testid="likes-count"
+          >
             {stats.likes.toLocaleString()}
           </p>
           <p className="text-sm text-gray-700 dark:text-gray-300">
@@ -24,7 +27,7 @@ export default function DetailStatistics({ stats }: Props) {
         </div>
         <div>
           <p
-            className="text-xl font-bold text-green-500 dark:text-green-400"
+            className="text-base font-bold text-green-500 sm:text-xl md:text-base 2xl:text-xl dark:text-green-400"
             data-testid="downloads-count"
           >
             {stats.downloads.toLocaleString()}
@@ -35,7 +38,7 @@ export default function DetailStatistics({ stats }: Props) {
         </div>
         <div>
           <p
-            className="text-xl font-bold text-fuchsia-400 dark:text-fuchsia-300"
+            className="text-base font-bold text-fuchsia-400 sm:text-xl md:text-base 2xl:text-xl dark:text-fuchsia-300"
             data-testid="views-count"
           >
             {stats.views.toLocaleString()}
