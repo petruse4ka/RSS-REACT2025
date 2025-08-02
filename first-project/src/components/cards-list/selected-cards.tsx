@@ -22,10 +22,10 @@ export default function SelectedCards() {
         count > 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
       }`}
     >
-      <div className="mx-auto max-w-[1440px] py-5">
+      <div className="mx-auto max-w-[1440px] py-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-center sm:text-left">
-            <p className="font-medium text-gray-700 dark:text-white">
+            <p className="text-xl font-medium text-cyan-600 dark:text-white">
               {`${translations.selectedCards.itemsSelected}: ${count}`}
             </p>
           </div>

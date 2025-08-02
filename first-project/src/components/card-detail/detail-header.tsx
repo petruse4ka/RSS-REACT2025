@@ -11,7 +11,7 @@ export default function DetailHeader({ handleClose }: Props) {
   return (
     <div
       data-testid="detail-header"
-      className="flex flex-col-reverse items-center justify-between gap-4 sm:flex-row sm:gap-0"
+      className="flex flex-row items-center justify-between gap-4 sm:gap-0"
     >
       <h2
         data-testid="detail-title"

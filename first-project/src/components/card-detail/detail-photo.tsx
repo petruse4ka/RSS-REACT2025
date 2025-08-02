@@ -6,7 +6,7 @@ type Props = {
 
 export default function DetailPhoto({ imageUrl, title, description }: Props) {
   return (
-    <div className="mt-2 sm:mt-6">
+    <div className="mt-6">
       <div className="mb-4 sm:mb-6">
         <img
           src={imageUrl}

@@ -11,8 +11,8 @@ type Props = {
 
 export default function Button({ type, onClick, className, text, dataTestId, disabled }: Props) {
   const defaultClassName = disabled
-    ? 'px-2 sm:px-6 py-2 text-white rounded-sm transition duration-300 cursor-not-allowed focus:outline-none'
-    : 'px-2 sm:px-6 py-2 text-white rounded-sm transition duration-300 cursor-pointer focus:outline-none';
+    ? 'px-4 sm:px-6 py-2 text-white rounded-sm transition duration-300 cursor-not-allowed focus:outline-none'
+    : 'px-4 sm:px-6 py-2 text-white rounded-sm transition duration-300 cursor-pointer focus:outline-none';
 
   return (
     <button
