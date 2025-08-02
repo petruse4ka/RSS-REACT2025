@@ -28,13 +28,14 @@ const testRender = (initialState: SelectedCardsState = { count: 0, selectedItems
   );
 };
 
-test('SelectedCards does not render when no items are selected', () => {
+test('SelectedCards renders with opacity 0 and when no items are selected', () => {
   testRender();
 
-  expect(screen.queryByTestId('selected-cards')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('selected-cards')).toBeInTheDocument();
+  expect(screen.getByTestId('selected-cards')).toHaveClass('opacity-0');
 });
 
-test('SelectedCards renders when items are selected', () => {
+test('SelectedCards renders with opacity 1 when items are selected', () => {
   const initialState: SelectedCardsState = {
     count: 2,
     selectedItems: [mockCard, { ...mockCard, id: '2' }],
@@ -43,6 +44,7 @@ test('SelectedCards renders when items are selected', () => {
   testRender(initialState);
 
   expect(screen.getByTestId('selected-cards')).toBeInTheDocument();
+  expect(screen.getByTestId('selected-cards')).toHaveClass('opacity-100');
   expect(screen.getByText('Photos selected: 2')).toBeInTheDocument();
 });
 
@@ -80,5 +82,6 @@ test('SelectedCards unselects all items when unselect all button is clicked', ()
     </Provider>
   );
 
-  expect(screen.queryByTestId('selected-cards')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('selected-cards')).toBeInTheDocument();
+  expect(screen.getByTestId('selected-cards')).toHaveClass('opacity-0');
 });

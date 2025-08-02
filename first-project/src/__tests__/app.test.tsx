@@ -32,5 +32,6 @@ test('App component renders with homepage component', () => {
   expect(footer).toBeInTheDocument();
 
   const selectedCards = screen.queryByTestId('selected-cards');
-  expect(selectedCards).not.toBeInTheDocument();
+  expect(selectedCards).toBeInTheDocument();
+  expect(selectedCards).toHaveClass('opacity-0');
 });
