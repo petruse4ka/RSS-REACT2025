@@ -1,15 +1,18 @@
 import { useRef, useState } from 'react';
-import type { MouseEvent, ReactNode } from 'react';
+import type { MouseEvent } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { useLocale } from '@/hooks/use-locale';
+import Button from '@/components/ui/button';
 
 type Props = {
   cards: CardData[];
   filename: string;
-  children: ReactNode;
+  text: string;
+  className: string;
+  dataTestId: string;
 };
 
-export function DownloadLink({ cards, filename, children }: Props) {
+export function DownloadLink({ cards, filename, text, className, dataTestId }: Props) {
   const [downloadUrl, setDownloadUrl] = useState('');
   const downloadRef = useRef<HTMLAnchorElement>(null);
   const translations = useLocale();
@@ -26,8 +29,10 @@ export function DownloadLink({ cards, filename, children }: Props) {
     return csvHeaders + csvRows.join('\n');
   };
 
-  const handleDownload = (e: MouseEvent) => {
-    e.stopPropagation();
+  const handleDownload = (e?: MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
 
     const csvContent = createCsvContent(cards);
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -46,9 +51,13 @@ export function DownloadLink({ cards, filename, children }: Props) {
 
   return (
     <>
-      <div data-testid="download-link" onClick={handleDownload}>
-        {children}
-      </div>
+      <Button
+        type="button"
+        onClick={handleDownload}
+        className={className}
+        text={text}
+        dataTestId={dataTestId}
+      />
       <a
         ref={downloadRef}
         href={downloadUrl}

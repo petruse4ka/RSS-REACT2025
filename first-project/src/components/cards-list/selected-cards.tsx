@@ -31,15 +31,13 @@ export default function SelectedCards() {
           </div>
 
           <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
-            <DownloadLink cards={selectedCards} filename={`${count}_items.csv`}>
-              <Button
-                type="button"
-                onClick={() => {}}
-                className="border border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
-                text={translations.selectedCards.download}
-                dataTestId="download-button"
-              />
-            </DownloadLink>
+            <DownloadLink
+              cards={selectedCards}
+              filename={`${count}_items.csv`}
+              text={translations.selectedCards.download}
+              className="border border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              dataTestId="download-button"
+            />
 
             <Button
               type="button"
