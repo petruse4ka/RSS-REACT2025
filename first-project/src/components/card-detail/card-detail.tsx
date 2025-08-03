@@ -33,7 +33,10 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
         const cardId = cards[cardIndex - 1]?.id;
 
         if (!cardId) {
-          throw new Error(FETCH_ERRORS.CARD_NOT_FOUND);
+          setErrorMessage(FETCH_ERRORS.CARD_NOT_FOUND);
+          setIsLoading(false);
+          setIsError(true);
+          return;
         }
 
         const card = await fetchCardDetails(cardId, translations);

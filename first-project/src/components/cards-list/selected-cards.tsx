@@ -1,14 +1,15 @@
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { clearAllItems } from '@/store/selected-cards-slice';
+import { selectSelectedCount, selectSelectedItems } from '@/store/selectors';
 import Button from '@/components/ui/button';
 import { DownloadLink } from '@/components/cards-list/download-link';
 import { useLocale } from '@/hooks/use-locale';
 
 export default function SelectedCards() {
   const dispatch = useAppDispatch();
-  const count = useAppSelector((state) => state.selectedCards.count);
-  const selectedCards = useAppSelector((state) => state.selectedCards.selectedItems);
+  const count = useAppSelector(selectSelectedCount);
+  const selectedCards = useAppSelector(selectSelectedItems);
   const translations = useLocale();
 
   const handleUnselectAll = () => {

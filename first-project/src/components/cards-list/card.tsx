@@ -4,6 +4,7 @@ import Checkbox from '@/components/ui/checkbox';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { selectItem, unselectItem } from '@/store/selected-cards-slice';
+import { selectSelectedItems } from '@/store/selectors';
 
 type Props = {
   card: CardData;
@@ -15,7 +16,7 @@ type Props = {
 export default function CardItem({ card, cardIndex, handleCardClick, classNames }: Props) {
   const { imageUrl, title, description } = card;
   const dispatch = useAppDispatch();
-  const selectedItems = useAppSelector((state) => state.selectedCards.selectedItems);
+  const selectedItems = useAppSelector(selectSelectedItems);
   const isChecked = selectedItems.some((item) => item.id === card.id);
 
   const handleClick = (e: MouseEvent) => {
