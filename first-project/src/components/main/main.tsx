@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import type { CardData } from '@/types/interfaces';
-import { SEARCH_TEXTS, CARDS_PER_PAGE } from '@/constants';
+import { CARDS_PER_PAGE } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 import Loader from '../ui/loader';
 import CardsList from '../cards-list/cards-list';
 import Paginator from '../paginator/paginator';
@@ -15,6 +16,7 @@ type Props = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
+  isCardDetailOpen: boolean;
 };
 
 export default function Main({
@@ -26,7 +28,10 @@ export default function Main({
   isLoading,
   isError,
   errorMessage,
+  isCardDetailOpen,
 }: Props) {
+  const translations = useLocale();
+
   useEffect(() => {
     if (totalItems > 0) {
       const totalPages = Math.ceil(totalItems / CARDS_PER_PAGE);
@@ -43,7 +48,7 @@ export default function Main({
           <Loader
             classNameSpinner="border-cyan-300"
             classNameText="text-cyan-300 text-lg"
-            text={SEARCH_TEXTS.LOADING}
+            text={translations.search.loading}
             dataTestId="main-loader"
           />
         </div>
@@ -57,8 +62,12 @@ export default function Main({
           </div>
         </div>
       ) : (
-        <div className="py-4">
-          <CardsList cards={cards} handleCardClick={handleCardClick} />
+        <div className="pt-5 md:pt-10">
+          <CardsList
+            cards={cards}
+            handleCardClick={handleCardClick}
+            isCardDetailOpen={isCardDetailOpen}
+          />
           <Paginator
             currentPage={currentPage}
             totalItems={totalItems}

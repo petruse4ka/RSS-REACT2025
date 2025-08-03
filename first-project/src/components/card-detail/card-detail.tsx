@@ -3,11 +3,12 @@ import type { CardDetailResponse, CardData } from '@/types/interfaces';
 import { fetchCardDetails } from '@/api/fetch-card-details';
 import Loader from '../ui/loader';
 import Button from '../ui/button';
-import { ERROR_TEXTS, CARD_DETAIL_TEXTS } from '@/constants';
+import { useLocale } from '@/hooks/use-locale';
 import DetailHeader from './detail-header';
 import DetailPhoto from './detail-photo';
 import DetailAuthor from './detail-author';
 import DetailStatistics from './detail-statistics';
+import { FETCH_ERRORS } from '@/constants';
 
 type Props = {
   cardIndex: number;
@@ -20,6 +21,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const translations = useLocale();
 
   useEffect(() => {
     const loadCardData = async () => {
@@ -31,20 +33,23 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
         const cardId = cards[cardIndex - 1]?.id;
 
         if (!cardId) {
-          throw new Error('Card not found');
+          setErrorMessage(FETCH_ERRORS.CARD_NOT_FOUND);
+          setIsLoading(false);
+          setIsError(true);
+          return;
         }
 
-        const card = await fetchCardDetails(cardId);
+        const card = await fetchCardDetails(cardId, translations);
         setCardData(card);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
         setIsError(true);
 
-        if (error instanceof Error && error.message === 'HTTP error: 403') {
-          setErrorMessage(ERROR_TEXTS.RATE_LIMIT_ERROR);
+        if (error instanceof Error && error.message === FETCH_ERRORS.HTTP_ERROR + ' 403') {
+          setErrorMessage(translations.error.rateLimitError);
         } else {
-          setErrorMessage(ERROR_TEXTS.FETCH_ERROR);
+          setErrorMessage(translations.error.fetchError);
         }
       }
     };
@@ -52,29 +57,31 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
     if (cardIndex && cards.length > 0 && cards.length >= cardIndex) {
       loadCardData();
     }
-  }, [cardIndex, cards]);
+  }, [cardIndex, cards, translations]);
 
   return (
-    <div className="mt-4 mb-4 ml-2 w-1/2 self-start rounded-lg bg-indigo-900 sm:ml-4 md:ml-8 2xl:w-1/3">
+    <div className="mt-5 w-full rounded-lg bg-white md:sticky md:top-4 md:mt-10 md:ml-8 md:w-1/2 md:self-start xl:w-1/3 dark:bg-indigo-900">
       {isLoading ? (
         <div className="flex h-full items-center justify-center">
           <div className="flex min-h-[300px] items-center justify-center">
             <Loader
-              classNameSpinner="border-cyan-300"
-              classNameText="text-cyan-300 text-lg"
-              text={CARD_DETAIL_TEXTS.LOADING}
+              classNameSpinner="border-cyan-500 dark:border-cyan-300"
+              classNameText="text-cyan-600 dark:text-cyan-300 text-lg"
+              text={translations.cardDetail.loading}
               dataTestId="main-loader"
             />
           </div>
         </div>
       ) : isError ? (
         <div className="flex h-full flex-col items-center justify-center p-6">
-          <div className="mb-4 text-center text-lg font-semibold text-red-500">{errorMessage}</div>
+          <div className="mb-4 text-center text-lg font-semibold text-red-500 dark:text-red-400">
+            {errorMessage}
+          </div>
           <Button
             type="button"
             onClick={handleDetailsClose}
-            className="border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400"
-            text={CARD_DETAIL_TEXTS.CLOSE}
+            className="border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+            text={translations.cardDetail.close}
             dataTestId="close-detail-button"
           />
         </div>
@@ -96,8 +103,8 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
             <Button
               type="button"
               onClick={() => window.open(cardData.links.html, '_blank')}
-              className="mt-4 w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 sm:mt-6"
-              text={CARD_DETAIL_TEXTS.VIEW_ON_UNSPLASH}
+              className="mt-4 w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 sm:mt-6 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.cardDetail.viewOnUnsplash}
               dataTestId="unsplash-link-button"
             />
           </div>

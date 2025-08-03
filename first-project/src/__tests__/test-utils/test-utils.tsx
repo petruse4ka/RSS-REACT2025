@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react';
 import type { RenderOptions } from '@testing-library/react';
 import type { ReactElement } from 'react';
-import { localStorageMock } from '../mocks/localStorageMock';
+import { localStorageMock } from '../mocks/local-storage-mock';
+import AllTheProviders from './all-the-providers';
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
-  render(ui, { ...options });
+  render(ui, { wrapper: AllTheProviders, ...options });
 
 const setLocalStorageMock = () => {
   Object.defineProperty(window, 'localStorage', {

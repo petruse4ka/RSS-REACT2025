@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import { MENU_TEXTS } from '@/constants';
+import { en } from '@/locale/en';
 import App from '@/app';
 import HomePage from '@/pages/homepage';
 
@@ -25,11 +25,11 @@ test('Menu component renders with homepage and about links', () => {
 
   const homepageLink = screen.getByTestId('menu-homepage-link');
   expect(homepageLink).toBeInTheDocument();
-  expect(homepageLink).toHaveTextContent(MENU_TEXTS.HOMEPAGE);
+  expect(homepageLink).toHaveTextContent(en.menu.homepage);
 
   const aboutLink = screen.getByTestId('menu-about-link');
   expect(aboutLink).toBeInTheDocument();
-  expect(aboutLink).toHaveTextContent(MENU_TEXTS.ABOUT);
+  expect(aboutLink).toHaveTextContent(en.menu.about);
 });
 
 test('Menu component renders burger menu', () => {
@@ -46,25 +46,31 @@ test('Burger menu toggles mobile menu when clicked', () => {
 
   const burgerMenu = screen.getByTestId('burger-menu');
 
-  expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('mobile-menu')).toBeInTheDocument();
+  const mobileMenu = screen.getByTestId('mobile-menu');
+  expect(mobileMenu).toHaveClass('opacity-0');
+  expect(mobileMenu).toHaveClass('pointer-events-none');
 
   fireEvent.click(burgerMenu);
 
-  const mobileMenu = screen.getByTestId('mobile-menu');
   expect(mobileMenu).toBeInTheDocument();
+  expect(mobileMenu).toHaveClass('opacity-100');
+  expect(mobileMenu).toHaveClass('pointer-events-auto');
 
   const mobileHomepageLink = screen.getByTestId('mobile-menu-homepage-link');
   const mobileAboutLink = screen.getByTestId('mobile-menu-about-link');
 
   expect(mobileHomepageLink).toBeInTheDocument();
-  expect(mobileHomepageLink).toHaveTextContent(MENU_TEXTS.HOMEPAGE);
+  expect(mobileHomepageLink).toHaveTextContent(en.menu.homepage);
 
   expect(mobileAboutLink).toBeInTheDocument();
-  expect(mobileAboutLink).toHaveTextContent(MENU_TEXTS.ABOUT);
+  expect(mobileAboutLink).toHaveTextContent(en.menu.about);
 
   fireEvent.click(burgerMenu);
 
-  expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('mobile-menu')).toBeInTheDocument();
+  expect(mobileMenu).toHaveClass('opacity-0');
+  expect(mobileMenu).toHaveClass('pointer-events-none');
 });
 
 test('Menu component handles window resize correctly', () => {
@@ -73,10 +79,15 @@ test('Menu component handles window resize correctly', () => {
 
   const burgerMenu = screen.getByTestId('burger-menu');
 
-  expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('mobile-menu')).toBeInTheDocument();
+  const mobileMenu = screen.getByTestId('mobile-menu');
+  expect(mobileMenu).toHaveClass('opacity-0');
+  expect(mobileMenu).toHaveClass('pointer-events-none');
 
   fireEvent.click(burgerMenu);
   expect(screen.getByTestId('mobile-menu')).toBeInTheDocument();
+  expect(mobileMenu).toHaveClass('opacity-100');
+  expect(mobileMenu).toHaveClass('pointer-events-auto');
 
   Object.defineProperty(window, 'innerWidth', {
     writable: true,
@@ -86,5 +97,7 @@ test('Menu component handles window resize correctly', () => {
 
   fireEvent.resize(window);
 
-  expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument();
+  expect(screen.queryByTestId('mobile-menu')).toBeInTheDocument();
+  expect(mobileMenu).toHaveClass('opacity-0');
+  expect(mobileMenu).toHaveClass('pointer-events-none');
 });

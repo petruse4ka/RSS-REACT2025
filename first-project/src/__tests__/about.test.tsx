@@ -1,6 +1,6 @@
 import { render, screen } from '@/__tests__/test-utils/test-utils';
 import About from '../pages/about';
-import { ABOUT_TEXTS } from '@/constants';
+import { en } from '@/locale/en';
 
 test('About page renders with all sections', () => {
   render(<About />);
@@ -10,17 +10,17 @@ test('About page renders with all sections', () => {
 
   const header = screen.getByTestId('about-header');
   expect(header).toBeInTheDocument();
-  expect(header).toHaveTextContent(ABOUT_TEXTS.TITLE);
-  expect(header).toHaveTextContent(ABOUT_TEXTS.SUBTITLE);
+  expect(header).toHaveTextContent(en.about.title);
+  expect(header).toHaveTextContent(en.about.subtitle);
 
   const aboutAuthorImage = screen.getByTestId('about-author-image');
   expect(aboutAuthorImage).toBeInTheDocument();
 
   const aboutAuthorDescription = screen.getByTestId('about-author-description');
   expect(aboutAuthorDescription).toBeInTheDocument();
-  expect(aboutAuthorDescription).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[0]);
-  expect(aboutAuthorDescription).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[1]);
-  expect(aboutAuthorDescription).toHaveTextContent(ABOUT_TEXTS.BACKGROUND_DESCRIPTION[2]);
+  expect(aboutAuthorDescription).toHaveTextContent(en.about.backgroundDescription[0]);
+  expect(aboutAuthorDescription).toHaveTextContent(en.about.backgroundDescription[1]);
+  expect(aboutAuthorDescription).toHaveTextContent(en.about.backgroundDescription[2]);
 
   const contacts = screen.getByTestId('contacts');
   expect(contacts).toBeInTheDocument();

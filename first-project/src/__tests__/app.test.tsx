@@ -30,4 +30,8 @@ test('App component renders with homepage component', () => {
 
   const footer = screen.getByTestId('footer');
   expect(footer).toBeInTheDocument();
+
+  const selectedCards = screen.queryByTestId('selected-cards');
+  expect(selectedCards).toBeInTheDocument();
+  expect(selectedCards).toHaveClass('opacity-0');
 });

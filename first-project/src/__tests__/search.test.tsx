@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, setLocalStorageMock } from '@/__tests__/test-utils/test-utils';
 import Search from '../components/search/search';
-import { SEARCH_TEXTS } from '@/constants';
-import { localStorageMock } from './mocks/localStorageMock';
+import { en } from '@/locale/en';
+import { localStorageMock } from './mocks/local-storage-mock';
 
 setLocalStorageMock();
 
@@ -17,12 +17,12 @@ test('Search component renders with default styling and text and empty input whe
 
   const input = screen.getByTestId('search-input');
   expect(input).toBeInTheDocument();
-  expect(input).toHaveAttribute('placeholder', SEARCH_TEXTS.PLACEHOLDER);
+  expect(input).toHaveAttribute('placeholder', en.search.placeholder);
   expect(input).toHaveValue('');
 
   const button = screen.getByTestId('search-button');
   expect(button).toBeInTheDocument();
-  expect(button).toHaveTextContent(SEARCH_TEXTS.BUTTON);
+  expect(button).toHaveTextContent(en.search.button);
 });
 
 test('Search component displays search query from props', () => {

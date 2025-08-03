@@ -4,15 +4,16 @@ import {
   UNSPLASH_BASE_URL,
   CARDS_PER_PAGE,
   DEFAULT_SEARCH_QUERY,
-  ERROR_TEXTS,
-  CARD_DETAIL_TEXTS,
+  FETCH_ERRORS,
 } from '@/constants';
 import defaultImage from '@/assets/images/default-image.png';
 import { isEmptyResponse, isValidCardsData, isValidApiResponse } from '@/types/guards';
+import type { Translations } from '@/locale';
 
 export const fetchCards = async (
   searchQuery: string = '',
-  page: number = 1
+  page: number = 1,
+  translations: Translations
 ): Promise<{ cards: CardData[]; total: number }> => {
   const urlParameters = new URLSearchParams({
     client_id: UNSPLASH_API_KEY,
@@ -27,23 +28,23 @@ export const fetchCards = async (
   const response = await fetch(`${UNSPLASH_BASE_URL}${path}`);
 
   if (!response.ok) {
-    throw new Error(`${ERROR_TEXTS.HTTP_ERROR} ${response.status}`);
+    throw new Error(`${FETCH_ERRORS.HTTP_ERROR} ${response.status}`);
   }
 
   const data: unknown = await response.json();
 
   if (isEmptyResponse(data)) {
-    throw new Error(ERROR_TEXTS.EMPTY_RESPONSE);
+    throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
   }
 
   if (!isValidApiResponse(data)) {
-    throw new Error(ERROR_TEXTS.INVALID_RESPONSE_STRUCTURE);
+    throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
   }
 
   const cardsData = 'results' in data ? data.results : data;
 
   if (!isValidCardsData(cardsData)) {
-    throw new Error(ERROR_TEXTS.INVALID_CARDS_DATA);
+    throw new Error(FETCH_ERRORS.INVALID_CARDS_DATA);
   }
 
   const cards: CardData[] = cardsData.map((card: CardResponse) => {
@@ -52,8 +53,8 @@ export const fetchCards = async (
     return {
       id: id,
       imageUrl: urls?.regular || defaultImage,
-      title: (alt_description || CARD_DETAIL_TEXTS.UNTITLED).toUpperCase(),
-      description: `${CARD_DETAIL_TEXTS.AUTHOR}: ${user?.name || CARD_DETAIL_TEXTS.UNKNOWN_AUTHOR} (@${user?.username || CARD_DETAIL_TEXTS.UNKNOWN_USERNAME})`,
+      title: (alt_description || translations.cardDetail.untitled).toUpperCase(),
+      description: `${translations.cardDetail.author}: ${user?.name || translations.cardDetail.unknownAuthor} (@${user?.username || translations.cardDetail.unknownUsername})`,
     };
   });
 

@@ -1,7 +1,7 @@
 import { render, screen, waitForElementToBeRemoved } from '@/__tests__/test-utils/test-utils';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import Main from '../components/main/main';
-import { ERROR_TEXTS } from '@/constants';
+import { en } from '@/locale/en';
 import App from '@/app';
 import HomePage from '@/pages/homepage';
 
@@ -43,7 +43,7 @@ const defaultProps = {
 };
 
 test('Main component renders loader when loading state is true and removes it when loading is false', async () => {
-  const { rerender } = render(<Main {...defaultProps} />);
+  const { rerender } = render(<Main {...defaultProps} isCardDetailOpen={false} />);
 
   expect(screen.getByTestId('main-loader')).toBeInTheDocument();
   expect(screen.queryByTestId('error-button')).not.toBeInTheDocument();
@@ -54,6 +54,7 @@ test('Main component renders loader when loading state is true and removes it wh
       isLoading={false}
       cards={[{ id: '1', imageUrl: 'test.jpg', title: 'Test', description: 'Test description' }]}
       totalItems={1}
+      isCardDetailOpen={false}
     />
   );
 
@@ -62,7 +63,7 @@ test('Main component renders loader when loading state is true and removes it wh
 });
 
 test('Main component does not render cards list when loading state is true and renders it when loading is false', async () => {
-  const { rerender } = render(<Main {...defaultProps} />);
+  const { rerender } = render(<Main {...defaultProps} isCardDetailOpen={false} />);
 
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
 
@@ -72,6 +73,7 @@ test('Main component does not render cards list when loading state is true and r
       isLoading={false}
       cards={[{ id: '1', imageUrl: 'test.jpg', title: 'Test', description: 'Test description' }]}
       totalItems={1}
+      isCardDetailOpen={false}
     />
   );
 
@@ -95,5 +97,5 @@ test('Main component receives searchQuery prop from App after mounting and does 
 
   expect(screen.queryByTestId('cards-list')).not.toBeInTheDocument();
   expect(screen.getByTestId('list-error-message')).toBeInTheDocument();
-  expect(screen.getByTestId('list-error-message')).toHaveTextContent(ERROR_TEXTS.FETCH_ERROR);
+  expect(screen.getByTestId('list-error-message')).toHaveTextContent(en.error.fetchError);
 });

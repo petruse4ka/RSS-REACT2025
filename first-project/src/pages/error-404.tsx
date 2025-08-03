@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/ui/button';
-import { ERROR_404_TEXTS } from '../constants';
+import { useLocale } from '../hooks/use-locale';
 import errorImage from '../assets/images/404-error.png';
 
 export default function Error404() {
   const navigate = useNavigate();
+  const translations = useLocale();
 
   const returnHome = () => {
     navigate('/');
@@ -14,10 +15,10 @@ export default function Error404() {
     <div className="flex w-full flex-col items-center justify-center" data-testid="404-error-page">
       <div className="text-center">
         <h2
-          className="mb-4 text-4xl font-bold text-cyan-300 md:text-5xl"
+          className="mb-4 text-4xl font-bold text-fuchsia-400 md:text-5xl dark:text-cyan-300"
           data-testid="404-error-title"
         >
-          {ERROR_404_TEXTS.TITLE}
+          {translations.error404.title}
         </h2>
 
         <img
@@ -28,17 +29,17 @@ export default function Error404() {
         />
 
         <p
-          className="mt-2text-lg leading-relaxed text-gray-300"
+          className="mt-2 text-lg leading-relaxed text-gray-700 dark:text-gray-300"
           data-testid="404-error-description"
         >
-          {ERROR_404_TEXTS.DESCRIPTION}
+          {translations.error404.description}
         </p>
 
         <Button
           type="button"
           onClick={returnHome}
-          className="mt-10 rounded-lg border-fuchsia-500 bg-fuchsia-500 px-2 hover:border-fuchsia-400 hover:bg-fuchsia-400"
-          text={ERROR_404_TEXTS.BUTTON}
+          className="mt-10 rounded-lg border-cyan-500 bg-cyan-500 px-2 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+          text={translations.error404.button}
           dataTestId="return-homepage-button"
         />
       </div>

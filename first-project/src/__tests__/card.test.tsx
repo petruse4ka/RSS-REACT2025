@@ -1,4 +1,4 @@
-import { render, screen } from '@/__tests__/test-utils/test-utils';
+import { render, screen, fireEvent } from '@/__tests__/test-utils/test-utils';
 import CardItem from '@/components/cards-list/card';
 import { mockCardData, incompleteCardData } from '@/__tests__/mocks/handlers';
 
@@ -32,4 +32,22 @@ test('CardItem handles missing props gracefully', () => {
   expect(image).toHaveAttribute('alt', '');
 
   expect(screen.getByText('Test description')).toBeInTheDocument();
+});
+
+test('CardItem calls handleCardClick when card is clicked', () => {
+  const mockHandleCardClick = vi.fn();
+  render(<CardItem card={mockCardData} cardIndex={0} handleCardClick={mockHandleCardClick} />);
+
+  const cardItem = screen.getByTestId('card-item');
+  fireEvent.click(cardItem);
+
+  expect(mockHandleCardClick).toHaveBeenCalledWith(0);
+});
+
+test('CardItem does not call handleCardClick when not provided', () => {
+  render(<CardItem card={mockCardData} cardIndex={0} />);
+
+  const cardItem = screen.getByTestId('card-item');
+
+  expect(() => fireEvent.click(cardItem)).not.toThrow();
 });

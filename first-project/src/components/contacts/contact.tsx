@@ -21,7 +21,7 @@ export default function Contact({
     <a
       data-testid="contact-link"
       href={href}
-      className="group rounded-lg bg-indigo-900 p-4 transition-all duration-300 hover:scale-105 hover:bg-indigo-800"
+      className="group rounded-lg bg-cyan-700 p-4 transition-all duration-300 hover:scale-105 hover:bg-cyan-600 dark:bg-indigo-900 dark:hover:bg-indigo-800"
       target={target}
       rel={rel}
     >
@@ -35,11 +35,11 @@ export default function Contact({
         <div data-testid="contact-info-container">
           <p
             data-testid="contact-info"
-            className="font-semibold text-white group-hover:text-cyan-300"
+            className="font-semibold text-white group-hover:text-fuchsia-400 dark:group-hover:text-cyan-400"
           >
             {contactInfo}
           </p>
-          <p data-testid="contact-type" className="text-sm text-gray-400">
+          <p data-testid="contact-type" className="text-sm text-gray-200 dark:text-gray-400">
             {contactType}
           </p>
         </div>

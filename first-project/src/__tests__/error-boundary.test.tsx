@@ -1,6 +1,6 @@
 import { render, screen } from '@/__tests__/test-utils/test-utils';
 import ErrorBoundary from '@/components/error-boundary/error-boundary';
-import { ERROR_TEXTS } from '@/constants';
+import { en } from '@/locale/en';
 
 const ThrowError = ({ error = false }: { error?: boolean }) => {
   if (error) {
@@ -13,9 +13,9 @@ test('ErrorBoundary renders children when there is no error', () => {
   render(
     <ErrorBoundary
       texts={{
-        title: ERROR_TEXTS.TITLE,
-        message: ERROR_TEXTS.DESCRIPTION,
-        buttonText: ERROR_TEXTS.REFRESH_BUTTON,
+        title: en.error.title,
+        message: en.error.description,
+        buttonText: en.error.refreshButton,
       }}
     >
       <ThrowError />
@@ -30,9 +30,9 @@ test('ErrorBoundary catches error and renders fallback UI when there is an error
   render(
     <ErrorBoundary
       texts={{
-        title: ERROR_TEXTS.TITLE,
-        message: ERROR_TEXTS.DESCRIPTION,
-        buttonText: ERROR_TEXTS.REFRESH_BUTTON,
+        title: en.error.title,
+        message: en.error.description,
+        buttonText: en.error.refreshButton,
       }}
     >
       <ThrowError error={true} />
@@ -43,9 +43,9 @@ test('ErrorBoundary catches error and renders fallback UI when there is an error
   expect(screen.getByTestId('error-title')).toBeInTheDocument();
   expect(screen.getByTestId('error-message')).toBeInTheDocument();
   expect(screen.getByTestId('refresh-button')).toBeInTheDocument();
-  expect(screen.getByTestId('error-title')).toHaveTextContent(ERROR_TEXTS.TITLE);
-  expect(screen.getByTestId('error-message')).toHaveTextContent(ERROR_TEXTS.DESCRIPTION);
-  expect(screen.getByTestId('refresh-button')).toHaveTextContent(ERROR_TEXTS.REFRESH_BUTTON);
+  expect(screen.getByTestId('error-title')).toHaveTextContent(en.error.title);
+  expect(screen.getByTestId('error-message')).toHaveTextContent(en.error.description);
+  expect(screen.getByTestId('refresh-button')).toHaveTextContent(en.error.refreshButton);
 });
 
 test('ErrorBoundary logs error to console when error occurs', () => {
@@ -54,9 +54,9 @@ test('ErrorBoundary logs error to console when error occurs', () => {
   render(
     <ErrorBoundary
       texts={{
-        title: ERROR_TEXTS.TITLE,
-        message: ERROR_TEXTS.DESCRIPTION,
-        buttonText: ERROR_TEXTS.REFRESH_BUTTON,
+        title: en.error.title,
+        message: en.error.description,
+        buttonText: en.error.refreshButton,
       }}
     >
       <ThrowError error={true} />
