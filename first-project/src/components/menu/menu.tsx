@@ -7,6 +7,7 @@ export default function Menu() {
   const translations = useLocale();
 
   const toggleMenu = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setIsMenuOpen(!isMenuOpen);
     if (!isMenuOpen) {
       document.body.style.overflow = 'hidden';
