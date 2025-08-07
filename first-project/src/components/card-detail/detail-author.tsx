@@ -8,6 +8,10 @@ type Props = {
 export default function DetailAuthor({ author }: Props) {
   const translations = useLocale();
 
+  const displayName = author.name || translations.cardDetail.unknownAuthor;
+  const displayUsername = author.username || translations.cardDetail.unknownUsername;
+  const displayBio = author.bio || translations.cardDetail.noBio;
+
   return (
     <div className="mt-4 sm:mt-6">
       <h4 className="mb-3 text-left text-lg font-semibold text-cyan-600 dark:text-cyan-300">
@@ -16,19 +20,19 @@ export default function DetailAuthor({ author }: Props) {
       <div className="flex flex-row items-start gap-4">
         <img
           src={author.profileImage}
-          alt={author.name}
+          alt={displayName}
           className="h-12 w-12 self-start rounded-full"
           data-testid="author-image"
         />
-        <div className="flex flex-col items-center items-start gap-1 self-start text-left">
+        <div className="flex flex-col items-start gap-1 self-start text-left">
           <p className="font-medium text-gray-900 dark:text-white" data-testid="author-name">
-            {author.name}
+            {displayName}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300" data-testid="author-username">
-            @{author.username}
+            @{displayUsername}
           </p>
           <p className="text-sm text-gray-700 dark:text-gray-300" data-testid="author-bio">
-            {author.bio}
+            {displayBio}
           </p>
         </div>
       </div>

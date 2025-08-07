@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { selectItem, unselectItem } from '@/store/selected-cards-slice';
 import { selectSelectedItems } from '@/store/selectors';
+import { useLocale } from '@/hooks/use-locale';
 
 type Props = {
   card: CardData;
@@ -14,10 +15,14 @@ type Props = {
 };
 
 export default function CardItem({ card, cardIndex, handleCardClick, classNames }: Props) {
+  const translations = useLocale();
   const { imageUrl, title, description } = card;
   const dispatch = useAppDispatch();
   const selectedItems = useAppSelector(selectSelectedItems);
   const isChecked = selectedItems.some((item) => item.id === card.id);
+
+  const displayTitle = title || translations.cardDetail.untitled;
+  const displayDescription = description || translations.cardDetail.noDescription;
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -43,7 +48,7 @@ export default function CardItem({ card, cardIndex, handleCardClick, classNames 
       <div className="relative h-full w-full">
         <img
           src={imageUrl}
-          alt={title}
+          alt={displayTitle}
           className="h-full w-full bg-cyan-300 object-cover object-center"
         />
 
@@ -59,9 +64,9 @@ export default function CardItem({ card, cardIndex, handleCardClick, classNames 
 
         <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4">
           <h2 className="mb-2 line-clamp-2 text-base font-semibold text-cyan-300 sm:text-xl">
-            {title}
+            {displayTitle}
           </h2>
-          <p className="line-clamp-2 text-sm text-fuchsia-400">{description}</p>
+          <p className="line-clamp-2 text-sm text-fuchsia-400">{displayDescription}</p>
         </div>
       </div>
     </li>
