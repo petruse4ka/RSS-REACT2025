@@ -20,9 +20,6 @@ export const api = createApi({
   reducerPath: 'unsplashApi',
   baseQuery: fetchBaseQuery({
     baseUrl: UNSPLASH_BASE_URL,
-    prepareHeaders: (headers) => {
-      return headers;
-    },
     timeout: 10000,
   }),
   tagTypes: ['Cards', 'CardDetails'],
