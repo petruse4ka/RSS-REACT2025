@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import type { CardDetailResponse, CardData } from '@/types/interfaces';
-import { fetchCardDetails } from '@/api/fetch-card-details';
+import type { CardData } from '@/types/interfaces';
+import { useGetCardDetailsQuery } from '@/store/api';
 import Loader from '../ui/loader';
 import Button from '../ui/button';
 import { useLocale } from '@/hooks/use-locale';
@@ -8,7 +7,6 @@ import DetailHeader from './detail-header';
 import DetailPhoto from './detail-photo';
 import DetailAuthor from './detail-author';
 import DetailStatistics from './detail-statistics';
-import { FETCH_ERRORS } from '@/constants';
 
 type Props = {
   cardIndex: number;
@@ -17,47 +15,33 @@ type Props = {
 };
 
 export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Props) {
-  const [cardData, setCardData] = useState<CardDetailResponse | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
   const translations = useLocale();
+  const cardId = cards[cardIndex - 1]?.id;
 
-  useEffect(() => {
-    const loadCardData = async () => {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        setErrorMessage('');
-
-        const cardId = cards[cardIndex - 1]?.id;
-
-        if (!cardId) {
-          setErrorMessage(FETCH_ERRORS.CARD_NOT_FOUND);
-          setIsLoading(false);
-          setIsError(true);
-          return;
-        }
-
-        const card = await fetchCardDetails(cardId, translations);
-        setCardData(card);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        setIsError(true);
-
-        if (error instanceof Error && error.message === FETCH_ERRORS.HTTP_ERROR + ' 403') {
-          setErrorMessage(translations.error.rateLimitError);
-        } else {
-          setErrorMessage(translations.error.fetchError);
-        }
-      }
-    };
-
-    if (cardIndex && cards.length > 0 && cards.length >= cardIndex) {
-      loadCardData();
+  const {
+    data: cardData,
+    isLoading,
+    isError,
+    error,
+  } = useGetCardDetailsQuery(
+    { cardId },
+    {
+      skip: !cardId,
     }
-  }, [cardIndex, cards, translations]);
+  );
+
+  const getErrorMessage = () => {
+    if (!isError || !error) return '';
+
+    if (error && typeof error === 'object' && 'status' in error) {
+      if (error.status === 403) {
+        return translations.error.rateLimitError;
+      }
+      return translations.error.fetchError;
+    }
+
+    return translations.error.fetchError;
+  };
 
   return (
     <div className="mt-5 w-full rounded-lg bg-white md:sticky md:top-4 md:mt-10 md:ml-8 md:w-1/2 md:self-start xl:w-1/3 dark:bg-indigo-900">
@@ -75,7 +59,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
       ) : isError ? (
         <div className="flex h-full flex-col items-center justify-center p-6">
           <div className="mb-4 text-center text-lg font-semibold text-red-500 dark:text-red-400">
-            {errorMessage}
+            {getErrorMessage()}
           </div>
           <Button
             type="button"

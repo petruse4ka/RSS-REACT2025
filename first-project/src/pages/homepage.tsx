@@ -42,10 +42,11 @@ export default function HomePage() {
   const getErrorMessage = () => {
     if (!isError || !error) return '';
 
-    if (error instanceof Error) {
-      if (error.message.includes('HTTP error: 403')) {
+    if (error && typeof error === 'object' && 'status' in error) {
+      if (error.status === 403) {
         return translations.error.rateLimitError;
       }
+      return translations.error.fetchError;
     }
 
     return translations.error.fetchError;
