@@ -1,13 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { CardData, CardResponse } from '@/types/interfaces';
+import type { CardData, CardResponse, CardDetailResponse } from '@/types/interfaces';
 import {
   UNSPLASH_API_KEY,
   UNSPLASH_BASE_URL,
   CARDS_PER_PAGE,
   DEFAULT_SEARCH_QUERY,
 } from '@/constants';
-import { isValidApiResponse, isValidCardsData } from '@/types/guards';
+import {
+  isEmptyResponse,
+  isValidCardsResponse,
+  isValidCardsData,
+  isValidCardDetailData,
+} from '@/types/guards';
 import { FETCH_ERRORS } from '@/constants';
+import defaultAvatar from '@/assets/icons/default-avatar.png';
+import defaultImage from '@/assets/images/default-image.png';
 
 export const api = createApi({
   reducerPath: 'unsplashApi',
@@ -38,7 +45,7 @@ export const api = createApi({
         return path;
       },
       transformResponse: (response: unknown) => {
-        if (!isValidApiResponse(response)) {
+        if (!isValidCardsResponse(response)) {
           throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
         }
 
@@ -46,6 +53,10 @@ export const api = createApi({
 
         if (!isValidCardsData(cardsData)) {
           throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
+        }
+
+        if (isEmptyResponse(cardsData)) {
+          throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
         }
 
         const cards: CardData[] = cardsData.map((card: CardResponse) => {
@@ -65,7 +76,51 @@ export const api = createApi({
         return { cards, total };
       },
     }),
+    getCardDetails: builder.query<CardDetailResponse, { cardId: string }>({
+      query: ({ cardId }) => {
+        const urlParameters = new URLSearchParams({
+          client_id: UNSPLASH_API_KEY,
+        });
+
+        return `/photos/${cardId}?${urlParameters.toString()}`;
+      },
+      transformResponse: (response: unknown) => {
+        if (!isValidCardDetailData(response)) {
+          throw new Error(FETCH_ERRORS.INVALID_CARD_DETAIL_DATA);
+        }
+
+        if (isEmptyResponse(response)) {
+          throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
+        }
+
+        const { id, urls, alt_description, description, user, likes, links, downloads, views } =
+          response;
+
+        const cardDetail: CardDetailResponse = {
+          id: id,
+          imageUrl: urls?.regular || defaultImage,
+          title: (alt_description || '').toUpperCase(),
+          description: description || '',
+          author: {
+            name: user?.name || '',
+            username: user?.username || '',
+            bio: user?.bio || '',
+            profileImage: user?.profile_image?.medium || defaultAvatar,
+          },
+          stats: {
+            likes: likes || 0,
+            downloads: downloads || 0,
+            views: views || 0,
+          },
+          links: {
+            html: links?.html || '',
+          },
+        };
+
+        return cardDetail;
+      },
+    }),
   }),
 });
 
-export const { useGetCardsQuery } = api;
+export const { useGetCardsQuery, useGetCardDetailsQuery } = api;

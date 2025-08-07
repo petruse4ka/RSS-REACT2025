@@ -4,7 +4,7 @@ export const isEmptyResponse = (data: unknown): boolean => {
   return !data || (typeof data === 'object' && Object.keys(data).length === 0) || data === null;
 };
 
-export const isValidApiResponse = (
+export const isValidCardsResponse = (
   data: unknown
 ): data is { results?: CardResponse[] } | CardResponse[] => {
   if (!data || typeof data !== 'object') {
@@ -32,7 +32,7 @@ export const isValidCardsData = (data: unknown): data is CardResponse[] => {
   );
 };
 
-export const isValidCardDetailResponse = (data: unknown): data is CardResponse => {
+export const isValidCardDetailData = (data: unknown): data is CardResponse => {
   if (!data || typeof data !== 'object') {
     return false;
   }

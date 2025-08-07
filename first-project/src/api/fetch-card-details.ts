@@ -1,7 +1,7 @@
 import type { CardDetailResponse } from '@/types/interfaces';
 import { UNSPLASH_API_KEY, UNSPLASH_BASE_URL, FETCH_ERRORS } from '@/constants';
 import defaultAvatar from '@/assets/icons/default-avatar.png';
-import { isEmptyResponse, isValidCardDetailResponse } from '@/types/guards';
+import { isEmptyResponse, isValidCardDetailData } from '@/types/guards';
 import defaultImage from '@/assets/images/default-image.png';
 import type { Translations } from '@/locale';
 
@@ -26,7 +26,7 @@ export const fetchCardDetails = async (
     throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
   }
 
-  if (!isValidCardDetailResponse(data)) {
+  if (!isValidCardDetailData(data)) {
     throw new Error(FETCH_ERRORS.INVALID_CARD_DETAIL_DATA);
   }
 

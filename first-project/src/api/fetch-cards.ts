@@ -7,7 +7,7 @@ import {
   FETCH_ERRORS,
 } from '@/constants';
 import defaultImage from '@/assets/images/default-image.png';
-import { isEmptyResponse, isValidCardsData, isValidApiResponse } from '@/types/guards';
+import { isEmptyResponse, isValidCardsData, isValidCardsResponse } from '@/types/guards';
 import type { Translations } from '@/locale';
 
 export const fetchCards = async (
@@ -37,7 +37,7 @@ export const fetchCards = async (
     throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
   }
 
-  if (!isValidApiResponse(data)) {
+  if (!isValidCardsResponse(data)) {
     throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
   }
 
