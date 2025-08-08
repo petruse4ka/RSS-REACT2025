@@ -50,6 +50,10 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
     dispatch(invalidateTags(['CardDetails']));
   };
 
+  const handleRefreshCurrent = () => {
+    dispatch(invalidateTags([{ type: 'CardDetails', id: cardId }]));
+  };
+
   return (
     <div className="mt-5 w-full rounded-lg bg-white md:sticky md:top-4 md:mt-10 md:ml-8 md:w-1/2 md:self-start xl:w-1/3 dark:bg-indigo-900">
       {isLoading ? (
@@ -78,23 +82,39 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
             />
             <Button
               type="button"
+              onClick={handleRefreshCurrent}
+              className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.search.refreshCurrentCard}
+              dataTestId="refresh-current-detail-button"
+            />
+            <Button
+              type="button"
               onClick={handleRefresh}
               className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
-              text={translations.search.refreshQuery}
-              dataTestId="refresh-detail-button"
+              text={translations.search.refreshAllCards}
+              dataTestId="refresh-all-detail-button"
             />
           </div>
         </div>
       ) : cardData ? (
         <div className="overflow-y-auto" data-testid="card-detail">
           <div className="p-3 sm:p-6">
-            <Button
-              type="button"
-              onClick={handleRefresh}
-              className="mb-4 w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 sm:mb-6 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
-              text={translations.search.refreshQuery}
-              dataTestId="refresh-detail-button"
-            />
+            <div className="mb-4 flex w-full flex-col gap-5 sm:mb-6">
+              <Button
+                type="button"
+                onClick={handleRefreshCurrent}
+                className="border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+                text={translations.search.refreshCurrentCard}
+                dataTestId="refresh-current-detail-button"
+              />
+              <Button
+                type="button"
+                onClick={handleRefresh}
+                className="border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+                text={translations.search.refreshAllCards}
+                dataTestId="refresh-all-detail-button"
+              />
+            </div>
 
             <DetailHeader handleClose={handleDetailsClose} />
 

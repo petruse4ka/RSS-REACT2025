@@ -41,7 +41,9 @@ export const api = createApi({
 
         return path;
       },
-      providesTags: ['Cards'],
+      providesTags: (_result, _error, { searchQuery, page }) => [
+        { type: 'Cards', id: `SEARCH_${searchQuery}_PAGE_${page}` },
+      ],
       transformResponse: (response: unknown) => {
         if (!isValidCardsResponse(response)) {
           throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
@@ -82,7 +84,7 @@ export const api = createApi({
 
         return `/photos/${cardId}?${urlParameters.toString()}`;
       },
-      providesTags: ['CardDetails'],
+      providesTags: (_result, _error, { cardId }) => [{ type: 'CardDetails', id: cardId }],
       transformResponse: (response: unknown) => {
         if (!isValidCardDetailData(response)) {
           throw new Error(FETCH_ERRORS.INVALID_CARD_DETAIL_DATA);

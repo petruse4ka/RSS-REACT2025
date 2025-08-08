@@ -23,6 +23,7 @@ type Props = {
 };
 
 export default function Main({
+  searchQuery,
   currentPage,
   handlePageChange,
   handleCardClick,
@@ -49,6 +50,10 @@ export default function Main({
     dispatch(invalidateTags(['Cards']));
   };
 
+  const handleRefreshCurrent = () => {
+    dispatch(invalidateTags([{ type: 'Cards', id: `SEARCH_${searchQuery}_PAGE_${currentPage}` }]));
+  };
+
   return (
     <section data-testid="main" className="w-full">
       {isLoading ? (
@@ -68,23 +73,39 @@ export default function Main({
           >
             {errorMessage}
           </div>
-          <Button
-            type="button"
-            onClick={handleRefresh}
-            className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
-            text={translations.search.refreshQuery}
-            dataTestId="refresh-button"
-          />
-        </div>
-      ) : (
-        <div className="pt-5 md:pt-10">
-          <div className="mb-4 flex justify-end">
+          <div className="flex w-full flex-col gap-5">
+            <Button
+              type="button"
+              onClick={handleRefreshCurrent}
+              className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.search.refreshCurrentPage}
+              dataTestId="refresh-current-button"
+            />
             <Button
               type="button"
               onClick={handleRefresh}
               className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
-              text={translations.search.refreshQuery}
-              dataTestId="refresh-button"
+              text={translations.search.refreshAllPages}
+              dataTestId="refresh-all-button"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="pt-5 md:pt-10">
+          <div className="mb-6 flex w-full flex-col gap-5">
+            <Button
+              type="button"
+              onClick={handleRefreshCurrent}
+              className="border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.search.refreshCurrentPage}
+              dataTestId="refresh-current-button"
+            />
+            <Button
+              type="button"
+              onClick={handleRefresh}
+              className="border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.search.refreshAllPages}
+              dataTestId="refresh-all-button"
             />
           </div>
           <CardsList
