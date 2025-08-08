@@ -3,6 +3,7 @@ export const en = {
     placeholder: 'Enter the search query',
     button: 'Search',
     loading: 'Loading photos...',
+    refreshQuery: 'Refresh',
   },
   error: {
     title: 'Something went wrong',

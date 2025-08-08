@@ -3,6 +3,7 @@ export const ru = {
     placeholder: 'Введите поисковый запрос',
     button: 'Поиск',
     loading: 'Загрузка фотографий...',
+    refreshQuery: 'Обновить',
   },
   error: {
     title: 'Что-то пошло не так',

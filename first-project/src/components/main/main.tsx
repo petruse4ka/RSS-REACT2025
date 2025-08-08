@@ -2,7 +2,10 @@ import { useEffect } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { CARDS_PER_PAGE } from '@/constants';
 import { useLocale } from '@/hooks/use-locale';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { invalidateTags } from '@/store/api';
 import Loader from '../ui/loader';
+import Button from '../ui/button';
 import CardsList from '../cards-list/cards-list';
 import Paginator from '../paginator/paginator';
 
@@ -31,6 +34,7 @@ export default function Main({
   isCardDetailOpen,
 }: Props) {
   const translations = useLocale();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (totalItems > 0) {
@@ -40,6 +44,10 @@ export default function Main({
       }
     }
   }, [totalItems, currentPage, handlePageChange]);
+
+  const handleRefresh = () => {
+    dispatch(invalidateTags(['Cards']));
+  };
 
   return (
     <section data-testid="main" className="w-full">
@@ -60,9 +68,25 @@ export default function Main({
           >
             {errorMessage}
           </div>
+          <Button
+            type="button"
+            onClick={handleRefresh}
+            className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+            text={translations.search.refreshQuery}
+            dataTestId="refresh-button"
+          />
         </div>
       ) : (
         <div className="pt-5 md:pt-10">
+          <div className="mb-4 flex justify-end">
+            <Button
+              type="button"
+              onClick={handleRefresh}
+              className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.search.refreshQuery}
+              dataTestId="refresh-button"
+            />
+          </div>
           <CardsList
             cards={cards}
             handleCardClick={handleCardClick}

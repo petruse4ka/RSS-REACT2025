@@ -123,3 +123,4 @@ export const api = createApi({
 });
 
 export const { useGetCardsQuery, useGetCardDetailsQuery } = api;
+export const { invalidateTags } = api.util;

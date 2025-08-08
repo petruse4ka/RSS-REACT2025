@@ -1,5 +1,7 @@
 import type { CardData } from '@/types/interfaces';
 import { useGetCardDetailsQuery } from '@/store/api';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { invalidateTags } from '@/store/api';
 import Loader from '../ui/loader';
 import Button from '../ui/button';
 import { useLocale } from '@/hooks/use-locale';
@@ -16,6 +18,7 @@ type Props = {
 
 export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Props) {
   const translations = useLocale();
+  const dispatch = useAppDispatch();
   const cardId = cards[cardIndex - 1]?.id;
 
   const {
@@ -43,6 +46,10 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
     return translations.error.fetchError;
   };
 
+  const handleRefresh = () => {
+    dispatch(invalidateTags(['CardDetails']));
+  };
+
   return (
     <div className="mt-5 w-full rounded-lg bg-white md:sticky md:top-4 md:mt-10 md:ml-8 md:w-1/2 md:self-start xl:w-1/3 dark:bg-indigo-900">
       {isLoading ? (
@@ -61,17 +68,34 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
           <div className="mb-4 text-center text-lg font-semibold text-red-500 dark:text-red-400">
             {getErrorMessage()}
           </div>
-          <Button
-            type="button"
-            onClick={handleDetailsClose}
-            className="border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
-            text={translations.cardDetail.close}
-            dataTestId="close-detail-button"
-          />
+          <div className="flex w-full flex-col gap-5">
+            <Button
+              type="button"
+              onClick={handleDetailsClose}
+              className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.cardDetail.close}
+              dataTestId="close-detail-button"
+            />
+            <Button
+              type="button"
+              onClick={handleRefresh}
+              className="w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.search.refreshQuery}
+              dataTestId="refresh-detail-button"
+            />
+          </div>
         </div>
       ) : cardData ? (
         <div className="overflow-y-auto" data-testid="card-detail">
           <div className="p-3 sm:p-6">
+            <Button
+              type="button"
+              onClick={handleRefresh}
+              className="mb-4 w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 sm:mb-6 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
+              text={translations.search.refreshQuery}
+              dataTestId="refresh-detail-button"
+            />
+
             <DetailHeader handleClose={handleDetailsClose} />
 
             <DetailPhoto
