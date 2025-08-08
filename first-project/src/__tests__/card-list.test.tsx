@@ -33,3 +33,23 @@ test('CardsList renders error message when no cards provided', () => {
   const cardsList = screen.queryByTestId('cards-list');
   expect(cardsList).not.toBeInTheDocument();
 });
+
+test('CardsList applies correct grid classes when card detail is open', () => {
+  render(<CardsList cards={[mockCardData]} isCardDetailOpen={true} />);
+
+  const cardsList = screen.getByTestId('cards-list');
+  expect(cardsList).toBeInTheDocument();
+
+  expect(cardsList).toHaveClass('grid-cols-1', 'xl:grid-cols-2');
+  expect(cardsList).not.toHaveClass('xl:grid-cols-4');
+});
+
+test('CardsList applies correct grid classes when card detail is closed', () => {
+  render(<CardsList cards={[mockCardData]} isCardDetailOpen={false} />);
+
+  const cardsList = screen.getByTestId('cards-list');
+  expect(cardsList).toBeInTheDocument();
+
+  expect(cardsList).toHaveClass('xl:grid-cols-4');
+  expect(cardsList).not.toHaveClass('xl:grid-cols-2');
+});
