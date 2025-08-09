@@ -25,7 +25,6 @@ export const api = createApi({
   tagTypes: ['Cards', 'CardDetails'],
   keepUnusedDataFor: 180,
   refetchOnReconnect: true,
-  refetchOnFocus: true,
   endpoints: (builder) => ({
     getCards: builder.query<
       { cards: CardData[]; total: number },
