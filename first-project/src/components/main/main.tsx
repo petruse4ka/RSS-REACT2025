@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import type { CardData } from '@/types/interfaces';
-import { CARDS_PER_PAGE } from '@/constants';
+import { CARDS_PER_PAGE, DEFAULT_SEARCH_QUERY } from '@/constants';
 import { useLocale } from '@/hooks/use-locale';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { invalidateTags } from '@/store/api';
@@ -51,7 +51,10 @@ export default function Main({
   };
 
   const handleRefreshCurrent = () => {
-    dispatch(invalidateTags([{ type: 'Cards', id: `SEARCH_${searchQuery}_PAGE_${currentPage}` }]));
+    const currentSearchQuery = searchQuery || DEFAULT_SEARCH_QUERY;
+    dispatch(
+      invalidateTags([{ type: 'Cards', id: `SEARCH_${currentSearchQuery}_PAGE_${currentPage}` }])
+    );
   };
 
   return (

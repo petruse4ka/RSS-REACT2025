@@ -44,7 +44,7 @@ export const api = createApi({
         return path;
       },
       providesTags: (_result, _error, { searchQuery, page }) => [
-        { type: 'Cards', id: `SEARCH_${searchQuery}_PAGE_${page}` },
+        { type: 'Cards', id: `SEARCH_${searchQuery || DEFAULT_SEARCH_QUERY}_PAGE_${page}` },
       ],
       transformResponse: (response: unknown) => {
         if (!isValidCardsResponse(response)) {
