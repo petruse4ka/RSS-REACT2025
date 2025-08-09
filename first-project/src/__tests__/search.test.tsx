@@ -73,3 +73,15 @@ test('Search component calls onSearch callback with trimmed correct parameters w
 
   expect(mockSearchCallback).toHaveBeenCalledWith('untrimmed query');
 });
+
+test('Search component calls onSearch callback with trimmed correct parameters when NumpadEnter key is pressed', () => {
+  const mockSearchCallback = vi.fn();
+  render(<Search searchQuery="" onSearch={mockSearchCallback} />);
+
+  const input = screen.getByTestId('search-input');
+
+  fireEvent.change(input, { target: { value: '  untrimmed query  ' } });
+  fireEvent.keyDown(input, { key: 'NumpadEnter' });
+
+  expect(mockSearchCallback).toHaveBeenCalledWith('untrimmed query');
+});
