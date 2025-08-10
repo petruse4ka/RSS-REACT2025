@@ -31,7 +31,7 @@ export default function HomePage() {
   const currentPage = isPageValid ? pageParam : 1;
   const cardIndex = isIdValid ? idParam : null;
 
-  const { data, isLoading, isError, error } = useGetCardsQuery({
+  const { data, isLoading, isFetching, isError, error } = useGetCardsQuery({
     searchQuery: searchQuery || 'random',
     page: currentPage,
   });
@@ -102,6 +102,7 @@ export default function HomePage() {
             cards={cards}
             totalItems={totalItems}
             isLoading={isLoading}
+            isFetching={isFetching}
             isError={isError}
             errorMessage={getErrorMessage()}
             isCardDetailOpen={Boolean(cardIndex)}

@@ -18,6 +18,7 @@ type Props = {
   cards: CardData[];
   totalItems: number;
   isLoading: boolean;
+  isFetching: boolean;
   isError: boolean;
   errorMessage: string;
   isCardDetailOpen: boolean;
@@ -31,6 +32,7 @@ export default function Main({
   cards,
   totalItems,
   isLoading,
+  isFetching,
   isError,
   errorMessage,
   isCardDetailOpen,
@@ -62,7 +64,7 @@ export default function Main({
 
   return (
     <section data-testid="main" className="w-full">
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <div className="flex min-h-[300px] items-center justify-center">
           <Loader
             classNameSpinner="border-cyan-300"

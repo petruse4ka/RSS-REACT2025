@@ -24,6 +24,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
   const {
     data: cardData,
     isLoading,
+    isFetching,
     isError,
     error,
   } = useGetCardDetailsQuery(
@@ -59,7 +60,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
       data-testid="card-detail"
       className="mt-5 w-full rounded-lg bg-white md:sticky md:top-4 md:mt-10 md:ml-8 md:w-1/2 md:self-start xl:w-1/3 dark:bg-indigo-900"
     >
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <div className="flex h-full items-center justify-center">
           <div className="flex min-h-[300px] items-center justify-center">
             <Loader
