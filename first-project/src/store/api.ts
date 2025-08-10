@@ -6,12 +6,7 @@ import {
   CARDS_PER_PAGE,
   DEFAULT_SEARCH_QUERY,
 } from '@/constants';
-import {
-  isEmptyResponse,
-  isValidCardsResponse,
-  isValidCardsData,
-  isValidCardDetailData,
-} from '@/types/guards';
+import { isValidCardsResponse, isValidCardsData, isValidCardDetailData } from '@/types/guards';
 import { FETCH_ERRORS } from '@/constants';
 import defaultAvatar from '@/assets/icons/default-avatar.png';
 import defaultImage from '@/assets/images/default-image.png';
@@ -57,10 +52,6 @@ export const api = createApi({
           throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
         }
 
-        if (isEmptyResponse(cardsData)) {
-          throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
-        }
-
         const cards: CardData[] = cardsData.map((card: CardResponse) => {
           const { id, urls, alt_description, user } = card;
 
@@ -90,10 +81,6 @@ export const api = createApi({
       transformResponse: (response: unknown) => {
         if (!isValidCardDetailData(response)) {
           throw new Error(FETCH_ERRORS.INVALID_CARD_DETAIL_DATA);
-        }
-
-        if (isEmptyResponse(response)) {
-          throw new Error(FETCH_ERRORS.EMPTY_RESPONSE);
         }
 
         const { id, urls, alt_description, description, user, likes, links, downloads, views } =
