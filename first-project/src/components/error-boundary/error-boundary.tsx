@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import type { ReactNode } from 'react';
+import { Component } from 'react';
+import type { ReactNode, ErrorInfo } from 'react';
 import Button from '../ui/button';
 import type { ErrorTexts } from '@/types/interfaces';
 
@@ -33,7 +33,7 @@ export default class ErrorBoundary extends Component<Props, State> {
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error(error);
     console.error('Error info:', errorInfo);
   }

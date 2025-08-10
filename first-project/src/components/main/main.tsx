@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import type { MouseEvent } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { CARDS_PER_PAGE, DEFAULT_SEARCH_QUERY } from '@/constants';
 import { useLocale } from '@/hooks/use-locale';
@@ -46,11 +47,13 @@ export default function Main({
     }
   }, [totalItems, currentPage, handlePageChange]);
 
-  const handleRefresh = () => {
+  const handleRefresh = (e?: MouseEvent<Element>) => {
+    e?.stopPropagation();
     dispatch(invalidateTags(['Cards']));
   };
 
-  const handleRefreshCurrent = () => {
+  const handleRefreshCurrent = (e?: MouseEvent<Element>) => {
+    e?.stopPropagation();
     const currentSearchQuery = searchQuery || DEFAULT_SEARCH_QUERY;
     dispatch(
       invalidateTags([{ type: 'Cards', id: `SEARCH_${currentSearchQuery}_PAGE_${currentPage}` }])

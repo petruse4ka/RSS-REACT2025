@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { ChangeEvent, KeyboardEvent } from 'react';
 import { useLocale } from '@/hooks/use-locale';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
@@ -12,7 +13,7 @@ export default function Search({ searchQuery, onSearch }: Props) {
   const [inputValue, setInputValue] = useState(searchQuery);
   const translations = useLocale();
 
-  const handleSearchQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
@@ -21,7 +22,7 @@ export default function Search({ searchQuery, onSearch }: Props) {
     onSearch(trimmedQuery);
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' || event.key === 'NumpadEnter') {
       handleSearch();
     }
