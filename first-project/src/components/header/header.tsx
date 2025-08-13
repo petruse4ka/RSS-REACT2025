@@ -20,7 +20,7 @@ export default function Header() {
             to="/"
             className="flex items-center gap-3 transition-all duration-300 hover:text-cyan-400 dark:hover:text-cyan-300"
           >
-            <img src={logoImage} alt="Logo" className="h-8 w-8" />
+            <img src={logoImage.src} alt="Logo" className="h-8 w-8" />
             <h1 className="text-xl font-bold">{translations.header.logo}</h1>
           </Link>
 

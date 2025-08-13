@@ -19,7 +19,7 @@ export default function App() {
   return (
     <ErrorBoundary
       texts={errorTexts}
-      image={errorImage}
+      image={errorImage.src}
       className="min-h-screen bg-stone-100 dark:bg-slate-900"
       containerClassName="bg-white dark:bg-indigo-900 backdrop-blur-sm text-gray-900 dark:text-white flex flex-col"
       imageClassName="w-64 h-64"

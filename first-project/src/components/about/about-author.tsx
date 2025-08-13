@@ -8,7 +8,7 @@ export default function AboutAuthor() {
     <div className="flex flex-col gap-10 xl:flex-row xl:gap-16">
       <div data-testid="about-author-image" className="flex justify-center xl:justify-start">
         <img
-          src={authorImage}
+          src={authorImage.src}
           alt="Konstantin Petrov photo"
           className="rounded-lg object-cover xl:w-90"
         />

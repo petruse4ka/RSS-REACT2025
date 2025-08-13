@@ -28,7 +28,7 @@ export default function AboutSchool() {
       >
         <img
           data-testid="about-school-logo"
-          src={rsSchoolLogo}
+          src={rsSchoolLogo.src}
           alt="RS School logo"
           className="h-12 w-12"
         />
