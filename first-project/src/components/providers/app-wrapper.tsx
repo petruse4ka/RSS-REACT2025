@@ -49,8 +49,13 @@ function AppContent({ children }: { children: ReactNode }) {
 }
 
 export default function AppWrapper({ children }: Props) {
+  const [mounted, setMounted] = useState(false);
   const [language, setLanguage] = useState(getDefaultLanguage());
   const [theme, setTheme] = useState(getDefaultTheme());
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -61,12 +66,14 @@ export default function AppWrapper({ children }: Props) {
   }, [theme]);
 
   return (
-    <Provider store={store}>
-      <LanguageContext value={{ language, setLanguage }}>
-        <ThemeContext value={{ theme, setTheme }}>
-          <AppContent>{children}</AppContent>
-        </ThemeContext>
-      </LanguageContext>
-    </Provider>
+    mounted && (
+      <Provider store={store}>
+        <LanguageContext value={{ language, setLanguage }}>
+          <ThemeContext value={{ theme, setTheme }}>
+            <AppContent>{children}</AppContent>
+          </ThemeContext>
+        </LanguageContext>
+      </Provider>
+    )
   );
 }
