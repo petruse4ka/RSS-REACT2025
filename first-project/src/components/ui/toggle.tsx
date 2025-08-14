@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 type Props = {
   isActive: boolean;
   leftIcon: string;
@@ -32,11 +34,11 @@ export default function Toggle({
       <div className="relative">
         <div className="relative h-8 w-16 rounded-full bg-slate-300 transition-all duration-300 dark:bg-slate-900">
           <div className="absolute top-1/2 left-2 -translate-y-1/2 transform">
-            <img src={leftIcon} alt={leftTitle} className="h-4 w-4" />
+            <Image src={leftIcon} alt={leftTitle} width={16} height={16} />
           </div>
 
           <div className="absolute top-1/2 right-2 -translate-y-1/2 transform">
-            <img src={rightIcon} alt={rightTitle} className="h-4 w-4" />
+            <Image src={rightIcon} alt={rightTitle} width={16} height={16} />
           </div>
 
           <div

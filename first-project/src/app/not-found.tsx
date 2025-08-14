@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Button from '../components/ui/button';
 import { useLocale } from '../hooks/use-locale';
 import errorImage from '../assets/images/404-error.png';
+import Image from 'next/image';
 
 export default function Error404() {
   const router = useRouter();
@@ -23,11 +24,14 @@ export default function Error404() {
           {translations.error404.title}
         </h2>
 
-        <img
+        <Image
           src={errorImage.src}
           alt="404 Error Image"
           className="mx-auto"
           data-testid="404-error-image"
+          width={658}
+          height={494}
+          priority
         />
 
         <p

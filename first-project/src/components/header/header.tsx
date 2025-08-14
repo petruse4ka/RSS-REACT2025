@@ -4,6 +4,7 @@ import ThemeSwitcher from './theme-switcher';
 import LanguageSwitcher from './language-switcher';
 import { useLocale } from '@/hooks/use-locale';
 import logoImage from '@/assets/images/logo.png';
+import Image from 'next/image';
 
 export default function Header() {
   const translations = useLocale();
@@ -20,7 +21,7 @@ export default function Header() {
             href="/"
             className="flex items-center gap-3 transition-all duration-300 hover:text-cyan-400 dark:hover:text-cyan-300"
           >
-            <img src={logoImage.src} alt="Logo" className="h-8 w-8" />
+            <Image src={logoImage} alt="Logo" width={32} height={32} />
             <h1 className="text-xl font-bold">{translations.header.logo}</h1>
           </Link>
 

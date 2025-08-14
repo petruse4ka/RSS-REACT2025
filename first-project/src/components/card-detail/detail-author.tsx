@@ -1,5 +1,6 @@
 import type { CardDetailResponse } from '@/types/interfaces';
 import { useLocale } from '@/hooks/use-locale';
+import Image from 'next/image';
 
 type Props = {
   author: CardDetailResponse['author'];
@@ -18,11 +19,13 @@ export default function DetailAuthor({ author }: Props) {
         {translations.cardDetail.author}
       </h4>
       <div className="flex flex-row items-start gap-4">
-        <img
+        <Image
           src={author.profileImage}
           alt={displayName}
-          className="h-12 w-12 self-start rounded-full"
+          className="self-start rounded-full"
           data-testid="author-image"
+          width={48}
+          height={48}
         />
         <div className="flex flex-col items-start gap-1 self-start text-left">
           <p className="font-medium text-gray-900 dark:text-white" data-testid="author-name">

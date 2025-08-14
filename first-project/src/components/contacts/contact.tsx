@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 type Props = {
   href: string;
   imageSrc: string;
@@ -26,11 +28,13 @@ export default function Contact({
       rel={rel}
     >
       <div data-testid="contact-item" className="flex items-center gap-5">
-        <img
+        <Image
           data-testid="contact-image"
           src={imageSrc}
           alt={alt}
-          className="h-12 w-12 rounded-lg text-white"
+          className="rounded-lg text-white"
+          width={48}
+          height={48}
         />
         <div data-testid="contact-info-container">
           <p
