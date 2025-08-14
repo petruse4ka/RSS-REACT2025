@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 export default function MenuItem({ to, children, dataTestId, onClick }: Props) {
   return (
     <Link
-      to={to}
+      href={to}
       className="group relative text-3xl font-semibold transition-all duration-300 hover:text-cyan-400 md:text-lg md:font-medium md:hover:drop-shadow-lg dark:hover:text-cyan-300"
       data-testid={dataTestId}
       onClick={onClick}

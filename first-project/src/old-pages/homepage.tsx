@@ -1,5 +1,5 @@
-import { useParams, useNavigate, Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import Search from '@/components/search/search';
 import Main from '@/components/main/main';
 import useLocalStorage from '@/hooks/use-local-storage';
@@ -9,27 +9,31 @@ import { useLocale } from '@/hooks/use-locale';
 
 export default function HomePage() {
   const translations = useLocale();
+  const router = useRouter();
   const params = useParams();
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useLocalStorage(LOCAL_STORAGE_KEYS.SEARCH_QUERY, '');
 
-  const pageParam = params.page ? parseInt(params.page, 10) : 1;
-  const idParam = params.id ? parseInt(params.id, 10) : null;
+  const pageParam = params?.page
+    ? Array.isArray(params.page)
+      ? params.page[0]
+      : params.page
+    : null;
+  const idParam = params?.id ? (Array.isArray(params.id) ? params.id[0] : params.id) : null;
 
-  const isPageValid =
-    !params.page || (!isNaN(pageParam) && pageParam > 0 && params.page === pageParam.toString());
-  const isIdValid =
-    !params.id ||
-    (idParam !== null && !isNaN(idParam) && idParam > 0 && params.id === idParam.toString());
+  const page = pageParam ? parseInt(pageParam, 10) : 1;
+  const id = idParam ? parseInt(idParam, 10) : null;
+
+  const isPageValid = !pageParam || (!isNaN(page) && page > 0 && pageParam === page.toString());
+  const isIdValid = !idParam || (id !== null && !isNaN(id) && id > 0 && idParam === id.toString());
 
   useEffect(() => {
     if (!isPageValid || !isIdValid) {
-      navigate('/error404', { replace: true });
+      router.replace('/not-found');
     }
-  }, [isPageValid, isIdValid, navigate]);
+  }, [isPageValid, isIdValid, router]);
 
-  const currentPage = isPageValid ? pageParam : 1;
-  const cardIndex = isIdValid ? idParam : null;
+  const currentPage = isPageValid ? page : 1;
+  const cardIndex = isIdValid ? id : null;
 
   const { data, isLoading, isFetching, isError, error } = useGetCardsQuery({
     searchQuery: searchQuery || 'random',
@@ -54,30 +58,30 @@ export default function HomePage() {
 
   useEffect(() => {
     if (cardIndex && cards.length > 0 && cardIndex > cards.length) {
-      navigate(`/${currentPage}/1`, { replace: true });
+      router.replace(`/${currentPage}/1`);
     }
-  }, [cardIndex, cards.length, currentPage, navigate]);
+  }, [cardIndex, cards.length, currentPage, router]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    navigate('/1');
+    router.push('/1');
   };
 
   const handlePageChange = (page: number) => {
     if (cardIndex) {
-      navigate(`/${page}`);
+      router.push(`/${page}`);
     } else {
-      navigate(`/${page}`);
+      router.push(`/${page}`);
     }
   };
 
   const handleCardClick = (cardIndex: number) => {
-    navigate(`/${currentPage}/${cardIndex}`);
+    router.push(`/${currentPage}/${cardIndex}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleDetailsClose = () => {
-    navigate(`/${currentPage}`);
+    router.push(`/${currentPage}`);
   };
 
   const handleMainClick = () => {
@@ -109,7 +113,7 @@ export default function HomePage() {
           />
         </div>
 
-        <Outlet context={{ cards, cardIndex, handleDetailsClose }} />
+        {/* <Outlet context={{ cards, cardIndex, handleDetailsClose }} /> */}
       </div>
     </div>
   );

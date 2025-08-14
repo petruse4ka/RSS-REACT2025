@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import Button from '../components/ui/button';
 import { useLocale } from '../hooks/use-locale';
 import errorImage from '../assets/images/404-error.png';
 
 export default function Error404() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const translations = useLocale();
 
   const returnHome = () => {
-    navigate('/');
+    router.push('/');
   };
 
   return (
@@ -22,7 +22,7 @@ export default function Error404() {
         </h2>
 
         <img
-          src={errorImage}
+          src={errorImage.src}
           alt="404 Error Image"
           className="mx-auto"
           data-testid="404-error-image"

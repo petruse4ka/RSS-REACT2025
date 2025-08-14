@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import '@/styles/index.css';
+import AppWrapper from '@/components/providers/app-wrapper';
 
 export const metadata: Metadata = {
   title: 'First React Project - Konstantin Petrov',
@@ -12,7 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <div id="root">{children}</div>
+        <AppWrapper>{children}</AppWrapper>
       </body>
     </html>
   );

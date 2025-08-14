@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import Menu from '@/components/menu/menu';
 import ThemeSwitcher from './theme-switcher';
 import LanguageSwitcher from './language-switcher';
@@ -17,7 +17,7 @@ export default function Header() {
         <div className="mb-4 flex items-center justify-between">
           <Link
             data-testid="header-logo"
-            to="/"
+            href="/"
             className="flex items-center gap-3 transition-all duration-300 hover:text-cyan-400 dark:hover:text-cyan-300"
           >
             <img src={logoImage.src} alt="Logo" className="h-8 w-8" />
