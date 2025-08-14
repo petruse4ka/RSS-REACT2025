@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Button from '../../components/ui/button';
+import Button from '../components/ui/button';
 import { useTranslations } from 'next-intl';
 import errorImage from '@/assets/images/404-error.png';
 import Image from 'next/image';

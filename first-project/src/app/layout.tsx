@@ -1,8 +1,6 @@
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import { hasLocale } from 'next-intl';
-import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
@@ -28,10 +26,6 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
 
   setRequestLocale(locale);
 
