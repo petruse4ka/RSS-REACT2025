@@ -17,8 +17,8 @@ export default function ThemeSwitcher() {
     <Toggle
       isActive={theme === 'dark'}
       onToggle={handleToggle}
-      leftIcon={sunIcon}
-      rightIcon={moonIcon}
+      leftIcon={sunIcon.src}
+      rightIcon={moonIcon.src}
       leftTitle={translations.theme.light}
       rightTitle={translations.theme.dark}
       activeSide="right"

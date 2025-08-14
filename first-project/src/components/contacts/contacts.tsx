@@ -16,7 +16,7 @@ export default function Contacts() {
           <Contact
             key={index}
             href={contact.href}
-            imageSrc={contact.imageSrc}
+            imageSrc={contact.imageSrc.src}
             alt={contact.alt}
             contactInfo={contact.contactInfo}
             contactType={contact.contactType}

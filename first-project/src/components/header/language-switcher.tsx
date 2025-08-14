@@ -17,8 +17,8 @@ export default function LanguageSwitcher() {
     <Toggle
       isActive={language === 'ru'}
       onToggle={handleToggle}
-      leftIcon={ukFlagIcon}
-      rightIcon={ruFlagIcon}
+      leftIcon={ukFlagIcon.src}
+      rightIcon={ruFlagIcon.src}
       leftTitle={translations.language.en}
       rightTitle={translations.language.ru}
       activeSide="right"
