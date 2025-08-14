@@ -1,4 +1,5 @@
 import type { MouseEvent } from 'react';
+import Image from 'next/image';
 import type { CardData } from '@/types/interfaces';
 import Checkbox from '@/components/ui/checkbox';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
@@ -46,10 +47,13 @@ export default function CardItem({ card, cardIndex, handleCardClick, classNames 
       onClick={handleClick}
     >
       <div className="relative h-full w-full">
-        <img
+        <Image
           src={imageUrl}
           alt={displayTitle}
           className="h-full w-full bg-cyan-300 object-cover object-center"
+          width={400}
+          height={400}
+          priority
         />
 
         <div className="absolute top-3 right-3 z-10">

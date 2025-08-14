@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useLocale } from '@/hooks/use-locale';
 
 type Props = {
@@ -15,11 +16,14 @@ export default function DetailPhoto({ imageUrl, title, description }: Props) {
   return (
     <div className="mt-6">
       <div className="mb-4 sm:mb-6">
-        <img
+        <Image
           src={imageUrl}
           alt={displayTitle}
           className="w-full rounded-lg shadow-lg"
           data-testid="detail-image"
+          width={400}
+          height={400}
+          priority
         />
       </div>
 
