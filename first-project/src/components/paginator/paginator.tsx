@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react';
 import { CARDS_PER_PAGE } from '@/constants';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 import Button from '../ui/button';
 import { PAGINATOR_NAVIGATION } from '@/constants';
 
@@ -12,7 +12,7 @@ type Props = {
 
 export default function Paginator({ currentPage, totalItems, handlePageChange }: Props) {
   const totalPages = Math.ceil(totalItems / CARDS_PER_PAGE);
-  const translations = useLocale();
+  const t = useTranslations();
 
   if (totalPages <= 1) {
     return null;
@@ -50,7 +50,7 @@ export default function Paginator({ currentPage, totalItems, handlePageChange }:
       />
 
       <span data-testid="page-info" className="font-medium text-fuchsia-400 dark:text-cyan-300">
-        {currentPage} {translations.paginator.of} {totalPages}
+        {currentPage} {t('paginator.of')} {totalPages}
       </span>
 
       <Button

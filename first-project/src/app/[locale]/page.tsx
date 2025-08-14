@@ -7,10 +7,10 @@ import Main from '@/components/main/main';
 import useLocalStorage from '@/hooks/use-local-storage';
 import { LOCAL_STORAGE_KEYS } from '@/constants';
 import { useGetCardsQuery } from '@/store/api';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 
 export default function HomePage() {
-  const translations = useLocale();
+  const t = useTranslations();
   const router = useRouter();
   const params = useParams();
   const [searchQuery, setSearchQuery] = useLocalStorage(LOCAL_STORAGE_KEYS.SEARCH_QUERY, '');
@@ -50,12 +50,12 @@ export default function HomePage() {
 
     if (error && typeof error === 'object' && 'status' in error) {
       if (error.status === 403) {
-        return translations.error.rateLimitError;
+        return t('error.rateLimitError');
       }
-      return translations.error.fetchError;
+      return t('error.fetchError');
     }
 
-    return translations.error.fetchError;
+    return t('error.fetchError');
   };
 
   useEffect(() => {

@@ -1,26 +1,23 @@
-import { useLocale } from '@/hooks/use-locale';
-import { useContext } from 'react';
-import { LanguageContext } from '@/context/language-context';
+import { useTranslations } from 'next-intl';
 import Toggle from '../ui/toggle';
 import ukFlagIcon from '@/assets/icons/uk-flag.png';
 import ruFlagIcon from '@/assets/icons/ru-flag.png';
 
 export default function LanguageSwitcher() {
-  const translations = useLocale();
-  const { language, setLanguage } = useContext(LanguageContext);
+  const t = useTranslations();
 
   const handleToggle = () => {
-    setLanguage(language === 'en' ? 'ru' : 'en');
+    console.log('language switched');
   };
 
   return (
     <Toggle
-      isActive={language === 'ru'}
+      isActive={true}
       onToggle={handleToggle}
       leftIcon={ukFlagIcon.src}
       rightIcon={ruFlagIcon.src}
-      leftTitle={translations.language.en}
-      rightTitle={translations.language.ru}
+      leftTitle={t('language.en')}
+      rightTitle={t('language.ru')}
       activeSide="right"
       dataTestId="language-switcher"
     />

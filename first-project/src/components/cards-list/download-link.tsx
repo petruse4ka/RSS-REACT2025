@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import type { CardData } from '@/types/interfaces';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 export function DownloadLink({ cards, filename, text, className, dataTestId }: Props) {
   const [downloadUrl, setDownloadUrl] = useState('');
   const downloadRef = useRef<HTMLAnchorElement>(null);
-  const translations = useLocale();
+  const t = useTranslations();
 
   const createCsvContent = (items: CardData[]): string => {
     const headers = ['Title', 'Description', 'Image URL', 'ID'];
@@ -75,7 +75,7 @@ export function DownloadLink({ cards, filename, text, className, dataTestId }: P
         className="hidden"
         data-testid="download-link-anchor"
       >
-        {translations.selectedCards.download}
+        {t('selectedCards.download')}
       </a>
     </>
   );

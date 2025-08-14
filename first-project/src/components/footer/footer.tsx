@@ -1,8 +1,8 @@
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const translations = useLocale();
+  const t = useTranslations();
 
   return (
     <footer
@@ -11,7 +11,7 @@ export default function Footer() {
     >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between">
         <span data-testid="footer-copyright">
-          {translations.footer.copyright} © {currentYear}
+          {t('footer.copyright')} © {currentYear}
         </span>
         <a
           data-testid="footer-github-link"
@@ -20,7 +20,7 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-1 transition-all duration-300 hover:text-fuchsia-500 dark:hover:text-cyan-300"
         >
-          <span>{translations.footer.github}</span>
+          <span>{t('footer.github')}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

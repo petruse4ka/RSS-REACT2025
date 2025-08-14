@@ -1,9 +1,9 @@
 import authorImage from '@/assets/images/author.png';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 export default function AboutAuthor() {
-  const translations = useLocale();
+  const t = useTranslations();
 
   return (
     <div className="flex flex-col gap-10 xl:flex-row xl:gap-16">
@@ -18,7 +18,7 @@ export default function AboutAuthor() {
       </div>
       <div data-testid="about-author-description" className="flex flex-1 flex-col justify-start">
         <div className="space-y-6">
-          {translations.about.backgroundDescription.map((description, index) => (
+          {t.raw('about.backgroundDescription').map((description: string, index: number) => (
             <p
               key={index}
               data-testid={`about-author-description-${index + 1}`}

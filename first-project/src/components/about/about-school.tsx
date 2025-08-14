@@ -1,10 +1,10 @@
 import rsSchoolLogo from '@/assets/images/rs-school-logo.svg';
 import { RS_SCHOOL_URL } from '@/constants';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 export default function AboutSchool() {
-  const translations = useLocale();
+  const t = useTranslations();
 
   return (
     <section data-testid="about-school" className="mt-16 text-center">
@@ -12,13 +12,13 @@ export default function AboutSchool() {
         data-testid="about-school-title"
         className="mb-8 text-center text-3xl font-semibold text-fuchsia-400 dark:text-cyan-300"
       >
-        {translations.about.learningJourneyTitle}
+        {t('about.learningJourneyTitle')}
       </h3>
       <p
         data-testid="about-school-description"
         className="mb-8 leading-relaxed text-gray-700 dark:text-gray-300"
       >
-        {translations.about.learningJourneyDescription}
+        {t('about.learningJourneyDescription')}
       </p>
       <a
         data-testid="about-school-link"
@@ -38,7 +38,7 @@ export default function AboutSchool() {
           data-testid="about-school-button"
           className="text-base font-semibold text-white md:text-lg"
         >
-          {translations.about.rsSchoolButton}
+          {t('about.rsSchoolButton')}
         </span>
       </a>
     </section>

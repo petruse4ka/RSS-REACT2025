@@ -2,9 +2,7 @@
 
 import { useState, useEffect, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { LanguageContext } from '@/context/language-context.ts';
 import { ThemeContext } from '@/context/theme-context.ts';
-import { getDefaultLanguage } from '@/utils/get-default-language.ts';
 import { getDefaultTheme } from '@/utils/get-default-theme.ts';
 import { store } from '@/store/store.ts';
 import Header from '@/components/header/header';
@@ -12,19 +10,19 @@ import Footer from '@/components/footer/footer';
 import ErrorBoundary from '@/components/error-boundary/error-boundary';
 import SelectedCards from '@/components/cards-list/selected-cards';
 import errorImage from '@/assets/images/error.svg';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   children: ReactNode;
 }
 
 function AppContent({ children }: { children: ReactNode }) {
-  const translations = useLocale();
+  const t = useTranslations();
 
   const errorTexts = {
-    title: translations.error.title,
-    message: translations.error.description,
-    buttonText: translations.error.refreshButton,
+    title: t('error.title'),
+    message: t('error.description'),
+    buttonText: t('error.refreshButton'),
   };
 
   return (
@@ -50,7 +48,6 @@ function AppContent({ children }: { children: ReactNode }) {
 
 export default function AppWrapper({ children }: Props) {
   const [mounted, setMounted] = useState(false);
-  const [language, setLanguage] = useState(getDefaultLanguage());
   const [theme, setTheme] = useState(getDefaultTheme());
 
   useEffect(() => {
@@ -68,11 +65,9 @@ export default function AppWrapper({ children }: Props) {
   return (
     mounted && (
       <Provider store={store}>
-        <LanguageContext value={{ language, setLanguage }}>
-          <ThemeContext value={{ theme, setTheme }}>
-            <AppContent>{children}</AppContent>
-          </ThemeContext>
-        </LanguageContext>
+        <ThemeContext value={{ theme, setTheme }}>
+          <AppContent>{children}</AppContent>
+        </ThemeContext>
       </Provider>
     )
   );

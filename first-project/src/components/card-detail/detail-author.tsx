@@ -1,5 +1,5 @@
 import type { CardDetailResponse } from '@/types/interfaces';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 type Props = {
@@ -7,16 +7,16 @@ type Props = {
 };
 
 export default function DetailAuthor({ author }: Props) {
-  const translations = useLocale();
+  const t = useTranslations();
 
-  const displayName = author.name || translations.cardDetail.unknownAuthor;
-  const displayUsername = author.username || translations.cardDetail.unknownUsername;
-  const displayBio = author.bio || translations.cardDetail.noBio;
+  const displayName = author.name || t('cardDetail.unknownAuthor');
+  const displayUsername = author.username || t('cardDetail.unknownUsername');
+  const displayBio = author.bio || t('cardDetail.noBio');
 
   return (
     <div className="mt-4 sm:mt-6">
       <h4 className="mb-3 text-left text-lg font-semibold text-cyan-600 dark:text-cyan-300">
-        {translations.cardDetail.author}
+        {t('cardDetail.author')}
       </h4>
       <div className="flex flex-row items-start gap-4">
         <Image

@@ -1,6 +1,4 @@
-import type { Locale } from '../locale/index';
-
-export function getDefaultLanguage(): Locale {
+export function getDefaultLanguage(): 'en' | 'ru' {
   if (typeof window !== 'undefined' && navigator.language) {
     const browserLanguage = navigator.language.toLowerCase();
     return browserLanguage.startsWith('ru') ? 'ru' : 'en';

@@ -4,7 +4,7 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { invalidateTags } from '@/store/api';
 import Loader from '../ui/loader';
 import Button from '../ui/button';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 import DetailHeader from './detail-header';
 import DetailPhoto from './detail-photo';
 import DetailAuthor from './detail-author';
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Props) {
-  const translations = useLocale();
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const cardId = cards[cardIndex - 1]?.id;
 
@@ -39,12 +39,12 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
 
     if (error && typeof error === 'object' && 'status' in error) {
       if (error.status === 403) {
-        return translations.error.rateLimitError;
+        return t('error.rateLimitError');
       }
-      return translations.error.fetchError;
+      return t('error.fetchError');
     }
 
-    return translations.error.fetchError;
+    return t('error.fetchError');
   };
 
   const handleRefresh = () => {
@@ -66,7 +66,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
             <Loader
               classNameSpinner="border-cyan-500 dark:border-cyan-300"
               classNameText="text-cyan-600 dark:text-cyan-300 text-lg"
-              text={translations.cardDetail.loading}
+              text={t('cardDetail.loading')}
               dataTestId="main-loader"
             />
           </div>
@@ -81,21 +81,21 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
               type="button"
               onClick={handleDetailsClose}
               className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-              text={translations.cardDetail.close}
+              text={t('cardDetail.close')}
               dataTestId="close-detail-button"
             />
             <Button
               type="button"
               onClick={handleRefreshCurrent}
               className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-              text={translations.search.refreshCurrentCard}
+              text={t('search.refreshCurrentCard')}
               dataTestId="refresh-current-detail-button"
             />
             <Button
               type="button"
               onClick={handleRefresh}
               className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-              text={translations.search.refreshAllCards}
+              text={t('search.refreshAllCards')}
               dataTestId="refresh-all-detail-button"
             />
           </div>
@@ -108,14 +108,14 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
                 type="button"
                 onClick={handleRefreshCurrent}
                 className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-                text={translations.search.refreshCurrentCard}
+                text={t('search.refreshCurrentCard')}
                 dataTestId="refresh-current-detail-button"
               />
               <Button
                 type="button"
                 onClick={handleRefresh}
                 className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-                text={translations.search.refreshAllCards}
+                text={t('search.refreshAllCards')}
                 dataTestId="refresh-all-detail-button"
               />
             </div>
@@ -136,7 +136,7 @@ export default function CardDetail({ cardIndex, cards, handleDetailsClose }: Pro
               type="button"
               onClick={() => window.open(cardData.links.html, '_blank')}
               className="mt-4 w-full border-cyan-500 bg-cyan-500 hover:border-cyan-400 hover:bg-cyan-400 sm:mt-6 dark:border-fuchsia-500 dark:bg-fuchsia-500 dark:hover:border-fuchsia-400 dark:hover:bg-fuchsia-400"
-              text={translations.cardDetail.viewOnUnsplash}
+              text={t('cardDetail.viewOnUnsplash')}
               dataTestId="unsplash-link-button"
             />
           </div>
