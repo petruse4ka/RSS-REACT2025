@@ -21,7 +21,6 @@ export default function Contacts() {
             contactInfo={contact.contactInfo}
             contactType={contact.contactType}
             target={contact.target}
-            rel={contact.rel}
           />
         ))}
       </div>
