@@ -14,50 +14,41 @@ type Props = {
 };
 
 export function DownloadLink({ cards, filename, text, className, dataTestId }: Props) {
-  const [downloadUrl, setDownloadUrl] = useState('');
+  const [isDownloading, setIsDownloading] = useState(false);
   const downloadRef = useRef<HTMLAnchorElement>(null);
   const t = useTranslations();
 
-  const createCsvContent = (items: CardData[]): string => {
-    const headers = ['Title', 'Description', 'Image URL', 'ID'];
-    const csvHeaders = headers.join(',') + '\n';
-
-    const formatCsvValue = (value: string): string => {
-      const formattedValue = value.replace(/"/g, '""');
-      return `"${formattedValue}"`;
-    };
-
-    const csvRows = items.map((item) => {
-      const rowData = [
-        formatCsvValue(item.title),
-        formatCsvValue(item.description),
-        formatCsvValue(item.imageUrl),
-        formatCsvValue(item.id),
-      ];
-      return rowData.join(',');
-    });
-
-    return csvHeaders + csvRows.join('\n');
-  };
-
-  const handleDownload = (e?: MouseEvent) => {
+  const handleDownload = async (e?: MouseEvent) => {
     if (e) {
       e.stopPropagation();
     }
 
-    const csvContent = createCsvContent(cards);
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    setIsDownloading(true);
 
-    const url = URL.createObjectURL(blob);
-    setDownloadUrl(url);
+    const response = await fetch('/api/download-csv', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cards, filename }),
+    });
 
-    setTimeout(() => {
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+
       if (downloadRef.current) {
+        downloadRef.current.href = url;
+        downloadRef.current.download = filename;
         downloadRef.current.click();
-        URL.revokeObjectURL(url);
-        setDownloadUrl('');
+
+        setTimeout(() => {
+          URL.revokeObjectURL(url);
+        }, 100);
       }
-    }, 0);
+    }
+
+    setIsDownloading(false);
   };
 
   return (
@@ -66,18 +57,11 @@ export function DownloadLink({ cards, filename, text, className, dataTestId }: P
         type="button"
         onClick={handleDownload}
         className={className}
-        text={text}
+        text={isDownloading ? t('selectedCards.generating') : text}
         dataTestId={dataTestId}
+        disabled={isDownloading || cards.length === 0}
       />
-      <Link
-        ref={downloadRef}
-        href={downloadUrl}
-        download={filename}
-        className="hidden"
-        data-testid="download-link-anchor"
-      >
-        {t('selectedCards.download')}
-      </Link>
+      <Link ref={downloadRef} href="url" className="hidden" data-testid="download-link-anchor" />
     </>
   );
 }

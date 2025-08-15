@@ -74,7 +74,8 @@
   "selectedCards": {
     "itemsSelected": "Фотографий выбрано",
     "unselectAll": "Удалить все",
-    "download": "Скачать"
+    "download": "Скачать",
+    "generating": "Генерация..."
   },
   "theme": {
     "light": "Светлая",

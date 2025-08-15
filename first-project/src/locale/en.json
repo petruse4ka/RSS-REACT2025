@@ -74,7 +74,8 @@
   "selectedCards": {
     "itemsSelected": "Photos selected",
     "unselectAll": "Unselect all",
-    "download": "Download"
+    "download": "Download",
+    "generating": "Generating..."
   },
   "theme": {
     "light": "Light",
