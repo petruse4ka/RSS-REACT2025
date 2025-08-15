@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
+import { useParams } from 'next/navigation';
 import Search from '@/components/search/search';
 import Main from '@/components/main/main';
 import useLocalStorage from '@/hooks/use-local-storage';

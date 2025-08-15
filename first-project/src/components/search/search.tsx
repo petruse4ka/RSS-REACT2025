@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ChangeEvent, KeyboardEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button';
@@ -12,6 +12,10 @@ type Props = {
 export default function Search({ searchQuery, onSearch }: Props) {
   const [inputValue, setInputValue] = useState(searchQuery);
   const t = useTranslations();
+
+  useEffect(() => {
+    setInputValue(searchQuery);
+  }, [searchQuery]);
 
   const handleSearchQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
