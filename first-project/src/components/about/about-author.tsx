@@ -14,6 +14,7 @@ export default function AboutAuthor() {
           className="rounded-lg object-cover xl:w-90"
           width={521}
           height={521}
+          priority={true}
         />
       </div>
       <div data-testid="about-author-description" className="flex flex-1 flex-col justify-start">

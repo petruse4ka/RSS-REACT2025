@@ -1,5 +1,3 @@
-'use client';
-
 import Contacts from '@/components/contacts/contacts';
 import AboutAuthor from '@/components/about/about-author';
 import AboutSchool from '@/components/about/about-school';

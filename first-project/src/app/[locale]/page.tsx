@@ -2,9 +2,10 @@
 
 import { useEffect } from 'react';
 import { useRouter } from '@/i18n/navigation';
-import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Search from '@/components/search/search';
 import Main from '@/components/main/main';
+import CardDetail from '@/components/card-detail/card-detail';
 import useLocalStorage from '@/hooks/use-local-storage';
 import { LOCAL_STORAGE_KEYS } from '@/constants';
 import { useGetCardsQuery } from '@/store/api';
@@ -13,30 +14,14 @@ import { useTranslations } from 'next-intl';
 export default function HomePage() {
   const t = useTranslations();
   const router = useRouter();
-  const params = useParams();
+  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useLocalStorage(LOCAL_STORAGE_KEYS.SEARCH_QUERY, '');
 
-  const pageParam = params?.page
-    ? Array.isArray(params.page)
-      ? params.page[0]
-      : params.page
-    : null;
-  const idParam = params?.id ? (Array.isArray(params.id) ? params.id[0] : params.id) : null;
+  const pageParam = searchParams.get('page');
+  const idParam = searchParams.get('id');
 
-  const page = pageParam ? parseInt(pageParam, 10) : 1;
-  const id = idParam ? parseInt(idParam, 10) : null;
-
-  const isPageValid = !pageParam || (!isNaN(page) && page > 0 && pageParam === page.toString());
-  const isIdValid = !idParam || (id !== null && !isNaN(id) && id > 0 && idParam === id.toString());
-
-  useEffect(() => {
-    if (!isPageValid || !isIdValid) {
-      router.replace('/not-found');
-    }
-  }, [isPageValid, isIdValid, router]);
-
-  const currentPage = isPageValid ? page : 1;
-  const cardIndex = isIdValid ? id : null;
+  const currentPage = pageParam ? parseInt(pageParam, 10) : 1;
+  const cardIndex = idParam ? parseInt(idParam, 10) : null;
 
   const { data, isLoading, isFetching, isError, error } = useGetCardsQuery({
     searchQuery: searchQuery || 'random',
@@ -67,24 +52,29 @@ export default function HomePage() {
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    router.push('/1');
+    router.push('/?page=1', { scroll: false });
   };
 
   const handlePageChange = (page: number) => {
+    const params = new URLSearchParams();
+    params.set('page', page.toString());
     if (cardIndex) {
-      router.push(`/${page}`);
-    } else {
-      router.push(`/${page}`);
+      params.set('id', cardIndex.toString());
     }
+    router.push(`/?${params.toString()}`, { scroll: false });
   };
 
   const handleCardClick = (cardIndex: number) => {
-    router.push(`/${currentPage}/${cardIndex}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const params = new URLSearchParams();
+    params.set('page', currentPage.toString());
+    params.set('id', cardIndex.toString());
+    router.push(`/?${params.toString()}`, { scroll: false });
   };
 
   const handleDetailsClose = () => {
-    router.push(`/${currentPage}`);
+    const params = new URLSearchParams();
+    params.set('page', currentPage.toString());
+    router.push(`/?${params.toString()}`, { scroll: false });
   };
 
   const handleMainClick = () => {
@@ -116,7 +106,9 @@ export default function HomePage() {
           />
         </div>
 
-        {/* <Outlet context={{ cards, cardIndex, handleDetailsClose }} /> */}
+        {cardIndex && cards.length > 0 && (
+          <CardDetail cardIndex={cardIndex} cards={cards} handleDetailsClose={handleDetailsClose} />
+        )}
       </div>
     </div>
   );
