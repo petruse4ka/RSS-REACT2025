@@ -88,14 +88,14 @@ export const api = createApi({
 
         const cardDetail: CardDetailResponse = {
           id: id,
-          imageUrl: urls?.regular || defaultImage,
+          imageUrl: urls?.regular || defaultImage.src,
           title: (alt_description || '').toUpperCase(),
           description: description || '',
           author: {
             name: user?.name || '',
             username: user?.username || '',
             bio: user?.bio || '',
-            profileImage: user?.profile_image?.medium || defaultAvatar,
+            profileImage: user?.profile_image?.medium || defaultAvatar.src,
           },
           stats: {
             likes: likes || 0,

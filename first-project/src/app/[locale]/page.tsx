@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from '@/i18n/navigation';
 import { useSearchParams } from 'next/navigation';
 import Search from '@/components/search/search';
@@ -12,8 +11,10 @@ import { useGetCardsQuery } from '@/store/api';
 import { useTranslations } from 'next-intl';
 import validateIdParam from '@/utils/validate-id-param';
 import validatePageParam from '@/utils/validate-page-param';
+import { useLocale } from 'next-intl';
 
 export default function HomePage() {
+  const locale = useLocale();
   const t = useTranslations();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -22,8 +23,8 @@ export default function HomePage() {
   const pageParam = searchParams.get('page');
   const idParam = searchParams.get('id');
 
-  const currentPage = validatePageParam(pageParam);
-  const cardIndex = validateIdParam(idParam);
+  const currentPage = validatePageParam(pageParam, locale);
+  const cardIndex = validateIdParam(idParam, locale);
 
   const { data, isLoading, isFetching, isError, error } = useGetCardsQuery({
     searchQuery: searchQuery || 'random',
@@ -45,12 +46,6 @@ export default function HomePage() {
 
     return t('error.fetchError');
   };
-
-  useEffect(() => {
-    if (cardIndex && cards.length > 0 && cardIndex > cards.length) {
-      router.replace(`/${currentPage}/1`);
-    }
-  }, [cardIndex, cards.length, currentPage, router]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);

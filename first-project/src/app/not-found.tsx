@@ -1,17 +1,18 @@
 'use client';
 
 import Button from '../components/ui/button';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import errorImage from '@/assets/images/404-error.png';
 import Image from 'next/image';
 import { useRouter } from '@/i18n/navigation';
 
 export default function Error404() {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
 
   const returnHome = () => {
-    router.push('/');
+    router.push('/', { locale: locale });
   };
 
   return (
