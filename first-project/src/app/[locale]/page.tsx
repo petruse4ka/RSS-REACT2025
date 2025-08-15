@@ -10,6 +10,8 @@ import useLocalStorage from '@/hooks/use-local-storage';
 import { LOCAL_STORAGE_KEYS } from '@/constants';
 import { useGetCardsQuery } from '@/store/api';
 import { useTranslations } from 'next-intl';
+import validateIdParam from '@/utils/validate-id-param';
+import validatePageParam from '@/utils/validate-page-param';
 
 export default function HomePage() {
   const t = useTranslations();
@@ -20,8 +22,8 @@ export default function HomePage() {
   const pageParam = searchParams.get('page');
   const idParam = searchParams.get('id');
 
-  const currentPage = pageParam ? parseInt(pageParam, 10) : 1;
-  const cardIndex = idParam ? parseInt(idParam, 10) : null;
+  const currentPage = validatePageParam(pageParam);
+  const cardIndex = validateIdParam(idParam);
 
   const { data, isLoading, isFetching, isError, error } = useGetCardsQuery({
     searchQuery: searchQuery || 'random',
