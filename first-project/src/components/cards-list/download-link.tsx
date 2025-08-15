@@ -3,6 +3,7 @@ import type { MouseEvent } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button';
+import { Link } from '@/i18n/navigation';
 
 type Props = {
   cards: CardData[];
@@ -68,7 +69,7 @@ export function DownloadLink({ cards, filename, text, className, dataTestId }: P
         text={text}
         dataTestId={dataTestId}
       />
-      <a
+      <Link
         ref={downloadRef}
         href={downloadUrl}
         download={filename}
@@ -76,7 +77,7 @@ export function DownloadLink({ cards, filename, text, className, dataTestId }: P
         data-testid="download-link-anchor"
       >
         {t('selectedCards.download')}
-      </a>
+      </Link>
     </>
   );
 }

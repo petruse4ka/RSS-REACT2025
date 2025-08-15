@@ -2,6 +2,7 @@ import rsSchoolLogo from '@/assets/images/rs-school-logo.svg';
 import { RS_SCHOOL_URL } from '@/constants';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 export default function AboutSchool() {
   const t = useTranslations();
@@ -20,11 +21,10 @@ export default function AboutSchool() {
       >
         {t('about.learningJourneyDescription')}
       </p>
-      <a
+      <Link
         data-testid="about-school-link"
         href={RS_SCHOOL_URL}
         target="_blank"
-        rel="noopener noreferrer"
         className="inline-flex items-center justify-center gap-3 rounded-lg bg-cyan-500 px-6 py-3 transition-all duration-300 hover:scale-105 hover:bg-cyan-400 lg:gap-6 dark:bg-fuchsia-500 dark:hover:bg-fuchsia-400"
       >
         <Image
@@ -40,7 +40,7 @@ export default function AboutSchool() {
         >
           {t('about.rsSchoolButton')}
         </span>
-      </a>
+      </Link>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 type Props = {
   href: string;
@@ -7,25 +8,15 @@ type Props = {
   contactInfo: string;
   contactType: string;
   target?: string;
-  rel?: string;
 };
 
-export default function Contact({
-  href,
-  imageSrc,
-  alt,
-  contactInfo,
-  contactType,
-  target,
-  rel,
-}: Props) {
+export default function Contact({ href, imageSrc, alt, contactInfo, contactType, target }: Props) {
   return (
-    <a
+    <Link
       data-testid="contact-link"
       href={href}
       className="group rounded-lg bg-cyan-700 p-4 transition-all duration-300 hover:scale-105 hover:bg-cyan-600 dark:bg-indigo-900 dark:hover:bg-indigo-800"
       target={target}
-      rel={rel}
     >
       <div data-testid="contact-item" className="flex items-center gap-5">
         <Image
@@ -48,6 +39,6 @@ export default function Contact({
           </p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }

@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import Menu from '@/components/menu/menu';
 import ThemeSwitcher from './theme-switcher';
 import LanguageSwitcher from './language-switcher';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import logoImage from '@/assets/images/logo.png';
 import Image from 'next/image';
 
