@@ -42,6 +42,15 @@ export const api = createApi({
         { type: 'Cards', id: `SEARCH_${searchQuery || DEFAULT_SEARCH_QUERY}_PAGE_${page}` },
       ],
       transformResponse: (response: unknown) => {
+        if (
+          response &&
+          typeof response === 'object' &&
+          'cards' in response &&
+          'total' in response
+        ) {
+          return response as { cards: CardData[]; total: number };
+        }
+
         if (!isValidCardsResponse(response)) {
           throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
         }

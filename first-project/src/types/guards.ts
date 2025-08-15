@@ -6,7 +6,7 @@ export const isEmptyResponse = (data: unknown): boolean => {
 
 export const isValidCardsResponse = (
   data: unknown
-): data is { results?: CardResponse[] } | CardResponse[] => {
+): data is { results?: CardResponse[]; total?: number; total_pages?: number } | CardResponse[] => {
   if (!data || typeof data !== 'object') {
     return false;
   }

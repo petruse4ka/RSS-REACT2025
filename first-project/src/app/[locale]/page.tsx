@@ -1,109 +1,43 @@
-'use client';
-
-import { useRouter } from '@/i18n/navigation';
-import { useSearchParams } from 'next/navigation';
-import Search from '@/components/search/search';
-import Main from '@/components/main/main';
-import CardDetail from '@/components/card-detail/card-detail';
-import useLocalStorage from '@/hooks/use-local-storage';
-import { LOCAL_STORAGE_KEYS } from '@/constants';
-import { useGetCardsQuery } from '@/store/api';
+import { Suspense } from 'react';
+import { fetchCards } from '@/api/fetch-cards';
+import { DEFAULT_SEARCH_QUERY } from '@/constants';
+import Client from './client';
+import Loader from '@/components/ui/loader';
 import { useTranslations } from 'next-intl';
-import validateIdParam from '@/utils/validate-id-param';
-import validatePageParam from '@/utils/validate-page-param';
-import { useLocale } from 'next-intl';
 
-export default function HomePage() {
-  const locale = useLocale();
-  const t = useTranslations();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [searchQuery, setSearchQuery] = useLocalStorage(LOCAL_STORAGE_KEYS.SEARCH_QUERY, '');
+interface Props {
+  searchParams: Promise<{ page?: string; id?: string; query?: string }>;
+}
 
-  const pageParam = searchParams.get('page');
-  const idParam = searchParams.get('id');
+async function HomePageContent({ searchParams }: Props) {
+  const params = await searchParams;
+  const hasSearchParams = params.page || params.id || params.query;
+  let initialData = null;
 
-  const currentPage = validatePageParam(pageParam, locale);
-  const cardIndex = validateIdParam(idParam, locale);
+  if (!hasSearchParams) {
+    initialData = await fetchCards(DEFAULT_SEARCH_QUERY, 1);
+  }
 
-  const { data, isLoading, isFetching, isError, error } = useGetCardsQuery({
-    searchQuery: searchQuery || 'random',
-    page: currentPage,
-  });
+  return <Client initialData={initialData} searchParams={params} />;
+}
 
-  const cards = data?.cards || [];
-  const totalItems = data?.total || 0;
-
-  const getErrorMessage = () => {
-    if (!isError || !error) return '';
-
-    if (error && typeof error === 'object' && 'status' in error) {
-      if (error.status === 403) {
-        return t('error.rateLimitError');
-      }
-      return t('error.fetchError');
-    }
-
-    return t('error.fetchError');
-  };
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    router.push('/?page=1', { scroll: false });
-  };
-
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams();
-    params.set('page', page.toString());
-    router.push(`/?${params.toString()}`, { scroll: false });
-  };
-
-  const handleCardClick = (cardIndex: number) => {
-    const params = new URLSearchParams();
-    params.set('page', currentPage.toString());
-    params.set('id', cardIndex.toString());
-    router.push(`/?${params.toString()}`, { scroll: false });
-  };
-
-  const handleDetailsClose = () => {
-    const params = new URLSearchParams();
-    params.set('page', currentPage.toString());
-    router.push(`/?${params.toString()}`, { scroll: false });
-  };
-
-  const handleMainClick = () => {
-    if (cardIndex) {
-      handleDetailsClose();
-    }
-  };
+function LoadingFallback() {
+  const t = useTranslations('search');
 
   return (
-    <div data-testid="homepage" className="flex w-full flex-col">
-      <Search searchQuery={searchQuery} onSearch={handleSearch} />
-      <div className="flex flex-col-reverse md:flex-row">
-        <div
-          className={`${cardIndex ? 'w-full md:w-1/2 xl:w-2/3' : 'w-full'} transition-all duration-300`}
-          onClick={handleMainClick}
-        >
-          <Main
-            searchQuery={searchQuery}
-            currentPage={currentPage}
-            handlePageChange={handlePageChange}
-            handleCardClick={handleCardClick}
-            cards={cards}
-            totalItems={totalItems}
-            isLoading={isLoading}
-            isFetching={isFetching}
-            isError={isError}
-            errorMessage={getErrorMessage()}
-            isCardDetailOpen={Boolean(cardIndex)}
-          />
-        </div>
+    <Loader
+      classNameSpinner="border-blue-500"
+      classNameText="text-gray-600"
+      text={t('loading')}
+      dataTestId="page-loader"
+    />
+  );
+}
 
-        {cardIndex && cards.length > 0 && (
-          <CardDetail cardIndex={cardIndex} cards={cards} handleDetailsClose={handleDetailsClose} />
-        )}
-      </div>
-    </div>
+export default function HomePage(props: Props) {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <HomePageContent {...props} />
+    </Suspense>
   );
 }
