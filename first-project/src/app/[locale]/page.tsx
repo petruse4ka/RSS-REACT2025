@@ -55,9 +55,6 @@ export default function HomePage() {
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams();
     params.set('page', page.toString());
-    if (cardIndex) {
-      params.set('id', cardIndex.toString());
-    }
     router.push(`/?${params.toString()}`, { scroll: false });
   };
 
