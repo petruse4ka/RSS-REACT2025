@@ -26,7 +26,7 @@ export default function LanguageSwitcher() {
 
   const isEnglish = locale === 'en';
 
-  return (
+  return isEnglish ? (
     <Toggle
       isActive={!isEnglish}
       onToggle={handleToggle}
@@ -35,6 +35,17 @@ export default function LanguageSwitcher() {
       leftTitle={t('language.en')}
       rightTitle={t('language.ru')}
       activeSide={isEnglish ? 'right' : 'left'}
+      dataTestId="language-switcher"
+    />
+  ) : (
+    <Toggle
+      isActive={!isEnglish}
+      onToggle={handleToggle}
+      leftIcon={ukFlagIcon.src}
+      rightIcon={ruFlagIcon.src}
+      leftTitle={t('language.en')}
+      rightTitle={t('language.ru')}
+      activeSide={isEnglish ? 'left' : 'right'}
       dataTestId="language-switcher"
     />
   );
