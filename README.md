@@ -32,7 +32,7 @@ git clone https://github.com/petruse4ka/RSS-REACT2025.git
 
 This will create the new folder with all the files from the repository.
 
-2. **Navigate to the project directory that contains the package.json file**
+2. **Navigate to the project directory**
 
 ```bash
 cd RSS-REACT2025/first-project
@@ -60,7 +60,7 @@ This will set up Husky to run the Git hooks for pre-commit and other automation.
 npm run dev
 ```
 
-This will launch the Vite development server to test that the project has been setup correctly.
+This will launch the Next.js development server to test that the project has been setup correctly.
 
 > ⚠️ **Important:** If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE. For **Visual Studio Code** select the TypeScript version by either:
 >
@@ -68,15 +68,3 @@ This will launch the Vite development server to test that the project has been s
 > - Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
 
 ---
-
-### Development Mode Setup
-
-To enable mock data in development mode, make sure the following code is uncommented in `src/main.tsx`:
-
-```typescript
-if (import.meta.env.DEV) {
-  import('./__tests__/mocks/browser.ts');
-}
-```
-
-This will automatically load the MSW (Mock Service Worker) handlers to provide mock API responses during development.
