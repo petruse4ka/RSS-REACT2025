@@ -11,6 +11,12 @@ export const en = {
     copyright: 'Konstantin Petrov',
     github: 'Github',
   },
+  homepage: {
+    title: 'Homepage',
+  },
+  loader: {
+    title: 'Loading...',
+  },
   error404: {
     title: '404 - Page Not Found',
     description:

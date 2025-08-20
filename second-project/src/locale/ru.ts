@@ -11,6 +11,12 @@ export const ru = {
     copyright: 'Константин Петров',
     github: 'Github',
   },
+  homepage: {
+    title: 'Главная',
+  },
+  loader: {
+    title: 'Загрузка...',
+  },
   error404: {
     title: '404 - Страница не найдена',
     description:
