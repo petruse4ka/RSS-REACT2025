@@ -1,13 +1,13 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './app';
-import './styles/index.css';
+import '@/styles/index.css';
+import AppWrapper from './providers/app-wrapper';
 
 const root = document.getElementById('root');
 if (root) {
   createRoot(root).render(
     <StrictMode>
-      <App />
+      <AppWrapper />
     </StrictMode>
   );
 }
