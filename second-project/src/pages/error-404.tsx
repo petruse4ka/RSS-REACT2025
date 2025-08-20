@@ -36,7 +36,6 @@ export default function Error404() {
         </p>
 
         <Button
-          type="button"
           onClick={returnHome}
           className="mt-10 rounded-lg border-cyan-500 bg-cyan-500 px-2 hover:border-cyan-400 hover:bg-cyan-400 dark:border-yellow-300 dark:bg-yellow-300 dark:hover:border-yellow-400 dark:hover:bg-yellow-400"
           text={translations.error404.button}

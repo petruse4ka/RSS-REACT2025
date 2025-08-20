@@ -16,13 +16,10 @@ export default function Toggle({
   rightIcon,
   leftTitle,
   rightTitle,
-  activeSide,
   className = '',
   onToggle,
   dataTestId,
 }: Props) {
-  const isLeftSideActive = isActive === (activeSide === 'left');
-
   return (
     <button
       onClick={onToggle}
@@ -41,7 +38,7 @@ export default function Toggle({
 
           <div
             className={`absolute top-1 h-6 w-6 rounded-full bg-white transition-all duration-300 dark:bg-cyan-300 ${
-              isLeftSideActive ? 'translate-x-1' : 'translate-x-8'
+              isActive ? 'translate-x-8' : 'translate-x-1'
             }`}
             data-testid="toggle-indicator"
           />

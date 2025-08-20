@@ -4,7 +4,6 @@ import Button from '@/components/ui/button';
 test('Button renders with default styling and text', () => {
   render(
     <Button
-      type="button"
       onClick={() => {}}
       className="bg-blue-500 hover:bg-blue-600"
       text="Test button"

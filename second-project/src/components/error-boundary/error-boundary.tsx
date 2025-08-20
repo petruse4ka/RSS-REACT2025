@@ -76,7 +76,6 @@ export default class ErrorBoundary extends Component<Props, State> {
             </p>
             <Button
               dataTestId="refresh-button"
-              type="button"
               onClick={handleRefresh}
               className={`${buttonClassName}`}
               text={buttonText}
