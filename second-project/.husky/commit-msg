@@ -1,0 +1,1 @@
+cd second project && npx --no -- commitlint --edit ${1} 
