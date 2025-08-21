@@ -34,7 +34,7 @@ export const en = {
     en: 'English',
     ru: 'Русский',
   },
-  buttons: {
+  forms: {
     uncontrolledForm: 'Uncontrolled Form',
     reactHookForm: 'React Hook Form',
   },
