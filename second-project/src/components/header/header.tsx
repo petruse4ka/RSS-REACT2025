@@ -20,10 +20,10 @@ export default function Header() {
             className="flex items-center gap-3 transition-all duration-300 hover:text-yellow-300 dark:hover:text-cyan-400"
           >
             <img src={logoImage} alt="Logo" className="h-8 w-8" />
-            <h1 className="text-xl font-bold">{translations.header.logo}</h1>
+            <h1 className="text-lg font-bold sm:text-xl">{translations.header.logo}</h1>
           </Link>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <ThemeSwitcher />
             <LanguageSwitcher />
           </div>
