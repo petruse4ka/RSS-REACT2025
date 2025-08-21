@@ -4,7 +4,6 @@ type Props = {
   rightIcon: string;
   leftTitle: string;
   rightTitle: string;
-  activeSide: 'left' | 'right';
   className?: string;
   onToggle: () => void;
   dataTestId: string;

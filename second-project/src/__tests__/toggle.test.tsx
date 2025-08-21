@@ -10,7 +10,7 @@ const toggleProps = {
 };
 
 test('Toggle renders with left side active', () => {
-  render(<Toggle {...toggleProps} isActive={true} activeSide="left" dataTestId="toggle-button" />);
+  render(<Toggle {...toggleProps} isActive={false} dataTestId="toggle-button" />);
 
   const toggle = screen.getByTestId('toggle-button');
   expect(toggle).toBeInTheDocument();
@@ -21,7 +21,7 @@ test('Toggle renders with left side active', () => {
 });
 
 test('Toggle renders with right side active', () => {
-  render(<Toggle {...toggleProps} isActive={true} activeSide="right" dataTestId="toggle-button" />);
+  render(<Toggle {...toggleProps} isActive={true} dataTestId="toggle-button" />);
 
   const toggle = screen.getByTestId('toggle-button');
   expect(toggle).toBeInTheDocument();
@@ -35,13 +35,7 @@ test('Toggle calls onToggle when clicked', () => {
   const mockOnToggle = vi.fn();
 
   render(
-    <Toggle
-      {...toggleProps}
-      onToggle={mockOnToggle}
-      isActive={false}
-      activeSide="left"
-      dataTestId="toggle-button"
-    />
+    <Toggle {...toggleProps} onToggle={mockOnToggle} isActive={false} dataTestId="toggle-button" />
   );
 
   const toggle = screen.getByTestId('toggle-button');
