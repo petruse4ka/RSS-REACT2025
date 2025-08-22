@@ -1,4 +1,4 @@
-import { getDefaultLanguage } from '@/utils/get-default-language';
+import getDefaultLanguage from '@/utils/get-default-language';
 
 test('getDefaultLanguage returns ru for Russian browser language', () => {
   Object.defineProperty(navigator, 'language', {

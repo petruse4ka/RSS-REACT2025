@@ -14,3 +14,16 @@ export const getPasswordStrength = (password: string): PasswordStrength => {
   if (score < 5) return 'medium';
   return 'strong';
 };
+
+export const getPasswordStrengthColor = (passwordStrength: PasswordStrength) => {
+  switch (passwordStrength) {
+    case 'weak':
+      return 'text-red-500';
+    case 'medium':
+      return 'text-yellow-500';
+    case 'strong':
+      return 'text-green-500';
+    default:
+      return 'text-gray-500';
+  }
+};

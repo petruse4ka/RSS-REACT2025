@@ -20,16 +20,17 @@ export default function Checkbox({
 
   useEffect(() => {
     if (ref && 'current' in ref && ref.current) {
-      setIsChecked(ref.current.checked);
+      const currentRef = ref.current;
+      setIsChecked(currentRef.checked);
 
       const handleChange = () => {
-        setIsChecked(ref.current?.checked || false);
+        setIsChecked(currentRef.checked || false);
       };
 
-      ref.current.addEventListener('change', handleChange);
+      currentRef.addEventListener('change', handleChange);
 
       return () => {
-        ref.current?.removeEventListener('change', handleChange);
+        currentRef.removeEventListener('change', handleChange);
       };
     }
   }, [ref]);

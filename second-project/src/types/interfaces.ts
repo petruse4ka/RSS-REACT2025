@@ -29,7 +29,7 @@ export interface FormErrors {
 }
 
 export interface Country {
-  country: string;
+  name: string;
   code: string;
   iso: string;
 }

@@ -21,7 +21,6 @@ export default function ThemeSwitcher() {
       rightIcon={moonIcon}
       leftTitle={translations.theme.light}
       rightTitle={translations.theme.dark}
-      activeSide="right"
       dataTestId="theme-switcher"
     />
   );

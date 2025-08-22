@@ -3,8 +3,8 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from '@/router/routes.tsx';
 import { LanguageContext } from '@/context/language-context.ts';
 import { ThemeContext } from '@/context/theme-context.ts';
-import { getDefaultLanguage } from '@/utils/get-default-language.ts';
-import { getDefaultTheme } from '@/utils/get-default-theme.ts';
+import getDefaultLanguage from '@/utils/get-default-language.ts';
+import getDefaultTheme from '@/utils/get-default-theme.ts';
 
 export default function AppWrapper() {
   const [language, setLanguage] = useState(getDefaultLanguage());
