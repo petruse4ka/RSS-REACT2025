@@ -252,7 +252,6 @@ export default function ControlledForm({ onSubmit }: Props) {
             onChange={handleFileChange}
             className="hidden"
             dataTestId="picture-input"
-            register={register}
           />
           <label
             htmlFor="picture"
