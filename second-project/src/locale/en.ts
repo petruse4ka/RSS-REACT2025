@@ -37,6 +37,7 @@ export const en = {
   forms: {
     uncontrolledForm: 'Uncontrolled Form',
     reactHookForm: 'Controlled Form',
+    id: 'ID',
     name: 'Name',
     namePlaceholder: 'Enter your name',
     age: 'Age',
@@ -64,6 +65,9 @@ export const en = {
     noUsersTitle: 'Add users',
     noUsers:
       'There are no users yet, but you can change that! Sumbit the form and add as many users as you want!',
+    totalUsers: 'Total Users',
+    clearAllUsers: 'Clear All Users',
+    deleteUser: 'Delete User',
     validation: {
       nameRequired: 'Name is required',
       nameFirstLetter: 'Name must start with an uppercase letter',

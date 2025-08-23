@@ -5,15 +5,16 @@ export interface ErrorTexts {
 }
 
 export interface FormData {
+  id: string;
   name: string;
   age: number;
   email: string;
   password: string;
   confirmPassword: string;
   gender: string;
-  acceptTerms: boolean;
-  picture: string;
   country: string;
+  picture: string;
+  acceptTerms: boolean;
 }
 
 export interface FormErrors {
@@ -32,4 +33,9 @@ export interface Country {
   name: string;
   code: string;
   iso: string;
+}
+
+export interface UserListState {
+  count: number;
+  users: FormData[];
 }

@@ -102,6 +102,7 @@ export default function UncontrolledForm({ onSubmit }: Props) {
     }
 
     const formData: FormData = {
+      id: Date.now().toString(),
       name: nameRef.current?.value || '',
       age: Number(ageRef.current?.value) || 0,
       email: emailRef.current?.value || '',

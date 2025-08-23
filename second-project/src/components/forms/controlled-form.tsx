@@ -80,6 +80,7 @@ export default function ControlledForm({ onSubmit }: Props) {
     }
 
     const formData: FormData = {
+      id: Date.now().toString(),
       name: data.name,
       age: Number(data.age),
       email: data.email,

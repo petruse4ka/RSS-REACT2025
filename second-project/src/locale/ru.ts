@@ -37,6 +37,7 @@ export const ru = {
   forms: {
     uncontrolledForm: 'Неконтролируемая форма',
     reactHookForm: 'Контролируемая Форма',
+    id: 'ID',
     name: 'Имя',
     namePlaceholder: 'Введите ваше имя',
     age: 'Возраст',
@@ -64,6 +65,9 @@ export const ru = {
     noUsersTitle: 'Добавьте пользователей',
     noUsers:
       'Тут пока нет пользователей, но вы можете изменить это! Отправьте форму и добавьте столько пользователей, сколько хотите!',
+    totalUsers: 'Всего пользователей',
+    clearAllUsers: 'Удалить всех пользователей',
+    deleteUser: 'Удалить пользователя',
     validation: {
       nameRequired: 'Имя обязательно',
       nameFirstLetter: 'Имя должно начинаться с заглавной буквы',
