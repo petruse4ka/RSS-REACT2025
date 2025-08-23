@@ -6,11 +6,12 @@ type Props = {
   className?: string;
   dataTestId?: string;
   id?: keyof FormSchema;
+  name?: string;
   ref?: Ref<HTMLSelectElement>;
   register?: FormRegister;
 };
 
-const Select = ({ children, className = '', dataTestId, id, ref, register }: Props) => {
+const Select = ({ children, className = '', dataTestId, id, name, ref, register }: Props) => {
   const defaultClassName =
     'flex-1 px-4 py-2 border rounded-sm transition duration-300 focus:outline-none cursor-pointer';
 
@@ -21,6 +22,7 @@ const Select = ({ children, className = '', dataTestId, id, ref, register }: Pro
       className={`${defaultClassName} ${className}`}
       data-testid={dataTestId}
       id={id}
+      name={name || id}
       {...conditionalProps}
     >
       {children}

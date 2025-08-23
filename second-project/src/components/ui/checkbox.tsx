@@ -7,6 +7,7 @@ type Props = {
   checkClassName?: string;
   dataTestId?: string;
   id?: keyof FormSchema;
+  name?: string;
   ref?: Ref<HTMLInputElement>;
   onClick?: () => void;
   checked?: boolean;
@@ -18,6 +19,7 @@ export default function Checkbox({
   checkClassName,
   dataTestId,
   id,
+  name,
   ref,
   onClick,
   checked,
@@ -79,6 +81,7 @@ export default function Checkbox({
       <input
         type="checkbox"
         id={id}
+        name={name || id}
         data-testid={dataTestId}
         className="sr-only"
         tabIndex={-1}
@@ -91,7 +94,7 @@ export default function Checkbox({
         tabIndex={0}
         role="checkbox"
         aria-checked={isChecked}
-        aria-labelledby={id ? `${id}-label` : '	checkbox-label'}
+        aria-labelledby={id ? `${id}-label` : undefined}
         className={`${defaultCheckboxClassName} ${checkboxClassName}`}
       >
         {isChecked && (

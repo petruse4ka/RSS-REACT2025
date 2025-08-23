@@ -10,6 +10,7 @@ type Props = {
   className: string;
   dataTestId: string;
   id?: keyof FormSchema;
+  name?: string;
   list?: string;
   min?: string | number;
   accept?: string;
@@ -28,6 +29,7 @@ export default function Input({
   className,
   dataTestId,
   id,
+  name,
   list,
   min,
   accept,
@@ -51,6 +53,7 @@ export default function Input({
       className={`${defaultClassName} ${className}`}
       data-testid={dataTestId}
       id={id}
+      name={name || id}
       list={list}
       min={min}
       accept={accept}

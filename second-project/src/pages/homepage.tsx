@@ -104,7 +104,7 @@ export default function HomePage() {
             <img
               src={noUsersImage}
               alt="No users"
-              className="mx-auto w-full max-w-[900px]"
+              className="mx-auto w-full max-w-[600px]"
               data-testid="no-users-image"
             />
             <p className="mt-5 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
