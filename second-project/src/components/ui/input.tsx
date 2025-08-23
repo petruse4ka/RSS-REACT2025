@@ -16,6 +16,7 @@ type Props = {
   autoComplete?: string;
   ref?: Ref<HTMLInputElement>;
   register?: FormRegister;
+  autoFocus?: boolean;
 };
 
 export default function Input({
@@ -33,6 +34,7 @@ export default function Input({
   autoComplete,
   ref,
   register,
+  autoFocus,
 }: Props) {
   const defaultClassName =
     'flex-1 px-4 py-2 border rounded-sm transition duration-300 focus:outline-none';
@@ -53,6 +55,7 @@ export default function Input({
       min={min}
       accept={accept}
       autoComplete={autoComplete}
+      autoFocus={autoFocus}
       {...conditionalProps}
     />
   );

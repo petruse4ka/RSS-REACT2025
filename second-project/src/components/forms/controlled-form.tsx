@@ -110,6 +110,7 @@ export default function ControlledForm({ onSubmit }: Props) {
           dataTestId="name-input"
           autoComplete="name"
           register={register}
+          autoFocus={true}
         />
       </Field>
 
@@ -250,10 +251,18 @@ export default function ControlledForm({ onSubmit }: Props) {
             onChange={handleFileChange}
             className="hidden"
             dataTestId="picture-input"
+            register={register}
           />
           <label
             htmlFor="picture"
-            className="flex-shrink-0 cursor-pointer rounded-sm border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium whitespace-nowrap text-gray-700 hover:border-yellow-200 focus:border-yellow-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:border-cyan-400 dark:focus:border-cyan-500"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ' || e.key === 'NumpadEnter') {
+                e.preventDefault();
+                document.getElementById('picture')?.click();
+              }
+            }}
+            className="flex-shrink-0 cursor-pointer rounded-sm border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium whitespace-nowrap text-gray-700 hover:border-yellow-200 focus:border-yellow-300 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:border-cyan-400 dark:focus:border-cyan-500"
           >
             {translations.forms.chooseFile}
           </label>
@@ -295,7 +304,7 @@ export default function ControlledForm({ onSubmit }: Props) {
       <div className="flex justify-end">
         <Button
           type="submit"
-          className="w-full bg-yellow-300 hover:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-cyan-500 dark:hover:bg-cyan-400"
+          className="w-full bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-cyan-500 dark:hover:bg-cyan-400 dark:focus:bg-cyan-400"
           text={translations.forms.submit}
           dataTestId="controlled-form-submit"
           disabled={!isValid || isSubmitting}

@@ -36,7 +36,7 @@ export const en = {
   },
   forms: {
     uncontrolledForm: 'Uncontrolled Form',
-    reactHookForm: 'React Hook Form',
+    reactHookForm: 'Controlled Form',
     name: 'Name',
     namePlaceholder: 'Enter your name',
     age: 'Age',

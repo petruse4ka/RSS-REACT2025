@@ -36,7 +36,7 @@ export const ru = {
   },
   forms: {
     uncontrolledForm: 'Неконтролируемая форма',
-    reactHookForm: 'React Hook Форма',
+    reactHookForm: 'Контролируемая Форма',
     name: 'Имя',
     namePlaceholder: 'Введите ваше имя',
     age: 'Возраст',

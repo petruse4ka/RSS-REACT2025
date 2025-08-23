@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { MouseEvent, Ref } from 'react';
+import type { MouseEvent, Ref, KeyboardEvent } from 'react';
 import type { FormRegister, FormSchema } from '@/types/types';
 
 type Props = {
@@ -55,6 +55,18 @@ export default function Checkbox({
     }
   };
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      if (onClick) {
+        onClick();
+      } else if (ref && 'current' in ref && ref.current) {
+        ref.current.checked = !ref.current.checked;
+        setUncontrolledChecked(ref.current.checked);
+      }
+    }
+  };
+
   const defaultCheckboxClassName = `
       w-5 h-5 border-2 rounded cursor-pointer transition-all duration-300
       focus:outline-none
@@ -69,10 +81,19 @@ export default function Checkbox({
         id={id}
         data-testid={dataTestId}
         className="sr-only"
+        tabIndex={-1}
         {...conditionalProps}
       />
 
-      <div onClick={handleClick} className={`${defaultCheckboxClassName} ${checkboxClassName}`}>
+      <div
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="checkbox"
+        aria-checked={isChecked}
+        aria-labelledby={id ? `${id}-label` : '	checkbox-label'}
+        className={`${defaultCheckboxClassName} ${checkboxClassName}`}
+      >
         {isChecked && (
           <div className="flex h-full w-full items-center justify-center">
             <svg

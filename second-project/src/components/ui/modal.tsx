@@ -65,7 +65,7 @@ export default function Modal({ isOpen, onClose, children, title, dataTestId }: 
                 </h2>
                 <Button
                   onClick={onClose}
-                  className="text-2xl text-yellow-300 hover:text-yellow-400 dark:text-cyan-500 dark:hover:text-cyan-400"
+                  className="text-2xl text-yellow-300 hover:text-yellow-400 focus:text-yellow-400 dark:text-cyan-500 dark:hover:text-cyan-400 dark:focus:text-cyan-400"
                   text="✕"
                   dataTestId="modal-close-btn"
                 />
