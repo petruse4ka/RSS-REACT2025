@@ -1,17 +1,21 @@
 import type { ChangeEvent, KeyboardEvent, Ref } from 'react';
+import type { FormRegister, FormSchema } from '@/types/types';
 
 type Props = {
-  type: 'text' | 'number' | 'password' | 'email';
-  placeholder: string;
+  type: 'text' | 'number' | 'password' | 'email' | 'file' | 'checkbox';
+  placeholder?: string;
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   className: string;
   dataTestId: string;
-  id?: string;
+  id?: keyof FormSchema;
   list?: string;
-  min?: string;
+  min?: string | number;
+  accept?: string;
+  autoComplete?: string;
   ref?: Ref<HTMLInputElement>;
+  register?: FormRegister;
 };
 
 export default function Input({
@@ -25,14 +29,18 @@ export default function Input({
   id,
   list,
   min,
+  accept,
+  autoComplete,
   ref,
+  register,
 }: Props) {
   const defaultClassName =
     'flex-1 px-4 py-2 border rounded-sm transition duration-300 focus:outline-none';
 
+  const conditionalProps = register && id ? register(id) : { ref };
+
   return (
     <input
-      ref={ref}
       type={type}
       placeholder={placeholder}
       value={value}
@@ -43,6 +51,9 @@ export default function Input({
       id={id}
       list={list}
       min={min}
+      accept={accept}
+      autoComplete={autoComplete}
+      {...conditionalProps}
     />
   );
 }

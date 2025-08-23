@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { useLocale } from '../hooks/use-locale';
 import Button from '../components/ui/button';
 import Modal from '../components/ui/modal';
+import UncontrolledForm from '../components/forms/uncontrolled-form';
+import ControlledForm from '../components/forms/controlled-form';
 import type { ModalType } from '../types/types';
+import type { FormData } from '../types/interfaces';
 
 export default function HomePage() {
   const translations = useLocale();
   const [modalState, setModalState] = useState<ModalType>(null);
+  const [userList, setUserList] = useState<FormData[]>([]);
 
   const handleFormModal = (modalType: ModalType) => {
     setModalState(modalType);
@@ -14,6 +18,11 @@ export default function HomePage() {
 
   const closeModal = () => {
     setModalState(null);
+  };
+
+  const handleFormSubmit = (data: FormData) => {
+    setUserList((prev) => [...prev, data]);
+    closeModal();
   };
 
   const isModalOpen = modalState !== null;
@@ -45,9 +54,11 @@ export default function HomePage() {
           }
           dataTestId={`${modalState}-form-modal`}
         >
-          <p>Children</p>
+          {modalState === 'uncontrolled' && <UncontrolledForm onSubmit={handleFormSubmit} />}
+          {modalState === 'reactHookForm' && <ControlledForm onSubmit={handleFormSubmit} />}
         </Modal>
       )}
+      {userList.length > 0 && <div className="mt-8 w-full">ITEMS WILL BE HERE</div>}
     </div>
   );
 }

@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import type { MouseEvent, Ref } from 'react';
+import type { FormRegister, FormSchema } from '@/types/types';
 
 type Props = {
   checkboxClassName?: string;
   checkClassName?: string;
   dataTestId?: string;
-  id?: string;
+  id?: keyof FormSchema;
   ref?: Ref<HTMLInputElement>;
+  onClick?: () => void;
+  checked?: boolean;
+  register?: FormRegister;
 };
 
 export default function Checkbox({
@@ -15,16 +19,22 @@ export default function Checkbox({
   dataTestId,
   id,
   ref,
+  onClick,
+  checked,
+  register,
 }: Props) {
-  const [isChecked, setIsChecked] = useState(false);
+  const [uncontrolledChecked, setUncontrolledChecked] = useState(false);
+  const isChecked = checked !== undefined ? checked : uncontrolledChecked;
+
+  const conditionalProps = register && id ? register(id) : { ref };
 
   useEffect(() => {
     if (ref && 'current' in ref && ref.current) {
       const currentRef = ref.current;
-      setIsChecked(currentRef.checked);
+      setUncontrolledChecked(currentRef.checked);
 
       const handleChange = () => {
-        setIsChecked(currentRef.checked || false);
+        setUncontrolledChecked(currentRef.checked || false);
       };
 
       currentRef.addEventListener('change', handleChange);
@@ -37,9 +47,11 @@ export default function Checkbox({
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
-    if (ref && 'current' in ref && ref.current) {
+    if (onClick) {
+      onClick();
+    } else if (ref && 'current' in ref && ref.current) {
       ref.current.checked = !ref.current.checked;
-      setIsChecked(ref.current.checked);
+      setUncontrolledChecked(ref.current.checked);
     }
   };
 
@@ -52,7 +64,13 @@ export default function Checkbox({
 
   return (
     <div className="relative">
-      <input ref={ref} type="checkbox" id={id} data-testid={dataTestId} className="sr-only" />
+      <input
+        type="checkbox"
+        id={id}
+        data-testid={dataTestId}
+        className="sr-only"
+        {...conditionalProps}
+      />
 
       <div onClick={handleClick} className={`${defaultCheckboxClassName} ${checkboxClassName}`}>
         {isChecked && (
