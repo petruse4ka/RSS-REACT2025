@@ -6,6 +6,7 @@ type Props = {
   placeholder?: string;
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeCapture?: (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   className: string;
   dataTestId: string;
@@ -25,6 +26,7 @@ export default function Input({
   placeholder,
   value,
   onChange,
+  onChangeCapture,
   onKeyDown,
   className,
   dataTestId,
@@ -49,6 +51,7 @@ export default function Input({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onChangeCapture={onChangeCapture}
       onKeyDown={onKeyDown}
       className={`${defaultClassName} ${className}`}
       data-testid={dataTestId}

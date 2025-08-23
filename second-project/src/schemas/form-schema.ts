@@ -21,16 +21,16 @@ export const formSchema = z
       .min(1, 'passwordRequired')
       .max(30, 'passwordMaxLength')
       .regex(/\d/, 'passwordStrength')
-      .regex(/[A-Z]/, 'passwordStrength')
-      .regex(/[a-z]/, 'passwordStrength')
+      .regex(/[А-ЯA-Z]/, 'passwordStrength')
+      .regex(/[а-яa-z]/, 'passwordStrength')
       .regex(/[!@#$%^&*(),.?":{}|<>]/, 'passwordStrength'),
     confirmPassword: z
       .string()
       .min(1, 'passwordRequired')
       .max(30, 'passwordMaxLength')
       .regex(/\d/, 'passwordStrength')
-      .regex(/[A-Z]/, 'passwordStrength')
-      .regex(/[a-z]/, 'passwordStrength')
+      .regex(/[А-ЯA-Z]/, 'passwordStrength')
+      .regex(/[а-яa-z]/, 'passwordStrength')
       .regex(/[!@#$%^&*(),.?":{}|<>]/, 'passwordStrength'),
     gender: z.string().min(1, 'genderRequired'),
     picture: z

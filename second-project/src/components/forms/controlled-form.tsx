@@ -24,6 +24,8 @@ export default function ControlledForm({ onSubmit }: Props) {
   const translations = useLocale();
   const [passwordStrength, setPasswordStrength] = useState<PasswordStrength>('');
   const [selectedFileName, setSelectedFileName] = useState<string>('');
+  const [passwordState, setPasswordState] = useState<string>('');
+  const [confirmPasswordState, setConfirmPasswordState] = useState<string>('');
 
   const {
     register,
@@ -57,7 +59,13 @@ export default function ControlledForm({ onSubmit }: Props) {
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const password = event.target.value;
+    setPasswordState(password);
     setPasswordStrength(getPasswordStrength(password));
+  };
+
+  const handleConfirmPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const confirmPassword = event.target.value;
+    setConfirmPasswordState(confirmPassword);
   };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -163,7 +171,7 @@ export default function ControlledForm({ onSubmit }: Props) {
           dataTestId="password-input"
           autoComplete="new-password"
           register={register}
-          onChange={(e) => {
+          onChangeCapture={(e) => {
             handlePasswordChange(e);
             trigger('confirmPassword');
           }}
@@ -193,7 +201,16 @@ export default function ControlledForm({ onSubmit }: Props) {
           dataTestId="confirm-password-input"
           autoComplete="new-password"
           register={register}
+          onChangeCapture={handleConfirmPasswordChange}
         />
+        {!errors.confirmPassword?.message &&
+          passwordState &&
+          confirmPasswordState &&
+          passwordState !== confirmPasswordState && (
+            <p className="mt-1 text-sm text-red-500">
+              {translations.forms.validation.passwordsMismatch}
+            </p>
+          )}
       </Field>
 
       <Field
