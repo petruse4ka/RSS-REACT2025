@@ -24,13 +24,15 @@ export default function App() {
       imageClassName="w-64 h-64"
       buttonClassName="bg-cyan-500 border border-cyan-500 hover:bg-cyan-400 hover:border-cyan-400 dark:bg-yellow-300 dark:border-yellow-300 dark:hover:bg-yellow-400 dark:hover:border-yellow-400"
     >
-      <Header />
-      <div className="flex-1 bg-stone-100 px-5 pb-10 text-gray-500 lg:px-20 dark:bg-slate-900 dark:text-gray-100">
-        <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col items-center py-5 md:py-10">
-          <Outlet />
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <div className="flex-1 bg-stone-100 px-5 pb-10 text-gray-500 lg:px-20 dark:bg-slate-900 dark:text-gray-100">
+          <div className="mx-auto flex max-w-[1440px] grow-1 flex-col items-center py-5 md:py-10">
+            <Outlet />
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </ErrorBoundary>
   );
 }
