@@ -60,6 +60,10 @@ export const en = {
     other: 'Other',
     chooseFile: 'Choose file',
     noFileChosen: 'No file chosen',
+    userList: 'User List',
+    noUsersTitle: 'Add users',
+    noUsers:
+      'There are no users yet, but you can change that! Sumbit the form and add as many users as you want!',
     validation: {
       nameRequired: 'Name is required',
       nameFirstLetter: 'Name must start with an uppercase letter',

@@ -14,27 +14,21 @@ export default function Error404() {
   return (
     <div className="flex w-full flex-col items-center justify-center" data-testid="404-error-page">
       <div className="text-center">
-        <h2
-          className="mb-4 text-4xl font-bold text-yellow-300 md:text-5xl"
-          data-testid="404-error-title"
-        >
+        <h2 className="mb-4 text-4xl text-yellow-300 md:text-5xl" data-testid="404-error-title">
           {translations.error404.title}
         </h2>
-
         <img
           src={errorImage}
           alt="404 Error Image"
-          className="mx-auto max-w-[900px]"
+          className="mx-auto w-full max-w-[900px]"
           data-testid="404-error-image"
         />
-
         <p
           className="mt-2 text-lg leading-relaxed text-gray-700 dark:text-gray-300"
           data-testid="404-error-description"
         >
           {translations.error404.description}
         </p>
-
         <Button
           onClick={returnHome}
           className="mt-10 bg-cyan-500 hover:bg-cyan-400 dark:bg-yellow-300 dark:hover:bg-yellow-400"
