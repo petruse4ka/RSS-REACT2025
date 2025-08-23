@@ -109,11 +109,13 @@ export default function HomePage() {
                       { key: 'country' as const, value: user.country },
                       { key: 'password' as const, value: user.password },
                     ].map(({ key, value }) => (
-                      <div key={key} className="flex justify-between">
+                      <div key={key} className="flex justify-between gap-4">
                         <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
                           {translations.forms[key]}:
                         </span>
-                        <span className="text-sm text-gray-900 dark:text-white">{value}</span>
+                        <span className="max-w-[200px] truncate text-sm text-gray-900 dark:text-white">
+                          {value}
+                        </span>
                       </div>
                     ))}
                   </div>

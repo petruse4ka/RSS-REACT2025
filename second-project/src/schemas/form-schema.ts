@@ -15,10 +15,11 @@ export const formSchema = z
       .refine((val) => !isNaN(Number(val)), 'ageNumber')
       .refine((val) => Number(val) >= 18, 'ageMin')
       .refine((val) => Number(val) <= 100, 'ageMax'),
-    email: z.email({ message: 'emailInvalid' }),
+    email: z.email({ message: 'emailInvalid' }).max(45, 'emailMaxLength'),
     password: z
       .string()
       .min(1, 'passwordRequired')
+      .max(30, 'passwordMaxLength')
       .regex(/\d/, 'passwordStrength')
       .regex(/[A-Z]/, 'passwordStrength')
       .regex(/[a-z]/, 'passwordStrength')
@@ -26,6 +27,7 @@ export const formSchema = z
     confirmPassword: z
       .string()
       .min(1, 'passwordRequired')
+      .max(30, 'passwordMaxLength')
       .regex(/\d/, 'passwordStrength')
       .regex(/[A-Z]/, 'passwordStrength')
       .regex(/[a-z]/, 'passwordStrength')
@@ -35,7 +37,7 @@ export const formSchema = z
       .instanceof(File, { message: 'pictureRequired' })
       .refine((file) => file.size <= MAX_FILE_SIZE, 'pictureSize')
       .refine((file) => ALLOWED_FILE_TYPES.includes(file.type), 'pictureFormat'),
-    country: z.string().min(1, 'countryRequired'),
+    country: z.string().min(1, 'countryRequired').max(30, 'countryMaxLength'),
     acceptTerms: z.boolean().refine((val) => val === true, 'termsRequired'),
   })
   .refine((data) => data.password === data.confirmPassword, {

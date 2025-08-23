@@ -80,9 +80,11 @@ export const ru = {
       agePositive: 'Возраст должен быть положительным',
       emailRequired: 'Email обязателен',
       emailInvalid: 'Введите корректный email адрес',
+      emailMaxLength: 'Email должен содержать не более 45 символов',
       passwordRequired: 'Пароль обязателен',
       passwordStrength:
         'Пароль должен содержать минимум 1 цифру, 1 заглавную букву, 1 строчную букву и 1 специальный символ',
+      passwordMaxLength: 'Пароль должен содержать не более 30 символов',
       confirmPasswordRequired: 'Подтвердите пароль',
       passwordsMismatch: 'Пароли не совпадают',
       genderRequired: 'Выберите пол',
@@ -91,6 +93,7 @@ export const ru = {
       pictureSize: 'Размер файла должен быть меньше 5MB',
       pictureFormat: 'Разрешены только PNG и JPEG файлы',
       countryRequired: 'Выберите страну',
+      countryMaxLength: 'Страна должна содержать не более 30 символов',
     },
     passwordStrength: {
       weak: 'Слабый',

@@ -80,9 +80,11 @@ export const en = {
       agePositive: 'Age must be positive',
       emailRequired: 'Email is required',
       emailInvalid: 'Enter a valid email address',
+      emailMaxLength: 'Email must be 45 characters or less',
       passwordRequired: 'Password is required',
       passwordStrength:
         'Password must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character',
+      passwordMaxLength: 'Password must be 30 characters or less',
       confirmPasswordRequired: 'Confirm your password',
       passwordsMismatch: 'Passwords do not match',
       genderRequired: 'Select a gender',
@@ -91,6 +93,7 @@ export const en = {
       pictureSize: 'File size must be less than 5MB',
       pictureFormat: 'Only PNG and JPEG files are allowed',
       countryRequired: 'Select a country',
+      countryMaxLength: 'Country must be 30 characters or less',
     },
     passwordStrength: {
       weak: 'Weak',
