@@ -8,7 +8,8 @@ import Input from '@/components/ui/input';
 import Checkbox from '@/components/ui/checkbox';
 import Field from '@/components/ui/field';
 import Select from '@/components/ui/select';
-import { COUNTRIES } from '@/constants';
+import { useAppSelector } from '@/store/hooks';
+import { selectCountries } from '@/store/selectors';
 import { formSchema } from '@/schemas/form-schema';
 import type { FormData, FormErrors } from '@/types/interfaces';
 import { getPasswordStrength, getPasswordStrengthColor } from '@/utils/get-password-strength';
@@ -26,6 +27,8 @@ export default function ControlledForm({ onSubmit }: Props) {
   const [selectedFileName, setSelectedFileName] = useState<string>('');
   const [passwordState, setPasswordState] = useState<string>('');
   const [confirmPasswordState, setConfirmPasswordState] = useState<string>('');
+
+  const countries = useAppSelector(selectCountries);
 
   const {
     register,
@@ -249,7 +252,7 @@ export default function ControlledForm({ onSubmit }: Props) {
           register={register}
         />
         <datalist id="countries">
-          {COUNTRIES.map((country) => (
+          {countries.map((country) => (
             <option key={`${country.code}-${country.iso}`} value={country.name} />
           ))}
         </datalist>

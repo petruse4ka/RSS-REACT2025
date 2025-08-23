@@ -6,7 +6,8 @@ import Input from '@/components/ui/input';
 import Checkbox from '@/components/ui/checkbox';
 import Field from '@/components/ui/field';
 import Select from '@/components/ui/select';
-import { COUNTRIES } from '@/constants';
+import { useAppSelector } from '@/store/hooks';
+import { selectCountries } from '@/store/selectors';
 import { formSchema } from '@/schemas/form-schema';
 import type { FormData, FormErrors } from '@/types/interfaces';
 import { isFormField } from '@/types/guards';
@@ -24,6 +25,8 @@ export default function UncontrolledForm({ onSubmit }: Props) {
   const [errors, setErrors] = useState<FormErrors>({});
   const [passwordStrength, setPasswordStrength] = useState<PasswordStrength>('');
   const [selectedFileName, setSelectedFileName] = useState<string>('');
+
+  const countries = useAppSelector(selectCountries);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
@@ -250,7 +253,7 @@ export default function UncontrolledForm({ onSubmit }: Props) {
           autoComplete="country"
         />
         <datalist id="countries">
-          {COUNTRIES.map((country) => (
+          {countries.map((country) => (
             <option key={`${country.code}-${country.iso}`} value={country.name} />
           ))}
         </datalist>

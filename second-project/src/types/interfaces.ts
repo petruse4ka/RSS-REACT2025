@@ -35,6 +35,10 @@ export interface Country {
   iso: string;
 }
 
+export interface CountriesState {
+  countries: Country[];
+}
+
 export interface UserListState {
   count: number;
   users: FormData[];
