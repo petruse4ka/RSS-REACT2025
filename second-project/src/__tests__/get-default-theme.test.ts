@@ -1,4 +1,4 @@
-import { getDefaultTheme } from '@/utils/get-default-theme';
+import getDefaultTheme from '@/utils/get-default-theme';
 
 test('getDefaultTheme returns dark when system prefers dark', () => {
   Object.defineProperty(window, 'matchMedia', {
