@@ -43,6 +43,37 @@
   input[list]::-webkit-calendar-picker-indicator {
     display: none !important;
   }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #e5e7eb;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #facc15;
+    border-radius: 9999px;
+    transition: background-color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #fbbf24;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #22d3ee;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4;
+  }
 }
 
 :root {

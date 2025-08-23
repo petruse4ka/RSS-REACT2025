@@ -49,14 +49,14 @@ export default function Modal({ isOpen, onClose, children, title, dataTestId }: 
           data-testid={dataTestId}
         >
           <div
-            className="mx-4 w-full max-w-3xl rounded-lg bg-stone-100 shadow-xl dark:bg-indigo-900"
+            className="mx-4 flex max-h-[90vh] w-full max-w-3xl flex-col rounded-lg bg-stone-100 shadow-xl dark:bg-indigo-900"
             aria-modal="true"
             aria-labelledby="form-modal"
             tabIndex={-1}
             role="dialog"
           >
             {title && (
-              <div className="flex items-center justify-between border-b border-stone-200 p-4 dark:border-indigo-800">
+              <div className="flex flex-shrink-0 items-center justify-between border-b border-stone-200 p-4 dark:border-indigo-800">
                 <h2
                   id="form-modal"
                   className="text-lg font-semibold text-cyan-500 dark:text-yellow-300"
@@ -71,7 +71,7 @@ export default function Modal({ isOpen, onClose, children, title, dataTestId }: 
                 />
               </div>
             )}
-            <div className="m-4">{children}</div>
+            <div className="m-4 flex-1 overflow-y-auto px-5">{children}</div>
           </div>
         </div>,
         modalRoot
