@@ -121,7 +121,7 @@ export default function UncontrolledForm({ onSubmit }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <Field
         label={translations.forms.name}
         htmlFor="name"

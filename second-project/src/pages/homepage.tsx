@@ -15,6 +15,7 @@ import defaultUserImage from '../assets/icons/default-user.png';
 export default function HomePage() {
   const translations = useLocale();
   const [modalState, setModalState] = useState<ModalType>(null);
+  const [newlyAddedUsers, setNewlyAddedUsers] = useState<Set<string>>(new Set());
   const dispatch = useAppDispatch();
   const userList = useAppSelector(selectUserList);
   const userCount = useAppSelector(selectUserCount);
@@ -29,6 +30,17 @@ export default function HomePage() {
 
   const handleFormSubmit = (data: FormData) => {
     dispatch(addUser(data));
+
+    setNewlyAddedUsers((prev) => new Set(prev).add(data.id));
+
+    setTimeout(() => {
+      setNewlyAddedUsers((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(data.id);
+        return newSet;
+      });
+    }, 3000);
+
     closeModal();
   };
 
@@ -90,7 +102,11 @@ export default function HomePage() {
               {userList.map((user, index) => (
                 <div
                   key={index}
-                  className="rounded-lg border border-cyan-500 bg-white p-4 shadow-sm dark:border-yellow-300 dark:bg-indigo-900"
+                  className={`rounded-lg border border-cyan-500 p-4 transition-all duration-300 dark:border-yellow-300 ${
+                    newlyAddedUsers.has(user.id)
+                      ? 'bg-yellow-200 dark:bg-cyan-800'
+                      : 'bg-white dark:bg-indigo-900'
+                  }`}
                 >
                   <div className="mb-3 flex justify-center">
                     <img

@@ -108,7 +108,7 @@ export default function ControlledForm({ onSubmit }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4">
       <Field
         label={translations.forms.name}
         htmlFor="name"
