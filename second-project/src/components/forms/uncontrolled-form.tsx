@@ -244,7 +244,7 @@ export default function UncontrolledForm({ onSubmit }: Props) {
           dataTestId="country-input"
           autoComplete="country"
         />
-        <datalist id="countries">
+        <datalist id="countries" role="listbox">
           {countries.map((country) => (
             <option key={`${country.code}-${country.iso}`} value={country.name} />
           ))}
