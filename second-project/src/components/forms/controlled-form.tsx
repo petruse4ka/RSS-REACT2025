@@ -11,6 +11,7 @@ import PasswordStrengthIndicator from '@/components/ui/password-indicator';
 import SubmitButton from '@/components/forms-ui/submit-button';
 import AcceptTerms from '@/components/forms-ui/accept-terms';
 import FileUploadField from '@/components/forms-ui/file-upload-field';
+import CountryField from '@/components/forms-ui/country-field';
 import { useAppSelector } from '@/store/hooks';
 import { selectCountries } from '@/store/selectors';
 import { formSchema } from '@/schemas/form-schema';
@@ -230,11 +231,11 @@ export default function ControlledForm({ onSubmit }: Props) {
         </Select>
       </Field>
 
-      <Field
+      <CountryField
         label={translations.forms.country}
-        htmlFor="country"
         error={getErrorMessage('country')}
         dataTestId="country-field"
+        countries={countries}
       >
         <Input
           type="text"
@@ -246,12 +247,7 @@ export default function ControlledForm({ onSubmit }: Props) {
           autoComplete="country"
           register={register}
         />
-        <datalist id="countries">
-          {countries.map((country) => (
-            <option key={`${country.code}-${country.iso}`} value={country.name} />
-          ))}
-        </datalist>
-      </Field>
+      </CountryField>
 
       <FileUploadField
         label={translations.forms.picture}
