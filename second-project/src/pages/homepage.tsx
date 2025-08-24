@@ -87,9 +87,6 @@ export default function HomePage() {
       )}
 
       <div className="mt-10 w-full text-center">
-        <h2 className="mb-10 text-4xl text-yellow-300 md:text-5xl">
-          {translations.forms.userList}
-        </h2>
         {userCount > 0 ? (
           <>
             <div className="mb-6 flex items-center justify-start">

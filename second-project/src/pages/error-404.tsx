@@ -14,9 +14,6 @@ export default function Error404() {
   return (
     <div className="flex w-full flex-col items-center justify-center" data-testid="404-error-page">
       <div className="text-center">
-        <h2 className="mb-4 text-4xl text-yellow-300 md:text-5xl" data-testid="404-error-title">
-          {translations.error404.title}
-        </h2>
         <img
           src={errorImage}
           alt="404 Error Image"

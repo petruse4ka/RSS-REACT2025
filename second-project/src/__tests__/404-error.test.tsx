@@ -26,10 +26,6 @@ test('Error404 component renders 404 error page with all elements', () => {
   const errorPage = screen.getByTestId('404-error-page');
   expect(errorPage).toBeInTheDocument();
 
-  const title = screen.getByTestId('404-error-title');
-  expect(title).toBeInTheDocument();
-  expect(title).toHaveTextContent(en.error404.title);
-
   const image = screen.getByTestId('404-error-image');
   expect(image).toBeInTheDocument();
 
