@@ -20,8 +20,12 @@ const userListSlice = createSlice({
     },
     deleteUser: (state, action: PayloadAction<string>) => {
       const id = action.payload;
+      const initialLength = state.users.length;
       state.users = state.users.filter((item) => item.id !== id);
-      state.count--;
+
+      if (state.users.length < initialLength) {
+        state.count--;
+      }
     },
     clearAllUsers: (state) => {
       state.users = [];
