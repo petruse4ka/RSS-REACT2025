@@ -32,6 +32,7 @@ export default function PasswordField({
           aria-label={isVisible ? 'Hide password' : 'Show password'}
           text=""
           dataTestId="password-toggle"
+          tabIndex={-1}
         >
           {isVisible ? (
             <svg

@@ -9,6 +9,7 @@ type Props = {
   dataTestId?: string;
   disabled?: boolean;
   children?: ReactNode;
+  tabIndex?: number;
 };
 
 export default function Button({
@@ -19,6 +20,7 @@ export default function Button({
   dataTestId,
   disabled,
   children,
+  tabIndex,
 }: Props) {
   const defaultClassName = disabled
     ? 'px-4 sm:px-6 py-2 text-white rounded-sm transition duration-300 cursor-not-allowed focus:outline-none'
@@ -31,6 +33,7 @@ export default function Button({
       className={`${defaultClassName} ${className}`}
       data-testid={dataTestId}
       disabled={disabled}
+      tabIndex={tabIndex}
     >
       {children || text}
     </button>

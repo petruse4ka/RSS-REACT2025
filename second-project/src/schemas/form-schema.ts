@@ -49,4 +49,8 @@ export const formSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: 'passwordsMismatch',
     path: ['confirmPassword'],
+    when(payload) {
+      return formSchema.pick({ password: true, confirmPassword: true }).safeParse(payload.value)
+        .success;
+    },
   });
