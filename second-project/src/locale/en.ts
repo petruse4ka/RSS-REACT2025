@@ -94,6 +94,7 @@ export const en = {
       pictureFormat: 'Only PNG and JPEG files are allowed',
       countryRequired: 'Select a country',
       countryMaxLength: 'Country must be 30 characters or less',
+      countryInvalid: 'Please select a valid country from the list',
     },
     passwordStrength: {
       weak: 'Weak',

@@ -92,3 +92,25 @@ test('ControlledForm file input is hidden and shows custom label', () => {
 
   expect(screen.getByText('Choose file')).toBeInTheDocument();
 });
+
+test('ControlledForm country input has datalist with countries from Redux', () => {
+  renderWithProvider(<ControlledForm onSubmit={mockOnSubmit} />);
+
+  const countryInput = screen.getByLabelText('Country');
+  expect(countryInput).toHaveAttribute('list', 'countries');
+});
+
+test('ControlledForm shows validation error for invalid country', async () => {
+  renderWithProvider(<ControlledForm onSubmit={mockOnSubmit} />);
+
+  const countryInput = screen.getByLabelText('Country');
+
+  fireEvent.change(countryInput, { target: { value: 'InvalidCountry' } });
+
+  const submitButton = screen.getByRole('button', { name: 'Submit' });
+  fireEvent.click(submitButton);
+
+  await waitFor(() => {
+    expect(screen.getByText('Please select a valid country from the list')).toBeInTheDocument();
+  });
+});

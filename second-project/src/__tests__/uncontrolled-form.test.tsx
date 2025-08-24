@@ -112,3 +112,17 @@ test('UncontrolledForm form validation prevents submission with missing required
 
   expect(mockOnSubmit).not.toHaveBeenCalled();
 });
+
+test('UncontrolledForm shows validation error for invalid country', async () => {
+  renderWithProvider(<UncontrolledForm onSubmit={mockOnSubmit} />);
+
+  const countryInput = screen.getByLabelText('Country');
+
+  fireEvent.change(countryInput, { target: { value: 'InvalidCountry' } });
+
+  const submitButton = screen.getByRole('button', { name: 'Submit' });
+  fireEvent.click(submitButton);
+
+  expect(screen.getByText('Please select a valid country from the list')).toBeInTheDocument();
+  expect(mockOnSubmit).not.toHaveBeenCalled();
+});

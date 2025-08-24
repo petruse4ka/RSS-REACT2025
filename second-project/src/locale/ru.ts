@@ -94,6 +94,7 @@ export const ru = {
       pictureFormat: 'Разрешены только PNG и JPEG файлы',
       countryRequired: 'Выберите страну',
       countryMaxLength: 'Страна должна содержать не более 30 символов',
+      countryInvalid: 'Пожалуйста, выберите действительную страну из списка',
     },
     passwordStrength: {
       weak: 'Слабый',

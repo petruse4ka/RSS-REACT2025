@@ -1,5 +1,7 @@
 import { z } from 'zod';
-import { ALLOWED_FILE_TYPES, MAX_FILE_SIZE } from '@/constants';
+import { ALLOWED_FILE_TYPES, MAX_FILE_SIZE, COUNTRIES } from '@/constants';
+
+const validCountries = COUNTRIES.map((country) => country.name);
 
 export const formSchema = z
   .object({
@@ -37,7 +39,11 @@ export const formSchema = z
       .instanceof(File, { message: 'pictureRequired' })
       .refine((file) => file.size <= MAX_FILE_SIZE, 'pictureSize')
       .refine((file) => ALLOWED_FILE_TYPES.includes(file.type), 'pictureFormat'),
-    country: z.string().min(1, 'countryRequired').max(30, 'countryMaxLength'),
+    country: z
+      .string()
+      .min(1, 'countryRequired')
+      .max(30, 'countryMaxLength')
+      .refine((value) => validCountries.includes(value), 'countryInvalid'),
     acceptTerms: z.boolean().refine((val) => val === true, 'termsRequired'),
   })
   .refine((data) => data.password === data.confirmPassword, {
