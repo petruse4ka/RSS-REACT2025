@@ -3,12 +3,14 @@ import type { ChangeEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale } from '@/hooks/use-locale';
-import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import Checkbox from '@/components/ui/checkbox';
 import Field from '@/components/ui/field';
 import Select from '@/components/ui/select';
 import PasswordStrengthIndicator from '@/components/ui/password-indicator';
+import SubmitButton from '@/components/forms-ui/submit-button';
+import AcceptTerms from '@/components/forms-ui/accept-terms';
+import FileUploadField from '@/components/forms-ui/file-upload-field';
 import { useAppSelector } from '@/store/hooks';
 import { selectCountries } from '@/store/selectors';
 import { formSchema } from '@/schemas/form-schema';
@@ -251,39 +253,23 @@ export default function ControlledForm({ onSubmit }: Props) {
         </datalist>
       </Field>
 
-      <Field
+      <FileUploadField
         label={translations.forms.picture}
-        htmlFor="picture"
         error={getErrorMessage('picture')}
         dataTestId="picture-field"
+        chooseFileText={translations.forms.chooseFile}
+        noFileChosenText={translations.forms.noFileChosen}
+        selectedFileName={selectedFileName}
       >
-        <div className="mt-1 flex items-center">
-          <Input
-            type="file"
-            id="picture"
-            accept="image/png,image/jpeg"
-            onChange={handleFileChange}
-            className="hidden"
-            dataTestId="picture-input"
-          />
-          <label
-            htmlFor="picture"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ' || e.key === 'NumpadEnter') {
-                e.preventDefault();
-                document.getElementById('picture')?.click();
-              }
-            }}
-            className="flex-shrink-0 cursor-pointer rounded-sm border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium whitespace-nowrap text-gray-700 hover:border-yellow-200 focus:border-yellow-300 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:border-cyan-400 dark:focus:border-cyan-500"
-          >
-            {translations.forms.chooseFile}
-          </label>
-          <span className="ml-3 text-sm text-gray-500 dark:text-gray-400">
-            {selectedFileName || translations.forms.noFileChosen}
-          </span>
-        </div>
-      </Field>
+        <Input
+          type="file"
+          id="picture"
+          accept="image/png,image/jpeg"
+          onChange={handleFileChange}
+          className="hidden"
+          dataTestId="picture-input"
+        />
+      </FileUploadField>
 
       <Field
         label=""
@@ -291,7 +277,7 @@ export default function ControlledForm({ onSubmit }: Props) {
         error={getErrorMessage('acceptTerms')}
         dataTestId="accept-terms-field"
       >
-        <div className="mt-1 flex items-start">
+        <AcceptTerms label={translations.forms.acceptTerms}>
           <Checkbox
             checkboxClassName="border-gray-300 hover:border-yellow-200 focus:border-yellow-300 dark:text-cyan-300 text-yellow-300 dark:hover:border-cyan-400 dark:focus:border-cyan-500 dark:border-gray-600 dark:bg-gray-700"
             dataTestId="accept-terms-checkbox"
@@ -305,24 +291,14 @@ export default function ControlledForm({ onSubmit }: Props) {
               trigger('acceptTerms');
             }}
           />
-
-          <div className="ml-3 text-sm text-black dark:text-white">
-            <label htmlFor="acceptTerms" className="font-medium">
-              {translations.forms.acceptTerms}
-            </label>
-          </div>
-        </div>
+        </AcceptTerms>
       </Field>
 
-      <div className="flex justify-end">
-        <Button
-          type="submit"
-          className="my-4 w-full bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-cyan-500 dark:hover:bg-cyan-400 dark:focus:bg-cyan-400"
-          text={translations.forms.submit}
-          dataTestId="controlled-form-submit"
-          disabled={!isValid || isSubmitting}
-        />
-      </div>
+      <SubmitButton
+        text={translations.forms.submit}
+        disabled={!isValid || isSubmitting}
+        dataTestId="controlled-form-submit"
+      />
     </form>
   );
 }
