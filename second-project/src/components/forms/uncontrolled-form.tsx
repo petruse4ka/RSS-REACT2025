@@ -311,7 +311,7 @@ export default function UncontrolledForm({ onSubmit }: Props) {
       <div className="flex justify-end">
         <Button
           type="submit"
-          className="w-full bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400 dark:bg-cyan-500 dark:hover:bg-cyan-400 dark:focus:bg-cyan-400"
+          className="my-4 w-full bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400 dark:bg-cyan-500 dark:hover:bg-cyan-400 dark:focus:bg-cyan-400"
           text={translations.forms.submit}
           dataTestId="uncontrolled-form-submit"
         />

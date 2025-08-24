@@ -317,7 +317,7 @@ export default function ControlledForm({ onSubmit }: Props) {
       <div className="flex justify-end">
         <Button
           type="submit"
-          className="w-full bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-cyan-500 dark:hover:bg-cyan-400 dark:focus:bg-cyan-400"
+          className="my-4 w-full bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-cyan-500 dark:hover:bg-cyan-400 dark:focus:bg-cyan-400"
           text={translations.forms.submit}
           dataTestId="controlled-form-submit"
           disabled={!isValid || isSubmitting}
