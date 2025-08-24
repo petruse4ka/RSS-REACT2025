@@ -17,6 +17,8 @@ export const getPasswordStrengthColor = (passwordStrength: number) => {
       return 'text-red-600';
     case 1:
       return 'text-red-500';
+    case 2:
+      return 'text-yellow-600';
     case 3:
       return 'text-yellow-500';
     case 4:
