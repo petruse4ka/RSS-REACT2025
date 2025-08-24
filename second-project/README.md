@@ -1,6 +1,6 @@
 # RSS-REACT2025
 
-First personal project for the React 2025 course of the RS School
+Second personal project for the React 2025 course of the RS School
 
 ---
 
@@ -35,7 +35,7 @@ This will create the new folder with all the files from the repository.
 2. **Navigate to the project directory**
 
 ```bash
-cd RSS-REACT2025/first-project
+cd RSS-REACT2025/second-project
 ```
 
 3. **Install project dependencies**
@@ -112,12 +112,12 @@ Use the following scripts to assist with development, formatting, linting, build
 
 ### ⚙️ Development & Deployment
 
-| Script            | Description                                  |
-| :---------------- | :------------------------------------------- |
-| `npm run dev`     | Start a local development server with Vite.  |
-| `npm run build`   | Build the project for production.            |
-| `npm run preview` | Preview the production build locally.        |
-| `npm run deploy`  | Build the project and deploy to Netlify |
+| Script            | Description                                 |
+| :---------------- | :------------------------------------------ |
+| `npm run dev`     | Start a local development server with Vite. |
+| `npm run build`   | Build the project for production.           |
+| `npm run preview` | Preview the production build locally.       |
+| `npm run deploy`  | Build the project and deploy to Netlify     |
 
 ### 🛡️ Git Hooks
 
@@ -214,11 +214,11 @@ class CardsList extends PureComponent {}
 ![Husky](https://img.shields.io/badge/Husky-4E8CAB?logo=husky&logoColor=white)  
 **Husky** – Used for automating code checks with Git hooks.
 
-![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify&logoColor=white)  
-**Netlify** – Used for hosting and continuous deployment of the application.
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)  
+**Vercel** – Used for hosting and continuous deployment of the application.
 
-![Zustand](https://img.shields.io/badge/Zustand-764ABC?logo=redux&logoColor=white)  
-**Zustand** – Used for lightweight state management with a simple and flexible API.
+![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-764ABC?logo=redux&logoColor=white)  
+**Redux Toolkit** – Used for efficient Redux development with simplified store setup and modern Redux patterns.
 
 ![Zod](https://img.shields.io/badge/Zod-3B82F6?logo=typescript&logoColor=white)  
 **Zod** – Used for TypeScript-first schema validation and type inference.
