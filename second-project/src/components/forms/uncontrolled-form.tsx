@@ -222,9 +222,9 @@ export default function UncontrolledForm({ onSubmit }: Props) {
           dataTestId="gender-select"
         >
           <option value="">{translations.forms.selectGender}</option>
-          <option value="male">{translations.forms.male}</option>
-          <option value="female">{translations.forms.female}</option>
-          <option value="other">{translations.forms.other}</option>
+          <option value={translations.forms.male}>{translations.forms.male}</option>
+          <option value={translations.forms.female}>{translations.forms.female}</option>
+          <option value={translations.forms.other}>{translations.forms.other}</option>
         </Select>
       </Field>
 
@@ -244,7 +244,7 @@ export default function UncontrolledForm({ onSubmit }: Props) {
           dataTestId="country-input"
           autoComplete="country"
         />
-        <datalist id="countries" role="listbox">
+        <datalist id="countries">
           {countries.map((country) => (
             <option key={`${country.code}-${country.iso}`} value={country.name} />
           ))}

@@ -222,9 +222,9 @@ export default function ControlledForm({ onSubmit }: Props) {
           register={register}
         >
           <option value="">{translations.forms.selectGender}</option>
-          <option value="male">{translations.forms.male}</option>
-          <option value="female">{translations.forms.female}</option>
-          <option value="other">{translations.forms.other}</option>
+          <option value={translations.forms.male}>{translations.forms.male}</option>
+          <option value={translations.forms.female}>{translations.forms.female}</option>
+          <option value={translations.forms.other}>{translations.forms.other}</option>
         </Select>
       </Field>
 
