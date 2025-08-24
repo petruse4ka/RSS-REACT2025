@@ -258,4 +258,4 @@ export const MAX_FILE_SIZE = 5 * 1024 * 1024;
 export const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png'];
 
 export const FORM_INPUT_CLASSNAME =
-  'mt-1 w-full focus:border-yellow-300 hover:border-yellow-200 dark:border-gray-600 dark:bg-gray-700 bg-gray-100 dark:text-white dark:focus:border-cyan-500 dark:hover:border-cyan-400';
+  'mt-1 w-full focus:border-yellow-300 hover:border-yellow-200 dark:border-gray-600 dark:bg-gray-700 bg-gray-100 dark:text-white dark:focus:border-cyan-500 dark:hover:border-cyan-40 pr-10';

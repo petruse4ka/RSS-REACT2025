@@ -10,6 +10,7 @@ import SubmitButton from '@/components/forms-ui/submit-button';
 import AcceptTerms from '@/components/forms-ui/accept-terms';
 import FileUploadField from '@/components/forms-ui/file-upload-field';
 import CountryField from '@/components/forms-ui/country-field';
+import PasswordField from '@/components/forms-ui/password-field';
 import { useAppSelector } from '@/store/hooks';
 import { selectCountries } from '@/store/selectors';
 import { formSchema } from '@/schemas/form-schema';
@@ -28,6 +29,8 @@ export default function UncontrolledForm({ onSubmit }: Props) {
   const [errors, setErrors] = useState<FormErrors>({});
   const [passwordStrength, setPasswordStrength] = useState<number>(0);
   const [selectedFileName, setSelectedFileName] = useState<string>('');
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState<boolean>(false);
 
   const countries = useAppSelector(selectCountries);
 
@@ -176,15 +179,17 @@ export default function UncontrolledForm({ onSubmit }: Props) {
         />
       </Field>
 
-      <Field
+      <PasswordField
         label={translations.forms.password}
         htmlFor="password"
         error={getErrorMessage('password')}
         dataTestId="password-field"
+        isVisible={passwordVisible}
+        onToggleVisibility={() => setPasswordVisible(!passwordVisible)}
       >
         <Input
           ref={passwordRef}
-          type="password"
+          type={passwordVisible ? 'text' : 'password'}
           id="password"
           placeholder={translations.forms.passwordPlaceholder}
           onChange={handlePasswordChange}
@@ -193,24 +198,26 @@ export default function UncontrolledForm({ onSubmit }: Props) {
           autoComplete="new-password"
         />
         <PasswordStrengthIndicator strength={passwordStrength} />
-      </Field>
+      </PasswordField>
 
-      <Field
+      <PasswordField
         label={translations.forms.confirmPassword}
         htmlFor="confirmPassword"
         error={getErrorMessage('confirmPassword')}
         dataTestId="confirm-password-field"
+        isVisible={confirmPasswordVisible}
+        onToggleVisibility={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
       >
         <Input
           ref={confirmPasswordRef}
-          type="password"
+          type={confirmPasswordVisible ? 'text' : 'password'}
           id="confirmPassword"
           placeholder={translations.forms.confirmPasswordPlaceholder}
           className={FORM_INPUT_CLASSNAME}
           dataTestId="confirm-password-input"
           autoComplete="new-password"
         />
-      </Field>
+      </PasswordField>
 
       <Field
         label={translations.forms.gender}
