@@ -25,7 +25,7 @@ export const formSchema = z
       .regex(/\d/, 'passwordStrength')
       .regex(/[А-ЯA-Z]/, 'passwordStrength')
       .regex(/[а-яa-z]/, 'passwordStrength')
-      .regex(/[!@#$%^&*(),.?":{}|<>]/, 'passwordStrength'),
+      .regex(/[-+=`!@#$%^&*(),.?":{}|<>]/, 'passwordStrength'),
     confirmPassword: z
       .string()
       .min(1, 'passwordRequired')

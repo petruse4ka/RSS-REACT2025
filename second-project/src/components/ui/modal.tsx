@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import type { ReactNode } from 'react';
+import type { ReactNode, MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
 import Button from './button';
 
@@ -33,7 +33,7 @@ export default function Modal({ isOpen, onClose, children, title, dataTestId }: 
 
   if (!isOpen) return null;
 
-  const handleOutsideClick = (event: React.MouseEvent) => {
+  const handleOutsideClick = (event: MouseEvent) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
@@ -45,7 +45,7 @@ export default function Modal({ isOpen, onClose, children, title, dataTestId }: 
     ? createPortal(
         <div
           className="fixed inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm dark:bg-black/80"
-          onClick={handleOutsideClick}
+          onMouseDown={handleOutsideClick}
           data-testid={dataTestId}
         >
           <div
