@@ -28,7 +28,7 @@ export default function PasswordField({
         <Button
           type="button"
           onClick={onToggleVisibility}
-          className="absolute top-2.5 right-0"
+          className="group absolute top-2.5 right-0"
           aria-label={isVisible ? 'Hide password' : 'Show password'}
           text=""
           dataTestId="password-toggle"
@@ -41,7 +41,7 @@ export default function PasswordField({
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 stroke-current text-stone-500 transition-colors duration-300 hover:text-cyan-500"
+              className="h-4 w-4 stroke-current text-stone-500 transition-colors duration-300 group-hover:text-cyan-500"
             >
               <g id="Edit / Hide">
                 <path
@@ -60,7 +60,7 @@ export default function PasswordField({
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 stroke-current text-stone-500 transition-colors duration-300 hover:text-cyan-500"
+              className="h-4 w-4 stroke-current text-stone-500 transition-colors duration-300 group-hover:text-cyan-500"
             >
               <g id="Edit / Show">
                 <g id="Vector">
