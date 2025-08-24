@@ -66,7 +66,7 @@ export const en = {
     noUsers:
       'There are no users yet, but you can change that! Sumbit the form and add as many users as you want!',
     totalUsers: 'Total Users',
-    clearAllUsers: 'Clear All Users',
+    clearAllUsers: 'Delete All Users',
     deleteUser: 'Delete User',
     validation: {
       nameRequired: 'Name is required',
