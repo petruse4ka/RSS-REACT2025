@@ -1,28 +1,28 @@
-import type { PasswordStrength } from '@/types/types';
-
-export const getPasswordStrength = (password: string): PasswordStrength => {
-  if (!password) return '';
+export const getPasswordStrength = (password: string): number => {
+  if (!password) return 0;
 
   let score = 0;
   if (/\d/.test(password)) score++;
-  if (/[A-Z]/.test(password)) score++;
-  if (/[a-z]/.test(password)) score++;
+  if (/[а-яa-z]/.test(password)) score++;
+  if (/[А-ЯA-Z]/.test(password)) score++;
   if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) score++;
   if (password.length >= 8) score++;
 
-  if (score < 3) return 'weak';
-  if (score < 5) return 'medium';
-  return 'strong';
+  return score;
 };
 
-export const getPasswordStrengthColor = (passwordStrength: PasswordStrength) => {
+export const getPasswordStrengthColor = (passwordStrength: number) => {
   switch (passwordStrength) {
-    case 'weak':
+    case 0:
+      return 'text-red-600';
+    case 1:
       return 'text-red-500';
-    case 'medium':
+    case 3:
       return 'text-yellow-500';
-    case 'strong':
+    case 4:
       return 'text-green-500';
+    case 5:
+      return 'text-green-600';
     default:
       return 'text-gray-500';
   }

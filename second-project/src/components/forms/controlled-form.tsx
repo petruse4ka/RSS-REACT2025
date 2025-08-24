@@ -8,13 +8,14 @@ import Input from '@/components/ui/input';
 import Checkbox from '@/components/ui/checkbox';
 import Field from '@/components/ui/field';
 import Select from '@/components/ui/select';
+import PasswordStrengthIndicator from '@/components/ui/password-indicator';
 import { useAppSelector } from '@/store/hooks';
 import { selectCountries } from '@/store/selectors';
 import { formSchema } from '@/schemas/form-schema';
 import type { FormData, FormErrors } from '@/types/interfaces';
-import { getPasswordStrength, getPasswordStrengthColor } from '@/utils/get-password-strength';
+import { getPasswordStrength } from '@/utils/get-password-strength';
 import convertToBase64 from '@/utils/convert-to-base64';
-import type { PasswordStrength, FormSchema as FormSchemaType } from '@/types/types';
+import type { FormSchema as FormSchemaType } from '@/types/types';
 import { FORM_INPUT_CLASSNAME } from '@/constants';
 
 type Props = {
@@ -23,7 +24,7 @@ type Props = {
 
 export default function ControlledForm({ onSubmit }: Props) {
   const translations = useLocale();
-  const [passwordStrength, setPasswordStrength] = useState<PasswordStrength>('');
+  const [passwordStrength, setPasswordStrength] = useState<number>(0);
   const [selectedFileName, setSelectedFileName] = useState<string>('');
   const [passwordState, setPasswordState] = useState<string>('');
   const [confirmPasswordState, setConfirmPasswordState] = useState<string>('');
@@ -179,15 +180,7 @@ export default function ControlledForm({ onSubmit }: Props) {
             trigger('confirmPassword');
           }}
         />
-        <div className="mt-1 flex items-center justify-between">
-          <span className={`text-sm ${getPasswordStrengthColor(passwordStrength)}`}>
-            {
-              translations.forms.passwordStrength[
-                passwordStrength as keyof typeof translations.forms.passwordStrength
-              ]
-            }
-          </span>
-        </div>
+        <PasswordStrengthIndicator strength={passwordStrength} />
       </Field>
 
       <Field
