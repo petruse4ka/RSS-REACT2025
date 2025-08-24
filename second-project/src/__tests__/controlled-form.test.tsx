@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { vi } from 'vitest';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
@@ -53,11 +53,14 @@ test('ControlledForm renders all form fields', () => {
   expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
 });
 
-test('ControlledForm shows password strength indicator', () => {
+test('ControlledForm shows password strength indicator', async () => {
   renderWithProvider(<ControlledForm onSubmit={mockOnSubmit} />);
 
   const passwordInput = screen.getByLabelText('Password');
-  fireEvent.change(passwordInput, { target: { value: 'test123' } });
+
+  await act(async () => {
+    fireEvent.change(passwordInput, { target: { value: 'test123' } });
+  });
 
   expect(screen.getByText('Weak')).toBeInTheDocument();
   expect(screen.getByText('Strong')).toBeInTheDocument();
@@ -69,8 +72,10 @@ test('ControlledForm shows password mismatch error when passwords do not match',
   const passwordInput = screen.getByLabelText('Password');
   const confirmPasswordInput = screen.getByLabelText('Confirm Password');
 
-  fireEvent.change(passwordInput, { target: { value: 'Password123!' } });
-  fireEvent.change(confirmPasswordInput, { target: { value: 'DifferentPassword123!' } });
+  await act(async () => {
+    fireEvent.change(passwordInput, { target: { value: 'Password123!' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'DifferentPassword123!' } });
+  });
 
   await waitFor(() => {
     expect(screen.getByText('Passwords do not match')).toBeInTheDocument();
@@ -105,10 +110,14 @@ test('ControlledForm shows validation error for invalid country', async () => {
 
   const countryInput = screen.getByLabelText('Country');
 
-  fireEvent.change(countryInput, { target: { value: 'InvalidCountry' } });
+  await act(async () => {
+    fireEvent.change(countryInput, { target: { value: 'InvalidCountry' } });
+  });
 
   const submitButton = screen.getByRole('button', { name: 'Submit' });
-  fireEvent.click(submitButton);
+  await act(async () => {
+    fireEvent.click(submitButton);
+  });
 
   await waitFor(() => {
     expect(screen.getByText('Please select a valid country from the list')).toBeInTheDocument();
