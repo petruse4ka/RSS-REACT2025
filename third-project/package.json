@@ -1,0 +1,78 @@
+{
+  "name": "rss-react2025-project1",
+  "version": "1.0.0",
+  "description": "Third personal project for the React 2025 course at RS School",
+  "homepage": "https://petruse4ka.github.io/RSS-REACT2025/third-project",
+  "bugs": {
+    "url": "https://github.com/petruse4ka/RSS-REACT2025/issues"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petruse4ka/RSS-REACT2025.git"
+  },
+  "license": "ISC",
+  "author": "Konstantin Petrov",
+  "type": "module",
+  "scripts": {
+    "check": "npm run lint && npm run format:check && npm run test",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,css,scss}\"",
+    "format:check": "prettier --list-different \"src/**/*.{ts,tsx,js,jsx,css,scss}\"",
+    "format:fix": "prettier --write --ignore-unknown \"src/**/*.{ts,tsx,js,jsx,css,scss}\"",
+    "lint": "eslint \"src/**/*.{ts,tsx,js}\" --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx,js}\" --ext .ts,.tsx,.js,.jsx --fix",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && netlify deploy --prod --dir=dist",
+    "prepare": "cd .. && husky ./third-project/.husky",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "npm run format",
+      "npm run lint"
+    ],
+    "src/**/*.{css,scss}": [
+      "npm run format"
+    ]
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.7.1",
+    "react-router-dom": "^7.7.1",
+    "save-dev": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.30.1",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "eslint": "^9.30.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-compiler": "^19.0.0-beta-af1b7da-20250417",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
+    "lint-staged": "^16.1.2",
+    "netlify-cli": "^22.4.0",
+    "postcss": "^8.5.6",
+    "prettier": "3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "sass": "^1.89.2",
+    "tailwindcss": "^4.1.11",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.35.1",
+    "vite": "^7.0.4",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}
