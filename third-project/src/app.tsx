@@ -1,3 +1,3 @@
 export default function App() {
-  return <div style={{ backgroundColor: 'red' }}>TEST</div>;
+  return <div className="bg-cyan-700">TEST</div>;
 }
