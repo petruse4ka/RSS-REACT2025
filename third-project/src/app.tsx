@@ -19,14 +19,14 @@ export default function App() {
     <ErrorBoundary
       texts={errorTexts}
       image={errorImage}
-      className="min-h-screen bg-stone-100 dark:bg-zinc-950"
-      containerClassName="bg-white dark:bg-zinc-800 backdrop-blur-sm text-gray-900 dark:text-white flex flex-col"
+      className="min-h-screen bg-zinc-50 dark:bg-zinc-950"
+      containerClassName="bg-zinc-100 dark:bg-zinc-800 backdrop-blur-sm text-gray-900 dark:text-white flex flex-col"
       imageClassName="w-64 h-64"
       buttonClassName="bg-scooter-500 border border-scooter-500 hover:bg-scooter-400 hover:border-scooter-400 dark:bg-shamrock-400 dark:border-shamrock-400 dark:hover:bg-shamrock-500 dark:hover:border-shamrock-500"
     >
       <div className="flex min-h-screen flex-col">
         <Header />
-        <div className="dark:text-shamrock-100 flex-1 bg-stone-100 px-5 pb-10 text-gray-500 lg:px-20 dark:bg-zinc-950">
+        <div className="dark:text-shamrock-100 flex-1 bg-zinc-50 px-5 pb-10 text-gray-500 lg:px-20 dark:bg-zinc-950">
           <div className="mx-auto flex max-w-[1440px] grow-1 flex-col items-center py-5 md:py-10">
             <Outlet />
           </div>

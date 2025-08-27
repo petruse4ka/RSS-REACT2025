@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header
       data-testid="header"
-      className="dark:text-shamrock-400 dark:border-shamrock-400 border-scooter-500 text-scooter-500 w-full border-b bg-white px-5 py-4 lg:px-20 dark:bg-zinc-950"
+      className="dark:text-shamrock-400 dark:border-shamrock-400 border-scooter-500 text-scooter-500 w-full border-b bg-zinc-50 px-5 py-4 lg:px-20 dark:bg-zinc-950"
     >
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-4 flex flex-col-reverse items-center justify-between gap-5 sm:flex-row">
