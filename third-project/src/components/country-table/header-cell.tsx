@@ -7,6 +7,7 @@ type Props = {
   currentSortField: SortField;
   currentSortDirection: SortDirection;
   onSort: (field: SortField) => void;
+  isSticky?: boolean;
 };
 
 export default function TableHeaderCell({
@@ -15,6 +16,7 @@ export default function TableHeaderCell({
   currentSortField,
   currentSortDirection,
   onSort,
+  isSticky = false,
 }: Props) {
   const translations = useLocale();
   const isCurrentlySorted = currentSortField === field;
@@ -33,7 +35,9 @@ export default function TableHeaderCell({
 
   return (
     <th
-      className="dark:hover:bg-shamrock-400 hover:bg-scooter-400 group cursor-pointer px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase transition-colors duration-300 select-none dark:text-zinc-50"
+      className={`dark:hover:bg-shamrock-400 hover:bg-scooter-400 group cursor-pointer px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase select-none dark:text-zinc-50 ${
+        isSticky ? 'sticky left-0 bg-zinc-100 dark:bg-zinc-900' : ''
+      }`}
       onClick={() => onSort(field)}
     >
       <div className="flex items-center">

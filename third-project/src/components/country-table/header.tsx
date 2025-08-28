@@ -29,6 +29,7 @@ export default function TableHeader({
           currentSortField={currentSortField}
           currentSortDirection={currentSortDirection}
           onSort={onSort}
+          isSticky={true}
         />
         <TableHeaderCell
           field="iso_code"

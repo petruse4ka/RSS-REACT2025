@@ -41,7 +41,7 @@ export default function CountryList({ data }: Props) {
   return (
     <Profiler id="CountriesList" onRender={onRender}>
       <div className="w-full">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto pb-3">
           <table className="min-w-full rounded-lg">
             <TableHeader
               mainTableFields={mainTableFields}
