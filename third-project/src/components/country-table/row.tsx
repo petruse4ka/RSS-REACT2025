@@ -20,7 +20,7 @@ export default function CountryItem({ country, mainTableFields, additionalTableF
 
   return (
     <tr
-      className={`hover:bg-scooter-400 dark:hover:bg-shamrock-400 transition-colors duration-150`}
+      className={`hover:bg-scooter-400 dark:hover:bg-shamrock-400 transition-colors duration-300`}
     >
       <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-700 dark:text-zinc-50">
         {country.name}

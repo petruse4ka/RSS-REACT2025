@@ -35,6 +35,11 @@ export const ru = {
     loader: 'Загрузка...',
     countries: 'стран за',
   },
+  sorting: {
+    sortBy: 'Сортировка по:',
+    ascending: '↓',
+    descending: '↑',
+  },
   tableFields: {
     country: 'Страна',
     isoCode: 'Код ISO',

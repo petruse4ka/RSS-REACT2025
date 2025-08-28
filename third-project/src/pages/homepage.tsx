@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import type { CountryListItem } from '../types/interfaces';
 import fetchEmissionsData from '../services/fetch-emmission-data';
 import transformEmissionsData from '../services/transform-emmission-data';
-import CountryList from '../components/country-list/list';
+import CountryList from '../components/country-table/table';
 import { useLocale } from '../hooks/use-locale';
 
 export default function HomePage() {

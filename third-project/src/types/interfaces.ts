@@ -1,3 +1,5 @@
+import type { SortField, SortDirection } from './types';
+
 export interface ErrorTexts {
   title: string;
   message: string;
@@ -21,4 +23,14 @@ export interface CountryListItem {
   name: string;
   iso_code: string;
   [key: string]: number | string;
+}
+
+export interface SortConfig {
+  field: SortField;
+  direction: SortDirection;
+}
+
+export interface TableField {
+  key: string;
+  label: string;
 }

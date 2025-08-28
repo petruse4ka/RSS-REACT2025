@@ -35,6 +35,11 @@ export const en = {
     loader: 'Loading...',
     countries: 'countries for',
   },
+  sorting: {
+    sortBy: 'Sorting by:',
+    ascending: '↓',
+    descending: '↑',
+  },
   tableFields: {
     country: 'Country',
     isoCode: 'ISO Code',

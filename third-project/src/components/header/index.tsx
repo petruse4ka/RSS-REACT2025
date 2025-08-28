@@ -17,7 +17,7 @@ export default function Header() {
           <Link
             data-testid="header-logo"
             to="/"
-            className="dark:hover:text-shamrock-500 hover:text-scooter-400 flex items-end gap-3 transition-all duration-300"
+            className="dark:hover:text-shamrock-500 hover:text-scooter-400 flex items-end gap-3 transition-colors duration-300"
           >
             <img src={logoImage} alt="Logo" className="h-8 w-8" />
             <h1 className="text-xl font-bold">{translations.header.logo}</h1>
