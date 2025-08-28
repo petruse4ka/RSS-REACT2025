@@ -3,6 +3,7 @@ import useMainTableFields from '@/hooks/use-main-table-fields';
 import useAdditionalTableFields from '@/hooks/use-additional-table-fields';
 import { useLocale } from '@/hooks/use-locale';
 import CountryItem from './item';
+import { Profiler } from 'react';
 
 type Props = {
   data: CountryListItem[];
@@ -21,46 +22,59 @@ export default function CountryList({ data }: Props) {
     );
   }
 
+  function onRender(
+    id: string,
+    phase: string,
+    actualDuration: number,
+    baseDuration: number,
+    startTime: number,
+    commitTime: number
+  ) {
+    console.log(id, phase, actualDuration, baseDuration, startTime, commitTime);
+  }
+
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="min-w-full rounded-lg">
-        <thead className="border-scooter-400 dark:border-shamrock-400 border-b">
-          <tr>
-            <th className="px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase dark:text-zinc-50">
-              {translations.tableFields.country}
-            </th>
-            <th className="px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase dark:text-zinc-50">
-              {translations.tableFields.isoCode}
-            </th>
-            {mainTableFields.map((field) => (
-              <th
-                key={field.key}
-                className="px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase dark:text-zinc-50"
-              >
-                {field.label}
+    <Profiler id="CountriesList" onRender={onRender}>
+      <div className="w-full overflow-x-auto">
+        <table className="min-w-full rounded-lg">
+          <thead className="border-scooter-400 dark:border-shamrock-400 border-b">
+            <tr>
+              <th className="px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase dark:text-zinc-50">
+                {translations.tableFields.country}
               </th>
-            ))}
-            {additionalTableFields.map((field) => (
-              <th
-                key={field.key}
-                className="mb-5 px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase dark:text-zinc-50"
-              >
-                {field.label}
+              <th className="px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase dark:text-zinc-50">
+                {translations.tableFields.isoCode}
               </th>
+              {mainTableFields.map((field) => (
+                <th
+                  key={field.key}
+                  className="px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase dark:text-zinc-50"
+                >
+                  {field.label}
+                </th>
+              ))}
+              {additionalTableFields.map((field) => (
+                <th
+                  key={field.key}
+                  className="mb-5 px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase dark:text-zinc-50"
+                >
+                  {field.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-scooter-400 dark:divide-shamrock-400 divide-y">
+            {data.map((country) => (
+              <CountryItem
+                key={`${country.name}-${country.year}`}
+                country={country}
+                mainTableFields={mainTableFields}
+                additionalTableFields={additionalTableFields}
+              />
             ))}
-          </tr>
-        </thead>
-        <tbody className="divide-scooter-400 dark:divide-shamrock-400 divide-y">
-          {data.map((country) => (
-            <CountryItem
-              key={`${country.name}-${country.year}`}
-              country={country}
-              mainTableFields={mainTableFields}
-              additionalTableFields={additionalTableFields}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      </div>
+    </Profiler>
   );
 }
