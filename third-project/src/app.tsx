@@ -22,7 +22,7 @@ export default function App() {
       className="min-h-screen bg-zinc-50 dark:bg-zinc-950"
       containerClassName="bg-zinc-100 dark:bg-zinc-800 backdrop-blur-sm text-gray-900 dark:text-white flex flex-col"
       imageClassName="w-64 h-64"
-      buttonClassName="bg-scooter-500 border border-scooter-500 hover:bg-scooter-400 hover:border-scooter-400 dark:bg-shamrock-400 dark:border-shamrock-400 dark:hover:bg-shamrock-500 dark:hover:border-shamrock-500"
+      buttonClassName="bg-scooter-500 border border-scooter-500 hover:bg-scooter-400 hover:border-scooter-400 dark:bg-shamrock-400 dark:border-shamrock-400 dark:hover:bg-shamrock-500 dark:hover:border-shamrock-500 transition-colors duration-300"
     >
       <div className="flex min-h-screen flex-col">
         <Header />

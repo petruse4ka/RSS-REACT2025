@@ -21,7 +21,7 @@ export default function TableHeaderCell({
 
   const addSortArrow = () => {
     return (
-      <span className="text-scooter-500 dark:text-shamrock-500 ml-2 w-2 font-bold">
+      <span className="text-scooter-500 dark:text-shamrock-500 ml-2 w-2 font-bold group-hover:text-zinc-700 group-hover:dark:text-zinc-50">
         {isCurrentlySorted
           ? currentSortDirection === 'asc'
             ? translations.sorting.ascending
@@ -33,7 +33,7 @@ export default function TableHeaderCell({
 
   return (
     <th
-      className="cursor-pointer px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase transition-colors duration-300 select-none hover:bg-zinc-100 dark:text-zinc-50 dark:hover:bg-zinc-700"
+      className="dark:hover:bg-shamrock-400 hover:bg-scooter-400 group cursor-pointer px-6 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase transition-colors duration-300 select-none dark:text-zinc-50"
       onClick={() => onSort(field)}
     >
       <div className="flex items-center">
