@@ -37,7 +37,7 @@ export default function FileUploadField({
         >
           {chooseFileText}
         </label>
-        <span className="ml-3 text-sm text-gray-500 dark:text-gray-400">
+        <span className="ml-3 max-w-[150px] truncate text-sm text-gray-500 sm:max-w-[500px] dark:text-gray-400">
           {selectedFileName || noFileChosenText}
         </span>
       </div>
