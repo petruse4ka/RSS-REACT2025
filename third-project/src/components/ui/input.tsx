@@ -13,6 +13,7 @@ type Props = {
   accept?: string;
   autoComplete?: string;
   autoFocus?: boolean;
+  readOnly?: boolean;
 };
 
 export default function Input({
@@ -28,6 +29,7 @@ export default function Input({
   accept,
   autoComplete,
   autoFocus,
+  readOnly,
 }: Props) {
   const defaultClassName =
     'flex-1 px-4 py-2 border rounded-sm transition duration-300 focus:outline-none';
@@ -47,6 +49,7 @@ export default function Input({
       accept={accept}
       autoComplete={autoComplete}
       autoFocus={autoFocus}
+      readOnly={readOnly}
     />
   );
 }

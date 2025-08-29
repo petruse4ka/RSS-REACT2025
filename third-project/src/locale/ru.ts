@@ -40,6 +40,13 @@ export const ru = {
     ascending: '↓',
     descending: '↑',
   },
+  controls: {
+    yearSelector: 'Выберите год',
+    search: 'Поиск',
+    searchPlaceholder: 'Поиск стран...',
+    currentSorting: 'Текущая сортировка',
+    noResults: 'Результатов нет. Уточните критерии поиска.',
+  },
   tableFields: {
     country: 'Страна',
     isoCode: 'Код ISO',

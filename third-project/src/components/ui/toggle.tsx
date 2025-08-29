@@ -23,7 +23,7 @@ export default function Toggle({
       className={`flex cursor-pointer items-center justify-center focus:outline-none ${className}`}
     >
       <div className="relative">
-        <div className="relative h-8 w-16 rounded-full bg-slate-300 dark:bg-zinc-800">
+        <div className="relative h-8 w-16 rounded-full bg-zinc-300 dark:bg-zinc-800">
           <div className="absolute top-1/2 left-2 -translate-y-1/2 transform">
             <img src={leftIcon} alt={leftTitle} className="h-4 w-4" />
           </div>

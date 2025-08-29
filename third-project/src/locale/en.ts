@@ -40,6 +40,13 @@ export const en = {
     ascending: '↓',
     descending: '↑',
   },
+  controls: {
+    yearSelector: 'Select Year',
+    search: 'Search',
+    searchPlaceholder: 'Search countries...',
+    currentSorting: 'Current Sorting',
+    noResults: 'No results. Refine search criteria.',
+  },
   tableFields: {
     country: 'Country',
     isoCode: 'ISO Code',
