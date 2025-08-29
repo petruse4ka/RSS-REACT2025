@@ -5,6 +5,8 @@ import transformEmissionsData from '../services/transform-emmission-data';
 import EmissionTable from '../components/emission-table/table';
 import { useLocale } from '../hooks/use-locale';
 import getAvailableYears from '../utils/get-available-years';
+import { TableSkeleton } from '../components/ui/skeleton';
+import Button from '@/components/ui/button';
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,28 +57,39 @@ export default function HomePage() {
     setSelectedYear(year);
   };
 
-  return isError ? (
-    <div className="py-8 text-center">
-      <div className="mb-4 text-red-500">{translations.table.error}</div>
-    </div>
-  ) : isLoading ? (
-    <div className="py-8 text-center">
-      <div className="mb-4 text-gray-500">{translations.table.loader}</div>
-    </div>
-  ) : (
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  return (
     <div className="mx-auto w-full space-y-6">
       <h2 className="text-scooter-400 dark:text-shamrock-400 mb-2 text-center text-3xl font-bold">
         {translations.homepage.title}
       </h2>
 
-      <div className="border-scooter-400 dark:border-shamrock-400 mt-10 rounded-lg border p-6">
-        <EmissionTable
-          data={countriesAnnualData}
-          availableYears={availableYears}
-          selectedYear={selectedYear}
-          onYearChange={handleYearChange}
-        />
-      </div>
+      {isError ? (
+        <div className="py-8 text-center">
+          <div className="mb-4 text-red-500">{translations.table.error}</div>
+          <Button
+            onClick={handleRefresh}
+            className="bg-scooter-500 hover:bg-scooter-400 dark:bg-shamrock-400 dark:hover:bg-shamrock-500 mt-8 text-white"
+            text={translations.homepage.refresh}
+          />
+        </div>
+      ) : isLoading ? (
+        <div className="border-scooter-400 dark:border-shamrock-400 mt-10 rounded-lg border p-6">
+          <TableSkeleton />
+        </div>
+      ) : (
+        <div className="border-scooter-400 dark:border-shamrock-400 mt-10 rounded-lg border p-6">
+          <EmissionTable
+            data={countriesAnnualData}
+            availableYears={availableYears}
+            selectedYear={selectedYear}
+            onYearChange={handleYearChange}
+          />
+        </div>
+      )}
     </div>
   );
 }

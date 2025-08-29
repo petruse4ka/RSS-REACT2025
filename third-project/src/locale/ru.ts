@@ -13,6 +13,7 @@ export const ru = {
   },
   homepage: {
     title: 'Таблица выбросов CO2',
+    refresh: 'Обновить страницу',
   },
   error404: {
     title: '404 - Страница не найдена',

@@ -13,6 +13,7 @@ export const en = {
   },
   homepage: {
     title: 'CO2 Emissions Table',
+    refresh: 'Refresh the page',
   },
   error404: {
     title: '404 - Page Not Found',
