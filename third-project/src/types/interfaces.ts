@@ -11,7 +11,7 @@ export interface AnnualData {
 }
 
 export interface CountryData {
-  iso_code: string;
+  iso_code?: string;
   data: AnnualData[];
 }
 
@@ -21,8 +21,8 @@ export interface EmissionsData {
 
 export interface CountryListItem {
   name: string;
-  iso_code: string;
-  [key: string]: number | string;
+  iso_code?: string;
+  [key: string]: number | string | undefined;
 }
 
 export interface SortConfig {

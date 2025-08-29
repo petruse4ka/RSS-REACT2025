@@ -26,7 +26,7 @@ export default function CountryItem({ country, mainTableFields, additionalTableF
         {country.name}
       </td>
       <td className="px-6 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 dark:text-zinc-50">
-        {country.iso_code}
+        {country.iso_code || translations.table.noData}
       </td>
       {mainTableFields.map((field) => {
         const fieldValue = country[field.key];
