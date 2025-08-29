@@ -1,6 +1,10 @@
 import { useLocale } from '@/hooks/use-locale';
+import { useState } from 'react';
+import type { MouseEvent } from 'react';
 import Select from '@/components/ui/select';
 import Input from '@/components/ui/input';
+import Tooltip from '@/components/ui/tooltip';
+
 import type { CountryListItem, TableField } from '@/types/interfaces';
 import type { SortField, SortDirection } from '@/types/types';
 import type { ChangeEvent } from 'react';
@@ -40,6 +44,9 @@ export default function TableControls({
   });
   const countryNamesAutocomplete = Array.from(countryNames).sort();
 
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [coords, setCoords] = useState({ left: 0, top: 0 });
+
   const getSortingLabel = (fieldKey: string): string => {
     if (fieldKey === 'name') return translations.tableFields.country;
     if (fieldKey === 'iso_code') return translations.tableFields.isoCode;
@@ -59,6 +66,19 @@ export default function TableControls({
 
   const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
     onYearChange(Number(event.target.value));
+  };
+
+  const handleMouseEnter = (event: MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setCoords({
+      left: rect.left,
+      top: rect.top + rect.height,
+    });
+    setShowTooltip(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowTooltip(false);
   };
 
   return (
@@ -104,10 +124,10 @@ export default function TableControls({
           </datalist>
         </div>
 
-        <div className="space-y-2">
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="space-y-2">
           <label
             htmlFor="current-sorting"
-            className="block text-sm text-zinc-700 dark:text-zinc-300"
+            className="block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
             {translations.controls.currentSorting}
           </label>
@@ -119,6 +139,8 @@ export default function TableControls({
           />
         </div>
       </div>
+
+      {showTooltip && <Tooltip coords={coords} text={translations.controls.sortingTooltip} />}
     </div>
   );
 }

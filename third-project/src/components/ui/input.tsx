@@ -1,4 +1,4 @@
-import type { ChangeEvent, KeyboardEvent } from 'react';
+import type { ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 
 type Props = {
   placeholder?: string;
@@ -6,6 +6,8 @@ type Props = {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeCapture?: (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  onMouseEnter?: (event: MouseEvent<HTMLInputElement>) => void;
+  onMouseLeave?: (event: MouseEvent<HTMLInputElement>) => void;
   className: string;
   id?: string;
   name?: string;
@@ -22,6 +24,8 @@ export default function Input({
   onChange,
   onChangeCapture,
   onKeyDown,
+  onMouseEnter,
+  onMouseLeave,
   className,
   id,
   name,
@@ -42,6 +46,8 @@ export default function Input({
       onChange={onChange}
       onChangeCapture={onChangeCapture}
       onKeyDown={onKeyDown}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       className={`${defaultClassName} ${className}`}
       id={id}
       name={name || id}

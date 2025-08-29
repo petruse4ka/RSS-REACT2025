@@ -46,6 +46,7 @@ export const en = {
     searchPlaceholder: 'Search countries...',
     currentSorting: 'Current Sorting',
     noResults: 'No results. Refine search criteria.',
+    sortingTooltip: 'Click on column title to change sorting',
   },
   tableFields: {
     country: 'Country',

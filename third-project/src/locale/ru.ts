@@ -46,6 +46,7 @@ export const ru = {
     searchPlaceholder: 'Поиск стран...',
     currentSorting: 'Текущая сортировка',
     noResults: 'Результатов нет. Уточните критерии поиска.',
+    sortingTooltip: 'Нажмите на заголовок столбца для изменения сортировки',
   },
   tableFields: {
     country: 'Страна',
