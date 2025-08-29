@@ -47,6 +47,13 @@ export const en = {
     currentSorting: 'Current Sorting',
     noResults: 'No results. Refine search criteria.',
     sortingTooltip: 'Click on column title to change sorting',
+    selectFields: 'Select Fields',
+    selected: 'Selected',
+    of: 'of',
+    selectAll: 'Select All',
+    deselectAll: 'Deselect All',
+    cancel: 'Cancel',
+    save: 'Save',
   },
   tableFields: {
     country: 'Country',

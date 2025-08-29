@@ -7,3 +7,8 @@ type AdditionalTableFieldKeys = ReturnType<typeof useAdditionalTableFields>[numb
 export type SortField = 'name' | 'iso_code' | MainTableFieldKeys | AdditionalTableFieldKeys;
 
 export type SortDirection = 'asc' | 'desc';
+
+export type ColumnSelectionState = {
+  selectedFields: string[];
+  setSelectedFields: (fields: string[]) => void;
+};

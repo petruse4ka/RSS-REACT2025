@@ -67,7 +67,7 @@ export default class ErrorBoundary extends Component<Props, State> {
             )}
             <h1
               data-testid="error-title"
-              className="text-scooter-500 dark:text-shamrock-400 mb-4 text-2xl font-bold"
+              className="text-scooter-400 dark:text-shamrock-400 mb-4 text-2xl font-bold"
             >
               {title}
             </h1>

@@ -1,16 +1,17 @@
 import { useLocale } from '@/hooks/use-locale';
 import { useState } from 'react';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, ChangeEvent } from 'react';
 import Select from '@/components/ui/select';
 import Input from '@/components/ui/input';
 import Tooltip from '@/components/ui/tooltip';
-
-import type { CountryListItem, TableField } from '@/types/interfaces';
+import Modal from '@/components/ui/modal';
+import Button from '@/components/ui/button';
+import ColumnSelectionForm from './column-selection-form';
+import type { CountryTableItem, TableField } from '@/types/interfaces';
 import type { SortField, SortDirection } from '@/types/types';
-import type { ChangeEvent } from 'react';
 
 type Props = {
-  data: CountryListItem[];
+  data: CountryTableItem[];
   availableYears: number[];
   selectedYear: number;
   onYearChange: (year: number) => void;
@@ -35,6 +36,7 @@ export default function TableControls({
   additionalTableFields,
 }: Props) {
   const translations = useLocale();
+  const [modalState, setModalState] = useState<boolean>(false);
 
   const countryNames = new Set<string>();
   data.forEach((country) => {
@@ -83,6 +85,13 @@ export default function TableControls({
 
   return (
     <div className="mb-6 space-y-4">
+      <div className="mb-4 flex items-center justify-end">
+        <Button
+          onClick={() => setModalState(true)}
+          className="bg-scooter-400 hover:bg-scooter-500 dark:bg-shamrock-400 dark:hover:bg-shamrock-500 px-4 py-2 text-white"
+          text={translations.controls.selectFields}
+        />
+      </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="space-y-2">
           <label htmlFor="year-selector" className="block text-sm text-zinc-700 dark:text-zinc-300">
@@ -141,6 +150,13 @@ export default function TableControls({
       </div>
 
       {showTooltip && <Tooltip coords={coords} text={translations.controls.sortingTooltip} />}
+      <Modal
+        isOpen={modalState}
+        onClose={() => setModalState(false)}
+        title={translations.controls.selectFields}
+      >
+        <ColumnSelectionForm onClose={() => setModalState(false)} />
+      </Modal>
     </div>
   );
 }

@@ -19,7 +19,7 @@ export interface EmissionsData {
   [countryName: string]: CountryData;
 }
 
-export interface CountryListItem {
+export interface CountryTableItem {
   name: string;
   iso_code?: string;
   [key: string]: number | string | undefined;

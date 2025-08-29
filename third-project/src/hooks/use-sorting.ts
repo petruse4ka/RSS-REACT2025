@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { SortConfig, CountryListItem } from '@/types/interfaces';
+import type { SortConfig, CountryTableItem } from '@/types/interfaces';
 import type { SortField } from '@/types/types';
 import { sortCountries } from '@/utils/sort-countries';
 
@@ -16,7 +16,7 @@ export function useSorting() {
     }));
   };
 
-  const sortData = (data: CountryListItem[]) => {
+  const sortData = (data: CountryTableItem[]) => {
     return sortCountries(data, sortConfig);
   };
 

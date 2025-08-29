@@ -1,9 +1,9 @@
-import type { EmissionsData, CountryListItem } from '../types/interfaces';
+import type { EmissionsData, CountryTableItem } from '../types/interfaces';
 
 export default function transformEmissionsData(
   data: EmissionsData,
   selectedYear: number
-): CountryListItem[] {
+): CountryTableItem[] {
   return Object.entries(data)
     .map(([countryName, countryData]) => {
       const yearData = countryData.data.find((item) => item.year === selectedYear);

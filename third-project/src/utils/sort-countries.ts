@@ -1,9 +1,9 @@
-import type { CountryListItem, SortConfig } from '@/types/interfaces';
+import type { CountryTableItem, SortConfig } from '@/types/interfaces';
 
 export function sortCountries(
-  countries: CountryListItem[],
+  countries: CountryTableItem[],
   sortConfig: SortConfig
-): CountryListItem[] {
+): CountryTableItem[] {
   const { field, direction } = sortConfig;
 
   return [...countries].sort((a, b) => {

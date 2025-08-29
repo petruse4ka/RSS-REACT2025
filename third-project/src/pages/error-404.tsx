@@ -28,7 +28,7 @@ export default function Error404() {
         </p>
         <Button
           onClick={returnHome}
-          className="bg-scooter-500 hover:bg-scooter-400 dark:bg-shamrock-400 dark:hover:bg-shamrock-500 mt-10"
+          className="bg-scooter-500 hover:bg-scooter-400 dark:bg-shamrock-400 dark:hover:bg-shamrock-500 mt-10 text-white"
           text={translations.error404.button}
         />
       </div>

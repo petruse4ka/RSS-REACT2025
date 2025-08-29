@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import type { CountryListItem, EmissionsData } from '../types/interfaces';
+import type { CountryTableItem, EmissionsData } from '../types/interfaces';
 import fetchEmissionsData from '../services/fetch-emmission-data';
 import transformEmissionsData from '../services/transform-emmission-data';
-import CountryList from '../components/country-table/table';
+import EmissionTable from '../components/emission-table/table';
 import { useLocale } from '../hooks/use-locale';
 import getAvailableYears from '../utils/get-available-years';
 
@@ -10,10 +10,10 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [countriesData, setCountriesData] = useState<EmissionsData>({});
-  const [countriesAnnualData, setCountriesAnnualData] = useState<CountryListItem[]>([]);
+  const [countriesAnnualData, setCountriesAnnualData] = useState<CountryTableItem[]>([]);
   const [availableYears, setAvailableYears] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(2020);
-  const translation = useLocale();
+  const translations = useLocale();
 
   useEffect(() => {
     const loadData = async () => {
@@ -57,20 +57,20 @@ export default function HomePage() {
 
   return isError ? (
     <div className="py-8 text-center">
-      <div className="mb-4 text-red-500">{translation.table.error}</div>
+      <div className="mb-4 text-red-500">{translations.table.error}</div>
     </div>
   ) : isLoading ? (
     <div className="py-8 text-center">
-      <div className="mb-4 text-gray-500">{translation.table.loader}</div>
+      <div className="mb-4 text-gray-500">{translations.table.loader}</div>
     </div>
   ) : (
     <div className="mx-auto w-full space-y-6">
       <h2 className="text-scooter-400 dark:text-shamrock-400 mb-2 text-center text-3xl font-bold">
-        {translation.homepage.title}
+        {translations.homepage.title}
       </h2>
 
       <div className="border-scooter-400 dark:border-shamrock-400 mt-10 rounded-lg border p-6">
-        <CountryList
+        <EmissionTable
           data={countriesAnnualData}
           availableYears={availableYears}
           selectedYear={selectedYear}

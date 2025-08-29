@@ -47,6 +47,13 @@ export const ru = {
     currentSorting: 'Текущая сортировка',
     noResults: 'Результатов нет. Уточните критерии поиска.',
     sortingTooltip: 'Нажмите на заголовок столбца для изменения сортировки',
+    selectFields: 'Выбрать поля',
+    selected: 'Выбрано',
+    of: 'из',
+    selectAll: 'Выбрать все',
+    deselectAll: 'Снять выбор',
+    cancel: 'Отмена',
+    save: 'Сохранить',
   },
   tableFields: {
     country: 'Страна',

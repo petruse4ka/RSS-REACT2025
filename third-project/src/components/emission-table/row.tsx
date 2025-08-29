@@ -1,14 +1,14 @@
-import type { CountryListItem } from '@/types/interfaces';
+import type { CountryTableItem } from '@/types/interfaces';
 import { useLocale } from '@/hooks/use-locale';
 import formatNumber from '@/utils/format-number';
 
 type Props = {
-  country: CountryListItem;
+  country: CountryTableItem;
   mainTableFields: { key: string; label: string }[];
   additionalTableFields: { key: string; label: string }[];
 };
 
-export default function CountryItem({ country, mainTableFields, additionalTableFields }: Props) {
+export default function CountryRow({ country, mainTableFields, additionalTableFields }: Props) {
   const translations = useLocale();
 
   const formatValue = (value: number | string | undefined): string => {

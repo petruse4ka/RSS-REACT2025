@@ -1,31 +1,37 @@
 import { useState } from 'react';
-import type { CountryListItem } from '@/types/interfaces';
+import type { CountryTableItem } from '@/types/interfaces';
 import useMainTableFields from '@/hooks/use-main-table-fields';
 import useAdditionalTableFields from '@/hooks/use-additional-table-fields';
+import { useColumnSelectionStore } from '@/store/column-selection-store';
 import { useLocale } from '@/hooks/use-locale';
 import { useSorting } from '@/hooks/use-sorting';
-import CountryItem from './row';
+import CountryRow from './row';
 import TableHeader from './header';
 import TableControls from './controls';
 import { Profiler } from 'react';
 
 type Props = {
-  data: CountryListItem[];
+  data: CountryTableItem[];
   availableYears: number[];
   selectedYear: number;
   onYearChange: (year: number) => void;
 };
 
-export default function CountryList({ data, availableYears, selectedYear, onYearChange }: Props) {
+export default function EmissionTable({ data, availableYears, selectedYear, onYearChange }: Props) {
   const mainTableFields = useMainTableFields();
-  const additionalTableFields = useAdditionalTableFields();
+  const allAdditionalFields = useAdditionalTableFields();
+  const { selectedFields } = useColumnSelectionStore();
   const translations = useLocale();
   const { sortConfig, handleSort, sortData } = useSorting();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const hasDataForYear = (country: CountryListItem) => country.year === selectedYear;
+  const additionalTableFields = allAdditionalFields.filter((field) =>
+    selectedFields.includes(field.key)
+  );
 
-  const isCountryMatch = (country: CountryListItem) => {
+  const hasDataForYear = (country: CountryTableItem) => country.year === selectedYear;
+
+  const isCountryMatch = (country: CountryTableItem) => {
     if (!searchQuery) return true;
     return country.name.toLowerCase().includes(searchQuery.toLowerCase());
   };
@@ -79,7 +85,7 @@ export default function CountryList({ data, availableYears, selectedYear, onYear
               />
               <tbody className="divide-scooter-400 dark:divide-shamrock-400 divide-y">
                 {sortedCountries.map((country) => (
-                  <CountryItem
+                  <CountryRow
                     key={`${country.name}-${country.year}`}
                     country={country}
                     mainTableFields={mainTableFields}
