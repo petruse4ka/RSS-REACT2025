@@ -12,7 +12,7 @@ export default function Tooltip({ text, coords }: Props) {
   return tooltipRoot
     ? createPortal(
         <div
-          className="bg-shamrock-400 dark:bg-scooter-400 fixed z-50 max-w-xs rounded-md px-3 py-2 text-center text-sm text-white"
+          className="bg-shamrock-400 dark:bg-scooter-400 fixed z-20 max-w-xs rounded-md px-3 py-2 text-center text-sm text-white"
           style={{ left, top }}
         >
           {text}

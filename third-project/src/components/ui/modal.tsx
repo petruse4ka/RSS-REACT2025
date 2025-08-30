@@ -43,7 +43,7 @@ export default function Modal({ isOpen, onClose, children, title }: Props) {
   return modalRoot
     ? createPortal(
         <div
-          className="fixed inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm dark:bg-black/80"
+          className="fixed inset-0 z-30 flex items-center justify-center bg-white/80 backdrop-blur-sm dark:bg-black/80"
           onMouseDown={handleOutsideClick}
         >
           <div
