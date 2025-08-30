@@ -3,7 +3,7 @@ import transformEmissionsData from './transform-emmission-data';
 import getAvailableYears from '../utils/get-available-years';
 
 export default async function fetchEmissionsData(): Promise<ProcessedEmissionsData> {
-  const response = await fetch('/src/data/c02-emissions.json');
+  const response = await fetch('c02-emissions.json');
 
   if (!response.ok) {
     throw new Error(`Failed to fetch data`);
