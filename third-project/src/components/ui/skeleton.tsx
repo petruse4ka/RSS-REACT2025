@@ -7,7 +7,7 @@ export default function Skeleton({ className }: { className?: string }) {
 
 export function TableSkeleton() {
   return (
-    <div className="space-y-4">
+    <div className="border-scooter-400 dark:border-shamrock-400 mt-10 space-y-4 rounded-lg border p-6">
       <div className="flex items-center justify-end">
         <Skeleton className="bg-scooter-400 dark:bg-shamrock-400 h-10 w-32" />
       </div>
@@ -20,7 +20,7 @@ export function TableSkeleton() {
 
       <div className="overflow-hidden">
         <div className="bg-zinc-50 dark:bg-zinc-800">
-          <div className="grid grid-cols-6 gap-4 py-4">
+          <div className="grid grid-cols-6 gap-4 px-2 py-4">
             {Array.from({ length: SKELETON_COLS }).map((_, index) => (
               <Skeleton key={index} className="h-6 w-full" />
             ))}
@@ -29,7 +29,7 @@ export function TableSkeleton() {
 
         <div className="divide-scooter-200 dark:divide-shamrock-400 divide-y">
           {Array.from({ length: SKELETON_ROWS }).map((_, index) => (
-            <div key={index} className="grid grid-cols-6 gap-4 py-4">
+            <div key={index} className="grid grid-cols-6 gap-4 px-2 py-4">
               {Array.from({ length: SKELETON_COLS }).map((_, index) => (
                 <Skeleton key={index} className="h-5 w-full" />
               ))}

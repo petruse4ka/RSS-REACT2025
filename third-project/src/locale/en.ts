@@ -35,6 +35,9 @@ export const en = {
     error: 'Error loading data',
     loader: 'Loading...',
     countries: 'countries for',
+    errorTitle: 'Error loading data',
+    errorMessage: 'An error occurred while loading the data. Please refresh the page.',
+    refreshButton: 'Refresh page',
   },
   sorting: {
     sortBy: 'Sorting by:',

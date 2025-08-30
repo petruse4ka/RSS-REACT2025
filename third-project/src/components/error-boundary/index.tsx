@@ -54,7 +54,7 @@ export default class ErrorBoundary extends Component<Props, State> {
         >
           <div
             data-testid="error-container"
-            className={`rounded-lg p-8 text-center shadow-lg ${containerClassName}`}
+            className={`rounded-lg p-8 text-center ${containerClassName}`}
           >
             {image && (
               <div className="mb-6">
