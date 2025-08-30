@@ -12,3 +12,5 @@ export type ColumnSelectionState = {
   selectedFields: string[];
   setSelectedFields: (fields: string[]) => void;
 };
+
+export type FieldValue = number | string | undefined;

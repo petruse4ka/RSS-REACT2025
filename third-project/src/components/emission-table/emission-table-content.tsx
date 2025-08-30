@@ -14,6 +14,9 @@ export default function EmissionTableContent() {
   const [availableYears, setAvailableYears] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(2020);
   const [isDataProcessed, setIsDataProcessed] = useState(false);
+  const [previousYearData, setPreviousYearData] = useState<CountryTableItem[]>([]);
+  const [hasYearChanged, setHasYearChanged] = useState(false);
+  const [showHighlighting, setShowHighlighting] = useState(false);
 
   useEffect(() => {
     const parseData = async () => {
@@ -33,9 +36,18 @@ export default function EmissionTableContent() {
   }, [countriesData]);
 
   const handleYearChange = (year: number) => {
+    setPreviousYearData(countriesAnnualData);
     setSelectedYear(year);
+
     const transformedData = transformEmissionsData(countriesData, year);
     setCountriesAnnualData(transformedData);
+
+    setHasYearChanged(true);
+    setShowHighlighting(true);
+
+    setTimeout(() => {
+      setShowHighlighting(false);
+    }, 3000);
   };
 
   return isDataProcessed ? (
@@ -45,6 +57,9 @@ export default function EmissionTableContent() {
         availableYears={availableYears}
         selectedYear={selectedYear}
         onYearChange={handleYearChange}
+        previousYearData={previousYearData}
+        hasYearChanged={hasYearChanged}
+        showHighlighting={showHighlighting}
       />
     </div>
   ) : (

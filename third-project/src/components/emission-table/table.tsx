@@ -15,9 +15,20 @@ type Props = {
   availableYears: number[];
   selectedYear: number;
   onYearChange: (year: number) => void;
+  previousYearData: CountryTableItem[];
+  hasYearChanged: boolean;
+  showHighlighting: boolean;
 };
 
-export default function EmissionTable({ data, availableYears, selectedYear, onYearChange }: Props) {
+export default function EmissionTable({
+  data,
+  availableYears,
+  selectedYear,
+  onYearChange,
+  previousYearData,
+  hasYearChanged,
+  showHighlighting,
+}: Props) {
   const mainTableFields = useMainTableFields();
   const allAdditionalFields = useAdditionalTableFields();
   const { selectedFields } = useColumnSelectionStore();
@@ -90,6 +101,9 @@ export default function EmissionTable({ data, availableYears, selectedYear, onYe
                     country={country}
                     mainTableFields={mainTableFields}
                     additionalTableFields={additionalTableFields}
+                    previousYearData={previousYearData}
+                    hasYearChanged={hasYearChanged}
+                    showHighlighting={showHighlighting}
                   />
                 ))}
               </tbody>

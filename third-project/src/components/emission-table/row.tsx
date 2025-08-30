@@ -1,21 +1,51 @@
 import type { CountryTableItem } from '@/types/interfaces';
 import { useLocale } from '@/hooks/use-locale';
 import formatNumber from '@/utils/format-number';
+import type { FieldValue } from '@/types/types';
+import type { TableField } from '@/types/interfaces';
 
 type Props = {
   country: CountryTableItem;
-  mainTableFields: { key: string; label: string }[];
-  additionalTableFields: { key: string; label: string }[];
+  mainTableFields: TableField[];
+  additionalTableFields: TableField[];
+  previousYearData: CountryTableItem[];
+  hasYearChanged: boolean;
+  showHighlighting: boolean;
 };
 
-export default function CountryRow({ country, mainTableFields, additionalTableFields }: Props) {
+export default function CountryRow({
+  country,
+  mainTableFields,
+  additionalTableFields,
+  previousYearData,
+  hasYearChanged,
+  showHighlighting,
+}: Props) {
   const translations = useLocale();
 
-  const formatValue = (value: number | string | undefined): string => {
+  const formatValue = (value: FieldValue): string => {
     if (typeof value !== 'number') {
       return translations.table.noData;
     }
     return formatNumber(value);
+  };
+
+  const getPreviousYearValue = (fieldKey: string): FieldValue => {
+    const previousCountry = previousYearData.find(
+      (currentCountry) => currentCountry.name === country.name
+    );
+    return previousCountry ? previousCountry[fieldKey] : undefined;
+  };
+
+  const isValueChanged = (fieldKey: string, currentValue: FieldValue): boolean => {
+    if (!hasYearChanged || !showHighlighting) return false;
+    const previousValue = getPreviousYearValue(fieldKey);
+    return currentValue !== previousValue;
+  };
+
+  const getHighlightClass = (fieldKey: string, currentValue: FieldValue): string => {
+    const hasChanged = isValueChanged(fieldKey, currentValue);
+    return hasChanged ? 'animate-pulse bg-shamrock-500 dark:bg-scooter-500' : '';
   };
 
   return (
@@ -33,7 +63,7 @@ export default function CountryRow({ country, mainTableFields, additionalTableFi
         return (
           <td
             key={field.key}
-            className="px-2 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 sm:px-6 dark:text-zinc-50"
+            className={`px-2 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 sm:px-6 dark:text-zinc-50 ${getHighlightClass(field.key, fieldValue)}`}
           >
             {formatValue(fieldValue)}
           </td>
@@ -44,7 +74,7 @@ export default function CountryRow({ country, mainTableFields, additionalTableFi
         return (
           <td
             key={field.key}
-            className="px-2 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 sm:px-6 dark:text-zinc-50"
+            className={`px-2 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 sm:px-6 dark:text-zinc-50 ${getHighlightClass(field.key, fieldValue)}`}
           >
             {formatValue(fieldValue)}
           </td>
