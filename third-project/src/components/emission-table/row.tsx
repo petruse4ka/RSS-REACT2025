@@ -27,7 +27,7 @@ export default function CountryRow({
   };
 
   return (
-    <tr className="hover:bg-scooter-400 dark:hover:bg-shamrock-400 group transition-colors duration-300">
+    <tr className="group transition-colors duration-300">
       <RowCell
         value={country.name}
         previousValue={getPreviousYearValue('name')}

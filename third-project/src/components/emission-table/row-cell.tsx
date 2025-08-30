@@ -1,6 +1,7 @@
 import { useLocale } from '@/hooks/use-locale';
 import formatNumber from '@/utils/format-number';
 import type { FieldValue } from '@/types/types';
+import { cn } from '@/utils/cn';
 
 type Props = {
   value: FieldValue;
@@ -50,7 +51,14 @@ export default function RowCell({
   const highlightClasses = getHighlightClass();
 
   return (
-    <td className={`${defaultClasses} ${stickyClasses} ${highlightClasses}`}>
+    <td
+      className={cn(
+        defaultClasses,
+        stickyClasses,
+        highlightClasses,
+        'group-hover:bg-scooter-400 dark:group-hover:bg-shamrock-400'
+      )}
+    >
       {formatValue(value)}
     </td>
   );
