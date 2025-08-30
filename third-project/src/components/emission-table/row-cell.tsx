@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useLocale } from '@/hooks/use-locale';
 import formatNumber from '@/utils/format-number';
 import type { FieldValue } from '@/types/types';
@@ -11,7 +12,7 @@ type Props = {
   isSticky?: boolean;
 };
 
-export default function RowCell({
+function RowCell({
   value,
   previousValue,
   hasYearChanged,
@@ -63,3 +64,5 @@ export default function RowCell({
     </td>
   );
 }
+
+export default memo(RowCell);

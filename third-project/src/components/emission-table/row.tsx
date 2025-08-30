@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { CountryTableItem } from '@/types/interfaces';
 import type { TableField } from '@/types/interfaces';
 import RowCell from './row-cell';
@@ -11,7 +12,7 @@ type Props = {
   showHighlighting: boolean;
 };
 
-export default function CountryRow({
+function CountryRow({
   country,
   mainTableFields,
   additionalTableFields,
@@ -62,3 +63,5 @@ export default function CountryRow({
     </tr>
   );
 }
+
+export default memo(CountryRow);

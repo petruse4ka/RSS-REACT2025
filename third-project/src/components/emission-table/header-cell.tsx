@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useLocale } from '@/hooks/use-locale';
 import type { SortField, SortDirection } from '@/types/types';
 
@@ -10,7 +11,7 @@ type Props = {
   isSticky?: boolean;
 };
 
-export default function TableHeaderCell({
+function TableHeaderCell({
   field,
   label,
   currentSortField,
@@ -47,3 +48,5 @@ export default function TableHeaderCell({
     </th>
   );
 }
+
+export default memo(TableHeaderCell);
