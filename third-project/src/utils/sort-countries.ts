@@ -17,8 +17,8 @@ export function sortCountries(
     } else if (typeof aValue === 'number' && typeof bValue === 'number') {
       comparison = aValue - bValue;
     } else {
-      const aNumber = typeof aValue === 'number' ? aValue : 0;
-      const bNumber = typeof bValue === 'number' ? bValue : 0;
+      const aNumber = typeof aValue === 'number' ? aValue : 0.001;
+      const bNumber = typeof bValue === 'number' ? bValue : -0.001;
       comparison = aNumber - bNumber;
     }
 
