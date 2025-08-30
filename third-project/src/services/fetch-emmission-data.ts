@@ -1,13 +1,24 @@
-import type { EmissionsData } from '../types/interfaces';
+import type { EmissionsData, ProcessedEmissionsData } from '../types/interfaces';
+import transformEmissionsData from './transform-emmission-data';
+import getAvailableYears from '../utils/get-available-years';
 
-export default async function fetchEmissionsData(): Promise<EmissionsData> {
+export default async function fetchEmissionsData(): Promise<ProcessedEmissionsData> {
   const response = await fetch('/src/data/c02-emissions.json');
 
   if (!response.ok) {
     throw new Error(`Failed to fetch data`);
   }
 
-  const data: EmissionsData = await response.json();
+  const countriesData: EmissionsData = await response.json();
 
-  return data;
+  const availableYears = getAvailableYears(countriesData);
+  const firstSelectedYear = availableYears.length > 0 ? availableYears[0] : 2020;
+  const firstCountriesAnnualData = transformEmissionsData(countriesData, firstSelectedYear);
+
+  return {
+    countriesData,
+    availableYears,
+    firstSelectedYear,
+    firstCountriesAnnualData,
+  };
 }

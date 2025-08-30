@@ -34,3 +34,10 @@ export interface TableField {
   key: string;
   label: string;
 }
+
+export interface ProcessedEmissionsData {
+  countriesData: EmissionsData;
+  availableYears: number[];
+  firstSelectedYear: number;
+  firstCountriesAnnualData: CountryTableItem[];
+}
