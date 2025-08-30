@@ -210,3 +210,74 @@ class CardsList extends PureComponent {}
 
 ![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)  
 **Vercel** – Used for hosting and continuous deployment of the application.
+
+---
+
+## 📊 App Performance
+
+This section documents the performance analysis of the emissions data table application using React DevTools Profiler and console performance logs.
+
+The application was profiled to measure performance during common user interactions:
+- Sorting table columns
+- Searching for countries
+- Changing years
+- Adding/removing columns
+- Language and theme changes
+
+### 📈 Initial profiling with React DevTools Profiler before optimisation
+
+##### Performance Metrics from console logs
+
+| Interaction | Actual Duration (ms) | Base Duration (ms) | Start Time (ms) | Commit Time (ms) |
+|-------------|----------------------|-------------------|-----------------|------------------|
+| **App 1st Load** | 260.2 | 241.3 | 958.2 | 1304.8 |
+| **Select and Add All Fields** | 720.0 | 648.7 | 34494.1 | 35220.5 |
+| **Change Year** | 865.4 | 765.6 | 78554.7 | 79426.2 |
+| **Apply Sorting** | 686.6 | 672.4 | 99936.9 | 100629.2 |
+| **Search by Country** | 74.5 | 74.2 | 130090.9 | 130165.5 |
+| **Change Language** | 670.3 | 660.4 | 158764.3 | 159439.6 |
+| **Change Theme** | 642.4 | 630.8 | 174524.8 | 175173.1 |
+
+##### Performance Metrics from React DevTools Profiler:**
+
+**1. App 1st Load:**
+![App 1st Load](src/assets/screenshots/before-optimisation/1st-load.png)
+- **Total Render Time:** 20.6 ms
+- **Key Components:** TableSkeleton (3.5ms), Skeleton (2.9ms), AppWrapper (0.8ms)
+- **Performance:** Initial mount with loading states
+
+**2. Select and Add All Fields:**
+![Add Fields](src/assets/screenshots/before-optimisation/add-fields.png)
+- **Total Render Time:** 732.4 ms
+- **Key Components:** TableControls (27.3 ms), EmissionTable (12.4 ms)
+- **Performance:** Column management and table re-rendering
+
+**3. Change Year:**
+![Change Year](src/assets/screenshots/before-optimisation/change-year.png)
+- **Total Render Time:** 881 ms
+- **Key Components:** TableControls (33.2 ms), EmissionTable (15 ms)
+- **Performance:** Data transformation and table updates
+
+**4. Apply Sorting:**
+![Apply Sorting](src/assets/screenshots/before-optimisation/apply-sorting.png)
+- **Total Render Time:** 705.7 ms
+- **Key Components:** TableControls (25.6 ms), EmissionTable (11.8 ms)
+- **Performance:** Column sorting and table re-rendering
+
+**5. Search by Country:**
+![Search by Country](src/assets/screenshots/before-optimisation/search-by-country.png)
+- **Total Render Time:** 75.3 ms
+- **Key Components:** TableControls (36.6 ms)
+- **Performance:** Filtering and table updates
+
+**6. Change Language:**
+![Change Language](src/assets/screenshots/before-optimisation/change-language.png)
+- **Total Render Time:** 691 ms
+- **Key Components:** TableControls (31.2 ms), EmissionTable (14.2 ms)
+- **Performance:** Internationalization and UI updates
+
+**7. Change Theme:**
+![Change Theme](src/assets/screenshots/before-optimisation/change-theme.png)
+- **Total Render Time:** 659.1 ms
+- **Key Components:** TableControls (26.3 ms), EmissionTable (13 ms)
+- **Performance:** Theme switching and UI updates
