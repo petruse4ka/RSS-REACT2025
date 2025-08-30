@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { CountryTableItem } from '@/types/interfaces';
 import useMainTableFields from '@/hooks/use-main-table-fields';
 import useAdditionalTableFields from '@/hooks/use-additional-table-fields';
@@ -36,20 +36,30 @@ export default function EmissionTable({
   const { sortConfig, handleSort, sortData } = useSorting();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const additionalTableFields = allAdditionalFields.filter((field) =>
-    selectedFields.includes(field.key)
+  const additionalTableFields = useMemo(
+    () => allAdditionalFields.filter((field) => selectedFields.includes(field.key)),
+    [allAdditionalFields, selectedFields]
   );
 
-  const hasDataForYear = (country: CountryTableItem) => country.year === selectedYear;
+  const hasDataForYear = useMemo(
+    () => (country: CountryTableItem) => country.year === selectedYear,
+    [selectedYear]
+  );
 
-  const isCountryMatch = (country: CountryTableItem) => {
-    if (!searchQuery) return true;
-    return country.name.toLowerCase().includes(searchQuery.toLowerCase());
-  };
+  const isCountryMatch = useMemo(
+    () => (country: CountryTableItem) => {
+      if (!searchQuery) return true;
+      return country.name.toLowerCase().includes(searchQuery.toLowerCase());
+    },
+    [searchQuery]
+  );
 
-  const filteredData = data.filter((country) => hasDataForYear(country) && isCountryMatch(country));
+  const filteredData = useMemo(
+    () => data.filter((country) => hasDataForYear(country) && isCountryMatch(country)),
+    [data, hasDataForYear, isCountryMatch]
+  );
 
-  const sortedCountries = sortData(filteredData);
+  const sortedCountries = useMemo(() => sortData(filteredData), [filteredData, sortData]);
 
   function onRender(
     id: string,
