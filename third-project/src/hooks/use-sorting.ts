@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import type { SortConfig, CountryTableItem } from '@/types/interfaces';
 import type { SortField } from '@/types/types';
 import { sortCountries } from '@/utils/sort-countries';
@@ -9,12 +9,12 @@ export function useSorting() {
     direction: 'asc',
   });
 
-  const handleSort = (field: SortField) => {
+  const handleSort = useCallback((field: SortField) => {
     setSortConfig((prev) => ({
       field,
       direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc',
     }));
-  };
+  }, []);
 
   const sortData = (data: CountryTableItem[]) => {
     return sortCountries(data, sortConfig);
