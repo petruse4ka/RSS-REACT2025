@@ -46,7 +46,7 @@ export default function RowCell({
   const defaultClasses =
     'px-2 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 sm:px-6 dark:text-zinc-50';
   const stickyClasses = isSticky
-    ? 'sticky left-0 bg-zinc-100 lg:whitespace-nowrap dark:bg-zinc-900'
+    ? 'sticky left-0 z-10 bg-zinc-100 lg:whitespace-nowrap dark:bg-zinc-900'
     : '';
   const highlightClasses = getHighlightClass();
 
