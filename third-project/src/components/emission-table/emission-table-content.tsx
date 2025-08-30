@@ -1,4 +1,4 @@
-import { useState, use } from 'react';
+import { useState, use, useCallback } from 'react';
 import type { CountryTableItem } from '@/types/interfaces';
 import fetchEmissionsData from '@/services/fetch-emmission-data';
 import transformEmissionsData from '@/services/transform-emmission-data';
@@ -16,20 +16,23 @@ export default function EmissionTableContent() {
   const [hasYearChanged, setHasYearChanged] = useState(false);
   const [showHighlighting, setShowHighlighting] = useState(false);
 
-  const handleYearChange = (year: number) => {
-    setPreviousYearData(countriesAnnualData);
-    setSelectedYear(year);
+  const handleYearChange = useCallback(
+    (year: number) => {
+      setPreviousYearData(countriesAnnualData);
+      setSelectedYear(year);
 
-    const newTransformedData = transformEmissionsData(countriesData, year);
-    setCountriesAnnualData(newTransformedData);
+      const newTransformedData = transformEmissionsData(countriesData, year);
+      setCountriesAnnualData(newTransformedData);
 
-    setHasYearChanged(true);
-    setShowHighlighting(true);
+      setHasYearChanged(true);
+      setShowHighlighting(true);
 
-    setTimeout(() => {
-      setShowHighlighting(false);
-    }, 3000);
-  };
+      setTimeout(() => {
+        setShowHighlighting(false);
+      }, 3000);
+    },
+    [countriesAnnualData, countriesData]
+  );
 
   return (
     <div className="border-scooter-400 dark:border-shamrock-400 mt-10 rounded-lg border p-6">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useLocale } from '@/hooks/use-locale';
 import useAdditionalTableFields from '@/hooks/use-additional-table-fields';
 import { useColumnSelectionStore } from '@/store/column-selection-store';
@@ -15,28 +15,28 @@ export default function ColumnSelectionForm({ onClose }: Props) {
   const { selectedFields, setSelectedFields } = useColumnSelectionStore();
   const [temporarySelectedFields, setTemporarySelectedFields] = useState<string[]>(selectedFields);
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     setSelectedFields(temporarySelectedFields);
     onClose();
-  };
+  }, [temporarySelectedFields, setSelectedFields, onClose]);
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     onClose();
-  };
+  }, [onClose]);
 
-  const handleToggleField = (fieldKey: string) => {
+  const handleToggleField = useCallback((fieldKey: string) => {
     setTemporarySelectedFields((prev) =>
       prev.includes(fieldKey) ? prev.filter((key) => key !== fieldKey) : [...prev, fieldKey]
     );
-  };
+  }, []);
 
-  const handleSelectAll = () => {
+  const handleSelectAll = useCallback(() => {
     setTemporarySelectedFields(allFields.map((field) => field.key));
-  };
+  }, [allFields]);
 
-  const handleDeselectAll = () => {
+  const handleDeselectAll = useCallback(() => {
     setTemporarySelectedFields([]);
-  };
+  }, []);
 
   const selectedCount = temporarySelectedFields.length;
   const totalCount = allFields.length;

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import type { CountryTableItem } from '@/types/interfaces';
 import useMainTableFields from '@/hooks/use-main-table-fields';
 import useAdditionalTableFields from '@/hooks/use-additional-table-fields';
@@ -61,6 +61,10 @@ export default function EmissionTable({
 
   const sortedCountries = useMemo(() => sortData(filteredData), [filteredData, sortData]);
 
+  const handleSearchChange = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
+
   function onRender(
     id: string,
     phase: string,
@@ -81,7 +85,7 @@ export default function EmissionTable({
           selectedYear={selectedYear}
           onYearChange={onYearChange}
           searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
+          onSearchChange={handleSearchChange}
           currentSortField={sortConfig.field}
           currentSortDirection={sortConfig.direction}
           mainTableFields={mainTableFields}

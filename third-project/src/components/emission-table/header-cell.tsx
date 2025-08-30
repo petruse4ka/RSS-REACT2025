@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useLocale } from '@/hooks/use-locale';
 import type { SortField, SortDirection } from '@/types/types';
 
@@ -34,12 +34,16 @@ function TableHeaderCell({
     );
   };
 
+  const handleSortClick = useCallback(() => {
+    onSort(field);
+  }, [onSort, field]);
+
   return (
     <th
       className={`hover:bg-shamrock-400 dark:hover:bg-scooter-400 group cursor-pointer px-2 py-4 text-left text-xs tracking-wider whitespace-nowrap text-zinc-700 uppercase select-none sm:px-6 dark:text-zinc-50 ${
         isSticky ? 'sticky left-0 z-10 bg-zinc-100 lg:whitespace-nowrap dark:bg-zinc-900' : ''
       }`}
-      onClick={() => onSort(field)}
+      onClick={handleSortClick}
     >
       <div className="flex items-center">
         {label}

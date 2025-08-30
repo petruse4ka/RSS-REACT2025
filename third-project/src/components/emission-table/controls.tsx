@@ -1,5 +1,5 @@
 import { useLocale } from '@/hooks/use-locale';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import type { MouseEvent, ChangeEvent } from 'react';
 import Select from '@/components/ui/select';
 import Input from '@/components/ui/input';
@@ -62,32 +62,46 @@ export default function TableControls({
     return fieldKey;
   };
 
-  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onSearchChange(event.target.value);
-  };
+  const handleSearchChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      onSearchChange(event.target.value);
+    },
+    [onSearchChange]
+  );
 
-  const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    onYearChange(Number(event.target.value));
-  };
+  const handleYearChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      onYearChange(Number(event.target.value));
+    },
+    [onYearChange]
+  );
 
-  const handleMouseEnter = (event: MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = useCallback((event: MouseEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     setCoords({
       left: rect.left,
       top: rect.top + rect.height,
     });
     setShowTooltip(true);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setShowTooltip(false);
-  };
+  }, []);
+
+  const handleModalOpen = useCallback(() => {
+    setModalState(true);
+  }, []);
+
+  const handleModalClose = useCallback(() => {
+    setModalState(false);
+  }, []);
 
   return (
     <div className="mb-6 space-y-4">
       <div className="mb-4 flex items-center justify-end">
         <Button
-          onClick={() => setModalState(true)}
+          onClick={handleModalOpen}
           className="bg-scooter-400 hover:bg-scooter-500 dark:bg-shamrock-400 dark:hover:bg-shamrock-500 px-4 py-2 text-white"
           text={translations.controls.selectFields}
         />
@@ -152,10 +166,10 @@ export default function TableControls({
       {showTooltip && <Tooltip coords={coords} text={translations.controls.sortingTooltip} />}
       <Modal
         isOpen={modalState}
-        onClose={() => setModalState(false)}
+        onClose={handleModalClose}
         title={translations.controls.selectFields}
       >
-        <ColumnSelectionForm onClose={() => setModalState(false)} />
+        <ColumnSelectionForm onClose={handleModalClose} />
       </Modal>
     </div>
   );
