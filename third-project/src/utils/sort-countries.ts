@@ -14,6 +14,12 @@ export function sortCountries(
 
     if (typeof aValue === 'string' && typeof bValue === 'string') {
       comparison = aValue.localeCompare(bValue);
+    } else if (typeof aValue === 'string' && typeof bValue === 'undefined') {
+      const bValue = 'ZZZZZZZZZZZZZZZZZZZZZZZZZZ';
+      comparison = aValue.localeCompare(bValue);
+    } else if (typeof aValue === 'undefined' && typeof bValue === 'string') {
+      const aValue = 'ZZZZZZZZZZZZZZZZZZZZZZZZZZ';
+      comparison = aValue.localeCompare(bValue);
     } else if (typeof aValue === 'number' && typeof bValue === 'number') {
       comparison = aValue - bValue;
     } else {
