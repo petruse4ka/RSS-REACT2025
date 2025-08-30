@@ -1,8 +1,6 @@
 import type { CountryTableItem } from '@/types/interfaces';
-import { useLocale } from '@/hooks/use-locale';
-import formatNumber from '@/utils/format-number';
-import type { FieldValue } from '@/types/types';
 import type { TableField } from '@/types/interfaces';
+import RowCell from './row-cell';
 
 type Props = {
   country: CountryTableItem;
@@ -21,65 +19,46 @@ export default function CountryRow({
   hasYearChanged,
   showHighlighting,
 }: Props) {
-  const translations = useLocale();
-
-  const formatValue = (value: FieldValue): string => {
-    if (typeof value !== 'number') {
-      return translations.table.noData;
-    }
-    return formatNumber(value);
-  };
-
-  const getPreviousYearValue = (fieldKey: string): FieldValue => {
+  const getPreviousYearValue = (fieldKey: string) => {
     const previousCountry = previousYearData.find(
       (currentCountry) => currentCountry.name === country.name
     );
     return previousCountry ? previousCountry[fieldKey] : undefined;
   };
 
-  const isValueChanged = (fieldKey: string, currentValue: FieldValue): boolean => {
-    if (!hasYearChanged || !showHighlighting) return false;
-    const previousValue = getPreviousYearValue(fieldKey);
-    return currentValue !== previousValue;
-  };
-
-  const getHighlightClass = (fieldKey: string, currentValue: FieldValue): string => {
-    const hasChanged = isValueChanged(fieldKey, currentValue);
-    return hasChanged ? 'animate-pulse bg-shamrock-500 dark:bg-scooter-500' : '';
-  };
-
   return (
-    <tr
-      className={`hover:bg-scooter-400 dark:hover:bg-shamrock-400 group transition-colors duration-300`}
-    >
-      <td className="group-hover:bg-scooter-400 dark:group-hover:bg-shamrock-400 sticky left-0 bg-zinc-100 px-2 py-4 text-sm text-zinc-700 transition-colors duration-300 sm:px-6 lg:whitespace-nowrap dark:bg-zinc-900 dark:text-zinc-50">
-        {country.name}
-      </td>
-      <td className="px-2 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 sm:px-6 dark:text-zinc-50">
-        {country.iso_code || translations.table.noData}
-      </td>
-      {mainTableFields.map((field) => {
-        const fieldValue = country[field.key];
-        return (
-          <td
-            key={field.key}
-            className={`px-2 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 sm:px-6 dark:text-zinc-50 ${getHighlightClass(field.key, fieldValue)}`}
-          >
-            {formatValue(fieldValue)}
-          </td>
-        );
-      })}
-      {additionalTableFields.map((field) => {
-        const fieldValue = country[field.key];
-        return (
-          <td
-            key={field.key}
-            className={`px-2 py-4 text-sm whitespace-nowrap text-zinc-700 transition-colors duration-300 sm:px-6 dark:text-zinc-50 ${getHighlightClass(field.key, fieldValue)}`}
-          >
-            {formatValue(fieldValue)}
-          </td>
-        );
-      })}
+    <tr className="hover:bg-scooter-400 dark:hover:bg-shamrock-400 group transition-colors duration-300">
+      <RowCell
+        value={country.name}
+        previousValue={getPreviousYearValue('name')}
+        hasYearChanged={hasYearChanged}
+        showHighlighting={showHighlighting}
+        isSticky={true}
+      />
+      <RowCell
+        value={country.iso_code}
+        previousValue={getPreviousYearValue('iso_code')}
+        hasYearChanged={hasYearChanged}
+        showHighlighting={showHighlighting}
+      />
+      {mainTableFields.map((field) => (
+        <RowCell
+          key={field.key}
+          value={country[field.key]}
+          previousValue={getPreviousYearValue(field.key)}
+          hasYearChanged={hasYearChanged}
+          showHighlighting={showHighlighting}
+        />
+      ))}
+      {additionalTableFields.map((field) => (
+        <RowCell
+          key={field.key}
+          value={country[field.key]}
+          previousValue={getPreviousYearValue(field.key)}
+          hasYearChanged={hasYearChanged}
+          showHighlighting={showHighlighting}
+        />
+      ))}
     </tr>
   );
 }
