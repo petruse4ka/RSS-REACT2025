@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 import type { CountryTableItem } from '@/types/interfaces';
 import useMainTableFields from '@/hooks/use-main-table-fields';
 import useAdditionalTableFields from '@/hooks/use-additional-table-fields';
@@ -20,7 +20,7 @@ type Props = {
   showHighlighting: boolean;
 };
 
-export default function EmissionTable({
+function EmissionTable({
   data,
   availableYears,
   selectedYear,
@@ -128,3 +128,5 @@ export default function EmissionTable({
     </Profiler>
   );
 }
+
+export default memo(EmissionTable);
