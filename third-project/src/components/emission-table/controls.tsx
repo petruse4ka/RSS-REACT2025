@@ -139,12 +139,12 @@ export default function TableControls({
               placeholder={translations.controls.searchPlaceholder}
               value={searchQuery}
               onChange={handleSearchChange}
-              className="dark:hover:border-scooter-400 hover:border-shamrock-400 focus:border-scooter-500 dark:focus:border-scooter-500 w-full border-zinc-300 bg-zinc-100 pr-20 text-zinc-900 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
+              className="dark:hover:border-scooter-400 hover:border-shamrock-400 focus:border-scooter-500 dark:focus:border-scooter-500 w-full border-zinc-300 bg-zinc-100 pr-15 text-zinc-900 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
             />
             {searchQuery && (
               <Button
                 onClick={() => onSearchChange('')}
-                className="text-scooter-400 hover:text-scooter-600 dark:text-shamrock-400 dark:hover:text-shamrock-600 absolute top-1/2 right-6 z-1 -translate-y-1/2 bg-zinc-100 px-1 sm:px-1 dark:bg-zinc-900"
+                className="text-scooter-400 hover:text-scooter-600 dark:text-shamrock-400 dark:hover:text-shamrock-600 absolute top-1/2 right-5 z-1 -translate-y-1/2 bg-zinc-100 px-2 sm:px-2 dark:bg-zinc-900"
                 text="×"
               />
             )}
