@@ -15,7 +15,7 @@ The application was profiled to measure performance during common user interacti
 - Changing years
 - Adding/removing columns
 
-### 📈 Initial profiling with React DevTools Profiler before optimisation
+### 📈 Performance Metrics before optimisation
 
 #### Performance Metrics from console logs
 
@@ -27,7 +27,7 @@ The application was profiled to measure performance during common user interacti
 | **Apply Sorting**             | 686.6                | 672.4              | 99936.9         | 100629.2         |
 | **Search by Country**         | 74.5                 | 74.2               | 130090.9        | 130165.5         |
 
-#### Performance Metrics from React DevTools Profiler:\*\*
+#### Performance Metrics from React DevTools Profiler
 
 **1. App 1st Load:**
 ![App 1st Load](src/assets/screenshots/before-optimisation/1st-load.png)
@@ -152,6 +152,7 @@ The optimization efforts have yielded **positive results** with significant impr
 
 **🔧 Technical Impact:**
 The performance gains were primarily achieved through:
+
 - **useCallback:** Preventing unnecessary re-creation of event handlers during re-renders
 - **useMemo:** Caching expensive computations like filtering and sorting results
 - **React.memo:** Preventing unnecessary component re-renders when props haven't changed
@@ -371,5 +372,5 @@ class CardsList extends PureComponent {}
 ![Zustand](https://img.shields.io/badge/Zustand-764ABC?logo=redux&logoColor=white)  
 **Zustand** – Used for lightweight state management with a simple and intuitive API.
 
-![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify&logoColor=white)   
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify&logoColor=white)  
 **Netlify** – Used for hosting and continuous deployment of the application.
