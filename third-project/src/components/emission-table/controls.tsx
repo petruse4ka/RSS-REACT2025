@@ -132,14 +132,23 @@ export default function TableControls({
           >
             {translations.controls.search}
           </label>
-          <Input
-            id="country-search"
-            list="country-suggestions"
-            placeholder={translations.controls.searchPlaceholder}
-            value={searchQuery}
-            onChange={handleSearchChange}
-            className="dark:hover:border-scooter-400 hover:border-shamrock-400 focus:border-scooter-500 dark:focus:border-shamrock-500 w-full border-zinc-300 bg-zinc-100 text-zinc-900 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
-          />
+          <div className="relative">
+            <Input
+              id="country-search"
+              list="country-suggestions"
+              placeholder={translations.controls.searchPlaceholder}
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="dark:hover:border-scooter-400 hover:border-shamrock-400 focus:border-scooter-500 dark:focus:border-scooter-500 w-full border-zinc-300 bg-zinc-100 pr-20 text-zinc-900 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
+            />
+            {searchQuery && (
+              <Button
+                onClick={() => onSearchChange('')}
+                className="text-scooter-400 hover:text-scooter-600 dark:text-shamrock-400 dark:hover:text-shamrock-600 absolute top-1/2 right-12 -translate-y-1/2 p-0 sm:p-0"
+                text="×"
+              />
+            )}
+          </div>
           <datalist id="country-suggestions">
             {countryNamesAutocomplete.map((name) => (
               <option key={name} value={name} />

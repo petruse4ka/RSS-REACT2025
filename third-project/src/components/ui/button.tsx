@@ -1,5 +1,6 @@
 import type { MouseEvent } from 'react';
 import type { ReactNode } from 'react';
+import { cn } from '@/utils/cn';
 
 type Props = {
   type?: 'button' | 'submit' | 'reset';
@@ -28,7 +29,7 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`${defaultClassName} ${className}`}
+      className={cn(defaultClassName, className)}
       disabled={disabled}
       tabIndex={tabIndex}
     >
