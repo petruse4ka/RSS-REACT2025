@@ -144,7 +144,7 @@ export default function TableControls({
             {searchQuery && (
               <Button
                 onClick={() => onSearchChange('')}
-                className="text-scooter-400 hover:text-scooter-600 dark:text-shamrock-400 dark:hover:text-shamrock-600 absolute top-1/2 right-12 -translate-y-1/2 p-0 sm:p-0"
+                className="text-scooter-400 hover:text-scooter-600 dark:text-shamrock-400 dark:hover:text-shamrock-600 absolute top-1/2 right-6 z-1 -translate-y-1/2 bg-zinc-100 px-1 sm:px-1 dark:bg-zinc-900"
                 text="×"
               />
             )}
