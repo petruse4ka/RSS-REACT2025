@@ -1,4 +1,4 @@
-import { useState, use, useCallback } from 'react';
+import { useState, use, useCallback, useRef } from 'react';
 import type { CountryTableItem } from '@/types/interfaces';
 import fetchEmissionsData from '@/services/fetch-emmission-data';
 import transformEmissionsData from '@/services/transform-emmission-data';
@@ -15,9 +15,14 @@ export default function EmissionTableContent() {
   const [previousYearData, setPreviousYearData] = useState<CountryTableItem[]>([]);
   const [hasYearChanged, setHasYearChanged] = useState(false);
   const [showHighlighting, setShowHighlighting] = useState(false);
+  const highlightingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleYearChange = useCallback(
     (year: number) => {
+      if (highlightingTimeoutRef.current) {
+        clearTimeout(highlightingTimeoutRef.current);
+      }
+
       setPreviousYearData(countriesAnnualData);
       setSelectedYear(year);
 
@@ -27,8 +32,9 @@ export default function EmissionTableContent() {
       setHasYearChanged(true);
       setShowHighlighting(true);
 
-      setTimeout(() => {
+      highlightingTimeoutRef.current = setTimeout(() => {
         setShowHighlighting(false);
+        highlightingTimeoutRef.current = null;
       }, 3000);
     },
     [countriesAnnualData, countriesData]
