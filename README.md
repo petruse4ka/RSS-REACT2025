@@ -4,6 +4,20 @@ Personal Projects for the React 2025 course of the RS School
 
 ---
 
+## 🚨 **IMPORTANT: APP PERFORMANCE REVIEW** 🚨
+
+> **📊 PERFORMANCE ANALYSIS & OPTIMIZATION DETAILS**
+> 
+> **⚠️ DON'T MISS THIS!** For comprehensive information about the app's performance analysis, optimization strategies, and detailed metrics, **CLICK HERE** → [`third-project/README.md`](./third-project/README.md)
+> 
+> **🔍 What you'll find inside:**
+> - Performance benchmarks and measurements
+> - Optimization techniques implemented
+> - Performance analysis results
+> - Code optimization strategies
+
+---
+
 ## 🚀 Project setup
 
 Follow these steps to set up and run the project locally.
@@ -35,7 +49,7 @@ This will create the new folder with all the files from the repository.
 2. **Navigate to the project directory that contains the package.json file**
 
 ```bash
-cd RSS-REACT2025/second-project
+cd RSS-REACT2025/third-project
 ```
 
 3. **Install project dependencies**
@@ -66,3 +80,4 @@ This will launch the Vite development server to test that the project has been s
 >
 > - Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
 > - Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
+
