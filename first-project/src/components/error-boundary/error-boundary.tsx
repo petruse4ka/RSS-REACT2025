@@ -1,0 +1,94 @@
+import { Component } from 'react';
+import type { ReactNode, ErrorInfo } from 'react';
+import Button from '../ui/button';
+import type { ErrorTexts } from '@/types/interfaces';
+import Image from 'next/image';
+
+type Props = {
+  children: ReactNode;
+  texts: ErrorTexts;
+  image?: string;
+  className?: string;
+  imageClassName?: string;
+  containerClassName?: string;
+  buttonClassName?: string;
+};
+
+type State = {
+  hasError: boolean;
+  error?: Error;
+};
+
+export default class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      hasError: false,
+    };
+  }
+
+  static getDerivedStateFromError(error: Error): State {
+    return {
+      hasError: true,
+      error,
+    };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error(error);
+    console.error('Error info:', errorInfo);
+  }
+
+  render() {
+    const handleRefresh = () => {
+      window.location.reload();
+    };
+
+    if (this.state.hasError) {
+      const { title, message, buttonText } = this.props.texts;
+      const { image, className, imageClassName, containerClassName, buttonClassName } = this.props;
+
+      return (
+        <div
+          data-testid="error-boundary"
+          className={`flex flex-col items-center justify-center ${className}`}
+        >
+          <div
+            data-testid="error-container"
+            className={`rounded-lg p-8 text-center shadow-lg ${containerClassName}`}
+          >
+            {image && (
+              <div className="mb-6">
+                <Image
+                  src={image}
+                  alt="Error image"
+                  className={`mx-auto object-contain ${imageClassName}`}
+                  width={256}
+                  height={256}
+                />
+              </div>
+            )}
+            <h1
+              data-testid="error-title"
+              className="mb-4 text-2xl font-bold text-fuchsia-400 dark:text-cyan-300"
+            >
+              {title}
+            </h1>
+            <p data-testid="error-message" className="mb-6 text-fuchsia-400 dark:text-cyan-300">
+              {message}
+            </p>
+            <Button
+              dataTestId="refresh-button"
+              type="button"
+              onClick={handleRefresh}
+              className={`${buttonClassName}`}
+              text={buttonText}
+            />
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}

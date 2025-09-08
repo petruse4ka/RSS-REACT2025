@@ -32,6 +32,7 @@ git clone https://github.com/petruse4ka/RSS-REACT2025.git
 
 This will create the new folder with all the files from the repository.
 
+
 2. **Navigate to the project directory that contains the package.json file**
 
 ```bash
@@ -66,3 +67,5 @@ This will launch the Vite development server to test that the project has been s
 >
 > - Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
 > - Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
+
+---
