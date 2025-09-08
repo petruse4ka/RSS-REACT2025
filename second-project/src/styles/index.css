@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 22px center;
+    background-size: 16px;
+    padding-right: 32px;
+  }
+
+  input[list] {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 22px center;
+    background-size: 16px;
+    padding-right: 32px;
+  }
+
+  input[list]::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #e5e7eb;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #facc15;
+    border-radius: 9999px;
+    transition: background-color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #fbbf24;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #22d3ee;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4;
+  }
+}
+
+:root {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}

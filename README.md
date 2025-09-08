@@ -32,10 +32,11 @@ git clone https://github.com/petruse4ka/RSS-REACT2025.git
 
 This will create the new folder with all the files from the repository.
 
-2. **Navigate to the project directory**
+
+2. **Navigate to the project directory that contains the package.json file**
 
 ```bash
-cd RSS-REACT2025/first-project
+cd RSS-REACT2025/second-project
 ```
 
 3. **Install project dependencies**
@@ -60,7 +61,7 @@ This will set up Husky to run the Git hooks for pre-commit and other automation.
 npm run dev
 ```
 
-This will launch the Next.js development server to test that the project has been setup correctly.
+This will launch the Vite development server to test that the project has been setup correctly.
 
 > ⚠️ **Important:** If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE. For **Visual Studio Code** select the TypeScript version by either:
 >
