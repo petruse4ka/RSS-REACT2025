@@ -2,27 +2,44 @@
 
 Personal Projects for the React 2025 course of the RS School
 
----
-
-## 🚨 **IMPORTANT: APP PERFORMANCE REVIEW** 🚨
-
-> **📊 PERFORMANCE ANALYSIS & OPTIMIZATION DETAILS**
-> 
-> **⚠️ DON'T MISS THIS!** For comprehensive information about the app's performance analysis, optimization strategies, and detailed metrics, **CLICK HERE** → [`third-project/README.md`](./third-project/README.md)
-> 
-> **🔍 What you'll find inside:**
-> - Performance benchmarks and measurements
-> - Optimization techniques implemented
-> - Performance analysis results
-> - Code optimization strategies
+This repository contains **3 different React projects** that demonstrate various aspects of modern React development, from basic concepts to advanced performance optimization techniques.
 
 ---
 
-## 🚀 Project setup
+## 📁 Repository Structure
 
-Follow these steps to set up and run the project locally.
+```
+RSS-REACT2025/
+├── first-project/     # Next.js application with internationalization
+├── second-project/    # React application with user management
+├── third-project/     # Advanced React app with performance optimization
 
-### Basic requirements
+```
+
+---
+
+## 🚀 Projects Overview
+
+### 🥇 **First Project** - Next.js with Internationalization
+- **Technology Stack:** Next.js, TypeScript, Tailwind CSS
+- **Key Features:** Server-side rendering, internationalization (i18n), responsive design
+- **Focus:** Modern Next.js development patterns and multi-language support
+
+### 🥈 **Second Project** - User Management System
+- **Technology Stack:** React, TypeScript, Vite, Tailwind CSS, Zod
+- **Key Features:** User CRUD operations, form validation, state management
+- **Focus:** Component architecture and user interface design
+
+### 🥉 **Third Project** - Performance-Optimized Data Visualization
+- **Technology Stack:** React, TypeScript, Vite, Tailwind CSS
+- **Key Features:** Large dataset handling, performance optimization, data visualization
+- **Focus:** Advanced React performance techniques and optimization strategies
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
 
 Make sure to have the following installed:
 
@@ -36,49 +53,50 @@ node -v
 npm -v
 ```
 
-### Setup Instructions
+### Running Any Project
 
-1. **Open the console and clone the repository**
+1. **Clone the repository**
 
 ```bash
 git clone https://github.com/petruse4ka/RSS-REACT2025.git
+cd RSS-REACT2025
 ```
 
-This will create the new folder with all the files from the repository.
-
-2. **Navigate to the project directory that contains the package.json file**
+2. **Choose a project and navigate to its directory**
 
 ```bash
-cd RSS-REACT2025/third-project
+# For first project (Next.js)
+cd first-project
+
+# For second project (React)
+cd second-project
+
+# For third project (Performance-focused React)
+cd third-project
 ```
 
-3. **Install project dependencies**
+3. **Install dependencies**
 
 ```bash
 npm install
 ```
 
-This will install all packages listed in `package.json`.
-
-4. **Initialize Husky for Git hooks**
-
-```bash
-npm run prepare
-```
-
-This will set up Husky to run the Git hooks for pre-commit and other automation.
-
-5. **Start the development server**
+4. **Start the development server**
 
 ```bash
 npm run dev
 ```
 
-This will launch the Vite development server to test that the project has been setup correctly.
+5. **Open your browser** and navigate to the URL shown in the terminal (usually `http://localhost:5173` or `http://localhost:3000`)
 
-> ⚠️ **Important:** If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE. For **Visual Studio Code** select the TypeScript version by either:
->
-> - Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
-> - Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
+---
+
+## 📚 Learning Objectives
+
+Each project focuses on different aspects of React development:
+
+- **Project 1:** Next.js fundamentals, SSR, and internationalization
+- **Project 2:** Component design, state management, form validation, and user interactions
+- **Project 3:** Performance optimization, large dataset handling, and advanced React patterns
 
 ---
