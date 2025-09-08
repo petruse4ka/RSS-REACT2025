@@ -4,6 +4,20 @@ Personal Projects for the React 2025 course of the RS School
 
 ---
 
+## 🚨 **IMPORTANT: APP PERFORMANCE REVIEW** 🚨
+
+> **📊 PERFORMANCE ANALYSIS & OPTIMIZATION DETAILS**
+> 
+> **⚠️ DON'T MISS THIS!** For comprehensive information about the app's performance analysis, optimization strategies, and detailed metrics, **CLICK HERE** → [`third-project/README.md`](./third-project/README.md)
+> 
+> **🔍 What you'll find inside:**
+> - Performance benchmarks and measurements
+> - Optimization techniques implemented
+> - Performance analysis results
+> - Code optimization strategies
+
+---
+
 ## 🚀 Project setup
 
 Follow these steps to set up and run the project locally.
@@ -32,11 +46,10 @@ git clone https://github.com/petruse4ka/RSS-REACT2025.git
 
 This will create the new folder with all the files from the repository.
 
-
 2. **Navigate to the project directory that contains the package.json file**
 
 ```bash
-cd RSS-REACT2025/second-project
+cd RSS-REACT2025/third-project
 ```
 
 3. **Install project dependencies**

@@ -1,0 +1,43 @@
+import type { SortField, SortDirection } from './types';
+
+export interface ErrorTexts {
+  title: string;
+  message: string;
+  buttonText: string;
+}
+
+export interface AnnualData {
+  [key: string]: number;
+}
+
+export interface CountryData {
+  iso_code?: string;
+  data: AnnualData[];
+}
+
+export interface EmissionsData {
+  [countryName: string]: CountryData;
+}
+
+export interface CountryTableItem {
+  name: string;
+  iso_code?: string;
+  [key: string]: number | string | undefined;
+}
+
+export interface SortConfig {
+  field: SortField;
+  direction: SortDirection;
+}
+
+export interface TableField {
+  key: string;
+  label: string;
+}
+
+export interface ProcessedEmissionsData {
+  countriesData: EmissionsData;
+  availableYears: number[];
+  firstSelectedYear: number;
+  firstCountriesAnnualData: CountryTableItem[];
+}

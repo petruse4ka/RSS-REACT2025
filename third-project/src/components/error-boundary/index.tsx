@@ -1,0 +1,90 @@
+import { Component } from 'react';
+import type { ReactNode, ErrorInfo } from 'react';
+import Button from '../ui/button';
+import type { ErrorTexts } from '@/types/interfaces';
+
+type Props = {
+  children: ReactNode;
+  texts: ErrorTexts;
+  image?: string;
+  className?: string;
+  imageClassName?: string;
+  containerClassName?: string;
+  buttonClassName?: string;
+};
+
+type State = {
+  hasError: boolean;
+  error?: Error;
+};
+
+export default class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      hasError: false,
+    };
+  }
+
+  static getDerivedStateFromError(error: Error): State {
+    return {
+      hasError: true,
+      error,
+    };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error(error);
+    console.error('Error info:', errorInfo);
+  }
+
+  render() {
+    const handleRefresh = () => {
+      window.location.reload();
+    };
+
+    if (this.state.hasError) {
+      const { title, message, buttonText } = this.props.texts;
+      const { image, className, imageClassName, containerClassName, buttonClassName } = this.props;
+
+      return (
+        <div
+          data-testid="error-boundary"
+          className={`flex flex-col items-center justify-center ${className}`}
+        >
+          <div
+            data-testid="error-container"
+            className={`rounded-lg p-8 text-center ${containerClassName}`}
+          >
+            {image && (
+              <div className="mb-6">
+                <img
+                  src={image}
+                  alt="Error image"
+                  className={`mx-auto object-contain ${imageClassName}`}
+                />
+              </div>
+            )}
+            <h1
+              data-testid="error-title"
+              className="text-scooter-400 dark:text-shamrock-400 mb-4 text-2xl font-bold"
+            >
+              {title}
+            </h1>
+            <p data-testid="error-message" className="dark:text-shamrock-100 mb-6 text-gray-700">
+              {message}
+            </p>
+            <Button
+              type="button"
+              onClick={handleRefresh}
+              className={`${buttonClassName}`}
+              text={buttonText}
+            />
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
