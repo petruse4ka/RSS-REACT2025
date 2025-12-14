@@ -1,0 +1,297 @@
+import { useRef, useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import { useLocale } from '@/hooks/use-locale';
+import Input from '@/components/ui/input';
+import Checkbox from '@/components/ui/checkbox';
+import Field from '@/components/ui/field';
+import Select from '@/components/ui/select';
+import PasswordStrengthIndicator from '@/components/ui/password-indicator';
+import SubmitButton from '@/components/forms-ui/submit-button';
+import AcceptTerms from '@/components/forms-ui/accept-terms';
+import FileUploadField from '@/components/forms-ui/file-upload-field';
+import CountryField from '@/components/forms-ui/country-field';
+import PasswordField from '@/components/forms-ui/password-field';
+import { useAppSelector } from '@/store/hooks';
+import { selectCountries } from '@/store/selectors';
+import { formSchema } from '@/schemas/form-schema';
+import type { FormData, FormErrors } from '@/types/interfaces';
+import { isFormField } from '@/types/guards';
+import convertToBase64 from '@/utils/convert-to-base64';
+import { getPasswordStrength } from '@/utils/get-password-strength';
+import { FORM_INPUT_CLASSNAME } from '@/constants';
+
+type Props = {
+  onSubmit: (data: FormData) => void;
+};
+
+export default function UncontrolledForm({ onSubmit }: Props) {
+  const translations = useLocale();
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [passwordStrength, setPasswordStrength] = useState<number>(0);
+  const [selectedFileName, setSelectedFileName] = useState<string>('');
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState<boolean>(false);
+
+  const countries = useAppSelector(selectCountries);
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const ageRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
+  const genderRef = useRef<HTMLSelectElement>(null);
+  const countryRef = useRef<HTMLInputElement>(null);
+  const pictureRef = useRef<HTMLInputElement>(null);
+  const acceptTermsRef = useRef<HTMLInputElement>(null);
+
+  const getErrorMessage = (field: keyof FormErrors) => {
+    const error = errors[field];
+    return error
+      ? translations.forms.validation[error as keyof typeof translations.forms.validation]
+      : undefined;
+  };
+
+  const handlePasswordChange = () => {
+    const password = passwordRef.current?.value || '';
+    setPasswordStrength(getPasswordStrength(password));
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFileName(file.name);
+    } else {
+      setSelectedFileName('');
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const formData = {
+      name: nameRef.current?.value || '',
+      age: ageRef.current?.value || '',
+      email: emailRef.current?.value || '',
+      password: passwordRef.current?.value || '',
+      confirmPassword: confirmPasswordRef.current?.value || '',
+      gender: genderRef.current?.value || '',
+      acceptTerms: acceptTermsRef.current?.checked || false,
+      picture: pictureRef.current?.files?.[0] || null,
+      country: countryRef.current?.value || '',
+    };
+
+    const result = formSchema.safeParse(formData);
+
+    if (!result.success) {
+      const currentErrors: FormErrors = {};
+      result.error.issues.forEach((error) => {
+        const field = error.path[0];
+        if (isFormField(field)) {
+          currentErrors[field] = error.message;
+        }
+      });
+      setErrors(currentErrors);
+      return false;
+    }
+
+    setErrors({});
+    return true;
+  };
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    let uploadedPicture = '';
+    const file = pictureRef.current?.files?.[0];
+
+    if (file) {
+      uploadedPicture = await convertToBase64(file);
+    }
+
+    const formData: FormData = {
+      id: Date.now().toString(),
+      name: nameRef.current?.value || '',
+      age: Number(ageRef.current?.value) || 0,
+      email: emailRef.current?.value || '',
+      password: passwordRef.current?.value || '',
+      confirmPassword: confirmPasswordRef.current?.value || '',
+      gender: genderRef.current?.value || '',
+      acceptTerms: acceptTermsRef.current?.checked || false,
+      picture: uploadedPicture,
+      country: countryRef.current?.value || '',
+    };
+
+    onSubmit(formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <Field
+        label={translations.forms.name}
+        htmlFor="name"
+        error={getErrorMessage('name')}
+        dataTestId="name-field"
+      >
+        <Input
+          ref={nameRef}
+          type="text"
+          id="name"
+          placeholder={translations.forms.namePlaceholder}
+          className={FORM_INPUT_CLASSNAME}
+          dataTestId="name-input"
+          autoComplete="name"
+          autoFocus={true}
+        />
+      </Field>
+
+      <Field
+        label={translations.forms.age}
+        htmlFor="age"
+        error={getErrorMessage('age')}
+        dataTestId="age-field"
+      >
+        <Input
+          ref={ageRef}
+          type="number"
+          id="age"
+          placeholder={translations.forms.agePlaceholder}
+          className={FORM_INPUT_CLASSNAME}
+          dataTestId="age-input"
+        />
+      </Field>
+
+      <Field
+        label={translations.forms.email}
+        htmlFor="email"
+        error={getErrorMessage('email')}
+        dataTestId="email-field"
+      >
+        <Input
+          ref={emailRef}
+          type="email"
+          id="email"
+          placeholder={translations.forms.emailPlaceholder}
+          className={FORM_INPUT_CLASSNAME}
+          dataTestId="email-input"
+          autoComplete="email"
+        />
+      </Field>
+
+      <PasswordField
+        label={translations.forms.password}
+        htmlFor="password"
+        error={getErrorMessage('password')}
+        dataTestId="password-field"
+        isVisible={passwordVisible}
+        onToggleVisibility={() => setPasswordVisible(!passwordVisible)}
+      >
+        <Input
+          ref={passwordRef}
+          type={passwordVisible ? 'text' : 'password'}
+          id="password"
+          placeholder={translations.forms.passwordPlaceholder}
+          onChange={handlePasswordChange}
+          className={FORM_INPUT_CLASSNAME}
+          dataTestId="password-input"
+          autoComplete="new-password"
+        />
+        <PasswordStrengthIndicator strength={passwordStrength} />
+      </PasswordField>
+
+      <PasswordField
+        label={translations.forms.confirmPassword}
+        htmlFor="confirmPassword"
+        error={getErrorMessage('confirmPassword')}
+        dataTestId="confirm-password-field"
+        isVisible={confirmPasswordVisible}
+        onToggleVisibility={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+      >
+        <Input
+          ref={confirmPasswordRef}
+          type={confirmPasswordVisible ? 'text' : 'password'}
+          id="confirmPassword"
+          placeholder={translations.forms.confirmPasswordPlaceholder}
+          className={FORM_INPUT_CLASSNAME}
+          dataTestId="confirm-password-input"
+          autoComplete="new-password"
+        />
+      </PasswordField>
+
+      <Field
+        label={translations.forms.gender}
+        htmlFor="gender"
+        error={getErrorMessage('gender')}
+        dataTestId="gender-field"
+      >
+        <Select
+          ref={genderRef}
+          id="gender"
+          className={FORM_INPUT_CLASSNAME}
+          dataTestId="gender-select"
+        >
+          <option value="">{translations.forms.selectGender}</option>
+          <option value={translations.forms.male}>{translations.forms.male}</option>
+          <option value={translations.forms.female}>{translations.forms.female}</option>
+          <option value={translations.forms.other}>{translations.forms.other}</option>
+        </Select>
+      </Field>
+
+      <CountryField
+        label={translations.forms.country}
+        error={getErrorMessage('country')}
+        dataTestId="country-field"
+        countries={countries}
+      >
+        <Input
+          ref={countryRef}
+          type="text"
+          id="country"
+          list="countries"
+          placeholder={translations.forms.countryPlaceholder}
+          className={FORM_INPUT_CLASSNAME}
+          dataTestId="country-input"
+          autoComplete="country"
+        />
+      </CountryField>
+
+      <FileUploadField
+        label={translations.forms.picture}
+        error={getErrorMessage('picture')}
+        dataTestId="picture-field"
+        chooseFileText={translations.forms.chooseFile}
+        noFileChosenText={translations.forms.noFileChosen}
+        selectedFileName={selectedFileName}
+      >
+        <Input
+          ref={pictureRef}
+          type="file"
+          id="picture"
+          accept="image/png,image/jpeg"
+          onChange={handleFileChange}
+          className="hidden"
+          dataTestId="picture-input"
+        />
+      </FileUploadField>
+
+      <Field
+        label=""
+        htmlFor="acceptTerms"
+        error={getErrorMessage('acceptTerms')}
+        dataTestId="accept-terms-field"
+      >
+        <AcceptTerms label={translations.forms.acceptTerms}>
+          <Checkbox
+            ref={acceptTermsRef}
+            id="acceptTerms"
+            checkboxClassName="border-gray-300 hover:border-yellow-200 focus:border-yellow-300 dark:text-cyan-300 text-yellow-300 dark:hover:border-cyan-400 dark:focus:border-cyan-500 dark:border-gray-600 dark:bg-gray-700"
+            dataTestId="accept-terms-checkbox"
+          />
+        </AcceptTerms>
+      </Field>
+
+      <SubmitButton text={translations.forms.submit} dataTestId="uncontrolled-form-submit" />
+    </form>
+  );
+}
