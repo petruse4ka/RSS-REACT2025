@@ -2,6 +2,7 @@ import { Component } from 'react';
 import type { ReactNode, ErrorInfo } from 'react';
 import Button from '../ui/button';
 import type { ErrorTexts } from '@/types/interfaces';
+import Image from 'next/image';
 
 type Props = {
   children: ReactNode;
@@ -58,10 +59,12 @@ export default class ErrorBoundary extends Component<Props, State> {
           >
             {image && (
               <div className="mb-6">
-                <img
+                <Image
                   src={image}
                   alt="Error image"
                   className={`mx-auto object-contain ${imageClassName}`}
+                  width={256}
+                  height={256}
                 />
               </div>
             )}

@@ -42,6 +42,15 @@ export const api = createApi({
         { type: 'Cards', id: `SEARCH_${searchQuery || DEFAULT_SEARCH_QUERY}_PAGE_${page}` },
       ],
       transformResponse: (response: unknown) => {
+        if (
+          response &&
+          typeof response === 'object' &&
+          'cards' in response &&
+          'total' in response
+        ) {
+          return response as { cards: CardData[]; total: number };
+        }
+
         if (!isValidCardsResponse(response)) {
           throw new Error(FETCH_ERRORS.INVALID_RESPONSE_STRUCTURE);
         }
@@ -88,14 +97,14 @@ export const api = createApi({
 
         const cardDetail: CardDetailResponse = {
           id: id,
-          imageUrl: urls?.regular || defaultImage,
+          imageUrl: urls?.regular || defaultImage.src,
           title: (alt_description || '').toUpperCase(),
           description: description || '',
           author: {
             name: user?.name || '',
             username: user?.username || '',
             bio: user?.bio || '',
-            profileImage: user?.profile_image?.medium || defaultAvatar,
+            profileImage: user?.profile_image?.medium || defaultAvatar.src,
           },
           stats: {
             likes: likes || 0,

@@ -1,12 +1,12 @@
 import Button from '../ui/button';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   handleClose: () => void;
 };
 
 export default function DetailHeader({ handleClose }: Props) {
-  const translations = useLocale();
+  const t = useTranslations();
 
   return (
     <div
@@ -17,7 +17,7 @@ export default function DetailHeader({ handleClose }: Props) {
         data-testid="detail-title"
         className="text-base text-cyan-600 sm:text-2xl dark:text-white"
       >
-        {translations.cardDetail.title}
+        {t('cardDetail.title')}
       </h2>
       <Button
         type="button"

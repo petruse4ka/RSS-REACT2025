@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 import MenuItem from './menu-item';
 
 export default function Menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const translations = useLocale();
+  const t = useTranslations();
 
   const toggleMenu = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -38,10 +38,10 @@ export default function Menu() {
     <>
       <nav data-testid="menu" className="hidden items-center gap-6 md:flex">
         <MenuItem dataTestId="menu-homepage-link" to="/">
-          {translations.menu.homepage}
+          {t('menu.homepage')}
         </MenuItem>
         <MenuItem dataTestId="menu-about-link" to="/about">
-          {translations.menu.about}
+          {t('menu.about')}
         </MenuItem>
       </nav>
 
@@ -74,10 +74,10 @@ export default function Menu() {
           }`}
         >
           <MenuItem dataTestId="mobile-menu-homepage-link" to="/" onClick={closeMenu}>
-            {translations.menu.homepage}
+            {t('menu.homepage')}
           </MenuItem>
           <MenuItem dataTestId="mobile-menu-about-link" to="/about" onClick={closeMenu}>
-            {translations.menu.about}
+            {t('menu.about')}
           </MenuItem>
         </div>
       </nav>

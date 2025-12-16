@@ -1,4 +1,5 @@
-import { useLocale } from '@/hooks/use-locale';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   imageUrl: string;
@@ -7,19 +8,22 @@ type Props = {
 };
 
 export default function DetailPhoto({ imageUrl, title, description }: Props) {
-  const translations = useLocale();
+  const t = useTranslations();
 
-  const displayTitle = title || translations.cardDetail.untitled;
-  const displayDescription = description || translations.cardDetail.noDescription;
+  const displayTitle = title || t('cardDetail.untitled');
+  const displayDescription = description || t('cardDetail.noDescription');
 
   return (
     <div className="mt-6">
       <div className="mb-4 sm:mb-6">
-        <img
+        <Image
           src={imageUrl}
           alt={displayTitle}
           className="w-full rounded-lg shadow-lg"
           data-testid="detail-image"
+          width={400}
+          height={400}
+          priority
         />
       </div>
 

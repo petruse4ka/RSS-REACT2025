@@ -1,11 +1,12 @@
 import type { MouseEvent } from 'react';
+import Image from 'next/image';
 import type { CardData } from '@/types/interfaces';
 import Checkbox from '@/components/ui/checkbox';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { selectItem, unselectItem } from '@/store/selected-cards-slice';
 import { selectSelectedItems } from '@/store/selectors';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   card: CardData;
@@ -15,14 +16,14 @@ type Props = {
 };
 
 export default function CardItem({ card, cardIndex, handleCardClick, classNames }: Props) {
-  const translations = useLocale();
+  const t = useTranslations();
   const { imageUrl, title, description } = card;
   const dispatch = useAppDispatch();
   const selectedItems = useAppSelector(selectSelectedItems);
   const isChecked = selectedItems.some((item) => item.id === card.id);
 
-  const displayTitle = title || translations.cardDetail.untitled;
-  const displayDescription = description || translations.cardDetail.noDescription;
+  const displayTitle = title || t('cardDetail.untitled');
+  const displayDescription = description || t('cardDetail.noDescription');
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -46,10 +47,13 @@ export default function CardItem({ card, cardIndex, handleCardClick, classNames 
       onClick={handleClick}
     >
       <div className="relative h-full w-full">
-        <img
+        <Image
           src={imageUrl}
           alt={displayTitle}
           className="h-full w-full bg-cyan-300 object-cover object-center"
+          width={400}
+          height={400}
+          priority
         />
 
         <div className="absolute top-3 right-3 z-10">

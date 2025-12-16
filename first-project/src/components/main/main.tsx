@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import type { MouseEvent } from 'react';
 import type { CardData } from '@/types/interfaces';
 import { CARDS_PER_PAGE, DEFAULT_SEARCH_QUERY } from '@/constants';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { invalidateTags } from '@/store/api';
 import Loader from '../ui/loader';
@@ -37,7 +37,7 @@ export default function Main({
   errorMessage,
   isCardDetailOpen,
 }: Props) {
-  const translations = useLocale();
+  const t = useTranslations();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function Main({
           <Loader
             classNameSpinner="border-cyan-300"
             classNameText="text-cyan-300 text-lg"
-            text={translations.search.loading}
+            text={t('search.loading')}
             dataTestId="main-loader"
           />
         </div>
@@ -86,14 +86,14 @@ export default function Main({
               type="button"
               onClick={handleRefreshCurrent}
               className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-              text={translations.search.refreshCurrentPage}
+              text={t('search.refreshCurrentPage')}
               dataTestId="refresh-current-button"
             />
             <Button
               type="button"
               onClick={handleRefresh}
               className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-              text={translations.search.refreshAllPages}
+              text={t('search.refreshAllPages')}
               dataTestId="refresh-all-button"
             />
           </div>
@@ -105,14 +105,14 @@ export default function Main({
               type="button"
               onClick={handleRefreshCurrent}
               className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-              text={translations.search.refreshCurrentPage}
+              text={t('search.refreshCurrentPage')}
               dataTestId="refresh-current-button"
             />
             <Button
               type="button"
               onClick={handleRefresh}
               className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
-              text={translations.search.refreshAllPages}
+              text={t('search.refreshAllPages')}
               dataTestId="refresh-all-button"
             />
           </div>

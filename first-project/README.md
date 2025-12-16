@@ -60,7 +60,7 @@ This will set up Husky to run the Git hooks for pre-commit and other automation.
 npm run dev
 ```
 
-This will launch the Vite development server to test that the project has been setup correctly.
+This will launch the Next.js development server to test that the project has been setup correctly.
 
 > ⚠️ **Important:** If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE. For **Visual Studio Code** select the TypeScript version by either:
 >
@@ -114,10 +114,10 @@ Use the following scripts to assist with development, formatting, linting, build
 
 | Script            | Description                                  |
 | :---------------- | :------------------------------------------- |
-| `npm run dev`     | Start a local development server with Vite.  |
+| `npm run dev`     | Start a local development server with Next.js. |
 | `npm run build`   | Build the project for production.            |
-| `npm run preview` | Preview the production build locally.        |
-| `npm run deploy`  | Build the project and deploy to GitHub Pages |
+| `npm run start`   | Start the production server locally.         |
+| `npm run deploy`  | Build the project and deploy to Netlify      |
 
 ### 🛡️ Git Hooks
 
@@ -193,14 +193,14 @@ class CardsList extends PureComponent {}
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)  
 **TypeScript** – Used for enhancing JavaScript with static typing to improve code quality.
 
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)  
+**Next.js 15** – Used for server-side rendering, routing, and optimized production builds.
+
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white)  
 **Tailwind CSS 4** – Used for building modern and responsive UI with a utility-first approach.
 
 ![Sass](https://img.shields.io/badge/Sass-CC6699?logo=sass&logoColor=white)  
 **Sass** – Used for enhanced CSS styling with variables, mixins, and nested rules.
-
-![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)  
-**Vite** – Used for fast development server and optimized production builds.
 
 ![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)  
 **Vitest** – Used for unit testing with Vite-native performance and coverage reporting.
@@ -214,19 +214,7 @@ class CardsList extends PureComponent {}
 ![Husky](https://img.shields.io/badge/Husky-4E8CAB?logo=husky&logoColor=white)  
 **Husky** – Used for automating code checks with Git hooks.
 
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?logo=github&logoColor=white)  
-**GitHub Pages** – Used for hosting and continuous deployment of the application.
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)  
+**Vercel** – Used for hosting and continuous deployment of the application.
 
 ---
-
-### Development Mode Setup
-
-To enable mock data in development mode, make sure the following code is uncommented in `src/main.tsx`:
-
-```typescript
-if (import.meta.env.DEV) {
-  import('./__tests__/mocks/browser.ts');
-}
-```
-
-This will automatically load the MSW (Mock Service Worker) handlers to provide mock API responses during development.

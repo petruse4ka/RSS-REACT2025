@@ -1,1 +1,1 @@
-cd first-project && npm run test
+cd first-project && npx lint-staged 

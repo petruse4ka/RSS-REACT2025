@@ -1,7 +1,7 @@
 import type { CardData } from '@/types/interfaces';
 import { getCardSize } from '@/utils/get-card-size';
 import CardItem from './card';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   cards: CardData[];
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function CardsList({ cards, handleCardClick, isCardDetailOpen = false }: Props) {
-  const translations = useLocale();
+  const t = useTranslations();
 
   return cards.length > 0 ? (
     <ul
@@ -34,7 +34,7 @@ export default function CardsList({ cards, handleCardClick, isCardDetailOpen = f
   ) : (
     <div className="flex min-h-[300px] flex-col items-center justify-center">
       <div data-testid="list-error-message" className="mb-4 text-xl font-semibold text-red-500">
-        {translations.error.fetchError}
+        {t('error.fetchError')}
       </div>
     </div>
   );

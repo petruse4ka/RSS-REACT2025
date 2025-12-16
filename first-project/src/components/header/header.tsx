@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom';
 import Menu from '@/components/menu/menu';
 import ThemeSwitcher from './theme-switcher';
 import LanguageSwitcher from './language-switcher';
-import { useLocale } from '@/hooks/use-locale';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import logoImage from '@/assets/images/logo.png';
+import Image from 'next/image';
 
 export default function Header() {
-  const translations = useLocale();
+  const t = useTranslations();
 
   return (
     <header
@@ -17,11 +18,11 @@ export default function Header() {
         <div className="mb-4 flex items-center justify-between">
           <Link
             data-testid="header-logo"
-            to="/"
+            href="/"
             className="flex items-center gap-3 transition-all duration-300 hover:text-cyan-400 dark:hover:text-cyan-300"
           >
-            <img src={logoImage} alt="Logo" className="h-8 w-8" />
-            <h1 className="text-xl font-bold">{translations.header.logo}</h1>
+            <Image src={logoImage} alt="Logo" width={32} height={32} />
+            <h1 className="text-xl font-bold">{t('header.logo')}</h1>
           </Link>
 
           <div className="flex items-center gap-4">
