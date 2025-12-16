@@ -3,6 +3,10 @@ export const ru = {
     placeholder: 'Введите поисковый запрос',
     button: 'Поиск',
     loading: 'Загрузка фотографий...',
+    refreshAllPages: 'Обновить все страницы',
+    refreshCurrentPage: 'Обновить текущую страницу',
+    refreshAllCards: 'Обновить все карточки',
+    refreshCurrentCard: 'Обновить текущую карточку',
   },
   error: {
     title: 'Что-то пошло не так',

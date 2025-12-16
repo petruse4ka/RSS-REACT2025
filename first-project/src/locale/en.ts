@@ -3,6 +3,10 @@ export const en = {
     placeholder: 'Enter the search query',
     button: 'Search',
     loading: 'Loading photos...',
+    refreshAllPages: 'Refresh all pages',
+    refreshCurrentPage: 'Refresh current page',
+    refreshAllCards: 'Refresh all cards',
+    refreshCurrentCard: 'Refresh current card',
   },
   error: {
     title: 'Something went wrong',

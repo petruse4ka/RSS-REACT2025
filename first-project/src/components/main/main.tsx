@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
+import type { MouseEvent } from 'react';
 import type { CardData } from '@/types/interfaces';
-import { CARDS_PER_PAGE } from '@/constants';
+import { CARDS_PER_PAGE, DEFAULT_SEARCH_QUERY } from '@/constants';
 import { useLocale } from '@/hooks/use-locale';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { invalidateTags } from '@/store/api';
 import Loader from '../ui/loader';
+import Button from '../ui/button';
 import CardsList from '../cards-list/cards-list';
 import Paginator from '../paginator/paginator';
 
@@ -14,23 +18,27 @@ type Props = {
   cards: CardData[];
   totalItems: number;
   isLoading: boolean;
+  isFetching: boolean;
   isError: boolean;
   errorMessage: string;
   isCardDetailOpen: boolean;
 };
 
 export default function Main({
+  searchQuery,
   currentPage,
   handlePageChange,
   handleCardClick,
   cards,
   totalItems,
   isLoading,
+  isFetching,
   isError,
   errorMessage,
   isCardDetailOpen,
 }: Props) {
   const translations = useLocale();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (totalItems > 0) {
@@ -41,9 +49,22 @@ export default function Main({
     }
   }, [totalItems, currentPage, handlePageChange]);
 
+  const handleRefresh = (e?: MouseEvent<Element>) => {
+    e?.stopPropagation();
+    dispatch(invalidateTags(['Cards']));
+  };
+
+  const handleRefreshCurrent = (e?: MouseEvent<Element>) => {
+    e?.stopPropagation();
+    const currentSearchQuery = searchQuery || DEFAULT_SEARCH_QUERY;
+    dispatch(
+      invalidateTags([{ type: 'Cards', id: `SEARCH_${currentSearchQuery}_PAGE_${currentPage}` }])
+    );
+  };
+
   return (
     <section data-testid="main" className="w-full">
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <div className="flex min-h-[300px] items-center justify-center">
           <Loader
             classNameSpinner="border-cyan-300"
@@ -60,9 +81,41 @@ export default function Main({
           >
             {errorMessage}
           </div>
+          <div className="flex w-full flex-col gap-5">
+            <Button
+              type="button"
+              onClick={handleRefreshCurrent}
+              className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
+              text={translations.search.refreshCurrentPage}
+              dataTestId="refresh-current-button"
+            />
+            <Button
+              type="button"
+              onClick={handleRefresh}
+              className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
+              text={translations.search.refreshAllPages}
+              dataTestId="refresh-all-button"
+            />
+          </div>
         </div>
       ) : (
         <div className="pt-5 md:pt-10">
+          <div className="mb-6 flex w-full flex-col gap-5">
+            <Button
+              type="button"
+              onClick={handleRefreshCurrent}
+              className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
+              text={translations.search.refreshCurrentPage}
+              dataTestId="refresh-current-button"
+            />
+            <Button
+              type="button"
+              onClick={handleRefresh}
+              className="w-full border-fuchsia-500 bg-fuchsia-500 hover:border-fuchsia-400 hover:bg-fuchsia-400 dark:border-cyan-500 dark:bg-cyan-500 dark:hover:border-cyan-400 dark:hover:bg-cyan-400"
+              text={translations.search.refreshAllPages}
+              dataTestId="refresh-all-button"
+            />
+          </div>
           <CardsList
             cards={cards}
             handleCardClick={handleCardClick}

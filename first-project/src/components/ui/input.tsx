@@ -1,11 +1,11 @@
-import React from 'react';
+import type { ChangeEvent, KeyboardEvent } from 'react';
 
 type Props = {
   type: 'text' | 'number';
   placeholder: string;
   value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   className: string;
   dataTestId: string;
 };

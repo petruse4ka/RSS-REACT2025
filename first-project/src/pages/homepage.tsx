@@ -1,11 +1,10 @@
 import { useParams, useNavigate, Outlet } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Search from '@/components/search/search';
 import Main from '@/components/main/main';
 import useLocalStorage from '@/hooks/use-local-storage';
 import { LOCAL_STORAGE_KEYS } from '@/constants';
-import type { CardData } from '@/types/interfaces';
-import { fetchCards } from '@/api/fetch-cards';
+import { useGetCardsQuery } from '@/store/api';
 import { useLocale } from '@/hooks/use-locale';
 
 export default function HomePage() {
@@ -13,12 +12,6 @@ export default function HomePage() {
   const params = useParams();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useLocalStorage(LOCAL_STORAGE_KEYS.SEARCH_QUERY, '');
-  const [cards, setCards] = useState<CardData[]>([]);
-  const [totalItems, setTotalItems] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const prevSearchQuery = useRef<string>(searchQuery);
 
   const pageParam = params.page ? parseInt(params.page, 10) : 1;
   const idParam = params.id ? parseInt(params.id, 10) : null;
@@ -38,41 +31,26 @@ export default function HomePage() {
   const currentPage = isPageValid ? pageParam : 1;
   const cardIndex = isIdValid ? idParam : null;
 
-  useEffect(() => {
-    const loadData = async (searchQuery: string) => {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        setErrorMessage('');
+  const { data, isLoading, isFetching, isError, error } = useGetCardsQuery({
+    searchQuery: searchQuery || 'random',
+    page: currentPage,
+  });
 
-        const pageToFetch = searchQuery !== prevSearchQuery.current ? 1 : currentPage;
-        const { cards, total } = await fetchCards(searchQuery, pageToFetch, translations);
+  const cards = data?.cards || [];
+  const totalItems = data?.total || 0;
 
-        if (cards.length === 0) {
-          setIsLoading(false);
-          setIsError(true);
-          setErrorMessage(translations.error.fetchError);
-          return;
-        }
+  const getErrorMessage = () => {
+    if (!isError || !error) return '';
 
-        setCards(cards);
-        setTotalItems(total);
-        setIsLoading(false);
-        prevSearchQuery.current = searchQuery;
-      } catch (error) {
-        setIsLoading(false);
-        setIsError(true);
-
-        if (error instanceof Error && error.message === 'HTTP error: 403') {
-          setErrorMessage(translations.error.rateLimitError);
-        } else {
-          setErrorMessage(translations.error.fetchError);
-        }
+    if (error && typeof error === 'object' && 'status' in error) {
+      if (error.status === 403) {
+        return translations.error.rateLimitError;
       }
-    };
+      return translations.error.fetchError;
+    }
 
-    loadData(searchQuery);
-  }, [searchQuery, currentPage, translations]);
+    return translations.error.fetchError;
+  };
 
   useEffect(() => {
     if (cardIndex && cards.length > 0 && cardIndex > cards.length) {
@@ -124,8 +102,9 @@ export default function HomePage() {
             cards={cards}
             totalItems={totalItems}
             isLoading={isLoading}
+            isFetching={isFetching}
             isError={isError}
-            errorMessage={errorMessage}
+            errorMessage={getErrorMessage()}
             isCardDetailOpen={Boolean(cardIndex)}
           />
         </div>

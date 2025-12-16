@@ -38,6 +38,7 @@ const defaultProps = {
   cards: [],
   totalItems: 0,
   isLoading: true,
+  isFetching: false,
   isError: false,
   errorMessage: '',
 };
